@@ -1,0 +1,76 @@
+import React from 'react';
+import { FiAward, FiBookOpen, FiShield, FiUsers, FiActivity, FiSmile } from 'react-icons/fi';
+
+const WhyChooseUs = () => {
+  const reasons = [
+    {
+      icon: <FiAward className="text-3xl text-amber-500" />,
+      title: 'Academic Excellence',
+      description: 'Structured CBSE curriculum designed to foster deep understanding, critical problem solving, and top examination performance.',
+    },
+    {
+      icon: <FiBookOpen className="text-3xl text-blue-500" />,
+      title: 'Smart Tech Classrooms',
+      description: 'Digital interactive boards, multimedia presentations, and internet-enabled audio-visual learning tools in every classroom.',
+    },
+    {
+      icon: <FiShield className="text-3xl text-emerald-500" />,
+      title: 'Safe & Secure Campus',
+      description: '24/7 CCTV surveillance, biometric access, guarded campus gates, and dedicated female attendants for junior wing safety.',
+    },
+    {
+      icon: <FiUsers className="text-3xl text-purple-500" />,
+      title: 'Qualified Pedagogues',
+      description: 'Highly skilled, compassionate teachers dedicated to mentoring each student with personalized guidance.',
+    },
+    {
+      icon: <FiActivity className="text-3xl text-rose-500" />,
+      title: 'Sports & Athletics',
+      description: 'Spacious playground, inter-house sports competitions, yoga, football, cricket, and physical wellness programs.',
+    },
+    {
+      icon: <FiSmile className="text-3xl text-sky-500" />,
+      title: 'Holistic Development',
+      description: 'Focus on moral values, public speaking, debates, drama, music, art, and leadership skills development.',
+    },
+  ];
+
+  return (
+    <section className="py-20 bg-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <span className="text-blue-600 font-bold text-xs uppercase tracking-wider bg-blue-50 px-3.5 py-1 rounded-full border border-blue-200">
+            Why Parents Trust Us
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 mt-3">
+            Why Choose S.S. Global Public School?
+          </h2>
+          <p className="text-slate-600 mt-3 text-base">
+            We provide an environment where children excel academically, grow emotionally, and discover their true potential.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {reasons.map((item, idx) => (
+            <div
+              key={idx}
+              className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/80 card-hover group"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-inner">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-serif group-hover:text-blue-600 transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default WhyChooseUs;
