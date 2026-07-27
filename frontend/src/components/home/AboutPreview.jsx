@@ -6,7 +6,7 @@ import { SettingContext } from '../../context/SettingContext';
 const AboutPreview = () => {
   const { settings } = useContext(SettingContext);
 
-  const schoolImg = settings.heroImage || '/school.jpg';
+  const schoolImg = settings.heroImage || '/school.jpeg';
 
   const points = [
     'Affiliated & aligned with CBSE Academic Standards',

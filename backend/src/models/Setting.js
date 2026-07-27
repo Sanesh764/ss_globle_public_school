@@ -16,7 +16,7 @@ const settingSchema = new mongoose.Schema(
     },
     heroImage: {
       type: String,
-      default: '/school.jpg',
+      default: '/school.jpeg',
     },
     principalPhoto: {
       type: String,

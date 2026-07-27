@@ -4,7 +4,7 @@ export const SCHOOL_DEFAULTS = {
   schoolName: 'S.S. Global Public School',
   tagline: 'Excellence in Education, Leadership in Life',
   logo: '/logo.jpg',
-  heroImage: '/school.jpg',
+  heroImage: '/school.jpeg',
   principalPhoto: '/principle.png',
   location: 'Daudnagar, Bihar, India',
   address: 'Daudnagar, Bihar - 824143, India',

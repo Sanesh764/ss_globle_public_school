@@ -6,7 +6,7 @@ import { SettingContext } from '../../context/SettingContext';
 const HeroSection = () => {
   const { settings } = useContext(SettingContext);
 
-  const heroBg = settings.heroImage || '/school.jpg';
+  const heroBg = settings.heroImage || '/school.jpeg';
 
   return (
     <div className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-950 text-white">

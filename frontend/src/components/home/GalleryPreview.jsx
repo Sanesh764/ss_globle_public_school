@@ -10,12 +10,12 @@ const GalleryPreview = () => {
   const { data, loading } = useFetch(() => getGalleryApi('All'), []);
 
   const sampleImages = [
-    { title: 'S.S. Global Public School Campus', category: 'Campus', image: '/school.jpg' },
+    { title: 'S.S. Global Public School Campus', category: 'Campus', image: '/school.jpeg' },
     { title: 'Principal Manish Singh Addressing Students', category: 'Campus', image: '/principle.png' },
     { title: 'School Official Crest & Emblem', category: 'Facilities', image: '/logo.jpg' },
-    { title: 'Smart Classroom Interaction', category: 'Facilities', image: '/school.jpg' },
-    { title: 'Annual Cultural Fiesta', category: 'Celebrations', image: '/school.jpg' },
-    { title: 'Sports & Athletic Meet', category: 'Sports', image: '/school.jpg' },
+    { title: 'Smart Classroom Interaction', category: 'Facilities', image: '/school.jpeg' },
+    { title: 'Annual Cultural Fiesta', category: 'Celebrations', image: '/school.jpeg' },
+    { title: 'Sports & Athletic Meet', category: 'Sports', image: '/school.jpeg' },
   ];
 
   const imagesToShow = data?.images && data.images.length > 0 ? data.images.slice(0, 6) : sampleImages;

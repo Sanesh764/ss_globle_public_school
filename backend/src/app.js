@@ -25,9 +25,10 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 
-// Serve static uploaded files
+// Serve static uploaded files both under /uploads and root
 const uploadsPath = path.join(__dirname, '../uploads');
 app.use('/uploads', express.static(uploadsPath));
+app.use(express.static(uploadsPath));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

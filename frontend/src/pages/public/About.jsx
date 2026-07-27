@@ -8,7 +8,7 @@ const About = () => {
 
   const principalPhoto = settings.principalPhoto || '/principle.png';
   const principalName = settings.principalName || 'Manish Singh';
-  const schoolImg = settings.heroImage || '/school.jpg';
+  const schoolImg = settings.heroImage || '/school.jpeg';
 
   const values = [
     { title: 'Academic Excellence', desc: 'Striving for continuous improvement and highest standards in all disciplines.', icon: <FiAward className="text-amber-500 text-2xl" /> },
@@ -124,7 +124,7 @@ const About = () => {
             <div className="lg:col-span-4 text-center">
               <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-amber-500 to-blue-600 mx-auto shadow-lg mb-4 overflow-hidden">
                 <img
-                  src="/school.jpg"
+                  src="/school.jpeg"
                   alt="Director"
                   className="w-full h-full object-cover rounded-full bg-slate-100"
                 />

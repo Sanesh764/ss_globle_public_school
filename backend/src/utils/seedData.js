@@ -21,14 +21,14 @@ export const seedInitialData = async () => {
       console.log('[Seeding] Initial admin created (email: admin@ssglobal.edu.in, password: Admin@123456)');
     }
 
-    // 2. Seed or Update Settings with Manish Singh and public folder images
+    // 2. Seed or Update Settings
     let setting = await Setting.findOne();
     if (!setting) {
       setting = await Setting.create({
         schoolName: 'S.S. Global Public School',
         tagline: 'Excellence in Education, Leadership in Life',
         logo: '/logo.jpg',
-        heroImage: '/school.jpg',
+        heroImage: '/school.jpeg',
         principalPhoto: '/principle.png',
         address: 'Daudnagar, Bihar - 824143, India',
         phone: '+91 98765 43210',
@@ -51,10 +51,9 @@ export const seedInitialData = async () => {
       });
       console.log('[Seeding] Initial school settings created');
     } else {
-      // Force update Principal name & images if previously set to defaults
       setting.principalName = 'Manish Singh';
       setting.logo = '/logo.jpg';
-      setting.heroImage = '/school.jpg';
+      setting.heroImage = '/school.jpeg';
       setting.principalPhoto = '/principle.png';
       await setting.save();
       console.log('[Seeding] School settings updated with Principal Manish Singh and public image assets');
@@ -96,43 +95,41 @@ export const seedInitialData = async () => {
       console.log('[Seeding] Initial notices created');
     }
 
-    // 4. Seed Gallery if empty or reset to public assets
-    const galleryCount = await Gallery.countDocuments();
-    if (galleryCount === 0) {
-      await Gallery.insertMany([
-        {
-          title: 'S.S. Global Public School Campus',
-          category: 'Campus',
-          image: '/school.jpg',
-        },
-        {
-          title: 'Principal Manish Singh Addressing Students',
-          category: 'Campus',
-          image: '/principle.png',
-        },
-        {
-          title: 'Official School Emblem & Crest',
-          category: 'Facilities',
-          image: '/logo.jpg',
-        },
-        {
-          title: 'Smart Classroom & Academic Facility',
-          category: 'Facilities',
-          image: '/school.jpg',
-        },
-        {
-          title: 'Annual Day Celebrations',
-          category: 'Celebrations',
-          image: '/school.jpg',
-        },
-        {
-          title: 'Sports & Cultural Fest',
-          category: 'Sports',
-          image: '/school.jpg',
-        },
-      ]);
-      console.log('[Seeding] Initial gallery images created');
-    }
+    // 4. Reset & Seed Gallery with all newly uploaded public images
+    await Gallery.deleteMany({});
+    await Gallery.insertMany([
+      {
+        title: 'Interactive Smart Classroom',
+        category: 'Facilities',
+        image: '/classRoom.jpg',
+      },
+      {
+        title: 'Academic Classroom Session',
+        category: 'Academics',
+        image: '/classes.jpg',
+      },
+      {
+        title: 'Annual Sports Day & Athletics Ground',
+        category: 'Sports',
+        image: '/sports.jpg',
+      },
+      {
+        title: 'S.S. Global Public School Main Campus',
+        category: 'Campus',
+        image: '/school.jpeg',
+      },
+      {
+        title: 'Principal Manish Singh Addressing Students',
+        category: 'Campus',
+        image: '/principle.png',
+      },
+      {
+        title: 'Official School Crest & Insignia',
+        category: 'Facilities',
+        image: '/logo.jpg',
+      },
+    ]);
+    console.log('[Seeding] Gallery re-seeded with classRoom.jpg, classes.jpg, sports.jpg, school.jpeg, principle.png, logo.jpg');
   } catch (error) {
     console.error('[Seeding Error]', error.message);
   }
