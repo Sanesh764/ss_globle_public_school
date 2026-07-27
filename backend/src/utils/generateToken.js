@@ -5,11 +5,14 @@ const generateToken = (res, userId) => {
     expiresIn: '7d',
   });
 
+  const isProduction = process.env.NODE_ENV === 'production';
+
   // Set JWT as HTTP-only cookie
+  // Note: For cross-domain (AWS Amplify frontend + Render backend), sameSite MUST be 'none' and secure MUST be true in production
   res.cookie('jwt', token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 

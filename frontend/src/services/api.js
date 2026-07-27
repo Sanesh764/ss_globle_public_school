@@ -1,7 +1,44 @@
 import axios from 'axios';
 
+// Get production Render backend URL or local Vite proxy
+export const getBackendBaseUrl = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL.replace(/\/api\/?$/, '');
+  }
+  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    return 'http://localhost:5000';
+  }
+  return 'https://ss-globle-public-school.onrender.com';
+};
+
+export const getApiBaseUrl = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    return '/api';
+  }
+  return 'https://ss-globle-public-school.onrender.com/api';
+};
+
+// Helper function to resolve image URLs cleanly in production
+export const getImageUrl = (imagePath) => {
+  if (!imagePath) return '/school.jpeg';
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+  
+  // If hosted on Amplify or production, resolve relative upload paths to Render backend
+  if (imagePath.startsWith('/uploads/')) {
+    const backendHost = getBackendBaseUrl();
+    return `${backendHost}${imagePath}`;
+  }
+
+  return imagePath;
+};
+
 const API = axios.create({
-  baseURL: '/api',
+  baseURL: getApiBaseUrl(),
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

@@ -92,11 +92,13 @@ export const seedInitialData = async () => {
           createdBy: adminUser ? adminUser._id : null,
         },
       ]);
+      
       console.log('[Seeding] Initial notices created');
     }
 
     // 4. Reset & Seed Gallery with all newly uploaded public images
     await Gallery.deleteMany({});
+
     await Gallery.insertMany([
       {
         title: 'Interactive Smart Classroom',
@@ -129,6 +131,7 @@ export const seedInitialData = async () => {
         image: '/logo.jpg',
       },
     ]);
+
     console.log('[Seeding] Gallery re-seeded with classRoom.jpg, classes.jpg, sports.jpg, school.jpeg, principle.png, logo.jpg');
   } catch (error) {
     console.error('[Seeding Error]', error.message);
