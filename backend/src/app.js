@@ -20,7 +20,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // 1. Enable Trust Proxy for Railway, Render, and single reverse proxies
-// Express will trust the first hop proxy (X-Forwarded-For header)
 app.set('trust proxy', 1);
 
 // 2. Allowed Origins Whitelist
@@ -51,7 +50,8 @@ const corsOptions = {
       return callback(null, true);
     }
 
-    return callback(new Error(`CORS Error: Origin ${origin} is not allowed by CORS policy.`));
+    // Return callback(null, false) to let Express CORS reject cleanly without throwing a 500 error
+    return callback(null, false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -59,7 +59,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-// 3. FIRST MIDDLEWARE: Apply CORS at top level
+// 3. Apply CORS at top level
 app.use(cors(corsOptions));
 
 // 4. Security HTTP Headers
@@ -105,31 +105,6 @@ const sanitizeMongoInput = (req, res, next) => {
 };
 
 app.use(sanitizeMongoInput);
-
-// 7. Rate Limiter (2000 requests / 15 mins, skipping preflight OPTIONS and localhost development traffic)
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 2000,
-  standardHeaders: true,
-  legacyHeaders: false,
-  skip: (req) => {
-    if (req.method === 'OPTIONS') return true;
-    const ip = req.ip || req.socket?.remoteAddress || '';
-    const isLocalhost =
-      ip === '127.0.0.1' ||
-      ip === '::1' ||
-      ip === '::ffff:127.0.0.1' ||
-      req.hostname === 'localhost';
-    return isLocalhost;
-  },
-  message: {
-    success: false,
-    statusCode: 429,
-    message: 'Too many requests from this IP. Please try again after 15 minutes.',
-  },
-});
-
-app.use('/api', apiLimiter);
 
 // 8. Body Parsers & Cookie Parser
 app.use(express.json({ limit: '10mb' }));
