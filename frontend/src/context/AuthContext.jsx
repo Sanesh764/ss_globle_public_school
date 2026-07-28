@@ -16,9 +16,11 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         try {
           const res = await getAdminProfileApi();
-          if (res.success && res.admin) {
-            setAdmin(res.admin);
-            localStorage.setItem('adminUser', JSON.stringify(res.admin));
+          const authData = res.data || res;
+          if (res.success && (authData.admin || res.admin)) {
+            const userData = authData.admin || res.admin;
+            setAdmin(userData);
+            localStorage.setItem('adminUser', JSON.stringify(userData));
           } else {
             logout();
           }
@@ -37,11 +39,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const res = await loginAdminApi(email, password);
-    if (res.success && res.token) {
-      setToken(res.token);
-      setAdmin(res.admin);
-      localStorage.setItem('adminToken', res.token);
-      localStorage.setItem('adminUser', JSON.stringify(res.admin));
+    const authData = res.data || res;
+    if (res.success && (authData.token || res.token)) {
+      const userToken = authData.token || res.token;
+      const userData = authData.admin || res.admin;
+      setToken(userToken);
+      setAdmin(userData);
+      localStorage.setItem('adminToken', userToken);
+      localStorage.setItem('adminUser', JSON.stringify(userData));
     }
     return res;
   };
