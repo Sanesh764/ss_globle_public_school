@@ -6,13 +6,17 @@ const generateToken = (res, userId) => {
   });
 
   const isProduction = process.env.NODE_ENV === 'production';
+  const requestOrigin = res.req?.headers?.origin || '';
+  
+  // Secure cookies require HTTPS. Enable secure & sameSite:'none' ONLY for HTTPS cross-site origins (AWS Amplify / Custom Domain).
+  // Use secure: false & sameSite: 'lax' for HTTP localhost development.
+  const isHttpsOrigin = requestOrigin.startsWith('https://');
+  const isSecureCookie = isProduction && isHttpsOrigin;
 
-  // Set JWT as HTTP-only cookie
-  // Note: For cross-domain (AWS Amplify frontend + Render backend), sameSite MUST be 'none' and secure MUST be true in production
   res.cookie('jwt', token, {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? 'none' : 'lax',
+    secure: isSecureCookie,
+    sameSite: isSecureCookie ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 

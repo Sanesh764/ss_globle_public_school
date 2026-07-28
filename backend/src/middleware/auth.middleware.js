@@ -43,5 +43,34 @@ export const verifyJWT = async (req, res, next) => {
   }
 };
 
+// Safe JWT middleware for logout route (does not block on expired/missing token)
+export const verifyJWTForLogout = async (req, res, next) => {
+  try {
+    let token;
+
+    if (req.cookies && req.cookies.jwt) {
+      token = req.cookies.jwt;
+    } else if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+      token = req.headers.authorization.split(' ')[1];
+    }
+
+    if (token) {
+      try {
+        const decodedToken = jwt.verify(
+          token,
+          process.env.JWT_SECRET || 'ss_global_public_school_super_secret_jwt_key_2026'
+        );
+        const admin = await Admin.findById(decodedToken.userId);
+        if (admin) req.admin = admin;
+      } catch (err) {
+        // Silently ignore expired or invalid token errors during logout
+      }
+    }
+    next();
+  } catch (error) {
+    next();
+  }
+};
+
 // Backwards compatibility alias
 export const protectAdmin = verifyJWT;

@@ -19,8 +19,8 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// 1. Enable Trust Proxy for Railway, Render, AWS, and Cloudflare Reverse Proxies
-// Essential so Express reads the actual client IP from X-Forwarded-For headers
+// 1. Enable Trust Proxy for Railway, Render, and single reverse proxies
+// Express will trust the first hop proxy (X-Forwarded-For header)
 app.set('trust proxy', 1);
 
 // 2. Allowed Origins Whitelist
@@ -39,19 +39,19 @@ const corsOptions = {
     // Allow requests with no origin (mobile apps, curl, Postman, server-to-server)
     if (!origin) return callback(null, true);
 
-    if (
+    const isAllowed =
       allowedOrigins.includes(origin) ||
       allowedOrigins.some((o) => origin.startsWith(o)) ||
       origin.endsWith('.amplifyapp.com') ||
       origin.endsWith('.up.railway.app') ||
       origin.endsWith('.onrender.com') ||
-      origin.endsWith('ssglobalpublicschool.com')
-    ) {
+      origin.endsWith('ssglobalpublicschool.com');
+
+    if (isAllowed) {
       return callback(null, true);
     }
 
-    // Return callback(null, false) so express cors handles rejection cleanly without 500 error
-    return callback(null, false);
+    return callback(new Error(`CORS Error: Origin ${origin} is not allowed by CORS policy.`));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -60,8 +60,6 @@ const corsOptions = {
 };
 
 // 3. FIRST MIDDLEWARE: Apply CORS at top level
-// Guarantees CORS headers (Access-Control-Allow-Origin, Access-Control-Allow-Credentials)
-// are attached to ALL responses including preflight OPTIONS and error responses
 app.use(cors(corsOptions));
 
 // 4. Security HTTP Headers
@@ -108,13 +106,22 @@ const sanitizeMongoInput = (req, res, next) => {
 
 app.use(sanitizeMongoInput);
 
-// 7. Rate Limiter (2000 requests / 15 mins, skipping preflight OPTIONS and public GET requests)
+// 7. Rate Limiter (2000 requests / 15 mins, skipping preflight OPTIONS and localhost development traffic)
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 2000,
   standardHeaders: true,
   legacyHeaders: false,
-  skip: (req) => req.method === 'OPTIONS' || req.method === 'GET',
+  skip: (req) => {
+    if (req.method === 'OPTIONS') return true;
+    const ip = req.ip || req.socket?.remoteAddress || '';
+    const isLocalhost =
+      ip === '127.0.0.1' ||
+      ip === '::1' ||
+      ip === '::ffff:127.0.0.1' ||
+      req.hostname === 'localhost';
+    return isLocalhost;
+  },
   message: {
     success: false,
     statusCode: 429,

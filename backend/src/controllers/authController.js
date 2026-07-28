@@ -54,15 +54,18 @@ export const getAdminProfile = asyncHandler(async (req, res) => {
 
 // @desc    Logout admin / clear cookie
 // @route   POST /api/admin/logout
-// @access  Private/Admin
+// @access  Public/Admin (Safe Logout)
 export const logoutAdmin = asyncHandler(async (req, res) => {
+  const requestOrigin = req.headers?.origin || '';
+  const isHttpsOrigin = requestOrigin.startsWith('https://');
   const isProduction = process.env.NODE_ENV === 'production';
-  
+  const isSecureCookie = isProduction && isHttpsOrigin;
+
   res.cookie('jwt', '', {
     httpOnly: true,
     expires: new Date(0),
-    secure: isProduction,
-    sameSite: isProduction ? 'none' : 'lax',
+    secure: isSecureCookie,
+    sameSite: isSecureCookie ? 'none' : 'lax',
   });
 
   res.status(200).json(new ApiResponse(200, {}, 'Logged out successfully'));

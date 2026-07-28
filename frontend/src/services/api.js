@@ -1,24 +1,32 @@
 import axios from 'axios';
 
-// Get production Railway backend URL or local Vite proxy
+// Get production Railway backend URL or local Vite proxy based on environment
 export const getBackendBaseUrl = () => {
+  const isLocal =
+    typeof window !== 'undefined' &&
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+  if (isLocal) {
+    return 'http://localhost:5000';
+  }
+
   if (import.meta.env.VITE_API_URL) {
     return import.meta.env.VITE_API_URL.replace(/\/api\/?$/, '');
   }
-  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-    return 'http://localhost:5000';
-  }
+
   return 'https://ssgloblepublicschool-production.up.railway.app';
 };
 
 export const getApiBaseUrl = () => {
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
-  }
-  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+  const isLocal =
+    typeof window !== 'undefined' &&
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+  if (isLocal) {
     return '/api';
   }
-  return 'https://ssgloblepublicschool-production.up.railway.app/api';
+
+  return import.meta.env.VITE_API_URL || 'https://ssgloblepublicschool-production.up.railway.app/api';
 };
 
 // Helper function to resolve image URLs cleanly in production
