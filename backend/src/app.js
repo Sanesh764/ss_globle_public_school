@@ -4,7 +4,6 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
 import compression from 'compression';
 
 import authRoutes from './routes/authRoutes.js';
