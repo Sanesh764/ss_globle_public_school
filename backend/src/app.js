@@ -23,43 +23,44 @@ app.set('trust proxy', 1);
 
 // 2. Allowed Origins Whitelist
 const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:3000',
   'https://main.dlzshhty32uyq.amplifyapp.com',
   'https://ssglobalpublicschool.com',
   'https://www.ssglobalpublicschool.com',
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'http://127.0.0.1:5173',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, curl, Postman, server-to-server)
-    if (!origin) return callback(null, true);
+// 3. Simplified CORS Middleware (Runs before all routes & returns 200 for OPTIONS)
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
 
-    const isAllowed =
-      allowedOrigins.includes(origin) ||
-      allowedOrigins.some((o) => origin.startsWith(o)) ||
-      origin.endsWith('.amplifyapp.com') ||
-      origin.endsWith('.up.railway.app') ||
-      origin.endsWith('.onrender.com') ||
-      origin.endsWith('ssglobalpublicschool.com');
+  if (!origin) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  } else if (
+    allowedOrigins.includes(origin) ||
+    origin.endsWith('.amplifyapp.com') ||
+    origin.endsWith('.up.railway.app') ||
+    origin.endsWith('ssglobalpublicschool.com')
+  ) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
 
-    if (isAllowed) {
-      return callback(null, true);
-    }
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, Origin, X-Requested-With');
 
-    // Return callback(null, false) to let Express CORS reject cleanly without throwing a 500 error
-    return callback(null, false);
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
-  optionsSuccessStatus: 200,
-};
+  // Guarantee every OPTIONS preflight returns HTTP 200
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
 
-// 3. Apply CORS at top level
-app.use(cors(corsOptions));
+  next();
+});
 
 // 4. Security HTTP Headers
 app.use(
