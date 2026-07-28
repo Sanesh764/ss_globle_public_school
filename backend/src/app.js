@@ -19,7 +19,56 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Security: Safe MongoDB Operator Injection Defense Middleware for Express 5 & Node 24
+// 1. Enable Trust Proxy for Railway, Render, AWS, and Cloudflare Reverse Proxies
+// Required so express-rate-limit and Express read the correct client IP from X-Forwarded-For
+app.set('trust proxy', 1);
+
+// 2. Strict Allowed Origins Whitelist
+const allowedOrigins = [
+  'https://main.dlzshhty32uyq.amplifyapp.com',
+  'https://ssglobalpublicschool.com',
+  'https://www.ssglobalpublicschool.com',
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://127.0.0.1:5173',
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Postman, server-to-server)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Strictly reject unauthorized origins
+    return callback(new Error(`CORS policy violation: Origin '${origin}' is not authorized`));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+  optionsSuccessStatus: 200,
+};
+
+// 3. FIRST MIDDLEWARE: CORS MUST be applied immediately after trust proxy
+// Guarantees CORS headers (Access-Control-Allow-Origin, Access-Control-Allow-Credentials)
+// are attached to ALL HTTP responses including OPTIONS preflight, 429 rate limit, and errors
+app.use(cors(corsOptions));
+
+// 4. Security HTTP Headers
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
+
+// 5. Response Payload Compression
+app.use(compression());
+
+// 6. Safe MongoDB Operator Injection Defense (In-Place Key Sanitizer for Express 5 & Node 24)
 const cleanMongoInput = (obj) => {
   if (!obj || typeof obj !== 'object') return obj;
 
@@ -50,26 +99,15 @@ const sanitizeMongoInput = (req, res, next) => {
   next();
 };
 
-// Security: Helmet for HTTP Headers
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-  })
-);
-
-// Performance: Response Compression
-app.use(compression());
-
-// Security: Safe MongoDB Operator Injection Defense
 app.use(sanitizeMongoInput);
 
-// Security: Rate Limiting (300 requests per 15 minutes per IP)
+// 7. Rate Limiter (600 requests per 15 minutes per IP, skipping OPTIONS preflight)
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 300,
+  max: 600,
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => req.method === 'OPTIONS',
   message: {
     success: false,
     statusCode: 429,
@@ -79,64 +117,36 @@ const apiLimiter = rateLimit({
 
 app.use('/api', apiLimiter);
 
-// Allowed Origins for CORS
-const allowedOrigins = [
-  'https://main.dlzshhty32uyq.amplifyapp.com',
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'http://127.0.0.1:5173',
-  process.env.FRONTEND_URL,
-].filter(Boolean);
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-
-    if (
-      allowedOrigins.includes(origin) ||
-      origin.endsWith('.amplifyapp.com') ||
-      origin.endsWith('.onrender.com')
-    ) {
-      return callback(null, true);
-    }
-
-    return callback(null, true);
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-};
-
-// Middlewares
-app.use(cors(corsOptions));
+// 8. Body Parsers & Cookie Parser
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 
-// Serve static uploaded files both under /uploads and root
+// 9. Static Upload Directory Serving
 const uploadsPath = path.join(__dirname, '../uploads');
 app.use('/uploads', express.static(uploadsPath));
 app.use(express.static(uploadsPath));
 
-// Health check endpoint
+// 10. Health Check Endpoint
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
     status: 'online',
     schoolName: 'S.S. Global Public School API',
     frontendUrl: process.env.FRONTEND_URL || 'https://main.dlzshhty32uyq.amplifyapp.com',
+    backendUrl: 'https://ssgloblepublicschool-production.up.railway.app',
     timestamp: new Date().toISOString(),
   });
 });
 
-// API Routes
+// 11. API Routes
 app.use('/api/admin', authRoutes);
 app.use('/api/notices', noticeRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/settings', settingRoutes);
 app.use('/api/contact', contactRoutes);
 
-// Error Handling
+// 12. Centralized Error Handling
 app.use(notFoundHandler);
 app.use(errorHandler);
 

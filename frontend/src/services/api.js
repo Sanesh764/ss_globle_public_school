@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Get production Render backend URL or local Vite proxy
+// Get production Railway backend URL or local Vite proxy
 export const getBackendBaseUrl = () => {
   if (import.meta.env.VITE_API_URL) {
     return import.meta.env.VITE_API_URL.replace(/\/api\/?$/, '');
@@ -8,7 +8,7 @@ export const getBackendBaseUrl = () => {
   if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
     return 'http://localhost:5000';
   }
-  return 'https://ss-globle-public-school.onrender.com';
+  return 'https://ssgloblepublicschool-production.up.railway.app';
 };
 
 export const getApiBaseUrl = () => {
@@ -18,7 +18,7 @@ export const getApiBaseUrl = () => {
   if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
     return '/api';
   }
-  return 'https://ss-globle-public-school.onrender.com/api';
+  return 'https://ssgloblepublicschool-production.up.railway.app/api';
 };
 
 // Helper function to resolve image URLs cleanly in production
@@ -28,7 +28,7 @@ export const getImageUrl = (imagePath) => {
     return imagePath;
   }
   
-  // If hosted on Amplify or production, resolve relative upload paths to Render backend
+  // If hosted on Amplify or production, resolve relative upload paths to Railway backend
   if (imagePath.startsWith('/uploads/')) {
     const backendHost = getBackendBaseUrl();
     return `${backendHost}${imagePath}`;

@@ -5,7 +5,8 @@ import { seedInitialData } from './src/utils/seedData.js';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+// Railway dynamic PORT configuration with fallback
+const PORT = process.env.PORT || 8080;
 
 // Connect to Database & Seed Initial Data then start HTTP server
 connectDB().then(async () => {
@@ -14,8 +15,8 @@ connectDB().then(async () => {
   app.listen(PORT, () => {
     console.log(`=======================================================`);
     console.log(` S.S. Global Public School Server Running on Port ${PORT}`);
-    console.log(` Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(` API Endpoint: http://localhost:${PORT}/api/health`);
+    console.log(` Environment: ${process.env.NODE_ENV || 'production'}`);
+    console.log(` Health Check: /api/health`);
     console.log(`=======================================================`);
   });
 }).catch((err) => {
