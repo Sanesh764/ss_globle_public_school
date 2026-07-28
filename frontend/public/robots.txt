@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://ss-global-public-school.edu.in/sitemap.xml
+Sitemap: https://www.ssglobalpublicschool.com/sitemap.xml
