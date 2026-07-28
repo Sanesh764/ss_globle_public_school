@@ -134,7 +134,7 @@ const AdminMessages = () => {
       </main>
 
       {/* Message Modal */}
-      <MessageModal message={selectedNotice || selectedMessage} onClose={() => setSelectedMessage(null)} />
+      <MessageModal message={selectedMessage} onClose={() => setSelectedMessage(null)} />
     </div>
   );
 };

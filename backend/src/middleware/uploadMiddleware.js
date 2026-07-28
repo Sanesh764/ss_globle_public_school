@@ -47,16 +47,26 @@ export const upload = multer({
 export const processUploadedFile = async (file, folder = 'ss_global_school') => {
   if (!file) return { url: '', public_id: '' };
 
-  if (isCloudinaryConfigured) {
+  if (isCloudinaryConfigured()) {
     try {
+      cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+      });
+
       const result = await cloudinary.uploader.upload(file.path, {
         folder,
         resource_type: 'image',
+        quality: 'auto',
+        fetch_format: 'auto',
       });
-      // Optionally clean up local temp file after Cloudinary upload
+
+      // Clean up local temp file after successful Cloudinary upload
       if (fs.existsSync(file.path)) {
         fs.unlinkSync(file.path);
       }
+
       return {
         url: result.secure_url,
         public_id: result.public_id,
@@ -78,8 +88,14 @@ export const processUploadedFile = async (file, folder = 'ss_global_school') => 
 export const deleteUploadedFile = async (publicIdOrUrl) => {
   if (!publicIdOrUrl) return;
 
-  if (isCloudinaryConfigured && !publicIdOrUrl.startsWith('/uploads/')) {
+  if (isCloudinaryConfigured() && !publicIdOrUrl.startsWith('/uploads/')) {
     try {
+      cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+      });
+
       await cloudinary.uploader.destroy(publicIdOrUrl);
     } catch (err) {
       console.error('[Cloudinary Delete Error]', err.message);

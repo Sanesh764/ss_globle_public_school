@@ -1,53 +1,64 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import MainLayout from '../layouts/MainLayout';
 import AdminLayout from '../layouts/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
-// Public Pages
-import Home from '../pages/public/Home';
-import About from '../pages/public/About';
-import Facilities from '../pages/public/Facilities';
-import Gallery from '../pages/public/Gallery';
-import NoticeBoard from '../pages/public/NoticeBoard';
-import Contact from '../pages/public/Contact';
-import NotFound from '../pages/public/NotFound';
+// Lazy Loaded Public Pages for Performance
+const Home = lazy(() => import('../pages/public/Home'));
+const About = lazy(() => import('../pages/public/About'));
+const Facilities = lazy(() => import('../pages/public/Facilities'));
+const Gallery = lazy(() => import('../pages/public/Gallery'));
+const NoticeBoard = lazy(() => import('../pages/public/NoticeBoard'));
+const Contact = lazy(() => import('../pages/public/Contact'));
+const NotFound = lazy(() => import('../pages/public/NotFound'));
+const Unauthorized = lazy(() => import('../pages/public/Unauthorized'));
 
-// Admin Pages
-import AdminLogin from '../pages/admin/AdminLogin';
-import AdminDashboard from '../pages/admin/AdminDashboard';
-import AdminNotices from '../pages/admin/AdminNotices';
-import AdminGallery from '../pages/admin/AdminGallery';
-import AdminSettings from '../pages/admin/AdminSettings';
-import AdminMessages from '../pages/admin/AdminMessages';
+// Lazy Loaded Admin Pages
+const AdminLogin = lazy(() => import('../pages/admin/AdminLogin'));
+const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard'));
+const AdminNotices = lazy(() => import('../pages/admin/AdminNotices'));
+const AdminGallery = lazy(() => import('../pages/admin/AdminGallery'));
+const AdminSettings = lazy(() => import('../pages/admin/AdminSettings'));
+const AdminMessages = lazy(() => import('../pages/admin/AdminMessages'));
+
+const SuspenseWrapper = ({ children }) => (
+  <Suspense fallback={<LoadingSpinner fullScreen text="Loading Page..." />}>
+    {children}
+  </Suspense>
+);
 
 const AppRoutes = () => {
   return (
     <Routes>
       {/* Public Pages Layout */}
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="facilities" element={<Facilities />} />
-        <Route path="gallery" element={<Gallery />} />
-        <Route path="notices" element={<NoticeBoard />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="*" element={<NotFound />} />
+        <Route index element={<SuspenseWrapper><Home /></SuspenseWrapper>} />
+        <Route path="about" element={<SuspenseWrapper><About /></SuspenseWrapper>} />
+        <Route path="facilities" element={<SuspenseWrapper><Facilities /></SuspenseWrapper>} />
+        <Route path="gallery" element={<SuspenseWrapper><Gallery /></SuspenseWrapper>} />
+        <Route path="notices" element={<SuspenseWrapper><NoticeBoard /></SuspenseWrapper>} />
+        <Route path="contact" element={<SuspenseWrapper><Contact /></SuspenseWrapper>} />
+        <Route path="unauthorized" element={<SuspenseWrapper><Unauthorized /></SuspenseWrapper>} />
+        <Route path="*" element={<SuspenseWrapper><NotFound /></SuspenseWrapper>} />
       </Route>
 
       {/* Admin Login (Unprotected) */}
-      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin/login" element={<SuspenseWrapper><AdminLogin /></SuspenseWrapper>} />
 
       {/* Protected Admin Dashboard Layout */}
       <Route element={<ProtectedRoute />}>
         <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="notices" element={<AdminNotices />} />
-          <Route path="gallery" element={<AdminGallery />} />
-          <Route path="settings" element={<AdminSettings />} />
-          <Route path="messages" element={<AdminMessages />} />
+          <Route index element={<SuspenseWrapper><AdminDashboard /></SuspenseWrapper>} />
+          <Route path="dashboard" element={<SuspenseWrapper><AdminDashboard /></SuspenseWrapper>} />
+          <Route path="notices" element={<SuspenseWrapper><AdminNotices /></SuspenseWrapper>} />
+          <Route path="gallery" element={<SuspenseWrapper><AdminGallery /></SuspenseWrapper>} />
+          <Route path="settings" element={<SuspenseWrapper><AdminSettings /></SuspenseWrapper>} />
+          <Route path="messages" element={<SuspenseWrapper><AdminMessages /></SuspenseWrapper>} />
+          {/* Unknown Admin Sub-routes render 404 */}
+          <Route path="*" element={<SuspenseWrapper><NotFound /></SuspenseWrapper>} />
         </Route>
       </Route>
     </Routes>

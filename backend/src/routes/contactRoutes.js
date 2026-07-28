@@ -5,19 +5,23 @@ import {
   deleteContactMessage,
   toggleReadMessage,
 } from '../controllers/contactController.js';
-import { protectAdmin } from '../middleware/authMiddleware.js';
+import { verifyJWT } from '../middleware/auth.middleware.js';
+import { verifyAdminRole } from '../middleware/admin.middleware.js';
+import validateObjectId from '../middleware/validateObjectId.js';
 import { validateContactMessage } from '../validators/contactValidator.js';
 
 const router = express.Router();
 
 router.route('/')
   .post(validateContactMessage, submitContactMessage)
-  .get(protectAdmin, getContactMessages);
+  .get(verifyJWT, verifyAdminRole, getContactMessages);
 
 router.route('/:id')
-  .delete(protectAdmin, deleteContactMessage);
+  .all(validateObjectId('id'))
+  .delete(verifyJWT, verifyAdminRole, deleteContactMessage);
 
 router.route('/:id/read')
-  .put(protectAdmin, toggleReadMessage);
+  .all(validateObjectId('id'))
+  .put(verifyJWT, verifyAdminRole, toggleReadMessage);
 
 export default router;

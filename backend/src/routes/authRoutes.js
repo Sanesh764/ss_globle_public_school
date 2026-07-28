@@ -1,12 +1,13 @@
 import express from 'express';
 import { loginAdmin, getAdminProfile, logoutAdmin } from '../controllers/authController.js';
-import { protectAdmin } from '../middleware/authMiddleware.js';
+import { verifyJWT } from '../middleware/auth.middleware.js';
+import { verifyAdminRole } from '../middleware/admin.middleware.js';
 import { validateLogin } from '../validators/authValidator.js';
 
 const router = express.Router();
 
 router.post('/login', validateLogin, loginAdmin);
-router.get('/me', protectAdmin, getAdminProfile);
-router.post('/logout', protectAdmin, logoutAdmin);
+router.get('/me', verifyJWT, verifyAdminRole, getAdminProfile);
+router.post('/logout', verifyJWT, logoutAdmin);
 
 export default router;

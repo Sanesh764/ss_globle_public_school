@@ -4,14 +4,18 @@ import { useAuth } from '../hooks/useAuth';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const ProtectedRoute = () => {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, loading, admin } = useAuth();
 
   if (loading) {
-    return <LoadingSpinner fullScreen text="Verifying Admin Access..." />;
+    return <LoadingSpinner fullScreen text="Verifying Administrator Authorization..." />;
   }
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated || !admin) {
     return <Navigate to="/admin/login" replace />;
+  }
+
+  if (admin.role !== 'admin') {
+    return <Navigate to="/unauthorized" replace />;
   }
 
   return <Outlet />;

@@ -17,9 +17,11 @@ const adminSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Password is required'],
+      select: false, // Security: Never include password in queries by default
     },
     role: {
       type: String,
+      enum: ['admin'],
       default: 'admin',
     },
   },

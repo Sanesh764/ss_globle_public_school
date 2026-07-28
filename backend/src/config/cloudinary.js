@@ -2,13 +2,15 @@ import { v2 as cloudinary } from 'cloudinary';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const isCloudinaryConfigured = Boolean(
-  process.env.CLOUDINARY_CLOUD_NAME &&
-  process.env.CLOUDINARY_API_KEY &&
-  process.env.CLOUDINARY_API_SECRET
-);
+export const isCloudinaryConfigured = () => {
+  return Boolean(
+    process.env.CLOUDINARY_CLOUD_NAME &&
+    process.env.CLOUDINARY_API_KEY &&
+    process.env.CLOUDINARY_API_SECRET
+  );
+};
 
-if (isCloudinaryConfigured) {
+if (isCloudinaryConfigured()) {
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -19,4 +21,4 @@ if (isCloudinaryConfigured) {
   console.log('[Cloudinary] Cloudinary credentials missing in .env - fallback to local storage mode.');
 }
 
-export { cloudinary, isCloudinaryConfigured };
+export { cloudinary };
