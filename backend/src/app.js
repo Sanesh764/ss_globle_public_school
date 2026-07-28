@@ -20,10 +20,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // 1. Enable Trust Proxy for Railway, Render, AWS, and Cloudflare Reverse Proxies
-// Required so express-rate-limit and Express read the correct client IP from X-Forwarded-For
+// Essential so Express reads the actual client IP from X-Forwarded-For headers
 app.set('trust proxy', 1);
 
-// 2. Strict Allowed Origins Whitelist
+// 2. Allowed Origins Whitelist
 const allowedOrigins = [
   'https://main.dlzshhty32uyq.amplifyapp.com',
   'https://ssglobalpublicschool.com',
@@ -39,12 +39,19 @@ const corsOptions = {
     // Allow requests with no origin (mobile apps, curl, Postman, server-to-server)
     if (!origin) return callback(null, true);
 
-    if (allowedOrigins.includes(origin)) {
+    if (
+      allowedOrigins.includes(origin) ||
+      allowedOrigins.some((o) => origin.startsWith(o)) ||
+      origin.endsWith('.amplifyapp.com') ||
+      origin.endsWith('.up.railway.app') ||
+      origin.endsWith('.onrender.com') ||
+      origin.endsWith('ssglobalpublicschool.com')
+    ) {
       return callback(null, true);
     }
 
-    // Strictly reject unauthorized origins
-    return callback(new Error(`CORS policy violation: Origin '${origin}' is not authorized`));
+    // Return callback(null, false) so express cors handles rejection cleanly without 500 error
+    return callback(null, false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -52,9 +59,9 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-// 3. FIRST MIDDLEWARE: CORS MUST be applied immediately after trust proxy
+// 3. FIRST MIDDLEWARE: Apply CORS at top level
 // Guarantees CORS headers (Access-Control-Allow-Origin, Access-Control-Allow-Credentials)
-// are attached to ALL HTTP responses including OPTIONS preflight, 429 rate limit, and errors
+// are attached to ALL responses including preflight OPTIONS and error responses
 app.use(cors(corsOptions));
 
 // 4. Security HTTP Headers
@@ -101,13 +108,13 @@ const sanitizeMongoInput = (req, res, next) => {
 
 app.use(sanitizeMongoInput);
 
-// 7. Rate Limiter (600 requests per 15 minutes per IP, skipping OPTIONS preflight)
+// 7. Rate Limiter (2000 requests / 15 mins, skipping preflight OPTIONS and public GET requests)
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 600,
+  max: 2000,
   standardHeaders: true,
   legacyHeaders: false,
-  skip: (req) => req.method === 'OPTIONS',
+  skip: (req) => req.method === 'OPTIONS' || req.method === 'GET',
   message: {
     success: false,
     statusCode: 429,
