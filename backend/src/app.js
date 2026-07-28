@@ -6,7 +6,6 @@ import { fileURLToPath } from 'url';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import compression from 'compression';
-import mongoSanitize from 'express-mongo-sanitize';
 
 import authRoutes from './routes/authRoutes.js';
 import noticeRoutes from './routes/noticeRoutes.js';
@@ -20,10 +19,41 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+// Security: Safe MongoDB Operator Injection Defense Middleware for Express 5 & Node 24
+const cleanMongoInput = (obj) => {
+  if (!obj || typeof obj !== 'object') return obj;
+
+  if (Array.isArray(obj)) {
+    obj.forEach((item) => {
+      if (typeof item === 'object' && item !== null) {
+        cleanMongoInput(item);
+      }
+    });
+    return obj;
+  }
+
+  Object.keys(obj).forEach((key) => {
+    if (key.startsWith('$') || key.includes('.')) {
+      delete obj[key];
+    } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+      cleanMongoInput(obj[key]);
+    }
+  });
+
+  return obj;
+};
+
+const sanitizeMongoInput = (req, res, next) => {
+  if (req.body && typeof req.body === 'object') cleanMongoInput(req.body);
+  if (req.query && typeof req.query === 'object') cleanMongoInput(req.query);
+  if (req.params && typeof req.params === 'object') cleanMongoInput(req.params);
+  next();
+};
+
 // Security: Helmet for HTTP Headers
 app.use(
   helmet({
-    contentSecurityPolicy: false, // Set to false if serving external images or embeds (Google Maps)
+    contentSecurityPolicy: false,
     crossOriginResourcePolicy: { policy: 'cross-origin' },
   })
 );
@@ -31,10 +61,10 @@ app.use(
 // Performance: Response Compression
 app.use(compression());
 
-// Security: MongoDB Operator Injection Protection
-app.use(mongoSanitize());
+// Security: Safe MongoDB Operator Injection Defense
+app.use(sanitizeMongoInput);
 
-// Security: Rate Limiting (100 requests per 15 minutes per IP)
+// Security: Rate Limiting (300 requests per 15 minutes per IP)
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 300,
@@ -79,7 +109,6 @@ const corsOptions = {
 
 // Middlewares
 app.use(cors(corsOptions));
-
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
