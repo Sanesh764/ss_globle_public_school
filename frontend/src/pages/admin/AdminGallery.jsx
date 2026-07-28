@@ -6,8 +6,9 @@ import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { useFetch } from '../../hooks/useFetch';
 import { useToast } from '../../hooks/useToast';
 import { getGalleryApi, uploadGalleryApi, deleteGalleryApi } from '../../services/galleryService';
+import { getImageUrl } from '../../services/api';
 import { GALLERY_CATEGORIES } from '../../utils/constants';
-import { FiPlus, FiTrash2, FiTag } from 'react-icons/fi';
+import { FiPlus, FiTrash2 } from 'react-icons/fi';
 
 const AdminGallery = () => {
   const { setMobileOpen } = useOutletContext();
@@ -21,6 +22,9 @@ const AdminGallery = () => {
     () => getGalleryApi(activeCategory),
     [activeCategory]
   );
+
+  // Correctly extract images array from response wrapper (data.data.images or data.images or data.data)
+  const images = data?.data?.images || data?.images || (Array.isArray(data?.data) ? data.data : []);
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this gallery photo?')) return;
@@ -85,17 +89,18 @@ const AdminGallery = () => {
         {/* Gallery Grid */}
         {loading ? (
           <LoadingSpinner />
-        ) : data?.images && data.images.length > 0 ? (
+        ) : images && images.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {data.images.map((item) => (
+            {images.map((item) => (
               <div
                 key={item._id}
                 className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 flex flex-col group card-hover"
               >
                 <div className="h-48 overflow-hidden relative bg-slate-100">
                   <img
-                    src={item.image}
+                    src={getImageUrl(item.image)}
                     alt={item.title}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <span className="absolute top-3 left-3 bg-slate-950/80 text-amber-400 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold">

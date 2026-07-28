@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiEye, FiArrowRight } from 'react-icons/fi';
 import { useFetch } from '../../hooks/useFetch';
 import { getGalleryApi } from '../../services/galleryService';
+import { getImageUrl } from '../../services/api';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const GalleryPreview = () => {
@@ -10,15 +11,17 @@ const GalleryPreview = () => {
   const { data, loading } = useFetch(() => getGalleryApi('All'), []);
 
   const sampleImages = [
-    { title: 'S.S. Global Public School Campus', category: 'Campus', image: '/school.jpeg' },
+    { title: 'Interactive Smart Classroom', category: 'Facilities', image: '/classRoom.jpg' },
+    { title: 'Academic Classroom Session', category: 'Academics', image: '/classes.jpg' },
+    { title: 'Annual Sports Day & Athletics Ground', category: 'Sports', image: '/sports.jpg' },
+    { title: 'S.S. Global Public School Main Building', category: 'Campus', image: '/school.jpeg' },
     { title: 'Principal Manish Singh Addressing Students', category: 'Campus', image: '/principle.png' },
     { title: 'School Official Crest & Emblem', category: 'Facilities', image: '/logo.jpg' },
-    { title: 'Smart Classroom Interaction', category: 'Facilities', image: '/school.jpeg' },
-    { title: 'Annual Cultural Fiesta', category: 'Celebrations', image: '/school.jpeg' },
-    { title: 'Sports & Athletic Meet', category: 'Sports', image: '/school.jpeg' },
   ];
 
-  const imagesToShow = data?.images && data.images.length > 0 ? data.images.slice(0, 6) : sampleImages;
+  const fetchedImages = data?.data?.images || data?.images || (Array.isArray(data?.data) ? data.data : []);
+
+  const imagesToShow = fetchedImages && fetchedImages.length > 0 ? fetchedImages.slice(0, 6) : sampleImages;
 
   return (
     <section className="py-20 bg-slate-50">
@@ -46,13 +49,14 @@ const GalleryPreview = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {imagesToShow.map((item, idx) => (
               <div
-                key={idx}
+                key={item._id || idx}
                 onClick={() => setSelectedImg(item)}
                 className="group relative rounded-2xl overflow-hidden shadow-md cursor-pointer aspect-video bg-slate-200 border border-slate-200 card-hover"
               >
                 <img
-                  src={item.image}
+                  src={getImageUrl(item.image)}
                   alt={item.title}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
@@ -80,7 +84,7 @@ const GalleryPreview = () => {
                 </button>
               </div>
               <div className="p-2 flex justify-center max-h-[75vh]">
-                <img src={selectedImg.image} alt={selectedImg.title} className="max-h-[70vh] object-contain rounded-xl" />
+                <img src={getImageUrl(selectedImg.image)} alt={selectedImg.title} className="max-h-[70vh] object-contain rounded-xl" />
               </div>
             </div>
           </div>

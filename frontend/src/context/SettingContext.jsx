@@ -12,8 +12,9 @@ export const SettingProvider = ({ children }) => {
     try {
       setLoading(true);
       const res = await getSettingsApi();
-      if (res.success && res.settings) {
-        setSettings((prev) => ({ ...prev, ...res.settings }));
+      const settingsData = res?.data?.settings || res?.settings;
+      if (res?.success && settingsData) {
+        setSettings((prev) => ({ ...prev, ...settingsData }));
       }
     } catch (err) {
       console.warn('[SettingContext] Could not fetch remote settings, using default preset:', err.message);

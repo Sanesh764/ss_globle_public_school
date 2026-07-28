@@ -4,6 +4,7 @@ import { GALLERY_CATEGORIES } from '../../utils/constants';
 import { useFetch } from '../../hooks/useFetch';
 import { getGalleryApi } from '../../services/galleryService';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
+import { getImageUrl } from '../../services/api';
 import { FiEye, FiX } from 'react-icons/fi';
 
 const Gallery = () => {
@@ -13,16 +14,19 @@ const Gallery = () => {
   const { data, loading } = useFetch(() => getGalleryApi(activeCategory), [activeCategory]);
 
   const defaultSampleImages = [
-    { title: 'S.S. Global Public School Building', category: 'Campus', image: '/school.jpg' },
-    { title: 'Principal Manish Singh', category: 'Campus', image: '/principle.png' },
+    { title: 'Interactive Smart Classroom', category: 'Facilities', image: '/classRoom.jpg' },
+    { title: 'Academic Classroom Session', category: 'Academics', image: '/classes.jpg' },
+    { title: 'Annual Sports Day & Athletics Ground', category: 'Sports', image: '/sports.jpg' },
+    { title: 'S.S. Global Public School Main Building', category: 'Campus', image: '/school.jpeg' },
+    { title: 'Principal Manish Singh Addressing Students', category: 'Campus', image: '/principle.png' },
     { title: 'School Official Logo & Emblem', category: 'Facilities', image: '/logo.jpg' },
-    { title: 'Interactive Classroom', category: 'Facilities', image: '/school.jpg' },
-    { title: 'Annual Cultural Performance', category: 'Celebrations', image: '/school.jpg' },
-    { title: 'Sports Meet & Athletics', category: 'Sports', image: '/school.jpg' },
   ];
 
-  const galleryItems = data?.images && data.images.length > 0
-    ? data.images
+  // Correctly extract images array from response wrapper (data.data.images or data.images or data.data)
+  const fetchedImages = data?.data?.images || data?.images || (Array.isArray(data?.data) ? data.data : []);
+
+  const galleryItems = fetchedImages && fetchedImages.length > 0
+    ? fetchedImages
     : (activeCategory === 'All' ? defaultSampleImages : defaultSampleImages.filter(i => i.category === activeCategory));
 
   return (
@@ -58,13 +62,14 @@ const Gallery = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {galleryItems.map((item, idx) => (
                 <div
-                  key={idx}
+                  key={item._id || idx}
                   onClick={() => setSelectedImg(item)}
                   className="group relative rounded-2xl overflow-hidden shadow-md cursor-pointer aspect-video bg-slate-200 border border-slate-200 card-hover"
                 >
                   <img
-                    src={item.image}
+                    src={getImageUrl(item.image)}
                     alt={item.title}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
@@ -111,7 +116,7 @@ const Gallery = () => {
             </div>
             <div className="p-3 flex justify-center max-h-[75vh]">
               <img
-                src={selectedImg.image}
+                src={getImageUrl(selectedImg.image)}
                 alt={selectedImg.title}
                 className="max-h-[70vh] object-contain rounded-xl"
               />

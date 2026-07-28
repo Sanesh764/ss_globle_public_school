@@ -8,7 +8,7 @@ import { NOTICE_CATEGORIES } from '../../utils/constants';
 import { useFetch } from '../../hooks/useFetch';
 import { getNoticesApi } from '../../services/noticeService';
 import { formatDate } from '../../utils/formatDate';
-import { FiCalendar, FiAlertCircle, FiTag } from 'react-icons/fi';
+import { FiCalendar, FiAlertCircle } from 'react-icons/fi';
 
 const NoticeBoard = () => {
   const [search, setSearch] = useState('');
@@ -20,6 +20,9 @@ const NoticeBoard = () => {
     () => getNoticesApi({ page, search, category, limit: 8 }),
     [page, search, category]
   );
+
+  const noticesList = data?.data?.notices || data?.notices || [];
+  const totalPages = data?.data?.pages || data?.pages || 1;
 
   return (
     <div>
@@ -66,9 +69,9 @@ const NoticeBoard = () => {
           {/* Notices Grid */}
           {loading ? (
             <LoadingSpinner />
-          ) : data?.notices && data.notices.length > 0 ? (
+          ) : noticesList.length > 0 ? (
             <div className="space-y-4">
-              {data.notices.map((notice) => (
+              {noticesList.map((notice) => (
                 <div
                   key={notice._id}
                   onClick={() => setSelectedNotice(notice)}
@@ -105,7 +108,7 @@ const NoticeBoard = () => {
 
               <Pagination
                 currentPage={page}
-                totalPages={data.pages || 1}
+                totalPages={totalPages}
                 onPageChange={(p) => setPage(p)}
               />
             </div>

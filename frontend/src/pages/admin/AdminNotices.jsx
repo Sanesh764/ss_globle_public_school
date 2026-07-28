@@ -9,7 +9,7 @@ import { useFetch } from '../../hooks/useFetch';
 import { useToast } from '../../hooks/useToast';
 import { getNoticesApi, createNoticeApi, updateNoticeApi, deleteNoticeApi } from '../../services/noticeService';
 import { formatDate } from '../../utils/formatDate';
-import { FiPlus, FiEdit2, FiTrash2, FiAlertCircle, FiCalendar } from 'react-icons/fi';
+import { FiPlus, FiEdit2, FiTrash2, FiAlertCircle } from 'react-icons/fi';
 
 const AdminNotices = () => {
   const { setMobileOpen } = useOutletContext();
@@ -25,6 +25,9 @@ const AdminNotices = () => {
     () => getNoticesApi({ page, search, limit: 8 }),
     [page, search]
   );
+
+  const noticesList = data?.data?.notices || data?.notices || [];
+  const totalPages = data?.data?.pages || data?.pages || 1;
 
   const handleCreateNew = () => {
     setEditingNotice(null);
@@ -93,7 +96,7 @@ const AdminNotices = () => {
 
           <button
             onClick={handleCreateNew}
-            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-colors flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-colors flex items-center justify-center gap-2 shrink-0"
           >
             <FiPlus className="text-lg" /> Publish New Notice
           </button>
@@ -102,7 +105,7 @@ const AdminNotices = () => {
         {/* Notices Data Table */}
         {loading ? (
           <LoadingSpinner />
-        ) : data?.notices && data.notices.length > 0 ? (
+        ) : noticesList.length > 0 ? (
           <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm text-slate-700">
@@ -116,7 +119,7 @@ const AdminNotices = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {data.notices.map((notice) => (
+                  {noticesList.map((notice) => (
                     <tr key={notice._id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-6 py-4 max-w-md">
                         <span className="font-bold text-slate-900 font-serif block">{notice.title}</span>
@@ -164,7 +167,7 @@ const AdminNotices = () => {
             <div className="p-4 border-t border-slate-100">
               <Pagination
                 currentPage={page}
-                totalPages={data.pages || 1}
+                totalPages={totalPages}
                 onPageChange={(p) => setPage(p)}
               />
             </div>

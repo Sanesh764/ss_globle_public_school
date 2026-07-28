@@ -16,9 +16,13 @@ const AdminDashboard = () => {
   const { data: galleryData, loading: galleryLoading } = useFetch(() => getGalleryApi('All'), []);
   const { data: messagesData, loading: messagesLoading } = useFetch(() => getContactMessagesApi(1), []);
 
-  const totalNotices = noticesData?.totalNotices || noticesData?.notices?.length || 0;
-  const totalGallery = galleryData?.totalImages || galleryData?.images?.length || 0;
-  const totalMessages = messagesData?.totalMessages || messagesData?.messages?.length || 0;
+  const noticesList = noticesData?.data?.notices || noticesData?.notices || [];
+  const galleryList = galleryData?.data?.images || galleryData?.images || [];
+  const messagesList = messagesData?.data?.messages || messagesData?.messages || [];
+
+  const totalNotices = noticesData?.data?.totalNotices || noticesData?.totalNotices || noticesList.length || 0;
+  const totalGallery = galleryData?.data?.totalImages || galleryData?.totalImages || galleryList.length || 0;
+  const totalMessages = messagesData?.data?.totalMessages || messagesData?.totalMessages || messagesList.length || 0;
 
   const isLoading = noticesLoading || galleryLoading || messagesLoading;
 
@@ -115,8 +119,8 @@ const AdminDashboard = () => {
               </div>
 
               <div className="space-y-3">
-                {noticesData?.notices && noticesData.notices.length > 0 ? (
-                  noticesData.notices.slice(0, 4).map((n) => (
+                {noticesList.length > 0 ? (
+                  noticesList.slice(0, 4).map((n) => (
                     <div key={n._id} className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center text-sm">
                       <div>
                         <h4 className="font-semibold text-slate-900 line-clamp-1">{n.title}</h4>
@@ -145,8 +149,8 @@ const AdminDashboard = () => {
               </div>
 
               <div className="space-y-3">
-                {messagesData?.messages && messagesData.messages.length > 0 ? (
-                  messagesData.messages.slice(0, 4).map((m) => (
+                {messagesList.length > 0 ? (
+                  messagesList.slice(0, 4).map((m) => (
                     <div key={m._id} className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center text-sm">
                       <div>
                         <h4 className="font-semibold text-slate-900">{m.name}</h4>
