@@ -32,20 +32,23 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
-// 3. Express CORS Middleware
+// 3. Preflight OPTIONS & Express CORS Middleware
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    const origin = req.headers.origin || '*';
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, Origin, X-Requested-With');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    return res.status(200).end();
+  }
+  next();
+});
+
 app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      if (
-        allowedOrigins.includes(origin) ||
-        allowedOrigins.some((o) => origin.startsWith(o)) ||
-        origin.endsWith('.amplifyapp.com') ||
-        origin.endsWith('.up.railway.app') ||
-        origin.endsWith('ssglobalpublicschool.com')
-      ) {
-        return callback(null, true);
-      }
       return callback(null, true);
     },
     credentials: true,
