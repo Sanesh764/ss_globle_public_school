@@ -31,17 +31,36 @@ export const getApiBaseUrl = () => {
 
 // Helper function to resolve image URLs cleanly in production
 export const getImageUrl = (imagePath) => {
-  if (!imagePath) return '/school.jpeg';
+  if (!imagePath) return '/school.webp';
+  if (typeof imagePath !== 'string') return '/school.webp';
+
+  const backendHost = getBackendBaseUrl();
+
+  // If DB contains a localhost / 127.0.0.1 URL but app is running in production, replace with backendHost
+  if (imagePath.startsWith('http://localhost') || imagePath.startsWith('http://127.0.0.1')) {
+    const isLocalClient =
+      typeof window !== 'undefined' &&
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+    if (!isLocalClient) {
+      // Replace http://localhost:5000/uploads/... with https://ssgloble.../uploads/...
+      const relative = imagePath.replace(/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?/, '');
+      return `${backendHost}${relative}`;
+    }
+    return imagePath;
+  }
+
+  // Full HTTP/HTTPS external URL
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
     return imagePath;
   }
-  
-  // If hosted on Amplify or production, resolve relative upload paths to Railway backend
+
+  // Relative uploaded backend image path: /uploads/...
   if (imagePath.startsWith('/uploads/')) {
-    const backendHost = getBackendBaseUrl();
     return `${backendHost}${imagePath}`;
   }
 
+  // Relative frontend static asset path: /school.webp, /classRoom.webp, etc.
   return imagePath;
 };
 

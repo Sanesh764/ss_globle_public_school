@@ -23,6 +23,8 @@ const AdminNotices = lazy(() => import('../pages/admin/AdminNotices'));
 const AdminGallery = lazy(() => import('../pages/admin/AdminGallery'));
 const AdminSettings = lazy(() => import('../pages/admin/AdminSettings'));
 const AdminMessages = lazy(() => import('../pages/admin/AdminMessages'));
+const AdminLeadership = lazy(() => import('../pages/admin/AdminLeadership'));
+const AdminHeroSlider = lazy(() => import('../pages/admin/AdminHeroSlider'));
 
 const SuspenseWrapper = ({ children }) => (
   <Suspense fallback={<LoadingSpinner fullScreen text="Loading Page..." />}>
@@ -53,6 +55,8 @@ const AppRoutes = () => {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<SuspenseWrapper><AdminDashboard /></SuspenseWrapper>} />
           <Route path="dashboard" element={<SuspenseWrapper><AdminDashboard /></SuspenseWrapper>} />
+          <Route path="hero-slider" element={<SuspenseWrapper><AdminHeroSlider /></SuspenseWrapper>} />
+          <Route path="leadership" element={<SuspenseWrapper><AdminLeadership /></SuspenseWrapper>} />
           <Route path="notices" element={<SuspenseWrapper><AdminNotices /></SuspenseWrapper>} />
           <Route path="gallery" element={<SuspenseWrapper><AdminGallery /></SuspenseWrapper>} />
           <Route path="settings" element={<SuspenseWrapper><AdminSettings /></SuspenseWrapper>} />

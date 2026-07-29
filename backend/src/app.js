@@ -11,6 +11,9 @@ import noticeRoutes from './routes/noticeRoutes.js';
 import galleryRoutes from './routes/galleryRoutes.js';
 import settingRoutes from './routes/settingRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import heroRoutes from './routes/hero.routes.js';
+import { publicLeadershipRouter, adminLeadershipRouter } from './routes/leadershipRoutes.js';
+import { publicHeroSliderRouter, adminHeroSliderRouter } from './routes/heroSliderRoutes.js';
 import { notFoundHandler, errorHandler } from './middleware/error.middleware.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -125,11 +128,16 @@ app.get('/api/health', (req, res) => {
 });
 
 // 11. API Routes
+app.use('/api/admin/hero-slider', adminHeroSliderRouter);
+app.use('/api/admin/leadership', adminLeadershipRouter);
 app.use('/api/admin', authRoutes);
 app.use('/api/notices', noticeRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/settings', settingRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/hero', heroRoutes);
+app.use('/api/hero-slider', publicHeroSliderRouter);
+app.use('/api/leadership', publicLeadershipRouter);
 
 // 12. Centralized Error Handling
 app.use(notFoundHandler);

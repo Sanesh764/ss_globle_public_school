@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { FiGrid, FiBell, FiImage, FiMail, FiSliders, FiHome, FiLogOut, FiShield } from 'react-icons/fi';
+import { FiGrid, FiFilm, FiUsers, FiBell, FiImage, FiMail, FiSliders, FiHome, FiLogOut, FiShield } from 'react-icons/fi';
 import { useAuth } from '../../hooks/useAuth';
 
 const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
@@ -8,6 +8,8 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
 
   const links = [
     { name: 'Dashboard', path: '/admin/dashboard', icon: <FiGrid className="text-xl" /> },
+    { name: 'Hero Slider', path: '/admin/hero-slider', icon: <FiFilm className="text-xl" /> },
+    { name: 'Leadership Team', path: '/admin/leadership', icon: <FiUsers className="text-xl" /> },
     { name: 'Manage Notices', path: '/admin/notices', icon: <FiBell className="text-xl" /> },
     { name: 'Manage Gallery', path: '/admin/gallery', icon: <FiImage className="text-xl" /> },
     { name: 'Website Settings', path: '/admin/settings', icon: <FiSliders className="text-xl" /> },

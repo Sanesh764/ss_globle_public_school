@@ -3,6 +3,8 @@ import Admin from '../models/Admin.js';
 import Setting from '../models/Setting.js';
 import Notice from '../models/Notice.js';
 import Gallery from '../models/Gallery.js';
+import Leadership from '../models/Leadership.js';
+import HeroSlide from '../models/HeroSlide.js';
 
 export const seedInitialData = async () => {
   try {
@@ -133,6 +135,97 @@ export const seedInitialData = async () => {
     ]);
 
     console.log('[Seeding] Gallery re-seeded with classRoom.jpg, classes.jpg, sports.jpg, school.jpeg, principle.png, logo.jpg');
+
+    // 5. Seed Leadership Profiles if empty
+    const leadershipCount = await Leadership.countDocuments();
+    if (leadershipCount === 0) {
+      await Leadership.insertMany([
+        {
+          name: 'Er. R. P. Singh (B.Tech)',
+          designation: 'Founder & Director',
+          heading: 'Empowering Future Leaders & Innovators',
+          message: 'Our vision is to provide world-class CBSE education in Daudnagar. We empower students with critical thinking, sportsmanship, technological literacy, and strong moral grounding.',
+          location: 'Daudnagar, Bihar',
+          image: '/school.webp',
+          displayOrder: 1,
+          isActive: true,
+          showOnHomepage: true,
+        },
+        {
+          name: 'Smt. Gayatri Devi',
+          designation: 'Co-Founder & Academic Patron',
+          heading: 'Instilling Values & Ethical Integrity',
+          message: 'Education is the lamp that illuminates wisdom and empathy. We are committed to nurturing every child in Daudnagar with maternal care, academic discipline, and Indian heritage.',
+          location: 'Daudnagar, Bihar',
+          image: '/logo.webp',
+          displayOrder: 2,
+          isActive: true,
+          showOnHomepage: true,
+        },
+        {
+          name: 'Manish Singh',
+          designation: 'Principal',
+          heading: 'Building Strong Foundations for Tomorrow',
+          message: 'Welcome to S.S. Global Public School. Education is not merely the accumulation of facts, but the training of the mind to think, innovate, and lead with empathy. We strive for excellence.',
+          location: 'Daudnagar, Bihar',
+          image: '/principle.webp',
+          displayOrder: 3,
+          isActive: true,
+          showOnHomepage: true,
+        },
+      ]);
+      console.log('[Seeding] Initial Leadership members created (Founder, Co-Founder, Principal)');
+    }
+
+    // 6. Seed Hero Slides if empty
+    const heroSlidesCount = await HeroSlide.countDocuments();
+    if (heroSlidesCount === 0) {
+      await HeroSlide.insertMany([
+        {
+          backgroundImage: '/school.webp',
+          badge: 'Admissions Open for Academic Session 2026-2027',
+          title: 'Welcome to',
+          highlightTitle: 'S.S. Global Public School',
+          description: 'Located in Daudnagar, Bihar. We provide premier CBSE curriculum education, smart classrooms, state-of-the-art computer & science laboratories, and comprehensive character building under Principal Manish Singh.',
+          primaryButtonText: 'Apply For Admission',
+          primaryButtonLink: '/contact',
+          secondaryButtonText: 'Explore School Vision',
+          secondaryButtonLink: '/about',
+          displayOrder: 1,
+          isActive: true,
+          autoPlay: true,
+        },
+        {
+          backgroundImage: '/classRoom.webp',
+          badge: 'State-of-the-Art Facilities',
+          title: 'Interactive',
+          highlightTitle: 'Modern Smart Classrooms',
+          description: 'Interactive smart touchboards and digital learning modules designed for immersive 3D conceptual understanding and digital literacy.',
+          primaryButtonText: 'Explore Facilities',
+          primaryButtonLink: '/facilities',
+          secondaryButtonText: 'View Campus',
+          secondaryButtonLink: '/gallery',
+          displayOrder: 2,
+          isActive: true,
+          autoPlay: true,
+        },
+        {
+          backgroundImage: '/sports.webp',
+          badge: 'Holistic Personality Development',
+          title: 'Excellence In',
+          highlightTitle: 'Sports & Athletic Arena',
+          description: 'Spacious athletic ground supporting cricket, football, track events, and teamwork encouraging physical fitness and sportsmanship.',
+          primaryButtonText: 'Join Sports Arena',
+          primaryButtonLink: '/contact',
+          secondaryButtonText: 'Explore Gallery',
+          secondaryButtonLink: '/gallery',
+          displayOrder: 3,
+          isActive: true,
+          autoPlay: true,
+        },
+      ]);
+      console.log('[Seeding] Initial Hero Slides created in MongoDB');
+    }
   } catch (error) {
     console.error('[Seeding Error]', error.message);
   }
