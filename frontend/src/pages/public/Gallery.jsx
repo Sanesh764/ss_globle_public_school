@@ -6,6 +6,7 @@ import { getGalleryApi } from '../../services/galleryService';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { getImageUrl } from '../../services/api';
 import { FiEye, FiX } from 'react-icons/fi';
+import { trackGalleryImageClick } from '../../utils/analytics';
 
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -63,7 +64,10 @@ const Gallery = () => {
               {galleryItems.map((item, idx) => (
                 <div
                   key={item._id || idx}
-                  onClick={() => setSelectedImg(item)}
+                  onClick={() => {
+                    setSelectedImg(item);
+                    trackGalleryImageClick(item.title, item.category);
+                  }}
                   className="group relative rounded-2xl overflow-hidden shadow-md cursor-pointer aspect-video bg-slate-200 border border-slate-200 card-hover"
                 >
                   <img

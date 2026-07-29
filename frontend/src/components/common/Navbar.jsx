@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { FiMenu, FiX, FiLock, FiPhone, FiMail, FiMapPin, FiUserCheck } from 'react-icons/fi';
 import { SettingContext } from '../../context/SettingContext';
 import { AuthContext } from '../../context/AuthContext';
+import { trackAdmissionClick } from '../../utils/analytics';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -109,6 +110,7 @@ const Navbar = () => {
 
             <Link
               to="/contact"
+              onClick={() => trackAdmissionClick('Navbar Desktop')}
               className="ml-4 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md shadow-amber-500/20 transition-all hover:shadow-lg transform hover:-translate-y-0.5"
             >
               Admission Open
@@ -149,7 +151,10 @@ const Navbar = () => {
           <div className="pt-2">
             <Link
               to="/contact"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+                trackAdmissionClick('Navbar Mobile');
+              }}
               className="block text-center w-full px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md"
             >
               Admission Open 2026-27

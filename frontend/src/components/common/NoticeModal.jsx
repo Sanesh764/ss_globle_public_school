@@ -1,6 +1,7 @@
 import React from 'react';
 import { FiX, FiCalendar, FiAlertCircle, FiDownload } from 'react-icons/fi';
 import { formatDate } from '../../utils/formatDate';
+import { trackNoticeDownload } from '../../utils/analytics';
 
 const NoticeModal = ({ notice, onClose }) => {
   if (!notice) return null;
@@ -46,6 +47,7 @@ const NoticeModal = ({ notice, onClose }) => {
                 href={notice.attachmentUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackNoticeDownload(notice.title, notice.attachmentUrl)}
                 className="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-50 text-blue-700 hover:bg-blue-100 font-semibold rounded-xl text-sm transition-colors border border-blue-200"
               >
                 <FiDownload /> View Official Attachment / Document
