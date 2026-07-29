@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { FiMapPin, FiPhone, FiMail, FiClock, FiSend } from 'react-icons/fi';
+import { FiMapPin, FiPhone, FiMail, FiSend } from 'react-icons/fi';
 import { SettingContext } from '../../context/SettingContext';
+import GoogleMap from '../common/GoogleMap';
 
-const ContactPreview = () => {
+const ContactPreview = memo(() => {
   const { settings } = useContext(SettingContext);
+
+  const schoolName = settings?.schoolName || 'S.S. Global Public School';
+  const schoolAddress = settings?.address || 'Daudnagar, Bihar - 824143, India';
+  const phone = settings?.phone || '+91 98765 43210';
 
   return (
     <section className="py-20 bg-white">
@@ -26,7 +31,7 @@ const ContactPreview = () => {
                 <FiMapPin className="text-blue-600 text-xl mt-1 shrink-0" />
                 <div>
                   <h4 className="font-bold text-slate-900">Campus Address</h4>
-                  <p className="text-slate-600">{settings.address || 'Daudnagar, Bihar - 824143, India'}</p>
+                  <p className="text-slate-600">{schoolAddress}</p>
                 </div>
               </div>
 
@@ -34,7 +39,7 @@ const ContactPreview = () => {
                 <FiPhone className="text-amber-500 text-xl mt-1 shrink-0" />
                 <div>
                   <h4 className="font-bold text-slate-900">Phone Numbers</h4>
-                  <p className="text-slate-600">{settings.phone || '+91 98765 43210'} / {settings.altPhone || '+91 91234 56789'}</p>
+                  <p className="text-slate-600">{phone} / {settings.altPhone || '+91 91234 56789'}</p>
                 </div>
               </div>
 
@@ -57,21 +62,23 @@ const ContactPreview = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-6 rounded-2xl overflow-hidden shadow-lg border border-slate-300 h-80">
-            <iframe
+          <div className="lg:col-span-6 rounded-2xl overflow-hidden shadow-lg border border-slate-300 h-80 flex flex-col">
+            <GoogleMap
+              src={settings?.googleMapUrl}
+              schoolName={schoolName}
+              address={schoolAddress}
+              phone={phone}
               title="S.S. Global Public School Location Map Preview"
-              src={settings.googleMapUrl || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14457.942738743126!2d84.39864225!3d25.034509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398d5c89839446d3%3A0x6b19451ba21d604b!2sDaudnagar%2C%20Bihar!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin'}
-              width="100%"
               height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-            ></iframe>
+              className="w-full h-full"
+            />
           </div>
         </div>
       </div>
     </section>
   );
-};
+});
+
+ContactPreview.displayName = 'ContactPreview';
 
 export default ContactPreview;

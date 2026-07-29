@@ -4,7 +4,9 @@ import AdminHeader from '../../components/admin/AdminHeader';
 import { SettingContext } from '../../context/SettingContext';
 import { useToast } from '../../hooks/useToast';
 import { updateSettingsApi } from '../../services/settingService';
-import { FiSave, FiUploadCloud, FiGlobe, FiPhone, FiMail, FiMapPin, FiUserCheck } from 'react-icons/fi';
+import { FiSave, FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
+import GoogleMap from '../../components/common/GoogleMap';
+import { isValidGoogleMapEmbedUrl } from '../../utils/mapUtils';
 
 const AdminSettings = () => {
   const { setMobileOpen } = useOutletContext();
@@ -35,6 +37,7 @@ const AdminSettings = () => {
 
   const [logoFile, setLogoFile] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [mapUrlError, setMapUrlError] = useState('');
 
   useEffect(() => {
     if (settings) {
@@ -62,8 +65,35 @@ const AdminSettings = () => {
     }
   }, [settings]);
 
+  const handleMapUrlChange = (e) => {
+    let inputVal = e.target.value;
+
+    // Handle iframe code copy-paste automatically
+    if (inputVal.includes('<iframe') && inputVal.includes('src=')) {
+      const srcMatch = inputVal.match(/src=["']([^"']+)["']/i);
+      if (srcMatch && srcMatch[1]) {
+        inputVal = srcMatch[1].trim();
+      }
+    }
+
+    setFormData((prev) => ({ ...prev, googleMapUrl: inputVal }));
+
+    if (inputVal.trim() && !isValidGoogleMapEmbedUrl(inputVal)) {
+      setMapUrlError('Please enter the official Google Maps Embed URL, not a shared Google Maps link.');
+    } else {
+      setMapUrlError('');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData.googleMapUrl.trim() && !isValidGoogleMapEmbedUrl(formData.googleMapUrl)) {
+      setMapUrlError('Please enter the official Google Maps Embed URL, not a shared Google Maps link.');
+      addToast('Invalid Google Maps URL. Please enter an official embed URL.', 'error');
+      return;
+    }
+
     try {
       setSubmitting(true);
       const dataToSubmit = new FormData();
@@ -213,16 +243,52 @@ const AdminSettings = () => {
               </div>
             </div>
 
-            <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-slate-700 uppercase">
                 Google Map Embed iFrame URL
               </label>
               <input
                 type="text"
                 value={formData.googleMapUrl}
-                onChange={(e) => setFormData({ ...formData, googleMapUrl: e.target.value })}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                onChange={handleMapUrlChange}
+                placeholder="https://www.google.com/maps/embed?pb=..."
+                className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl text-sm focus:outline-none focus:ring-2 ${
+                  mapUrlError
+                    ? 'border-red-500 focus:ring-red-500 bg-red-50/30'
+                    : 'border-slate-300 focus:ring-blue-600'
+                }`}
               />
+              <p className="text-xs text-slate-500">
+                Paste only the Google Maps Embed iframe URL.
+              </p>
+
+              {mapUrlError ? (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs font-semibold flex items-center gap-2">
+                  <FiAlertCircle className="text-red-600 text-base shrink-0" />
+                  {mapUrlError}
+                </div>
+              ) : formData.googleMapUrl.trim() ? (
+                <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700 text-xs font-semibold flex items-center gap-2">
+                  <FiCheckCircle className="text-emerald-600 text-base shrink-0" />
+                  Valid Google Maps Embed URL recognized.
+                </div>
+              ) : null}
+
+              {/* Map Live Preview */}
+              <div className="pt-3">
+                <label className="block text-xs font-bold text-slate-600 uppercase mb-2">
+                  Map Live Preview
+                </label>
+                <div className="rounded-2xl overflow-hidden border border-slate-200 h-64">
+                  <GoogleMap
+                    src={formData.googleMapUrl}
+                    schoolName={formData.schoolName || 'S.S. Global Public School'}
+                    address={formData.address || 'Daudnagar, Bihar'}
+                    phone={formData.phone}
+                    height="100%"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -347,7 +413,7 @@ const AdminSettings = () => {
           <div className="pt-4 flex justify-end">
             <button
               type="submit"
-              disabled={submitting}
+              disabled={submitting || Boolean(mapUrlError)}
               className="px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-base shadow-xl shadow-blue-600/30 transition-all flex items-center gap-2 disabled:opacity-50"
             >
               <FiSave className="text-xl" /> {submitting ? 'Saving Settings...' : 'Save All Settings'}

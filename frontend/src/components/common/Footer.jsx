@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { FiMapPin, FiPhone, FiMail, FiClock, FiExternalLink, FiFacebook, FiTwitter, FiInstagram, FiYoutube, FiArrowUpRight } from 'react-icons/fi';
+import { FiMapPin, FiPhone, FiMail, FiClock, FiFacebook, FiTwitter, FiInstagram, FiYoutube, FiArrowUpRight } from 'react-icons/fi';
 import { SettingContext } from '../../context/SettingContext';
+import GoogleMap from './GoogleMap';
 
-const Footer = () => {
+const Footer = memo(() => {
   const { settings } = useContext(SettingContext);
 
   const quickLinks = [
@@ -15,6 +16,10 @@ const Footer = () => {
     { name: 'Contact & Admissions', path: '/contact' },
     { name: 'Admin Portal', path: '/admin/login' },
   ];
+
+  const schoolName = settings?.schoolName || 'S.S. Global Public School';
+  const schoolAddress = settings?.address || 'Daudnagar, Bihar - 824143, India';
+  const phone = settings?.phone || '+91 98765 43210';
 
   return (
     <footer className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-800">
@@ -40,7 +45,7 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-white font-serif tracking-tight">
-                  {settings.schoolName || 'S.S. Global Public School'}
+                  {schoolName}
                 </h3>
                 <p className="text-xs text-amber-400 font-medium">Daudnagar, Bihar</p>
               </div>
@@ -89,11 +94,11 @@ const Footer = () => {
             <ul className="space-y-3 text-sm text-slate-400">
               <li className="flex items-start gap-3">
                 <FiMapPin className="text-amber-400 text-lg mt-0.5 shrink-0" />
-                <span>{settings.address || 'Daudnagar, Bihar - 824143, India'}</span>
+                <span>{schoolAddress}</span>
               </li>
               <li className="flex items-center gap-3">
                 <FiPhone className="text-amber-400 text-base shrink-0" />
-                <span>{settings.phone || '+91 98765 43210'}</span>
+                <span>{phone}</span>
               </li>
               <li className="flex items-center gap-3">
                 <FiMail className="text-amber-400 text-base shrink-0" />
@@ -106,37 +111,27 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Col 4: Location Map & Direct Link */}
+          {/* Col 4: Location Map Embed */}
           <div>
             <h4 className="text-white text-base font-bold mb-4 font-serif uppercase tracking-wider border-l-4 border-emerald-500 pl-3">
               Location Map
             </h4>
             <div className="rounded-xl overflow-hidden border border-slate-800 shadow-md bg-slate-900">
-              <iframe
+              <GoogleMap
+                src={settings?.googleMapUrl}
+                schoolName={schoolName}
+                address={schoolAddress}
+                phone={phone}
                 title="S.S. Global Public School Location Map"
-                src={settings.googleMapUrl || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14457.942738743126!2d84.39864225!3d25.034509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398d5c89839446d3%3A0x6b19451ba21d604b!2sDaudnagar%2C%20Bihar!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin'}
-                width="100%"
-                height="130"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+                height="150px"
+              />
             </div>
-            <a
-              href="https://maps.google.com/?q=Daudnagar+Bihar"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2.5 inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 font-semibold"
-            >
-              Open in Google Maps <FiExternalLink />
-            </a>
           </div>
         </div>
 
         {/* Bottom Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} {settings.schoolName || 'S.S. Global Public School'}, Daudnagar. All Rights Reserved.</p>
+          <p>© {new Date().getFullYear()} {schoolName}, Daudnagar. All Rights Reserved.</p>
           <p className="flex items-center gap-2">
             <span>CBSE Curriculum School</span>
             <span>•</span>
@@ -146,6 +141,8 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';
 
 export default Footer;

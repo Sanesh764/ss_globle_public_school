@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PageHeader from '../../components/common/PageHeader';
+import LocationSection from '../../components/common/LocationSection';
 import { SettingContext } from '../../context/SettingContext';
 import { useToast } from '../../hooks/useToast';
 import { submitContactApi } from '../../services/contactService';
@@ -10,32 +11,44 @@ const Contact = () => {
   const { addToast } = useToast();
 
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
     phone: '',
     subject: 'Admission Inquiry',
     message: '',
+    state: 'Bihar',
+    district: 'Aurangabad',
+    city: 'Daudnagar',
+    pinCode: '',
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setSubmitting(true);
+      setSuccessMsg('');
       const res = await submitContactApi(formData);
       if (res.success) {
-        addToast(res.message || 'Your inquiry has been submitted successfully!', 'success');
+        const msg = res.message || 'Thank you! Your inquiry has been received. Our team will contact you soon.';
+        setSuccessMsg(msg);
+        addToast(msg, 'success');
         setFormData({
-          name: '',
+          fullName: '',
           email: '',
           phone: '',
           subject: 'Admission Inquiry',
           message: '',
+          state: 'Bihar',
+          district: 'Aurangabad',
+          city: 'Daudnagar',
+          pinCode: '',
         });
       }
     } catch (err) {
-      addToast(err.response?.data?.message || 'Failed to submit form. Please try again.', 'error');
+      addToast(err.response?.data?.message || 'Failed to submit inquiry. Please try again.', 'error');
     } finally {
       setSubmitting(false);
     }
@@ -72,8 +85,14 @@ const Contact = () => {
                     <FiPhone className="text-amber-500 text-xl mt-1 shrink-0" />
                     <div>
                       <h4 className="font-bold text-slate-900">Phone Numbers</h4>
-                      <p className="text-slate-600">{settings.phone || '+91 98765 43210'}</p>
-                      {settings.altPhone && <p className="text-slate-600">{settings.altPhone}</p>}
+                      <a href={`tel:${settings.phone || '+919876543210'}`} className="text-slate-600 hover:text-blue-600 font-semibold block">
+                        {settings.phone || '+91 98765 43210'}
+                      </a>
+                      {settings.altPhone && (
+                        <a href={`tel:${settings.altPhone}`} className="text-slate-600 hover:text-blue-600 font-semibold block">
+                          {settings.altPhone}
+                        </a>
+                      )}
                     </div>
                   </div>
 
@@ -81,7 +100,9 @@ const Contact = () => {
                     <FiMail className="text-emerald-600 text-xl mt-1 shrink-0" />
                     <div>
                       <h4 className="font-bold text-slate-900">Email Address</h4>
-                      <p className="text-slate-600 break-all">{settings.email || 'info@ssglobalpublicschool.edu.in'}</p>
+                      <a href={`mailto:${settings.email || 'info@ssglobalpublicschool.edu.in'}`} className="text-slate-600 hover:text-blue-600 font-semibold break-all block">
+                        {settings.email || 'info@ssglobalpublicschool.edu.in'}
+                      </a>
                     </div>
                   </div>
 
@@ -106,7 +127,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Contact Form (Stored in MongoDB) */}
+            {/* Contact Inquiry Form */}
             <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl shadow-sm border border-slate-200">
               <h3 className="text-2xl font-bold font-serif text-slate-900 mb-2">
                 Send Us a Direct Inquiry
@@ -114,6 +135,13 @@ const Contact = () => {
               <p className="text-slate-600 text-sm mb-6">
                 Fill out the form below and our administrative team will respond promptly.
               </p>
+
+              {successMsg && (
+                <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-sm font-semibold flex items-center gap-2">
+                  <FiCheckCircle className="text-emerald-600 text-xl shrink-0" />
+                  {successMsg}
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -124,8 +152,8 @@ const Contact = () => {
                     <input
                       type="text"
                       required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       placeholder="e.g. Ramesh Kumar"
                       className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
                     />
@@ -149,7 +177,7 @@ const Contact = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                      Phone Number *
+                      Mobile Number *
                     </label>
                     <input
                       type="tel"
@@ -163,7 +191,7 @@ const Contact = () => {
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                      Inquiry Subject
+                      Inquiry Subject *
                     </label>
                     <select
                       value={formData.subject}
@@ -176,6 +204,60 @@ const Contact = () => {
                       <option value="General Inquiry">General Inquiry</option>
                     </select>
                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                      State
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.state}
+                      onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                      placeholder="Bihar"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                      District
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.district}
+                      onChange={(e) => setFormData({ ...formData, district: e.target.value })}
+                      placeholder="Aurangabad"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                      City / Village
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.city}
+                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      placeholder="Daudnagar"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                    PIN Code (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.pinCode}
+                    onChange={(e) => setFormData({ ...formData, pinCode: e.target.value })}
+                    placeholder="e.g. 824143"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
                 </div>
 
                 <div>
@@ -203,23 +285,8 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Interactive Google Map Section */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
-            <h3 className="text-xl font-bold font-serif text-slate-900">
-              Interactive School Location Map (Daudnagar, Bihar)
-            </h3>
-            <div className="rounded-2xl overflow-hidden shadow-inner h-96">
-              <iframe
-                title="S.S. Global Public School Google Map Location"
-                src={settings.googleMapUrl || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14457.942738743126!2d84.39864225!3d25.034509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398d5c89839446d3%3A0x6b19451ba21d604b!2sDaudnagar%2C%20Bihar!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin'}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-              ></iframe>
-            </div>
-          </div>
+          {/* Location & Directions Section */}
+          <LocationSection />
         </div>
       </section>
     </div>

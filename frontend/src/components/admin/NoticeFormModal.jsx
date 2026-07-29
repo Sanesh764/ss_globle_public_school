@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiX, FiCheck } from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 import { NOTICE_CATEGORIES } from '../../utils/constants';
 
 const NoticeFormModal = ({ isOpen, onClose, onSubmit, notice = null, loading = false }) => {

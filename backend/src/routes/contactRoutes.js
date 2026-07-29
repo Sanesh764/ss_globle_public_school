@@ -2,26 +2,35 @@ import express from 'express';
 import {
   submitContactMessage,
   getContactMessages,
+  getContactMessageById,
+  markMessageAsRead,
+  markMessageAsReplied,
   deleteContactMessage,
-  toggleReadMessage,
 } from '../controllers/contactController.js';
 import { verifyJWT } from '../middleware/auth.middleware.js';
 import { verifyAdminRole } from '../middleware/admin.middleware.js';
 import validateObjectId from '../middleware/validateObjectId.js';
-import { validateContactMessage } from '../validators/contactValidator.js';
+import { contactSubmissionLimiter } from '../middleware/rateLimiter.middleware.js';
 
-const router = express.Router();
+export const publicContactRouter = express.Router();
+publicContactRouter.post('/', contactSubmissionLimiter, submitContactMessage);
 
-router.route('/')
-  .post(validateContactMessage, submitContactMessage)
-  .get(verifyJWT, verifyAdminRole, getContactMessages);
+export const adminContactRouter = express.Router();
+adminContactRouter.use(verifyJWT, verifyAdminRole);
 
-router.route('/:id')
+adminContactRouter.get('/', getContactMessages);
+
+adminContactRouter.route('/:id')
   .all(validateObjectId('id'))
-  .delete(verifyJWT, verifyAdminRole, deleteContactMessage);
+  .get(getContactMessageById)
+  .delete(deleteContactMessage);
 
-router.route('/:id/read')
+adminContactRouter.route('/:id/read')
   .all(validateObjectId('id'))
-  .put(verifyJWT, verifyAdminRole, toggleReadMessage);
+  .patch(markMessageAsRead)
+  .put(markMessageAsRead);
 
-export default router;
+adminContactRouter.route('/:id/replied')
+  .all(validateObjectId('id'))
+  .patch(markMessageAsReplied)
+  .put(markMessageAsReplied);

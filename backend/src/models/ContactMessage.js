@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const contactMessageSchema = new mongoose.Schema(
   {
-    name: {
+    fullName: {
       type: String,
-      required: [true, 'Sender name is required'],
+      required: [true, 'Full name is required'],
       trim: true,
     },
     email: {
@@ -20,12 +20,42 @@ const contactMessageSchema = new mongoose.Schema(
     },
     subject: {
       type: String,
-      default: 'General Inquiry',
+      required: [true, 'Subject is required'],
       trim: true,
     },
     message: {
       type: String,
       required: [true, 'Message content is required'],
+    },
+    state: {
+      type: String,
+      default: 'Bihar',
+      trim: true,
+    },
+    district: {
+      type: String,
+      default: 'Aurangabad',
+      trim: true,
+    },
+    city: {
+      type: String,
+      default: 'Daudnagar',
+      trim: true,
+    },
+    pinCode: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    ipAddress: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    status: {
+      type: String,
+      enum: ['Unread', 'Read', 'Replied'],
+      default: 'Unread',
     },
     isRead: {
       type: Boolean,
@@ -36,6 +66,14 @@ const contactMessageSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// Virtual property for 'name' for backwards compatibility
+contactMessageSchema.virtual('name').get(function () {
+  return this.fullName;
+});
+
+contactMessageSchema.set('toJSON', { virtuals: true });
+contactMessageSchema.set('toObject', { virtuals: true });
 
 const ContactMessage = mongoose.model('ContactMessage', contactMessageSchema);
 export default ContactMessage;

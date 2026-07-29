@@ -5,17 +5,27 @@ export const submitContactApi = async (contactData) => {
   return response.data;
 };
 
-export const getContactMessagesApi = async (page = 1) => {
-  const response = await API.get('/contact', { params: { page } });
+export const getContactMessagesApi = async (params = {}) => {
+  const response = await API.get('/admin/messages', { params });
+  return response.data;
+};
+
+export const getContactMessageByIdApi = async (id) => {
+  const response = await API.get(`/admin/messages/${id}`);
+  return response.data;
+};
+
+export const markMessageAsReadApi = async (id) => {
+  const response = await API.patch(`/admin/messages/${id}/read`);
+  return response.data;
+};
+
+export const markMessageAsRepliedApi = async (id) => {
+  const response = await API.patch(`/admin/messages/${id}/replied`);
   return response.data;
 };
 
 export const deleteContactMessageApi = async (id) => {
-  const response = await API.delete(`/contact/${id}`);
-  return response.data;
-};
-
-export const toggleReadMessageApi = async (id) => {
-  const response = await API.put(`/contact/${id}/read`);
+  const response = await API.delete(`/admin/messages/${id}`);
   return response.data;
 };

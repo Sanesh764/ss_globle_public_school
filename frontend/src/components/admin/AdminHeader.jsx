@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiMenu, FiUser, FiBell } from 'react-icons/fi';
+import { FiMenu, FiUser } from 'react-icons/fi';
 import { useAuth } from '../../hooks/useAuth';
 
 const AdminHeader = ({ setMobileOpen, title }) => {

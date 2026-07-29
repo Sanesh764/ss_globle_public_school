@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiAlertTriangle, FiHome } from 'react-icons/fi';
 
-const ErrorFallback = ({ error, resetErrorBoundary }) => {
+const ErrorFallback = ({ error: _error, resetErrorBoundary }) => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center p-4 bg-slate-50">
       <div className="text-center max-w-md space-y-6 bg-white p-10 rounded-3xl shadow-xl border border-slate-200">

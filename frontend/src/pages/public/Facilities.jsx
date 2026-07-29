@@ -1,6 +1,6 @@
 import React from 'react';
 import PageHeader from '../../components/common/PageHeader';
-import { FiMonitor, FiCpu, FiGlobe, FiBook, FiActivity, FiShield, FiTruck } from 'react-icons/fi';
+import { FiMonitor, FiCpu, FiGlobe, FiBook, FiActivity, FiShield } from 'react-icons/fi';
 
 const Facilities = () => {
   const facilityList = [

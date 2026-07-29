@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiX, FiCalendar, FiTag, FiAlertCircle, FiDownload } from 'react-icons/fi';
+import { FiX, FiCalendar, FiAlertCircle, FiDownload } from 'react-icons/fi';
 import { formatDate } from '../../utils/formatDate';
 
 const NoticeModal = ({ notice, onClose }) => {
