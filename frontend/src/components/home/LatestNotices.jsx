@@ -12,7 +12,7 @@ const LatestNotices = () => {
   const { data, loading } = useFetch(() => getNoticesApi({ page: 1, limit: 5 }), []);
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white min-h-[450px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
@@ -32,7 +32,9 @@ const LatestNotices = () => {
         </div>
 
         {loading ? (
-          <LoadingSpinner />
+          <div className="min-h-[300px] flex items-center justify-center">
+            <LoadingSpinner />
+          </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left Ticker / Featured Cards */}

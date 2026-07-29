@@ -25,8 +25,12 @@ const AboutPreview = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-100">
               <img
-                src={schoolImg}
+                src={schoolImg && schoolImg !== '/school.jpeg' ? schoolImg : '/school.webp'}
                 alt="S.S. Global Public School Building"
+                width="600"
+                height="380"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[380px] object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>

@@ -21,8 +21,8 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-40 w-full shadow-md bg-white">
       {/* Top Header Bar */}
-      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800 min-h-[36px] flex items-center">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 w-full">
           <div className="flex items-center space-x-4">
             <span className="flex items-center gap-1.5 hover:text-white transition-colors">
               <FiMapPin className="text-amber-400" /> {settings.address || 'Daudnagar, Bihar, India'}
@@ -63,10 +63,18 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo & School Name */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-xl primary-gradient text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform">
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
+            <div className="w-12 h-12 rounded-xl primary-gradient text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-blue-600/30 group-hover:scale-105 transition-transform shrink-0">
               {settings.logo ? (
-                <img src={settings.logo} alt="Logo" className="w-full h-full object-cover rounded-xl" />
+                <img
+                  src={settings.logo}
+                  alt="S.S. Global Public School Logo"
+                  width="48"
+                  height="48"
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-full object-cover rounded-xl"
+                />
               ) : (
                 'SS'
               )}

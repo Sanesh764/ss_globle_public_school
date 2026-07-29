@@ -22,10 +22,13 @@
     <meta property="twitter:image" content="/school.jpeg" />
 
     <title>S.S. Global Public School | Daudnagar, Bihar</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Preload Critical LCP Hero Image -->
+    <link rel="preload" as="image" href="/school.webp" type="image/webp" fetchpriority="high" />
+
+    <!-- Google Fonts Preconnect & Synchronous Loading to Prevent CLS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" />
   </head>
   <body>
     <div id="root"></div>

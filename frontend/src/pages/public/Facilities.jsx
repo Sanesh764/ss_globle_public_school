@@ -7,7 +7,7 @@ const Facilities = () => {
     {
       title: 'Smart Classroom',
       icon: <FiMonitor className="text-3xl text-blue-600" />,
-      image: '/classRoom.jpg',
+      image: '/classRoom.webp',
       features: [
         'Interactive Touchboards & HD Projectors',
         'Digital Multimedia Curriculum Content',
@@ -19,7 +19,7 @@ const Facilities = () => {
     {
       title: 'Academic Classroom & IT Lab',
       icon: <FiCpu className="text-3xl text-amber-500" />,
-      image: '/classes.jpg',
+      image: '/classes.webp',
       features: [
         'Interactive Classroom Learning Environment',
         'Basic & Advanced Computer & Coding Curriculum',
@@ -31,7 +31,7 @@ const Facilities = () => {
     {
       title: 'Playground & Sports Arena',
       icon: <FiActivity className="text-3xl text-rose-500" />,
-      image: '/sports.jpg',
+      image: '/sports.webp',
       features: [
         'Spacious Cricket & Football Ground',
         'Volleyball & Badminton Courts',
@@ -43,7 +43,7 @@ const Facilities = () => {
     {
       title: 'Modern Campus Building',
       icon: <FiGlobe className="text-3xl text-purple-600" />,
-      image: '/school.jpeg',
+      image: '/school.webp',
       features: [
         'State-of-the-art CBSE Architecture',
         'Physics, Chemistry & Biology Workstations',
@@ -55,7 +55,7 @@ const Facilities = () => {
     {
       title: 'Leadership & Administrative Wing',
       icon: <FiBook className="text-3xl text-emerald-600" />,
-      image: '/principle.png',
+      image: '/principle.webp',
       features: [
         'Principal Manish Singh Guidance Office',
         'Parent Counseling & Helpdesk Desk',
@@ -67,7 +67,7 @@ const Facilities = () => {
     {
       title: 'CCTV Security & Transport Fleet',
       icon: <FiShield className="text-3xl text-sky-600" />,
-      image: '/logo.jpg',
+      image: '/logo.webp',
       features: [
         '24/7 CCTV Camera Coverage across Campus',
         'Guarded Entry/Exit Points with Visitor Pass',
@@ -99,6 +99,10 @@ const Facilities = () => {
                 <img
                   src={fac.image}
                   alt={fac.title}
+                  width="500"
+                  height="320"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>

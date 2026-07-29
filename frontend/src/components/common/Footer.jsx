@@ -25,7 +25,15 @@ const Footer = () => {
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl primary-gradient text-white flex items-center justify-center font-bold text-lg shadow-md">
                 {settings.logo ? (
-                  <img src={settings.logo} alt="Logo" className="w-full h-full object-cover rounded-xl" />
+                  <img
+                    src={settings.logo}
+                    alt="S.S. Global Public School Logo"
+                    width="40"
+                    height="40"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover rounded-xl"
+                  />
                 ) : (
                   'SS'
                 )}
@@ -42,16 +50,16 @@ const Footer = () => {
             </p>
             {/* Social Icons */}
             <div className="flex items-center space-x-3 pt-2">
-              <a href={settings.socialLinks?.facebook || 'https://facebook.com'} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-slate-900 hover:bg-blue-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+              <a href={settings.socialLinks?.facebook || 'https://facebook.com'} target="_blank" rel="noopener noreferrer" aria-label="Official Facebook Page" className="w-9 h-9 rounded-lg bg-slate-900 hover:bg-blue-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
                 <FiFacebook />
               </a>
-              <a href={settings.socialLinks?.instagram || 'https://instagram.com'} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-slate-900 hover:bg-pink-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+              <a href={settings.socialLinks?.instagram || 'https://instagram.com'} target="_blank" rel="noopener noreferrer" aria-label="Official Instagram Profile" className="w-9 h-9 rounded-lg bg-slate-900 hover:bg-pink-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
                 <FiInstagram />
               </a>
-              <a href={settings.socialLinks?.twitter || 'https://twitter.com'} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-slate-900 hover:bg-sky-500 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+              <a href={settings.socialLinks?.twitter || 'https://twitter.com'} target="_blank" rel="noopener noreferrer" aria-label="Official Twitter Handle" className="w-9 h-9 rounded-lg bg-slate-900 hover:bg-sky-500 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
                 <FiTwitter />
               </a>
-              <a href={settings.socialLinks?.youtube || 'https://youtube.com'} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-slate-900 hover:bg-red-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
+              <a href={settings.socialLinks?.youtube || 'https://youtube.com'} target="_blank" rel="noopener noreferrer" aria-label="Official YouTube Channel" className="w-9 h-9 rounded-lg bg-slate-900 hover:bg-red-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors">
                 <FiYoutube />
               </a>
             </div>

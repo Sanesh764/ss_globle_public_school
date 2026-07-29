@@ -8,25 +8,25 @@ const FacilitiesPreview = () => {
       title: 'Smart Classroom',
       icon: <FiMonitor className="text-2xl text-blue-600" />,
       desc: 'Interactive smart boards and digital learning modules for immersive conceptual understanding.',
-      img: '/classRoom.jpg',
+      img: '/classRoom.webp',
     },
     {
       title: 'Academic Classroom & Labs',
       icon: <FiCpu className="text-2xl text-amber-500" />,
       desc: 'Modern interactive classrooms equipped with desktop systems and audio-visual tools.',
-      img: '/classes.jpg',
+      img: '/classes.webp',
     },
     {
       title: 'Sports & Athletic Arena',
       icon: <FiActivity className="text-2xl text-rose-500" />,
       desc: 'Spacious sports ground supporting cricket, football, track events, and outdoor fitness.',
-      img: '/sports.jpg',
+      img: '/sports.webp',
     },
     {
       title: 'Campus & Infrastructure',
       icon: <FiGlobe className="text-2xl text-emerald-600" />,
       desc: 'Secure, modern CBSE school facility in Daudnagar designed for holistic child development.',
-      img: '/school.jpeg',
+      img: '/school.webp',
     },
   ];
 
@@ -60,6 +60,10 @@ const FacilitiesPreview = () => {
                 <img
                   src={fac.img}
                   alt={fac.title}
+                  width="300"
+                  height="192"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md p-2.5 rounded-xl shadow-md">

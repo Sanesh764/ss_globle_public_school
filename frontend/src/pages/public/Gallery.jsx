@@ -14,12 +14,12 @@ const Gallery = () => {
   const { data, loading } = useFetch(() => getGalleryApi(activeCategory), [activeCategory]);
 
   const defaultSampleImages = [
-    { title: 'Interactive Smart Classroom', category: 'Facilities', image: '/classRoom.jpg' },
-    { title: 'Academic Classroom Session', category: 'Academics', image: '/classes.jpg' },
-    { title: 'Annual Sports Day & Athletics Ground', category: 'Sports', image: '/sports.jpg' },
-    { title: 'S.S. Global Public School Main Building', category: 'Campus', image: '/school.jpeg' },
-    { title: 'Principal Manish Singh Addressing Students', category: 'Campus', image: '/principle.png' },
-    { title: 'School Official Logo & Emblem', category: 'Facilities', image: '/logo.jpg' },
+    { title: 'Interactive Smart Classroom', category: 'Facilities', image: '/classRoom.webp' },
+    { title: 'Academic Classroom Session', category: 'Academics', image: '/classes.webp' },
+    { title: 'Annual Sports Day & Athletics Ground', category: 'Sports', image: '/sports.webp' },
+    { title: 'S.S. Global Public School Main Building', category: 'Campus', image: '/school.webp' },
+    { title: 'Principal Manish Singh Addressing Students', category: 'Campus', image: '/principle.webp' },
+    { title: 'School Official Logo & Emblem', category: 'Facilities', image: '/logo.webp' },
   ];
 
   // Correctly extract images array from response wrapper (data.data.images or data.images or data.data)
@@ -69,7 +69,10 @@ const Gallery = () => {
                   <img
                     src={getImageUrl(item.image)}
                     alt={item.title}
+                    width="400"
+                    height="225"
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">

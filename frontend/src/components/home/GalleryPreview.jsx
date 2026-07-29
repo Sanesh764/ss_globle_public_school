@@ -11,12 +11,12 @@ const GalleryPreview = () => {
   const { data, loading } = useFetch(() => getGalleryApi('All'), []);
 
   const sampleImages = [
-    { title: 'Interactive Smart Classroom', category: 'Facilities', image: '/classRoom.jpg' },
-    { title: 'Academic Classroom Session', category: 'Academics', image: '/classes.jpg' },
-    { title: 'Annual Sports Day & Athletics Ground', category: 'Sports', image: '/sports.jpg' },
-    { title: 'S.S. Global Public School Main Building', category: 'Campus', image: '/school.jpeg' },
-    { title: 'Principal Manish Singh Addressing Students', category: 'Campus', image: '/principle.png' },
-    { title: 'School Official Crest & Emblem', category: 'Facilities', image: '/logo.jpg' },
+    { title: 'Interactive Smart Classroom', category: 'Facilities', image: '/classRoom.webp' },
+    { title: 'Academic Classroom Session', category: 'Academics', image: '/classes.webp' },
+    { title: 'Annual Sports Day & Athletics Ground', category: 'Sports', image: '/sports.webp' },
+    { title: 'S.S. Global Public School Main Building', category: 'Campus', image: '/school.webp' },
+    { title: 'Principal Manish Singh Addressing Students', category: 'Campus', image: '/principle.webp' },
+    { title: 'School Official Crest & Emblem', category: 'Facilities', image: '/logo.webp' },
   ];
 
   const fetchedImages = data?.data?.images || data?.images || (Array.isArray(data?.data) ? data.data : []);
@@ -24,7 +24,7 @@ const GalleryPreview = () => {
   const imagesToShow = fetchedImages && fetchedImages.length > 0 ? fetchedImages.slice(0, 6) : sampleImages;
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-20 bg-slate-50 min-h-[450px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
@@ -44,7 +44,9 @@ const GalleryPreview = () => {
         </div>
 
         {loading ? (
-          <LoadingSpinner />
+          <div className="min-h-[300px] flex items-center justify-center">
+            <LoadingSpinner />
+          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {imagesToShow.map((item, idx) => (
@@ -56,7 +58,10 @@ const GalleryPreview = () => {
                 <img
                   src={getImageUrl(item.image)}
                   alt={item.title}
+                  width="400"
+                  height="225"
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">

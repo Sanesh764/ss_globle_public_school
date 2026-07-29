@@ -19,8 +19,12 @@ const WelcomeMessage = () => {
             <div className="lg:col-span-4 flex flex-col items-center text-center">
               <div className="w-44 h-44 sm:w-52 sm:h-52 rounded-full p-2 bg-gradient-to-tr from-blue-600 to-amber-400 shadow-xl mb-4 overflow-hidden">
                 <img
-                  src={principalPhoto}
-                  alt={principalName}
+                  src={principalPhoto && principalPhoto !== '/principle.png' ? principalPhoto : '/principle.webp'}
+                  alt={`Principal ${principalName}`}
+                  width="208"
+                  height="208"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover rounded-full bg-slate-100"
                 />
               </div>

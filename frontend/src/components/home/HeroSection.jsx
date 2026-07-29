@@ -6,13 +6,13 @@ import { SettingContext } from '../../context/SettingContext';
 const HeroSection = () => {
   const { settings } = useContext(SettingContext);
 
-  const heroBg = settings.heroImage || '/school.jpeg';
+  const heroBg = settings.heroImage && settings.heroImage !== '/school.jpeg' ? settings.heroImage : '/school.webp';
 
   return (
-    <div className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-950 text-white">
+    <div className="relative min-h-[600px] sm:min-h-[650px] lg:min-h-[700px] h-[85vh] flex items-center justify-center overflow-hidden bg-slate-950 text-white">
       {/* Background Image with Dark Overlay Gradient */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-1000 ease-out"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
         style={{
           backgroundImage: `url('${heroBg}')`,
         }}

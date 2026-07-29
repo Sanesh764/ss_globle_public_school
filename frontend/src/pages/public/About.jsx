@@ -47,8 +47,12 @@ const About = () => {
             <div className="lg:col-span-6 relative">
               <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-100">
                 <img
-                  src={schoolImg}
+                  src={schoolImg && schoolImg !== '/school.jpeg' ? schoolImg : '/school.webp'}
                   alt="S.S. Global Public School Building"
+                  width="600"
+                  height="384"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-96 object-cover"
                 />
               </div>
@@ -103,8 +107,12 @@ const About = () => {
             <div className="lg:col-span-4 text-center">
               <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto shadow-lg mb-4 overflow-hidden">
                 <img
-                  src={principalPhoto}
-                  alt={principalName}
+                  src={principalPhoto && principalPhoto !== '/principle.png' ? principalPhoto : '/principle.webp'}
+                  alt={`Principal ${principalName}`}
+                  width="192"
+                  height="192"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover rounded-full bg-slate-100"
                 />
               </div>
@@ -124,8 +132,12 @@ const About = () => {
             <div className="lg:col-span-4 text-center">
               <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-amber-500 to-blue-600 mx-auto shadow-lg mb-4 overflow-hidden">
                 <img
-                  src="/school.jpeg"
-                  alt="Director"
+                  src="/school.webp"
+                  alt={`Director ${settings.directorName || 'Er. R. P. Singh'}`}
+                  width="192"
+                  height="192"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover rounded-full bg-slate-100"
                 />
               </div>
