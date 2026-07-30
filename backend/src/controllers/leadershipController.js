@@ -1,18 +1,19 @@
 import Leadership from '../models/Leadership.js';
+import { processUploadedFile, deleteUploadedFile } from '../middleware/uploadMiddleware.js';
 
 /**
  * GET /api/leadership
- * Public endpoint returning active homepage leadership members sorted by displayOrder ASC.
+ * Public endpoint returning active leadership members sorted by displayOrder ASC.
  */
 export const getPublicLeadership = async (req, res, next) => {
   try {
-    const members = await Leadership.find({ isActive: true, showOnHomepage: true })
-      .sort({ displayOrder: 1, createdAt: -1 });
+    const members = await Leadership.find({ isActive: true }).sort({ displayOrder: 1, createdAt: -1 });
 
     return res.status(200).json({
       success: true,
       count: members.length,
       data: members,
+      leadership: members,
     });
   } catch (error) {
     next(error);
@@ -31,6 +32,7 @@ export const getAdminLeadership = async (req, res, next) => {
       success: true,
       count: members.length,
       data: members,
+      leadership: members,
     });
   } catch (error) {
     next(error);
@@ -46,33 +48,39 @@ export const createLeadership = async (req, res, next) => {
     const { name, designation, heading, message, location, displayOrder, isActive, showOnHomepage } = req.body;
 
     let imageUrl = req.body.image || '';
+    let publicId = '';
+
     if (req.file) {
-      imageUrl = `/uploads/${req.file.filename}`;
+      const uploadResult = await processUploadedFile(req.file, 'ss_global_leadership');
+      imageUrl = uploadResult.url;
+      publicId = uploadResult.public_id;
     }
 
-    if (!name || !designation || !message || !imageUrl) {
+    if (!name || !designation || !message) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide name, designation, message, and profile image.',
+        message: 'Please provide name, designation, and message.',
       });
     }
 
     const newMember = await Leadership.create({
-      name,
-      designation,
-      heading: heading || 'Building Strong Foundations',
-      message,
-      location: location || 'Daudnagar, Bihar',
+      name: name.trim(),
+      designation: designation.trim(),
+      heading: heading ? heading.trim() : 'Building Strong Foundations',
+      message: message.trim(),
+      location: location ? location.trim() : 'Daudnagar, Bihar',
       image: imageUrl,
+      public_id: publicId,
       displayOrder: displayOrder ? parseInt(displayOrder, 10) : 1,
-      isActive: isActive === undefined ? true : Boolean(isActive),
-      showOnHomepage: showOnHomepage === undefined ? true : Boolean(showOnHomepage),
+      isActive: isActive === undefined ? true : (isActive === 'true' || isActive === true),
+      showOnHomepage: showOnHomepage === undefined ? true : (showOnHomepage === 'true' || showOnHomepage === true),
     });
 
     return res.status(201).json({
       success: true,
       message: 'Leadership member created successfully',
       data: newMember,
+      leadership: newMember,
     });
   } catch (error) {
     next(error);
@@ -97,17 +105,22 @@ export const updateLeadership = async (req, res, next) => {
 
     const { name, designation, heading, message, location, displayOrder, isActive, showOnHomepage } = req.body;
 
-    if (name) member.name = name;
-    if (designation) member.designation = designation;
-    if (heading !== undefined) member.heading = heading;
-    if (message) member.message = message;
-    if (location !== undefined) member.location = location;
+    if (name) member.name = name.trim();
+    if (designation) member.designation = designation.trim();
+    if (heading !== undefined) member.heading = heading.trim();
+    if (message) member.message = message.trim();
+    if (location !== undefined) member.location = location.trim();
     if (displayOrder !== undefined) member.displayOrder = parseInt(displayOrder, 10);
-    if (isActive !== undefined) member.isActive = Boolean(isActive);
-    if (showOnHomepage !== undefined) member.showOnHomepage = Boolean(showOnHomepage);
+    if (isActive !== undefined) member.isActive = isActive === 'true' || isActive === true;
+    if (showOnHomepage !== undefined) member.showOnHomepage = showOnHomepage === 'true' || showOnHomepage === true;
 
     if (req.file) {
-      member.image = `/uploads/${req.file.filename}`;
+      if (member.public_id || member.image) {
+        await deleteUploadedFile(member.public_id || member.image);
+      }
+      const uploadResult = await processUploadedFile(req.file, 'ss_global_leadership');
+      member.image = uploadResult.url;
+      member.public_id = uploadResult.public_id;
     } else if (req.body.image) {
       member.image = req.body.image;
     }
@@ -118,6 +131,7 @@ export const updateLeadership = async (req, res, next) => {
       success: true,
       message: 'Leadership member updated successfully',
       data: member,
+      leadership: member,
     });
   } catch (error) {
     next(error);
@@ -140,7 +154,11 @@ export const deleteLeadership = async (req, res, next) => {
       });
     }
 
-    await Leadership.findByIdAndDelete(id);
+    if (member.public_id || member.image) {
+      await deleteUploadedFile(member.public_id || member.image);
+    }
+
+    await member.deleteOne();
 
     return res.status(200).json({
       success: true,

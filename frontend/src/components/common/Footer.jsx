@@ -13,6 +13,7 @@ const Footer = memo(() => {
     { name: 'Facilities & Infrastructure', path: '/facilities' },
     { name: 'Photo Gallery', path: '/gallery' },
     { name: 'Notice Board', path: '/notices' },
+    { name: 'Academic Resources', path: '/downloads' },
     { name: 'Contact & Admissions', path: '/contact' },
     { name: 'Admin Portal', path: '/admin/login' },
   ];

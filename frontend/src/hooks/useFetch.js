@@ -24,3 +24,5 @@ export const useFetch = (fetchFunction, dependencies = []) => {
 
   return { data, loading, error, refetch: execute };
 };
+
+export default useFetch;

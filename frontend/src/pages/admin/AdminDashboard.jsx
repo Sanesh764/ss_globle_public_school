@@ -2,6 +2,7 @@ import React from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 import AdminHeader from '../../components/admin/AdminHeader';
 import { useFetch } from '../../hooks/useFetch';
+import { useAuth } from '../../hooks/useAuth';
 import { getNoticesApi } from '../../services/noticeService';
 import { getGalleryApi } from '../../services/galleryService';
 import { getContactMessagesApi } from '../../services/contactService';
@@ -10,7 +11,10 @@ import { FiBell, FiImage, FiMail, FiArrowRight, FiPlusCircle, FiSliders, FiClock
 import { formatDate } from '../../utils/formatDate';
 
 const AdminDashboard = () => {
-  const { setMobileOpen } = useOutletContext();
+  const outletContext = useOutletContext();
+  const setMobileOpen = outletContext?.setMobileOpen || (() => {});
+  const { admin } = useAuth();
+  const isStaff = admin?.role === 'staff';
 
   const { data: noticesData, loading: noticesLoading } = useFetch(() => getNoticesApi({ limit: 5 }), []);
   const { data: galleryData, loading: galleryLoading } = useFetch(() => getGalleryApi('All'), []);
@@ -95,12 +99,14 @@ const AdminDashboard = () => {
             >
               <FiImage /> Upload Photo
             </Link>
-            <Link
-              to="/admin/settings"
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl shadow transition-colors flex items-center gap-1.5 border border-slate-700"
-            >
-              <FiSliders /> Edit Settings
-            </Link>
+            {!isStaff && (
+              <Link
+                to="/admin/settings"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl shadow transition-colors flex items-center gap-1.5 border border-slate-700"
+              >
+                <FiSliders /> Edit Settings
+              </Link>
+            )}
           </div>
         </div>
 

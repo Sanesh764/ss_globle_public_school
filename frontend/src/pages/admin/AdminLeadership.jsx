@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { getAdminLeadershipApi, createLeadershipApi, updateLeadershipApi, deleteLeadershipApi } from '../../services/leadershipService';
 import { getImageUrl } from '../../services/api';
 import { useToast } from '../../hooks/useToast';
@@ -7,6 +8,8 @@ import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { FiPlus, FiEdit, FiTrash2, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 
 const AdminLeadership = () => {
+  const outletContext = useOutletContext();
+  const setMobileOpen = outletContext?.setMobileOpen || (() => {});
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -139,6 +142,7 @@ const AdminLeadership = () => {
   return (
     <div className="space-y-8">
       <AdminHeader
+        setMobileOpen={setMobileOpen}
         title="Leadership Team Management"
         subtitle="Manage Founder, Co-Founder, Principal, and leadership profiles displayed on the public homepage."
         action={

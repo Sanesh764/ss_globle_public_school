@@ -26,7 +26,9 @@ export const AuthProvider = ({ children }) => {
           }
         } catch (err) {
           console.error('[AuthContext] Verification error:', err.message);
-          logout();
+          if (err.response?.status === 401) {
+            logout();
+          }
         }
       } else {
         setAdmin(null);

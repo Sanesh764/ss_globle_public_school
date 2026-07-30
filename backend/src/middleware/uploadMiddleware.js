@@ -13,7 +13,7 @@ if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
-// Storage configuration
+// Storage configuration for Images
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, uploadsDir);
@@ -43,7 +43,7 @@ export const upload = multer({
   fileFilter,
 });
 
-// Helper function to process uploaded image file and get public URL
+// Helper function to process uploaded image file
 export const processUploadedFile = async (file, folder = 'ss_global_school') => {
   if (!file) return { url: '', public_id: '' };
 
@@ -62,7 +62,6 @@ export const processUploadedFile = async (file, folder = 'ss_global_school') => 
         fetch_format: 'auto',
       });
 
-      // Clean up local temp file after successful Cloudinary upload
       if (fs.existsSync(file.path)) {
         fs.unlinkSync(file.path);
       }
@@ -76,7 +75,6 @@ export const processUploadedFile = async (file, folder = 'ss_global_school') => 
     }
   }
 
-  // Local URL fallback
   const localUrl = `/uploads/${file.filename}`;
   return {
     url: localUrl,
@@ -84,11 +82,11 @@ export const processUploadedFile = async (file, folder = 'ss_global_school') => 
   };
 };
 
-// Helper function to delete image
+// Helper function to delete image file
 export const deleteUploadedFile = async (publicIdOrUrl) => {
   if (!publicIdOrUrl) return;
 
-  if (isCloudinaryConfigured() && !publicIdOrUrl.startsWith('/uploads/')) {
+  if (isCloudinaryConfigured() && (publicIdOrUrl.startsWith('http') || publicIdOrUrl.includes('/'))) {
     try {
       cloudinary.config({
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -96,12 +94,22 @@ export const deleteUploadedFile = async (publicIdOrUrl) => {
         api_secret: process.env.CLOUDINARY_API_SECRET,
       });
 
-      await cloudinary.uploader.destroy(publicIdOrUrl);
+      let publicId = publicIdOrUrl;
+      if (publicIdOrUrl.includes('/image/upload/')) {
+        const parts = publicIdOrUrl.split('/image/upload/');
+        if (parts[1]) {
+          publicId = parts[1].replace(/^v\d+\//, '');
+        }
+      }
+
+      // Strip file extension (.jpg, .jpeg, .png, .webp) for Cloudinary public_id destroy API
+      publicId = publicId.replace(/\.[^/.]+$/, '');
+
+      await cloudinary.uploader.destroy(publicId, { resource_type: 'image' });
     } catch (err) {
       console.error('[Cloudinary Delete Error]', err.message);
     }
   } else {
-    // Delete local file if present
     const fileName = path.basename(publicIdOrUrl);
     const localFilePath = path.join(uploadsDir, fileName);
     if (fs.existsSync(localFilePath)) {

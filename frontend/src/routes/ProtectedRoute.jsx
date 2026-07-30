@@ -14,7 +14,9 @@ const ProtectedRoute = () => {
     return <Navigate to="/admin/login" replace />;
   }
 
-  if (admin.role !== 'admin') {
+  // Allow any authenticated admin (superadmin, admin, or staff)
+  const userRole = (admin?.role || '').toString().toLowerCase().replace(/_/g, '');
+  if (!['superadmin', 'admin', 'staff'].includes(userRole)) {
     return <Navigate to="/unauthorized" replace />;
   }
 

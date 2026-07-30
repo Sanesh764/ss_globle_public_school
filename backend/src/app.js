@@ -14,6 +14,8 @@ import heroRoutes from './routes/hero.routes.js';
 import { publicLeadershipRouter, adminLeadershipRouter } from './routes/leadershipRoutes.js';
 import { publicHeroSliderRouter, adminHeroSliderRouter } from './routes/heroSliderRoutes.js';
 import { publicContactRouter, adminContactRouter } from './routes/contactRoutes.js';
+import { publicFacilityRouter, adminFacilityRouter } from './routes/facilityRoutes.js';
+import { publicAcademicResourceRouter, adminAcademicResourceRouter } from './routes/academicResourceRoutes.js';
 import { notFoundHandler, errorHandler } from './middleware/error.middleware.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -69,69 +71,47 @@ app.use(
   })
 );
 
-// 5. Response Payload Compression
+// 5. Response Compression
 app.use(compression());
 
-// 6. Safe MongoDB Operator Injection Defense (In-Place Key Sanitizer for Express 5 & Node 24)
-const cleanMongoInput = (obj) => {
-  if (!obj || typeof obj !== 'object') return obj;
-
-  if (Array.isArray(obj)) {
-    obj.forEach((item) => {
-      if (typeof item === 'object' && item !== null) {
-        cleanMongoInput(item);
-      }
-    });
-    return obj;
-  }
-
-  Object.keys(obj).forEach((key) => {
-    if (key.startsWith('$') || key.includes('.')) {
-      delete obj[key];
-    } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-      cleanMongoInput(obj[key]);
-    }
-  });
-
-  return obj;
-};
-
-const sanitizeMongoInput = (req, res, next) => {
-  if (req.body && typeof req.body === 'object') cleanMongoInput(req.body);
-  if (req.query && typeof req.query === 'object') cleanMongoInput(req.query);
-  if (req.params && typeof req.params === 'object') cleanMongoInput(req.params);
-  next();
-};
-
-app.use(sanitizeMongoInput);
-
-// 8. Body Parsers & Cookie Parser
+// 6. Request Body Parsers
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// 7. Cookie Parser
 app.use(cookieParser());
 
-// 9. Static Upload Directory Serving
-const uploadsPath = path.join(__dirname, '../uploads');
-app.use('/uploads', express.static(uploadsPath));
-app.use(express.static(uploadsPath));
+// 8. Static Assets Serving
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// 10. Health Check Endpoint
+// 9. Root Health & Status Route
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'S.S. Global Public School API Server Running Cleanly',
+    environment: process.env.NODE_ENV || 'development',
+    timestamp: new Date().toISOString(),
+  });
+});
+
+// 10. API Health Route
 app.get('/api/health', (req, res) => {
-  res.json({
-    success: true,
-    status: 'online',
-    schoolName: 'S.S. Global Public School API',
-    frontendUrl: process.env.FRONTEND_URL || 'https://main.dlzshhty32uyq.amplifyapp.com',
-    backendUrl: 'https://ssgloblepublicschool-production.up.railway.app',
+  res.status(200).json({
+    status: 'OK',
+    uptime: process.uptime(),
     timestamp: new Date().toISOString(),
   });
 });
 
 // 11. API Routes
+app.use('/api/admin/academic-resources', adminAcademicResourceRouter);
 app.use('/api/admin/messages', adminContactRouter);
 app.use('/api/admin/hero-slider', adminHeroSliderRouter);
 app.use('/api/admin/leadership', adminLeadershipRouter);
+app.use('/api/admin/facilities', adminFacilityRouter);
 app.use('/api/admin', authRoutes);
+app.use('/api/academic-resources', publicAcademicResourceRouter);
+app.use('/api/facilities', publicFacilityRouter);
 app.use('/api/notices', noticeRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/settings', settingRoutes);

@@ -7,6 +7,7 @@ import StatsSection from '../../components/home/StatsSection';
 import FacilitiesPreview from '../../components/home/FacilitiesPreview';
 import GalleryPreview from '../../components/home/GalleryPreview';
 import LatestNotices from '../../components/home/LatestNotices';
+import DownloadsPreview from '../../components/home/DownloadsPreview';
 import Testimonials from '../../components/home/Testimonials';
 import CallToAction from '../../components/home/CallToAction';
 import ContactPreview from '../../components/home/ContactPreview';
@@ -22,6 +23,7 @@ const Home = () => {
       <FacilitiesPreview />
       <GalleryPreview />
       <LatestNotices />
+      <DownloadsPreview />
       <Testimonials />
       <CallToAction />
       <ContactPreview />

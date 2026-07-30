@@ -11,7 +11,8 @@ import { GALLERY_CATEGORIES } from '../../utils/constants';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
 
 const AdminGallery = () => {
-  const { setMobileOpen } = useOutletContext();
+  const outletContext = useOutletContext();
+  const setMobileOpen = outletContext?.setMobileOpen || (() => {});
   const { addToast } = useToast();
 
   const [activeCategory, setActiveCategory] = useState('All');

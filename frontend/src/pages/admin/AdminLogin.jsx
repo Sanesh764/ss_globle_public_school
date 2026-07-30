@@ -77,11 +77,11 @@ const AdminLogin = () => {
                 <FiMail className="absolute left-3.5 top-3.5 text-slate-500" />
                 <input
                   id="email"
-                  type="email"
+                  type="text"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter email address"
+                  placeholder="Enter email address or username (e.g. staff)"
                   className="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>

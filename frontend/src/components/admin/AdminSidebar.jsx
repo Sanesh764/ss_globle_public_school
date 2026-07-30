@@ -1,19 +1,84 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { FiGrid, FiFilm, FiUsers, FiBell, FiImage, FiMail, FiSliders, FiHome, FiLogOut, FiShield } from 'react-icons/fi';
+import {
+  FiGrid,
+  FiFilm,
+  FiFileText,
+  FiCheckSquare,
+  FiUsers,
+  FiImage,
+  FiBell,
+  FiMail,
+  FiSliders,
+  FiUserCheck,
+  FiHome,
+  FiLogOut,
+  FiShield,
+  FiBookOpen,
+} from 'react-icons/fi';
 import { useAuth } from '../../hooks/useAuth';
 
 const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
   const { logout, admin } = useAuth();
 
-  const links = [
-    { name: 'Dashboard', path: '/admin/dashboard', icon: <FiGrid className="text-xl" /> },
-    { name: 'Hero Slider', path: '/admin/hero-slider', icon: <FiFilm className="text-xl" /> },
-    { name: 'Leadership Team', path: '/admin/leadership', icon: <FiUsers className="text-xl" /> },
-    { name: 'Manage Notices', path: '/admin/notices', icon: <FiBell className="text-xl" /> },
-    { name: 'Manage Gallery', path: '/admin/gallery', icon: <FiImage className="text-xl" /> },
-    { name: 'Website Settings', path: '/admin/settings', icon: <FiSliders className="text-xl" /> },
-    { name: 'Contact Messages', path: '/admin/messages', icon: <FiMail className="text-xl" /> },
+  const userRole = (admin?.role || '').toString().toLowerCase().replace(/_/g, '');
+  const isSuperAdmin = userRole === 'superadmin' || userRole === 'admin';
+  const isStaffAdmin = !isSuperAdmin;
+
+  const navigationSections = [
+    {
+      category: null, // Dashboard top level
+      staffAllowed: true,
+      items: [
+        { name: 'Dashboard', path: '/admin/dashboard', icon: <FiGrid className="text-xl" />, staffAllowed: true },
+      ],
+    },
+    {
+      category: 'Content Management',
+      staffAllowed: false,
+      items: [
+        { name: 'Hero Slider', path: '/admin/hero-slider', icon: <FiFilm className="text-xl" />, staffAllowed: false },
+        { name: 'About Page', path: '/admin/about', icon: <FiFileText className="text-xl" />, staffAllowed: false },
+        { name: 'Facilities', path: '/admin/facilities', icon: <FiCheckSquare className="text-xl" />, staffAllowed: false },
+        { name: 'Leadership', path: '/admin/leadership', icon: <FiUsers className="text-xl" />, staffAllowed: false },
+      ],
+    },
+    {
+      category: 'Media',
+      staffAllowed: true,
+      items: [
+        { name: 'Gallery', path: '/admin/gallery', icon: <FiImage className="text-xl" />, staffAllowed: true },
+      ],
+    },
+    {
+      category: 'Communication',
+      staffAllowed: true,
+      items: [
+        { name: 'Notices', path: '/admin/notices', icon: <FiBell className="text-xl" />, staffAllowed: true },
+        { name: 'Contact Messages', path: '/admin/messages', icon: <FiMail className="text-xl" />, staffAllowed: true },
+      ],
+    },
+    {
+      category: 'Academic',
+      staffAllowed: true,
+      items: [
+        { name: 'Academic Resources', path: '/admin/academic-resources', icon: <FiBookOpen className="text-xl" />, staffAllowed: true },
+      ],
+    },
+    {
+      category: 'Website',
+      staffAllowed: false,
+      items: [
+        { name: 'Website Settings', path: '/admin/settings', icon: <FiSliders className="text-xl" />, staffAllowed: false },
+      ],
+    },
+    {
+      category: 'Administration',
+      staffAllowed: false,
+      items: [
+        { name: 'Staff Users', path: '/admin/users', icon: <FiUserCheck className="text-xl" />, staffAllowed: false },
+      ],
+    },
   ];
 
   return (
@@ -42,30 +107,48 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
                 S.S. Global Admin
               </h2>
               <span className="text-xs text-amber-400 font-semibold flex items-center gap-1">
-                <FiShield /> Version 1.0
+                <FiShield /> {isStaffAdmin ? 'Staff Portal' : 'Super Admin'}
               </span>
             </div>
           </div>
 
-          {/* Navigation Links */}
-          <nav className="p-4 space-y-1.5">
-            {links.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                onClick={() => setMobileOpen(false)}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                    isActive
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-900'
-                  }`
-                }
-              >
-                {link.icon}
-                <span>{link.name}</span>
-              </NavLink>
-            ))}
+          {/* Navigation Links with Category Headers */}
+          <nav className="p-4 space-y-4 overflow-y-auto max-h-[calc(100vh-210px)]">
+            {navigationSections.map((sec, secIdx) => {
+              const visibleItems = isStaffAdmin
+                ? sec.items.filter((item) => item.staffAllowed)
+                : sec.items;
+
+              if (visibleItems.length === 0) return null;
+
+              return (
+                <div key={secIdx} className="space-y-1">
+                  {sec.category && (
+                    <h3 className="px-4 text-[10px] font-extrabold text-slate-500 uppercase tracking-widest pt-2 pb-1">
+                      {sec.category}
+                    </h3>
+                  )}
+
+                  {visibleItems.map((link) => (
+                    <NavLink
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setMobileOpen(false)}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                          isActive
+                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
+                            : 'text-slate-400 hover:text-white hover:bg-slate-900'
+                        }`
+                      }
+                    >
+                      {link.icon}
+                      <span>{link.name}</span>
+                    </NavLink>
+                  ))}
+                </div>
+              );
+            })}
           </nav>
         </div>
 

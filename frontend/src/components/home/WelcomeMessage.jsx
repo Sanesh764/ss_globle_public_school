@@ -1,41 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { getPublicLeadershipApi } from '../../services/leadershipService';
 import { getImageUrl } from '../../services/api';
+import { SettingContext } from '../../context/SettingContext';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { FiMapPin, FiAward } from 'react-icons/fi';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const WelcomeMessage = () => {
   const { data, loading } = useFetch(() => getPublicLeadershipApi(), []);
+  const { settings } = useContext(SettingContext);
 
   const defaultLeaders = [
     {
       _id: 'default-1',
-      name: 'Er. R. P. Singh (B.Tech)',
+      name: settings?.directorName || 'Er. R. P. Singh (B.Tech)',
       designation: 'Founder & Director',
       heading: 'Empowering Future Leaders & Innovators',
-      message: 'Our vision is to provide world-class CBSE education in Daudnagar. We empower students with critical thinking, sportsmanship, technological literacy, and strong moral grounding.',
+      message: settings?.directorMessage || 'Our vision is to provide world-class CBSE education in Daudnagar. We empower students with critical thinking, sportsmanship, technological literacy, and strong moral grounding.',
       location: 'Daudnagar, Bihar',
-      image: '/school.webp',
+      image: settings?.directorPhoto || '/school.webp',
     },
     {
       _id: 'default-2',
-      name: 'Smt. Gayatri Devi',
-      designation: 'Co-Founder & Academic Patron',
-      heading: 'Instilling Values & Ethical Integrity',
-      message: 'Education is the lamp that illuminates wisdom and empathy. We are committed to nurturing every child in Daudnagar with maternal care, academic discipline, and Indian heritage.',
-      location: 'Daudnagar, Bihar',
-      image: '/logo.webp',
-    },
-    {
-      _id: 'default-3',
-      name: 'Manish Singh',
+      name: settings?.principalName || 'Manish Singh',
       designation: 'Principal',
       heading: 'Building Strong Foundations for Tomorrow',
-      message: 'Welcome to S.S. Global Public School. Education is not merely the accumulation of facts, but the training of the mind to think, innovate, and lead with empathy. We strive for excellence.',
+      message: settings?.principalMessage || 'Welcome to S.S. Global Public School. Education is not merely the accumulation of facts, but the training of the mind to think, innovate, and lead with empathy. We strive for excellence.',
       location: 'Daudnagar, Bihar',
-      image: '/principle.webp',
+      image: settings?.principalPhoto || '/principle.webp',
     },
   ];
 

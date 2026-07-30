@@ -19,3 +19,11 @@ export const SCHOOL_DEFAULTS = {
 export const GALLERY_CATEGORIES = ['All', 'Campus', 'Facilities', 'Events', 'Sports', 'Academics', 'Celebrations'];
 
 export const NOTICE_CATEGORIES = ['All', 'Academic', 'Exam', 'Holiday', 'General', 'Admission'];
+
+export const ACADEMIC_RESOURCE_CATEGORIES = [
+  'Book List',
+  'Syllabus',
+  'Academic Calendar',
+  'Holiday Calendar',
+  'Annual Calendar',
+];

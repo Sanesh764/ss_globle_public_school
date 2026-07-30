@@ -7,7 +7,7 @@ import {
   deleteLeadership,
 } from '../controllers/leadershipController.js';
 import { verifyJWT } from '../middleware/auth.middleware.js';
-import { verifyAdminRole } from '../middleware/admin.middleware.js';
+import { verifySuperAdmin } from '../middleware/admin.middleware.js';
 import validateObjectId from '../middleware/validateObjectId.js';
 import { upload } from '../middleware/uploadMiddleware.js';
 
@@ -15,7 +15,7 @@ export const publicLeadershipRouter = express.Router();
 publicLeadershipRouter.get('/', getPublicLeadership);
 
 export const adminLeadershipRouter = express.Router();
-adminLeadershipRouter.use(verifyJWT, verifyAdminRole);
+adminLeadershipRouter.use(verifyJWT, verifySuperAdmin);
 
 adminLeadershipRouter.route('/')
   .get(getAdminLeadership)

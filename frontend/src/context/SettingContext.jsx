@@ -8,7 +8,11 @@ export const SettingProvider = ({ children }) => {
   const [settings, setSettings] = useState(SCHOOL_DEFAULTS);
   const [loading, setLoading] = useState(true);
 
-  const fetchSettings = async () => {
+  const fetchSettings = async (newSettings = null) => {
+    if (newSettings && typeof newSettings === 'object') {
+      setSettings((prev) => ({ ...prev, ...newSettings }));
+      return;
+    }
     try {
       setLoading(true);
       const res = await getSettingsApi();

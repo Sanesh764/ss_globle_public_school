@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import {
   getContactMessagesApi,
   markMessageAsReadApi,
@@ -26,6 +27,8 @@ import {
 } from 'react-icons/fi';
 
 const AdminMessages = () => {
+  const outletContext = useOutletContext();
+  const setMobileOpen = outletContext?.setMobileOpen || (() => {});
   const [messages, setMessages] = useState([]);
   const [stats, setStats] = useState({ totalInquiries: 0, unreadCount: 0, todayInquiries: 0 });
   const [loading, setLoading] = useState(true);
@@ -106,6 +109,7 @@ const AdminMessages = () => {
   return (
     <div className="space-y-8">
       <AdminHeader
+        setMobileOpen={setMobileOpen}
         title="Contact Inquiry Management"
         subtitle="View, search, filter, and respond to incoming admission and general school inquiries."
       />

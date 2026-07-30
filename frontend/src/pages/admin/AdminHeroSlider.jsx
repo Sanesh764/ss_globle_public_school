@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import {
   getAdminHeroSlidesApi,
   createHeroSlideApi,
@@ -23,6 +24,8 @@ import {
 } from 'react-icons/fi';
 
 const AdminHeroSlider = () => {
+  const outletContext = useOutletContext();
+  const setMobileOpen = outletContext?.setMobileOpen || (() => {});
   const [slides, setSlides] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -192,6 +195,7 @@ const AdminHeroSlider = () => {
   return (
     <div className="space-y-8">
       <AdminHeader
+        setMobileOpen={setMobileOpen}
         title="Hero Slider Management"
         subtitle="Manage dynamic front page hero banner slides, titles, badges, buttons, auto-play, and display order."
         action={

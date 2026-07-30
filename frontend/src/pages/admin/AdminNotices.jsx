@@ -12,7 +12,8 @@ import { formatDate } from '../../utils/formatDate';
 import { FiPlus, FiEdit2, FiTrash2, FiAlertCircle } from 'react-icons/fi';
 
 const AdminNotices = () => {
-  const { setMobileOpen } = useOutletContext();
+  const outletContext = useOutletContext();
+  const setMobileOpen = outletContext?.setMobileOpen || (() => {});
   const { addToast } = useToast();
 
   const [search, setSearch] = useState('');

@@ -1,14 +1,42 @@
 import React, { useContext } from 'react';
 import PageHeader from '../../components/common/PageHeader';
 import { SettingContext } from '../../context/SettingContext';
-import { FiEye, FiTarget, FiHeart, FiAward, FiShield, FiBookOpen } from 'react-icons/fi';
+import { getImageUrl } from '../../services/api';
+import { FiEye, FiTarget, FiHeart, FiAward, FiShield, FiBookOpen, FiCheckCircle } from 'react-icons/fi';
 
 const About = () => {
   const { settings } = useContext(SettingContext);
 
-  const principalPhoto = settings.principalPhoto || '/principle.png';
+  const heroTitle = settings.aboutHeroTitle || 'About S.S. Global Public School';
+  const heroSubtitle = settings.aboutHeroSubtitle || 'Dedicated to excellence in education, character building, and leadership in Daudnagar, Bihar.';
+  const aboutBadge = settings.aboutBadge || 'Our Legacy & History';
+  const aboutTitle = settings.aboutTitle || 'Nurturing Potential, Shaping Destiny in Daudnagar';
+  const aboutText1 = settings.aboutText1 || settings.aboutText || settings.about || 'S.S. Global Public School was established with a singular objective: to bring high quality CBSE education within reach of every student in Daudnagar and surrounding regions. Under the guidance of Principal Manish Singh, the institution has grown into a premier seat of learning.';
+  const aboutText2 = settings.aboutText2 || 'We believe that education must extend beyond textbooks. Our campus blends modern technology with traditional Indian ethics, giving students the tools to compete globally while remaining rooted in strong values.';
+  const buildingImg = getImageUrl(settings.aboutImage || settings.heroImage || '/school.webp');
+  const expNumber = settings.aboutExpNumber || '15+';
+  const expText = settings.aboutExpText || 'Years of Educational Excellence';
+
+  const principalPhoto = getImageUrl(settings.principalPhoto || '/principle.png');
   const principalName = settings.principalName || 'Manish Singh';
-  const schoolImg = settings.heroImage || '/school.jpeg';
+  const principalMessage = settings.principalMessage || 'Welcome to S.S. Global Public School, Daudnagar. Our commitment is to foster academic excellence, holistic development, and moral values in a modern learning environment.';
+
+  const directorPhoto = getImageUrl(settings.directorPhoto || '/school.webp');
+  const directorName = settings.directorName || 'Er. R. P. Singh';
+  const directorMessage = settings.directorMessage || 'We believe every child has infinite potential. At S.S. Global, we provide world-class infrastructure, smart labs, and guidance to turn dreams into reality.';
+
+  const defaultFeatures = [
+    'Affiliated & aligned with CBSE Academic Standards',
+    'Interactive Smart Classrooms & Digital Learning',
+    'Comprehensive Science & Robotics Laboratories',
+    'Safe CCTV-Monitored Transport System in Daudnagar',
+    'Dedicated Focus on Sports & Holistic Personality Development',
+    'Individual Attention under Principal Leadership',
+  ];
+
+  const features = Array.isArray(settings.aboutFeaturesList) && settings.aboutFeaturesList.length > 0
+    ? settings.aboutFeaturesList.map((f) => (typeof f === 'object' ? f.title : f))
+    : (Array.isArray(settings.aboutFeatures) && settings.aboutFeatures.length > 0 ? settings.aboutFeatures : defaultFeatures);
 
   const values = [
     { title: 'Academic Excellence', desc: 'Striving for continuous improvement and highest standards in all disciplines.', icon: <FiAward className="text-amber-500 text-2xl" /> },
@@ -20,8 +48,8 @@ const About = () => {
   return (
     <div>
       <PageHeader
-        title="About S.S. Global Public School"
-        subtitle="Dedicated to excellence in education, character building, and leadership in Daudnagar, Bihar."
+        title={heroTitle}
+        subtitle={heroSubtitle}
         breadcrumb={[{ label: 'About School' }]}
       />
 
@@ -31,23 +59,34 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-6">
               <span className="text-blue-600 font-bold text-xs uppercase tracking-wider bg-blue-50 px-3.5 py-1 rounded-full border border-blue-200">
-                Our Legacy & History
+                {aboutBadge}
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 leading-tight">
-                Nurturing Potential, Shaping Destiny in Daudnagar
+                {aboutTitle}
               </h2>
               <p className="text-slate-600 text-base leading-relaxed">
-                {settings.about || 'S.S. Global Public School was established with a singular objective: to bring high quality CBSE education within reach of every student in Daudnagar and surrounding regions. Under the guidance of Principal Manish Singh, the institution has grown into a premier seat of learning.'}
+                {aboutText1}
               </p>
-              <p className="text-slate-600 text-base leading-relaxed">
-                We believe that education must extend beyond textbooks. Our campus blends modern technology with traditional Indian ethics, giving students the tools to compete globally while remaining rooted in strong values.
-              </p>
+              {aboutText2 && (
+                <p className="text-slate-600 text-base leading-relaxed">
+                  {aboutText2}
+                </p>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                {features.map((feat, idx) => (
+                  <div key={idx} className="flex items-start gap-2 text-sm text-slate-700 font-medium">
+                    <FiCheckCircle className="text-blue-600 text-lg shrink-0 mt-0.5" />
+                    <span>{feat}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="lg:col-span-6 relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-100">
+              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-100 relative">
                 <img
-                  src={schoolImg && schoolImg !== '/school.jpeg' ? schoolImg : '/school.webp'}
+                  src={buildingImg}
                   alt="S.S. Global Public School Building"
                   width="600"
                   height="384"
@@ -55,6 +94,10 @@ const About = () => {
                   decoding="async"
                   className="w-full h-96 object-cover"
                 />
+              </div>
+              <div className="absolute -bottom-6 -right-2 sm:right-6 z-20 bg-slate-900 text-white p-5 rounded-2xl shadow-xl border border-slate-700 max-w-xs">
+                <span className="text-3xl font-extrabold text-amber-400 font-serif block">{expNumber}</span>
+                <span className="text-xs text-slate-300 font-medium uppercase tracking-wider block">{expText}</span>
               </div>
             </div>
           </div>
@@ -107,7 +150,7 @@ const About = () => {
             <div className="lg:col-span-4 text-center">
               <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto shadow-lg mb-4 overflow-hidden">
                 <img
-                  src={principalPhoto && principalPhoto !== '/principle.png' ? principalPhoto : '/principle.webp'}
+                  src={principalPhoto}
                   alt={`Principal ${principalName}`}
                   width="192"
                   height="192"
@@ -122,7 +165,7 @@ const About = () => {
             <div className="lg:col-span-8 space-y-3">
               <h3 className="text-xl font-bold font-serif text-slate-900">Principal's Message</h3>
               <p className="text-slate-600 italic leading-relaxed text-base">
-                "{settings.principalMessage || 'Welcome to S.S. Global Public School, Daudnagar. Our commitment is to foster academic excellence, holistic development, and moral values in a modern learning environment.'}"
+                "{principalMessage}"
               </p>
             </div>
           </div>
@@ -132,8 +175,8 @@ const About = () => {
             <div className="lg:col-span-4 text-center">
               <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-amber-500 to-blue-600 mx-auto shadow-lg mb-4 overflow-hidden">
                 <img
-                  src="/school.webp"
-                  alt={`Director ${settings.directorName || 'Er. R. P. Singh'}`}
+                  src={directorPhoto}
+                  alt={`Director ${directorName}`}
                   width="192"
                   height="192"
                   loading="lazy"
@@ -141,13 +184,13 @@ const About = () => {
                   className="w-full h-full object-cover rounded-full bg-slate-100"
                 />
               </div>
-              <h4 className="text-xl font-bold text-slate-900 font-serif">{settings.directorName || 'Er. R. P. Singh'}</h4>
+              <h4 className="text-xl font-bold text-slate-900 font-serif">{directorName}</h4>
               <p className="text-xs font-semibold text-amber-600">Director, S.S. Global Public School</p>
             </div>
             <div className="lg:col-span-8 space-y-3">
               <h3 className="text-xl font-bold font-serif text-slate-900">Director's Message</h3>
               <p className="text-slate-600 italic leading-relaxed text-base">
-                "{settings.directorMessage || 'We believe every child has infinite potential. At S.S. Global, we provide world-class infrastructure, smart labs, and guidance to turn dreams into reality.'}"
+                "{directorMessage}"
               </p>
             </div>
           </div>
