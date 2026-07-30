@@ -20,8 +20,6 @@
 | Component | Target Environment / Endpoint |
 | :--- | :--- |
 | **Public Portal** | [https://www.ssglobalpublicschool.com](https://www.ssglobalpublicschool.com) |
-| **AWS Amplify Deployment** | [https://main.dlzshhty32uyq.amplifyapp.com](https://main.dlzshhty32uyq.amplifyapp.com) |
-| **Backend REST API** | [https://ssgloblepublicschool-production.up.railway.app/api](https://ssgloblepublicschool-production.up.railway.app/api) |
 | **API Health Check** | `GET /api/health` |
 | **GitHub Repository** | [https://github.com/Sanesh764/ss_globle_public_school](https://github.com/Sanesh764/ss_globle_public_school) |
 | **Admin Portal** | `/admin/login` |
