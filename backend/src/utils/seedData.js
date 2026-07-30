@@ -50,21 +50,7 @@ export const seedDatabase = async () => {
       });
       console.log(`[Seeding] Created default staff admin account: ${staffEmail}`);
     }
-
-    //testing email 
-
-    let TestingUser = await Admin.findOne({ email: staffEmail });
-
-    if (!TestingUser) {
-      TestingUser = await Admin.create({
-        name: 'testing Staff',
-        email: TestingEmail,
-        password: TestingPassword,
-        role: 'staff',
-        isActive: true,
-      });
-      console.log(`[Seeding] Created default staff admin account: ${staffEmail}`);
-    }
+    
     // 2. Seed Default Settings
     const existingSetting = await Setting.findOne();
     if (!existingSetting) {
@@ -237,6 +223,7 @@ export const seedDatabase = async () => {
       ]);
       console.log('[Seeding] Initial Hero Slides created in MongoDB');
     }
+
 
     // 7. Seed Default Facilities
     const facilityCount = await Facility.countDocuments();
