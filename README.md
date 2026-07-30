@@ -141,9 +141,9 @@ npm run dev
 ```env
 PORT=5000
 NODE_ENV=production
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/ss_global_school?retryWrites=true&w=majority
+MONGO_URI=your url
 JWT_SECRET=your_super_secret_jwt_key_here
-FRONTEND_URL=https://main.dlzshhty32uyq.amplifyapp.com
+FRONTEND_URL=yout frontend url
 
 # Cloudinary Credentials (Optional)
 CLOUDINARY_CLOUD_NAME=your_cloud_name
