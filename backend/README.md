@@ -18,15 +18,15 @@ npm install
 
 2. Environment Variables (.env):
 ```env
-PORT=5000
-NODE_ENV=development
-MONGO_URI=mongodb://127.0.0.1:27017/ss_global_school
-JWT_SECRET=ss_global_public_school_super_secret_jwt_key_2026
+PORT=*********************
+NODE_ENV=**********************
+MONGO_URI=**********************************
+JWT_SECRET=**********************
 
 # Cloudinary (Optional)
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
+CLOUDINARY_CLOUD_NAME=*******************
+CLOUDINARY_API_KEY=**************
+CLOUDINARY_API_SECRET=***************
 ```
 
 3. Run Development Server:
@@ -34,6 +34,3 @@ CLOUDINARY_API_SECRET=
 npm run dev
 ```
 
-## Admin Default Credentials (Auto-Seeded)
-- **Email**: `admin@ssglobal.edu.in`
-- **Password**: `Admin@123456`
