@@ -15,6 +15,22 @@ export const logoutAdminApi = async () => {
   return response.data;
 };
 
+// Super Admin Own Profile API Calls
+export const getSuperAdminProfileApi = async () => {
+  const response = await API.get('/admin/profile');
+  return response.data;
+};
+
+export const updateSuperAdminProfileApi = async (profileData) => {
+  const response = await API.put('/admin/profile', profileData);
+  return response.data;
+};
+
+export const updateSuperAdminPasswordApi = async (passwordData) => {
+  const response = await API.put('/admin/profile/password', passwordData);
+  return response.data;
+};
+
 // Staff Admin User Management API Calls
 export const getStaffAdminsApi = async () => {
   const response = await API.get('/admin/users');
@@ -31,8 +47,9 @@ export const updateStaffAdminApi = async (id, userData) => {
   return response.data;
 };
 
-export const resetStaffAdminPasswordApi = async (id, newPassword) => {
-  const response = await API.patch(`/admin/users/${id}/reset-password`, { newPassword });
+export const resetStaffAdminPasswordApi = async (id, newPassword, confirmPassword) => {
+  const payload = typeof newPassword === 'object' ? newPassword : { newPassword, confirmPassword: confirmPassword || newPassword };
+  const response = await API.put(`/admin/users/${id}/reset-password`, payload);
   return response.data;
 };
 

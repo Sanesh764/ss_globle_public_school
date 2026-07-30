@@ -15,6 +15,7 @@ import {
   FiLogOut,
   FiShield,
   FiBookOpen,
+  FiUser,
 } from 'react-icons/fi';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -76,6 +77,7 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
       category: 'Administration',
       staffAllowed: false,
       items: [
+        { name: 'My Profile', path: '/admin/profile', icon: <FiUser className="text-xl" />, staffAllowed: false },
         { name: 'Staff Users', path: '/admin/users', icon: <FiUserCheck className="text-xl" />, staffAllowed: false },
       ],
     },

@@ -3,6 +3,9 @@ import {
   loginAdmin,
   getAdminProfile,
   logoutAdmin,
+  getSuperAdminProfile,
+  updateSuperAdminProfile,
+  updateSuperAdminPassword,
   getStaffAdmins,
   createStaffAdmin,
   updateStaffAdmin,
@@ -21,7 +24,14 @@ router.post('/login', loginLimiter, validateLogin, loginAdmin);
 router.get('/me', verifyJWT, verifyAdminRole, getAdminProfile);
 router.post('/logout', verifyJWTForLogout, logoutAdmin);
 
-// Super Admin User Management Routes
+// Super Admin Own Profile Management Routes (Restricted to Super Admin)
+router.route('/profile')
+  .get(verifyJWT, verifySuperAdmin, getSuperAdminProfile)
+  .put(verifyJWT, verifySuperAdmin, updateSuperAdminProfile);
+
+router.put('/profile/password', verifyJWT, verifySuperAdmin, updateSuperAdminPassword);
+
+// Super Admin Staff User Management Routes (Restricted to Super Admin)
 router.route('/users')
   .get(verifyJWT, verifySuperAdmin, getStaffAdmins)
   .post(verifyJWT, verifySuperAdmin, createStaffAdmin);
@@ -31,6 +41,7 @@ router.route('/users/:id')
   .put(updateStaffAdmin)
   .delete(deleteStaffAdmin);
 
+router.put('/users/:id/reset-password', verifyJWT, verifySuperAdmin, validateObjectId('id'), resetStaffAdminPassword);
 router.patch('/users/:id/reset-password', verifyJWT, verifySuperAdmin, validateObjectId('id'), resetStaffAdminPassword);
 
 export default router;

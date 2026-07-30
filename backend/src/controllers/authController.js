@@ -16,7 +16,7 @@ export const loginAdmin = asyncHandler(async (req, res) => {
     throw new ApiError(400, 'Please provide both email/username and password');
   }
 
-  let searchCriteria = [{ email: loginInput }];
+  let searchCriteria = [{ email: loginInput }, { username: loginInput }];
   if (loginInput === 'staff') {
     searchCriteria.push({ email: 'staff@ssglobal.edu.in' });
   } else if (loginInput === 'admin') {
@@ -39,9 +39,11 @@ export const loginAdmin = asyncHandler(async (req, res) => {
   const adminResponse = {
     _id: admin._id,
     name: admin.name,
+    username: admin.username || admin.email.split('@')[0],
     email: admin.email,
     role: admin.role,
     isActive: admin.isActive,
+    createdAt: admin.createdAt,
   };
 
   res.status(200).json(
@@ -62,7 +64,17 @@ export const getAdminProfile = asyncHandler(async (req, res) => {
     throw new ApiError(404, 'Admin profile not found');
   }
 
-  res.status(200).json(new ApiResponse(200, { admin }, 'Admin profile retrieved'));
+  const adminResponse = {
+    _id: admin._id,
+    name: admin.name,
+    username: admin.username || admin.email.split('@')[0],
+    email: admin.email,
+    role: admin.role,
+    isActive: admin.isActive,
+    createdAt: admin.createdAt,
+  };
+
+  res.status(200).json(new ApiResponse(200, { admin: adminResponse }, 'Admin profile retrieved'));
 });
 
 // @desc    Logout admin / clear cookie
@@ -85,14 +97,110 @@ export const logoutAdmin = asyncHandler(async (req, res) => {
 });
 
 // ====================================================
-// SUPER ADMIN USER MANAGEMENT CONTROLLERS
+// SUPER ADMIN OWN PROFILE CONTROLLERS
+// ====================================================
+
+// @desc    Get Super Admin own profile
+// @route   GET /api/admin/profile
+// @access  Private/SuperAdmin
+export const getSuperAdminProfile = asyncHandler(async (req, res) => {
+  const admin = await Admin.findById(req.admin._id);
+  if (!admin) throw new ApiError(404, 'Super Admin profile not found');
+
+  const profile = {
+    _id: admin._id,
+    name: admin.name,
+    username: admin.username || admin.email.split('@')[0],
+    email: admin.email,
+    role: admin.role,
+    createdAt: admin.createdAt,
+  };
+
+  res.status(200).json(new ApiResponse(200, { profile }, 'Profile retrieved successfully'));
+});
+
+// @desc    Update Super Admin own profile
+// @route   PUT /api/admin/profile
+// @access  Private/SuperAdmin
+export const updateSuperAdminProfile = asyncHandler(async (req, res) => {
+  const admin = await Admin.findById(req.admin._id);
+  if (!admin) throw new ApiError(404, 'Super Admin profile not found');
+
+  const { name, username, email } = req.body;
+
+  if (email && email.trim().toLowerCase() !== admin.email.toLowerCase()) {
+    const emailExists = await Admin.findOne({ email: email.trim().toLowerCase(), _id: { $ne: admin._id } });
+    if (emailExists) throw new ApiError(400, 'An admin account with this email already exists');
+    admin.email = email.trim().toLowerCase();
+  }
+
+  if (username && username.trim().toLowerCase() !== (admin.username || '').toLowerCase()) {
+    const usernameExists = await Admin.findOne({ username: username.trim().toLowerCase(), _id: { $ne: admin._id } });
+    if (usernameExists) throw new ApiError(400, 'An admin account with this username already exists');
+    admin.username = username.trim().toLowerCase();
+  }
+
+  if (name && name.trim()) admin.name = name.trim();
+
+  await admin.save();
+
+  const profile = {
+    _id: admin._id,
+    name: admin.name,
+    username: admin.username || admin.email.split('@')[0],
+    email: admin.email,
+    role: admin.role,
+    createdAt: admin.createdAt,
+  };
+
+  res.status(200).json(new ApiResponse(200, { profile }, 'Profile updated successfully'));
+});
+
+// @desc    Update Super Admin own password
+// @route   PUT /api/admin/profile/password
+// @access  Private/SuperAdmin
+export const updateSuperAdminPassword = asyncHandler(async (req, res) => {
+  const { currentPassword, newPassword, confirmPassword } = req.body;
+
+  if (!currentPassword) throw new ApiError(400, 'Current password is required');
+  if (!newPassword || newPassword.length < 8) {
+    throw new ApiError(400, 'New password must be at least 8 characters long');
+  }
+  if (confirmPassword !== undefined && newPassword !== confirmPassword) {
+    throw new ApiError(400, 'New password and confirm password do not match');
+  }
+
+  const admin = await Admin.findById(req.admin._id).select('+password');
+  if (!admin) throw new ApiError(404, 'Super Admin profile not found');
+
+  const isMatch = await bcrypt.compare(currentPassword, admin.password);
+  if (!isMatch) throw new ApiError(401, 'Current password is incorrect');
+
+  admin.password = newPassword;
+  await admin.save();
+
+  res.status(200).json(new ApiResponse(200, null, 'Password updated successfully. Please log in again.'));
+});
+
+// ====================================================
+// SUPER ADMIN STAFF USER MANAGEMENT CONTROLLERS
 // ====================================================
 
 // @desc    Get all staff admins
 // @route   GET /api/admin/users
 // @access  Private/SuperAdmin
 export const getStaffAdmins = asyncHandler(async (req, res) => {
-  const users = await Admin.find({ _id: { $ne: req.admin._id } }).select('-password').sort({ createdAt: -1 });
+  const rawUsers = await Admin.find({ _id: { $ne: req.admin._id } }).select('-password').sort({ createdAt: -1 });
+  const users = rawUsers.map((u) => ({
+    _id: u._id,
+    name: u.name,
+    username: u.username || u.email.split('@')[0],
+    email: u.email,
+    role: u.role,
+    isActive: u.isActive,
+    createdAt: u.createdAt,
+  }));
+
   res.status(200).json(new ApiResponse(200, { count: users.length, users }, 'Admin users retrieved'));
 });
 
@@ -100,18 +208,25 @@ export const getStaffAdmins = asyncHandler(async (req, res) => {
 // @route   POST /api/admin/users
 // @access  Private/SuperAdmin
 export const createStaffAdmin = asyncHandler(async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, username, email, password, role } = req.body;
 
   if (!name || !name.trim()) throw new ApiError(400, 'Full name is required');
   if (!email || !email.trim()) throw new ApiError(400, 'Email address is required');
-  if (!password || password.length < 6) throw new ApiError(400, 'Password must be at least 6 characters');
+  if (!password || password.length < 8) throw new ApiError(400, 'Password must be at least 8 characters long');
 
-  const existing = await Admin.findOne({ email: email.trim().toLowerCase() });
-  if (existing) throw new ApiError(400, 'An admin account with this email already exists');
+  const cleanEmail = email.trim().toLowerCase();
+  const cleanUsername = (username || email.split('@')[0]).trim().toLowerCase();
+
+  const existingEmail = await Admin.findOne({ email: cleanEmail });
+  if (existingEmail) throw new ApiError(400, 'An admin account with this email already exists');
+
+  const existingUsername = await Admin.findOne({ username: cleanUsername });
+  if (existingUsername) throw new ApiError(400, 'An admin account with this username already exists');
 
   const newUser = await Admin.create({
     name: name.trim(),
-    email: email.trim().toLowerCase(),
+    username: cleanUsername,
+    email: cleanEmail,
     password: password,
     role: role === 'superadmin' ? 'superadmin' : 'staff',
   });
@@ -119,13 +234,14 @@ export const createStaffAdmin = asyncHandler(async (req, res) => {
   const userResponse = {
     _id: newUser._id,
     name: newUser.name,
+    username: newUser.username,
     email: newUser.email,
     role: newUser.role,
     isActive: newUser.isActive,
     createdAt: newUser.createdAt,
   };
 
-  res.status(201).json(new ApiResponse(201, { user: userResponse }, 'Staff Admin account created successfully'));
+  res.status(201).json(new ApiResponse(201, { user: userResponse }, 'Staff account created successfully'));
 });
 
 // @desc    Update Staff Admin user
@@ -133,12 +249,23 @@ export const createStaffAdmin = asyncHandler(async (req, res) => {
 // @access  Private/SuperAdmin
 export const updateStaffAdmin = asyncHandler(async (req, res) => {
   const user = await Admin.findById(req.params.id);
-  if (!user) throw new ApiError(404, 'Admin user not found');
+  if (!user) throw new ApiError(404, 'Staff account not found');
 
-  const { name, email, role, isActive } = req.body;
+  const { name, username, email, role, isActive } = req.body;
+
+  if (email && email.trim().toLowerCase() !== user.email.toLowerCase()) {
+    const existingEmail = await Admin.findOne({ email: email.trim().toLowerCase(), _id: { $ne: user._id } });
+    if (existingEmail) throw new ApiError(400, 'An admin account with this email already exists');
+    user.email = email.trim().toLowerCase();
+  }
+
+  if (username && username.trim().toLowerCase() !== (user.username || '').toLowerCase()) {
+    const existingUsername = await Admin.findOne({ username: username.trim().toLowerCase(), _id: { $ne: user._id } });
+    if (existingUsername) throw new ApiError(400, 'An admin account with this username already exists');
+    user.username = username.trim().toLowerCase();
+  }
 
   if (name && name.trim()) user.name = name.trim();
-  if (email && email.trim()) user.email = email.trim().toLowerCase();
   if (role) user.role = role;
   if (isActive !== undefined) user.isActive = isActive === 'true' || isActive === true;
 
@@ -147,25 +274,30 @@ export const updateStaffAdmin = asyncHandler(async (req, res) => {
   const userResponse = {
     _id: user._id,
     name: user.name,
+    username: user.username || user.email.split('@')[0],
     email: user.email,
     role: user.role,
     isActive: user.isActive,
     updatedAt: user.updatedAt,
   };
 
-  res.status(200).json(new ApiResponse(200, { user: userResponse }, 'Admin user updated successfully'));
+  res.status(200).json(new ApiResponse(200, { user: userResponse }, 'Staff account updated successfully'));
 });
 
 // @desc    Reset Staff Admin password
+// @route   PUT /api/admin/users/:id/reset-password
 // @route   PATCH /api/admin/users/:id/reset-password
 // @access  Private/SuperAdmin
 export const resetStaffAdminPassword = asyncHandler(async (req, res) => {
   const user = await Admin.findById(req.params.id);
-  if (!user) throw new ApiError(404, 'Admin user not found');
+  if (!user) throw new ApiError(404, 'Staff account not found');
 
-  const { newPassword } = req.body;
-  if (!newPassword || newPassword.length < 6) {
-    throw new ApiError(400, 'New password must be at least 6 characters');
+  const { newPassword, confirmPassword } = req.body;
+  if (!newPassword || newPassword.length < 8) {
+    throw new ApiError(400, 'Password must be at least 8 characters long');
+  }
+  if (confirmPassword !== undefined && newPassword !== confirmPassword) {
+    throw new ApiError(400, 'New password and confirm password do not match');
   }
 
   user.password = newPassword;
@@ -179,12 +311,12 @@ export const resetStaffAdminPassword = asyncHandler(async (req, res) => {
 // @access  Private/SuperAdmin
 export const deleteStaffAdmin = asyncHandler(async (req, res) => {
   const user = await Admin.findById(req.params.id);
-  if (!user) throw new ApiError(404, 'Admin user not found');
+  if (!user) throw new ApiError(404, 'Staff account not found');
 
   if (user._id.toString() === req.admin._id.toString()) {
     throw new ApiError(400, 'You cannot delete your own admin account');
   }
 
   await user.deleteOne();
-  res.status(200).json(new ApiResponse(200, null, 'Staff Admin account deleted successfully'));
+  res.status(200).json(new ApiResponse(200, null, 'Staff account deleted successfully'));
 });

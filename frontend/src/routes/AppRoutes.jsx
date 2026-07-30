@@ -31,6 +31,7 @@ const AdminMessages = lazy(() => import('../pages/admin/AdminMessages'));
 const AdminLeadership = lazy(() => import('../pages/admin/AdminLeadership'));
 const AdminHeroSlider = lazy(() => import('../pages/admin/AdminHeroSlider'));
 const AdminAcademicResources = lazy(() => import('../pages/admin/AdminAcademicResources'));
+const AdminProfile = lazy(() => import('../pages/admin/AdminProfile'));
 
 const SuspenseWrapper = ({ children }) => (
   <Suspense fallback={<LoadingSpinner fullScreen text="Loading Page..." />}>
@@ -69,6 +70,7 @@ const AppRoutes = () => {
 
           {/* Super Admin Restricted Routes (Staff Admin gets 403 / Unauthorized if manually typed) */}
           <Route element={<SuperAdminRoute />}>
+            <Route path="profile" element={<SuspenseWrapper><AdminProfile /></SuspenseWrapper>} />
             <Route path="hero-slider" element={<SuspenseWrapper><AdminHeroSlider /></SuspenseWrapper>} />
             <Route path="about" element={<SuspenseWrapper><AdminAbout /></SuspenseWrapper>} />
             <Route path="leadership" element={<SuspenseWrapper><AdminLeadership /></SuspenseWrapper>} />
