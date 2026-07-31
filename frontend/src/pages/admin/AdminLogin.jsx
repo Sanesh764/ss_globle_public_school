@@ -14,10 +14,16 @@ const AdminLogin = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const expiredMsg = sessionStorage.getItem('sessionExpiredMsg');
+    if (expiredMsg) {
+      sessionStorage.removeItem('sessionExpiredMsg');
+      addToast(expiredMsg, 'warning');
+    }
+
     if (isAuthenticated) {
       navigate('/admin/dashboard', { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, addToast]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

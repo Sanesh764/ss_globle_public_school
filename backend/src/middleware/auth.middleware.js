@@ -34,7 +34,7 @@ export const verifyJWT = async (req, res, next) => {
     next();
   } catch (error) {
     if (error.name === 'TokenExpiredError') {
-      return next(new ApiError(401, 'Session expired - Please log in again'));
+      return next(new ApiError(401, 'Your session has expired. Please sign in again.'));
     }
     if (error.name === 'JsonWebTokenError') {
       return next(new ApiError(401, 'Invalid authentication token'));

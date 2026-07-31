@@ -92,6 +92,7 @@ API.interceptors.response.use(
       if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') {
         localStorage.removeItem('adminToken');
         localStorage.removeItem('adminUser');
+        sessionStorage.setItem('sessionExpiredMsg', 'Your session has expired. Please sign in again.');
         window.location.href = '/admin/login';
       }
     }
