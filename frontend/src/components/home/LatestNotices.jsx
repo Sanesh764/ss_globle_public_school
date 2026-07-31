@@ -9,7 +9,9 @@ import LoadingSpinner from '../common/LoadingSpinner';
 
 const LatestNotices = () => {
   const [selectedNotice, setSelectedNotice] = useState(null);
-  const { data, loading } = useFetch(() => getNoticesApi({ page: 1, limit: 5 }), []);
+  const { data, loading, error } = useFetch(() => getNoticesApi({ page: 1, limit: 5 }), []);
+
+  const noticesList = data?.notices || data?.data?.notices || (Array.isArray(data?.data) ? data.data : []);
 
   return (
     <section className="py-20 bg-white min-h-[450px]">
@@ -39,8 +41,12 @@ const LatestNotices = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left Ticker / Featured Cards */}
             <div className="lg:col-span-8 space-y-4">
-              {data?.notices && data.notices.length > 0 ? (
-                data.notices.map((notice) => (
+              {error ? (
+                <div className="p-8 text-center bg-amber-50/60 rounded-2xl border border-amber-200 text-amber-900 text-sm font-medium">
+                  Information is temporarily unavailable. Please check again shortly.
+                </div>
+              ) : noticesList.length > 0 ? (
+                noticesList.map((notice) => (
                   <div
                     key={notice._id}
                     onClick={() => setSelectedNotice(notice)}

@@ -8,20 +8,10 @@ import LoadingSpinner from '../common/LoadingSpinner';
 
 const GalleryPreview = () => {
   const [selectedImg, setSelectedImg] = useState(null);
-  const { data, loading } = useFetch(() => getGalleryApi('All'), []);
-
-  const sampleImages = [
-    { title: 'Interactive Smart Classroom', category: 'Facilities', image: '/classRoom.webp' },
-    { title: 'Academic Classroom Session', category: 'Academics', image: '/classes.webp' },
-    { title: 'Annual Sports Day & Athletics Ground', category: 'Sports', image: '/sports.webp' },
-    { title: 'S.S. Global Public School Main Building', category: 'Campus', image: '/school.webp' },
-    { title: 'Principal Manish Singh Addressing Students', category: 'Campus', image: '/principle.webp' },
-    { title: 'School Official Crest & Emblem', category: 'Facilities', image: '/logo.webp' },
-  ];
+  const { data, loading, error } = useFetch(() => getGalleryApi('All'), []);
 
   const fetchedImages = data?.data?.images || data?.images || (Array.isArray(data?.data) ? data.data : []);
-
-  const imagesToShow = fetchedImages && fetchedImages.length > 0 ? fetchedImages.slice(0, 6) : sampleImages;
+  const imagesToShow = Array.isArray(fetchedImages) ? fetchedImages.slice(0, 6) : [];
 
   return (
     <section className="py-20 bg-slate-50 min-h-[450px]">
@@ -47,7 +37,11 @@ const GalleryPreview = () => {
           <div className="min-h-[300px] flex items-center justify-center">
             <LoadingSpinner />
           </div>
-        ) : (
+        ) : error ? (
+          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-amber-800 text-sm font-semibold">
+            Information is temporarily unavailable. Please check again shortly.
+          </div>
+        ) : imagesToShow.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {imagesToShow.map((item, idx) => (
               <div
@@ -75,6 +69,10 @@ const GalleryPreview = () => {
                 </div>
               </div>
             ))}
+          </div>
+        ) : (
+          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500">
+            No gallery photos available at this time.
           </div>
         )}
 

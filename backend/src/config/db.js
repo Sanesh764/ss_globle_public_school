@@ -3,15 +3,15 @@ import dns from 'dns';
 import logger from '../utils/logger.js';
 
 /**
- * Helper to resolve SRV records for mongodb+srv URIs using custom DNS servers
- * when the default OS DNS resolver blocks SRV queries on port 53.
+ * Helper to resolve SRV records for mongodb+srv URIs using custom public DNS servers
+ * when local OS/network DNS resolvers fail to resolve _mongodb._tcp SRV records.
  */
 const resolveSrvUri = async (srvUri) => {
   try {
     const match = srvUri.match(/^mongodb\+srv:\/\/([^:]+):([^@]+)@([^/]+)\/([^?]+)(\?.*)?$/);
     if (!match) return null;
 
-    const [, username, password, host, dbName, queryParams] = match;
+    const [, username, password, host, dbName] = match;
     const srvDomain = `_mongodb._tcp.${host}`;
 
     const resolver = new dns.Resolver();
@@ -37,16 +37,25 @@ const resolveSrvUri = async (srvUri) => {
 };
 
 const connectDB = async () => {
-  const primaryUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ss_global_school';
+  const isProduction = process.env.NODE_ENV === 'production';
+  const mongoUri = process.env.MONGO_URI;
+
+  // Strict Production Check: Fail fast if MONGO_URI is missing in production
+  if (isProduction && !mongoUri) {
+    logger.error('[Database Error] FATAL: MONGO_URI environment variable is missing in production!');
+    throw new Error('MONGO_URI is required in production environment.');
+  }
+
+  const primaryUri = mongoUri || 'mongodb://127.0.0.1:27017/ss_global_school';
 
   try {
     const conn = await mongoose.connect(primaryUri);
-    logger.info(`[Database] Connected to MongoDB Atlas: ${conn.connection.host} (DB: ${conn.connection.name})`);
+    logger.info(`[Database] MongoDB Atlas connected successfully: ${conn.connection.host} (DB: ${conn.connection.name})`);
     return conn;
   } catch (primaryError) {
-    logger.warn(`[Database] Primary MONGO_URI SRV connection failed: ${primaryError.message}`);
+    logger.warn(`[Database] Primary MONGO_URI connection failed: ${primaryError.message}`);
 
-    // If SRV DNS lookup failed on mongodb+srv, attempt custom SRV resolver
+    // If SRV DNS lookup failed on mongodb+srv, attempt custom public DNS SRV resolver
     if (primaryUri.startsWith('mongodb+srv://')) {
       logger.info('[Database] Resolving Atlas SRV record via public DNS (8.8.8.8)...');
       const resolvedUri = await resolveSrvUri(primaryUri);
@@ -54,7 +63,7 @@ const connectDB = async () => {
       if (resolvedUri) {
         try {
           const conn = await mongoose.connect(resolvedUri);
-          logger.info(`[Database] Successfully connected to MongoDB Atlas via resolved hosts: ${conn.connection.host}`);
+          logger.info(`[Database] Connected to MongoDB Atlas via resolved hosts: ${conn.connection.host}`);
           return conn;
         } catch (resolvedErr) {
           logger.error(`[Database Error] Resolved Atlas URI connection failed: ${resolvedErr.message}`);
@@ -62,10 +71,17 @@ const connectDB = async () => {
       }
     }
 
-    // Attempt local fallback if running locally
-    const fallbackUri = 'mongodb://127.0.0.1:27017/ss_global_school';
+    // In Production: FAIL FAST. Do NOT silently fall back to localhost in production.
+    if (isProduction) {
+      logger.error('[Database Error] FATAL: MongoDB Atlas connection failed in production.');
+      throw primaryError;
+    }
+
+    // In Development ONLY: Attempt local MongoDB fallback
+    logger.info('[Database] Attempting local MongoDB fallback for development...');
+    const localUri = 'mongodb://127.0.0.1:27017/ss_global_school';
     try {
-      const conn = await mongoose.connect(fallbackUri);
+      const conn = await mongoose.connect(localUri);
       logger.info(`[Database] Connected to local MongoDB fallback: ${conn.connection.host}`);
       return conn;
     } catch (fallbackError) {

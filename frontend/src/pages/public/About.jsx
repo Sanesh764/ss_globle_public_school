@@ -11,19 +11,23 @@ const About = () => {
   const heroSubtitle = settings.aboutHeroSubtitle || 'Dedicated to excellence in education, character building, and leadership in Daudnagar, Bihar.';
   const aboutBadge = settings.aboutBadge || 'Our Legacy & History';
   const aboutTitle = settings.aboutTitle || 'Nurturing Potential, Shaping Destiny in Daudnagar';
-  const aboutText1 = settings.aboutText1 || settings.aboutText || settings.about || 'S.S. Global Public School was established with a singular objective: to bring high quality CBSE education within reach of every student in Daudnagar and surrounding regions. Under the guidance of Principal Manish Singh, the institution has grown into a premier seat of learning.';
+  const aboutText1 = settings.aboutText1 || settings.aboutText || settings.about || 'S.S. Global Public School was established with a singular objective: to bring high quality CBSE education within reach of every student in Daudnagar and surrounding regions. Under visionary guidance, the institution has grown into a premier seat of learning.';
   const aboutText2 = settings.aboutText2 || 'We believe that education must extend beyond textbooks. Our campus blends modern technology with traditional Indian ethics, giving students the tools to compete globally while remaining rooted in strong values.';
   const buildingImg = getImageUrl(settings.aboutImage || settings.heroImage || '/school.webp');
   const expNumber = settings.aboutExpNumber || '15+';
   const expText = settings.aboutExpText || 'Years of Educational Excellence';
 
-  const principalPhoto = getImageUrl(settings.principalPhoto || '/principle.png');
-  const principalName = settings.principalName || 'Manish Singh';
-  const principalMessage = settings.principalMessage || 'Welcome to S.S. Global Public School, Daudnagar. Our commitment is to foster academic excellence, holistic development, and moral values in a modern learning environment.';
+  const founderPhoto = getImageUrl(settings.founderPhoto || '/founder_image.jpeg');
+  const founderName = settings.founderName || 'Shambhu Sharan Singh';
+  const founderMessage = settings.founderMessage || 'Our foundational goal is to provide world-class CBSE education in Daudnagar. We empower students with critical thinking, sportsmanship, technological literacy, and strong moral grounding.';
 
-  const directorPhoto = getImageUrl(settings.directorPhoto || '/school.webp');
-  const directorName = settings.directorName || 'Er. R. P. Singh';
+  const directorPhoto = getImageUrl(settings.directorPhoto || '/Director_image.jpeg');
+  const directorName = settings.directorName || 'Er. Manish Singh';
   const directorMessage = settings.directorMessage || 'We believe every child has infinite potential. At S.S. Global, we provide world-class infrastructure, smart labs, and guidance to turn dreams into reality.';
+
+  const principalPhoto = getImageUrl(settings.principalPhoto || '/Principle_image.jpg');
+  const principalName = settings.principalName || 'Ashutosh Kumar';
+  const principalMessage = settings.principalMessage || 'Welcome to S.S. Global Public School, Daudnagar. Our commitment is to foster academic excellence, holistic development, and moral values in a modern learning environment.';
 
   const defaultFeatures = [
     'Affiliated & aligned with CBSE Academic Standards',
@@ -145,13 +149,13 @@ const About = () => {
             </h2>
           </div>
 
-          {/* Principal Message */}
+          {/* Founder Message */}
           <div className="bg-slate-50 p-8 sm:p-12 rounded-3xl border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-4 text-center">
-              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto shadow-lg mb-4 overflow-hidden">
+              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-amber-500 via-blue-600 to-sky-400 mx-auto shadow-lg mb-4 overflow-hidden">
                 <img
-                  src={principalPhoto}
-                  alt={`Principal ${principalName}`}
+                  src={founderPhoto}
+                  alt={`Founder ${founderName}`}
                   width="192"
                   height="192"
                   loading="lazy"
@@ -159,13 +163,13 @@ const About = () => {
                   className="w-full h-full object-cover rounded-full bg-slate-100"
                 />
               </div>
-              <h4 className="text-xl font-bold text-slate-900 font-serif">{principalName}</h4>
-              <p className="text-xs font-semibold text-blue-600">Principal, S.S. Global Public School</p>
+              <h4 className="text-xl font-bold text-slate-900 font-serif">{founderName}</h4>
+              <p className="text-xs font-semibold text-amber-700">Founder, S.S. Global Public School</p>
             </div>
             <div className="lg:col-span-8 space-y-3">
-              <h3 className="text-xl font-bold font-serif text-slate-900">Principal's Message</h3>
+              <h3 className="text-xl font-bold font-serif text-slate-900">Founder's Message</h3>
               <p className="text-slate-600 italic leading-relaxed text-base">
-                "{principalMessage}"
+                "{founderMessage}"
               </p>
             </div>
           </div>
@@ -191,6 +195,31 @@ const About = () => {
               <h3 className="text-xl font-bold font-serif text-slate-900">Director's Message</h3>
               <p className="text-slate-600 italic leading-relaxed text-base">
                 "{directorMessage}"
+              </p>
+            </div>
+          </div>
+
+          {/* Principal Message */}
+          <div className="bg-slate-50 p-8 sm:p-12 rounded-3xl border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-4 text-center">
+              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto shadow-lg mb-4 overflow-hidden">
+                <img
+                  src={principalPhoto}
+                  alt={`Principal ${principalName}`}
+                  width="192"
+                  height="192"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover rounded-full bg-slate-100"
+                />
+              </div>
+              <h4 className="text-xl font-bold text-slate-900 font-serif">{principalName}</h4>
+              <p className="text-xs font-semibold text-blue-600">Principal, S.S. Global Public School</p>
+            </div>
+            <div className="lg:col-span-8 space-y-3">
+              <h3 className="text-xl font-bold font-serif text-slate-900">Principal's Message</h3>
+              <p className="text-slate-600 italic leading-relaxed text-base">
+                "{principalMessage}"
               </p>
             </div>
           </div>

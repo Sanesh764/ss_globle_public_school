@@ -12,23 +12,10 @@ const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedImg, setSelectedImg] = useState(null);
 
-  const { data, loading } = useFetch(() => getGalleryApi(activeCategory), [activeCategory]);
+  const { data, loading, error } = useFetch(() => getGalleryApi(activeCategory), [activeCategory]);
 
-  const defaultSampleImages = [
-    { title: 'Interactive Smart Classroom', category: 'Facilities', image: '/classRoom.webp' },
-    { title: 'Academic Classroom Session', category: 'Academics', image: '/classes.webp' },
-    { title: 'Annual Sports Day & Athletics Ground', category: 'Sports', image: '/sports.webp' },
-    { title: 'S.S. Global Public School Main Building', category: 'Campus', image: '/school.webp' },
-    { title: 'Principal Manish Singh Addressing Students', category: 'Campus', image: '/principle.webp' },
-    { title: 'School Official Logo & Emblem', category: 'Facilities', image: '/logo.webp' },
-  ];
-
-  // Correctly extract images array from response wrapper (data.data.images or data.images or data.data)
   const fetchedImages = data?.data?.images || data?.images || (Array.isArray(data?.data) ? data.data : []);
-
-  const galleryItems = fetchedImages && fetchedImages.length > 0
-    ? fetchedImages
-    : (activeCategory === 'All' ? defaultSampleImages : defaultSampleImages.filter(i => i.category === activeCategory));
+  const galleryItems = Array.isArray(fetchedImages) ? fetchedImages : [];
 
   return (
     <div>
@@ -59,6 +46,10 @@ const Gallery = () => {
 
           {loading ? (
             <LoadingSpinner />
+          ) : error ? (
+            <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-amber-800 text-sm font-semibold">
+              Information is temporarily unavailable. Please check again shortly.
+            </div>
           ) : galleryItems.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {galleryItems.map((item, idx) => (

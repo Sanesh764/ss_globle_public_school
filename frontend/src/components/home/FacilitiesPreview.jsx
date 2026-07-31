@@ -13,6 +13,7 @@ import {
 } from 'react-icons/fi';
 import useFetch from '../../hooks/useFetch';
 import { getPublicFacilitiesApi } from '../../services/facilityService';
+import { FACILITIES_FALLBACK } from '../../config/fallbackData';
 
 const renderIcon = (iconName) => {
   switch (iconName) {
@@ -34,12 +35,17 @@ const renderIcon = (iconName) => {
 };
 
 const FacilitiesPreview = () => {
-  const { data, loading } = useFetch(getPublicFacilitiesApi);
+  const { data, loading, error } = useFetch(getPublicFacilitiesApi);
 
-  const fetchedList = data?.data?.facilities || data?.facilities || [];
-  const displayList = Array.isArray(fetchedList) ? fetchedList.slice(0, 4) : [];
+  let displayList = [];
+  if (error) {
+    displayList = FACILITIES_FALLBACK.slice(0, 4);
+  } else if (data) {
+    const fetchedList = data?.data?.facilities || data?.facilities || (Array.isArray(data?.data) ? data.data : []);
+    displayList = Array.isArray(fetchedList) ? fetchedList.slice(0, 4) : FACILITIES_FALLBACK.slice(0, 4);
+  }
 
-  if (!loading && displayList.length === 0) {
+  if (!loading && !error && displayList.length === 0) {
     return null;
   }
 

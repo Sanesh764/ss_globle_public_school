@@ -157,7 +157,7 @@ const settingSchema = new mongoose.Schema(
     // Leadership & Additional Content
     principalPhoto: {
       type: String,
-      default: '/principle.png',
+      default: '/Principle_image.jpg',
     },
     principalPhotoPublicId: {
       type: String,
@@ -165,7 +165,7 @@ const settingSchema = new mongoose.Schema(
     },
     principalName: {
       type: String,
-      default: 'Manish Singh',
+      default: 'Ashutosh Kumar',
     },
     principalMessage: {
       type: String,
@@ -173,7 +173,7 @@ const settingSchema = new mongoose.Schema(
     },
     directorPhoto: {
       type: String,
-      default: '/school.webp',
+      default: '/Director_image.jpeg',
     },
     directorPhotoPublicId: {
       type: String,
@@ -181,11 +181,27 @@ const settingSchema = new mongoose.Schema(
     },
     directorName: {
       type: String,
-      default: 'Er. R. P. Singh',
+      default: 'Er. Manish Singh',
     },
     directorMessage: {
       type: String,
       default: 'We believe every child has infinite potential. At S.S. Global, we provide world-class infrastructure and guidance to turn dreams into reality.',
+    },
+    founderPhoto: {
+      type: String,
+      default: '/founder_image.jpeg',
+    },
+    founderPhotoPublicId: {
+      type: String,
+      default: '',
+    },
+    founderName: {
+      type: String,
+      default: 'Shambhu Sharan Singh',
+    },
+    founderMessage: {
+      type: String,
+      default: 'Our foundational goal is to provide world-class CBSE education in Daudnagar.',
     },
     vision: {
       type: String,

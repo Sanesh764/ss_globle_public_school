@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import { FiArrowRight, FiCheckCircle, FiAward, FiBookOpen, FiUsers, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { useHeroSlider } from '../../hooks/useHeroSlider';
 import { getImageUrl } from '../../services/api';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const HeroSlider = () => {
   const {
     slides,
     currentSlide,
     currentIndex,
+    loading,
     nextSlide,
     prevSlide,
     goToSlide,
@@ -23,6 +25,16 @@ const HeroSlider = () => {
     setFailedImages((prev) => ({ ...prev, [slideId]: true }));
   };
 
+  if (loading) {
+    return (
+      <div className="relative min-h-[600px] sm:min-h-[650px] lg:min-h-[700px] h-[85vh] flex items-center justify-center bg-slate-950 text-white">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  const slide = currentSlide || {};
+
   return (
     <div
       className="relative min-h-[600px] sm:min-h-[650px] lg:min-h-[700px] h-[85vh] flex items-center justify-center overflow-hidden bg-slate-950 text-white select-none"
@@ -32,10 +44,10 @@ const HeroSlider = () => {
       onTouchEnd={handleTouchEnd}
     >
       {/* Background Images Layer with 700ms Smooth Fade Transition */}
-      {slides.map((slide, idx) => {
+      {slides.map((s, idx) => {
         const isActive = idx === currentIndex;
-        const slideId = slide._id || idx;
-        const rawUrl = getImageUrl(slide.backgroundImage);
+        const slideId = s._id || idx;
+        const rawUrl = getImageUrl(s.backgroundImage);
         const bgUrl = failedImages[slideId] ? '/school.webp' : rawUrl;
 
         return (
@@ -66,43 +78,45 @@ const HeroSlider = () => {
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         <div className="max-w-3xl space-y-6">
           {/* Badge */}
-          {currentSlide.badge && (
+          {slide.badge && (
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-semibold backdrop-blur-md animate-fadeIn">
-              <FiCheckCircle className="text-amber-400 text-base shrink-0" /> {currentSlide.badge}
+              <FiCheckCircle className="text-amber-400 text-base shrink-0" /> {slide.badge}
             </div>
           )}
 
           {/* Title & Highlight Title */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-serif leading-tight text-white tracking-tight">
-            {currentSlide.title || 'Welcome to'} <br />
+            {slide.title || 'Welcome to'} <br />
             <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-amber-300 bg-clip-text text-transparent">
-              {currentSlide.highlightTitle || 'S.S. Global Public School'}
+              {slide.highlightTitle || 'S.S. Global Public School'}
             </span>
           </h1>
 
           {/* Description */}
-          <p className="text-lg sm:text-xl text-slate-200 font-light leading-relaxed">
-            {currentSlide.description}
-          </p>
+          {slide.description && (
+            <p className="text-lg sm:text-xl text-slate-200 font-light leading-relaxed">
+              {slide.description}
+            </p>
+          )}
 
           {/* Action Buttons */}
           <div className="pt-4 flex flex-wrap gap-4 items-center">
-            {currentSlide.primaryButtonText && (
+            {slide.primaryButtonText && (
               <Link
-                to={currentSlide.primaryButtonLink || '/contact'}
+                to={slide.primaryButtonLink || '/contact'}
                 className="px-7 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-base shadow-xl shadow-amber-500/20 transition-all transform hover:-translate-y-1 flex items-center gap-2 group"
               >
-                {currentSlide.primaryButtonText}{' '}
+                {slide.primaryButtonText}{' '}
                 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
             )}
 
-            {currentSlide.secondaryButtonText && (
+            {slide.secondaryButtonText && (
               <Link
-                to={currentSlide.secondaryButtonLink || '/about'}
+                to={slide.secondaryButtonLink || '/about'}
                 className="px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-base backdrop-blur-md border border-white/20 transition-all hover:border-white/40"
               >
-                {currentSlide.secondaryButtonText}
+                {slide.secondaryButtonText}
               </Link>
             )}
           </div>

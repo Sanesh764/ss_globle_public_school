@@ -1,38 +1,33 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { getPublicLeadershipApi } from '../../services/leadershipService';
 import { getImageUrl } from '../../services/api';
-import { SettingContext } from '../../context/SettingContext';
+import { LEADERSHIP_FALLBACK } from '../../config/fallbackData';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { FiMapPin, FiAward } from 'react-icons/fi';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const WelcomeMessage = () => {
-  const { data, loading } = useFetch(() => getPublicLeadershipApi(), []);
-  const { settings } = useContext(SettingContext);
+  const { data, loading, error } = useFetch(() => getPublicLeadershipApi(), []);
 
-  const defaultLeaders = [
-    {
-      _id: 'default-1',
-      name: settings?.directorName || 'Er. R. P. Singh (B.Tech)',
-      designation: 'Founder & Director',
-      heading: 'Empowering Future Leaders & Innovators',
-      message: settings?.directorMessage || 'Our vision is to provide world-class CBSE education in Daudnagar. We empower students with critical thinking, sportsmanship, technological literacy, and strong moral grounding.',
-      location: 'Daudnagar, Bihar',
-      image: settings?.directorPhoto || '/school.webp',
-    },
-    {
-      _id: 'default-2',
-      name: settings?.principalName || 'Manish Singh',
-      designation: 'Principal',
-      heading: 'Building Strong Foundations for Tomorrow',
-      message: settings?.principalMessage || 'Welcome to S.S. Global Public School. Education is not merely the accumulation of facts, but the training of the mind to think, innovate, and lead with empathy. We strive for excellence.',
-      location: 'Daudnagar, Bihar',
-      image: settings?.principalPhoto || '/principle.webp',
-    },
-  ];
+  // Determine leaders list based on response classification:
+  // 1. API Failure -> use LEADERSHIP_FALLBACK
+  // 2. API Success + Data -> use API data
+  // 3. API Success + Empty -> empty array
+  let leaders = [];
+  let isApiFailed = false;
 
-  const leaders = data?.data && Array.isArray(data.data) && data.data.length > 0 ? data.data : defaultLeaders;
+  if (error) {
+    leaders = LEADERSHIP_FALLBACK;
+    isApiFailed = true;
+  } else if (data) {
+    const apiList = data?.data || data?.leadership || (Array.isArray(data) ? data : null);
+    if (Array.isArray(apiList)) {
+      leaders = apiList.length > 0 ? apiList : [];
+    } else {
+      leaders = LEADERSHIP_FALLBACK;
+    }
+  }
 
   return (
     <section className="py-20 bg-slate-50 border-y border-slate-200/80">
@@ -54,7 +49,7 @@ const WelcomeMessage = () => {
           <div className="min-h-[300px] flex items-center justify-center">
             <LoadingSpinner />
           </div>
-        ) : (
+        ) : leaders.length > 0 ? (
           /* Responsive Card Grid: 3 Desktop | 2 Tablet | 1 Mobile */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
             {leaders.map((leader, idx) => {
@@ -124,6 +119,10 @@ const WelcomeMessage = () => {
                 </div>
               );
             })}
+          </div>
+        ) : (
+          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500">
+            No leadership messages available at this time.
           </div>
         )}
       </div>

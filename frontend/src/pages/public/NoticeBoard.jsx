@@ -16,7 +16,7 @@ const NoticeBoard = () => {
   const [page, setPage] = useState(1);
   const [selectedNotice, setSelectedNotice] = useState(null);
 
-  const { data, loading } = useFetch(
+  const { data, loading, error } = useFetch(
     () => getNoticesApi({ page, search, category, limit: 8 }),
     [page, search, category]
   );
@@ -69,6 +69,10 @@ const NoticeBoard = () => {
           {/* Notices Grid */}
           {loading ? (
             <LoadingSpinner />
+          ) : error ? (
+            <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-amber-800 text-sm font-semibold">
+              Information is temporarily unavailable. Please check again shortly.
+            </div>
           ) : noticesList.length > 0 ? (
             <div className="space-y-4">
               {noticesList.map((notice) => (

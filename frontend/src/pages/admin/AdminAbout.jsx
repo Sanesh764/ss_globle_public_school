@@ -78,9 +78,9 @@ const AdminAbout = () => {
         aboutExpText: settings.aboutExpText || 'Years of Educational Excellence',
         aboutButtonText: settings.aboutButtonText || 'Learn More About Us',
         aboutButtonLink: settings.aboutButtonLink || '/about',
-        principalName: settings.principalName || 'Manish Singh',
+        principalName: settings.principalName || 'Ashutosh Kumar',
         principalMessage: settings.principalMessage || '',
-        directorName: settings.directorName || 'Er. R. P. Singh',
+        directorName: settings.directorName || 'Er. Manish Singh',
         directorMessage: settings.directorMessage || '',
       });
 

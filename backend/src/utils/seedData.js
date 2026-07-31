@@ -151,23 +151,30 @@ export const seedDatabase = async () => {
     if (leadershipCount === 0) {
       await Leadership.insertMany([
         {
-          name: 'Shri Saneshwar Prasad',
-          role: 'Founder & Managing Director',
-          designation: 'Founder & Managing Director',
-          message:
-            'Our vision is to provide accessible, high-quality education rooted in ethics, discipline, and modern scientific knowledge.',
-          image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop',
+          name: 'Shambhu Sharan Singh',
+          role: 'Founder',
+          designation: 'Founder',
+          message: 'Our foundational goal is to provide world-class CBSE education in Daudnagar. We empower students with critical thinking, sportsmanship, technological literacy, and strong moral grounding.',
+          image: '/founder_image.jpeg',
           displayOrder: 1,
           isPrincipal: false,
         },
         {
-          name: 'Dr. Archana Sharma',
+          name: 'Er. Manish Singh',
+          role: 'Director',
+          designation: 'Director',
+          message: 'We believe every child possesses infinite potential. At S.S. Global, we provide modern infrastructure, smart labs, and holistic guidance to turn academic dreams into reality.',
+          image: '/Director_image.jpeg',
+          displayOrder: 2,
+          isPrincipal: false,
+        },
+        {
+          name: 'Ashutosh Kumar',
           role: 'Principal',
           designation: 'Principal',
-          message:
-            'At S.S. Global Public School, we empower students to discover their potential through innovative teaching and holistic development.',
-          image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop',
-          displayOrder: 2,
+          message: 'Welcome to S.S. Global Public School. Education is not merely the accumulation of facts, but the training of the mind to think, innovate, and lead with empathy. We strive for holistic excellence.',
+          image: '/Principle_image.jpg',
+          displayOrder: 3,
           isPrincipal: true,
         },
       ]);

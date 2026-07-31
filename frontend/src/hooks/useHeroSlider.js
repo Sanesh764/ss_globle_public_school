@@ -1,55 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { getPublicHeroSlidesApi } from '../services/heroSliderService';
+import { HERO_SLIDES_FALLBACK } from '../config/fallbackData';
 
 export const useHeroSlider = (intervalMs = 3000) => {
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef(null);
   const touchStartX = useRef(0);
-
-  const fallbackSlides = [
-    {
-      _id: 'fallback-1',
-      backgroundImage: '/school.webp',
-      badge: 'Admissions Open for Academic Session 2026-2027',
-      title: 'Welcome to',
-      highlightTitle: 'S.S. Global Public School',
-      description: 'Located in Daudnagar, Bihar. We provide premier CBSE curriculum education, smart classrooms, state-of-the-art computer & science laboratories, and comprehensive character building under Principal Manish Singh.',
-      primaryButtonText: 'Apply For Admission',
-      primaryButtonLink: '/contact',
-      secondaryButtonText: 'Explore School Vision',
-      secondaryButtonLink: '/about',
-      autoPlay: true,
-    },
-    {
-      _id: 'fallback-2',
-      backgroundImage: '/classRoom.webp',
-      badge: 'State-of-the-Art Facilities',
-      title: 'Interactive',
-      highlightTitle: 'Modern Smart Classrooms',
-      description: 'Interactive smart touchboards and digital learning modules designed for immersive 3D conceptual understanding.',
-      primaryButtonText: 'Explore Facilities',
-      primaryButtonLink: '/facilities',
-      secondaryButtonText: 'View Campus',
-      secondaryButtonLink: '/gallery',
-      autoPlay: true,
-    },
-    {
-      _id: 'fallback-3',
-      backgroundImage: '/sports.webp',
-      badge: 'Holistic Personality Development',
-      title: 'Excellence In',
-      highlightTitle: 'Sports & Athletic Arena',
-      description: 'Spacious athletic ground supporting cricket, football, track events, and teamwork encouraging physical fitness and discipline.',
-      primaryButtonText: 'Join Sports Arena',
-      primaryButtonLink: '/contact',
-      secondaryButtonText: 'Explore Gallery',
-      secondaryButtonLink: '/gallery',
-      autoPlay: true,
-    },
-  ];
 
   useEffect(() => {
     let isMounted = true;
@@ -57,19 +17,24 @@ export const useHeroSlider = (intervalMs = 3000) => {
     const fetchSlides = async () => {
       try {
         setLoading(true);
+        setError(false);
         const res = await getPublicHeroSlidesApi();
-        if (isMounted && res.success && Array.isArray(res.slides) && res.slides.length > 0) {
-          setSlides(res.slides);
-          if (import.meta.env.DEV) {
-            console.log('[HeroSlider] Loaded slide image URLs:', res.slides.map((s) => s.backgroundImage));
+        if (isMounted) {
+          if (res?.success && Array.isArray(res.slides)) {
+            setSlides(res.slides);
+          } else {
+            // Unexpected response structure without explicit thrown error
+            setError(true);
+            setSlides(HERO_SLIDES_FALLBACK);
           }
-        } else if (isMounted) {
-          setSlides(fallbackSlides);
         }
       } catch (err) {
-        console.error('[useHeroSlider Hook] Error fetching slides:', err);
+        if (import.meta.env.DEV) {
+          console.warn('[useHeroSlider Hook] API failure, using local hero fallback:', err.message);
+        }
         if (isMounted) {
-          setSlides(fallbackSlides);
+          setError(true);
+          setSlides(HERO_SLIDES_FALLBACK);
         }
       } finally {
         if (isMounted) setLoading(false);
@@ -133,11 +98,11 @@ export const useHeroSlider = (intervalMs = 3000) => {
     if (diff < -50) prevSlide(); // Swiped Right -> Prev Slide
   };
 
-  const currentSlide = slides[currentIndex] || fallbackSlides[0];
+  const currentSlide = slides[currentIndex] || HERO_SLIDES_FALLBACK[0];
 
   // Auto-play interval timer with pause check
   useEffect(() => {
-    if (slides.length <= 1 || isPaused || currentSlide.autoPlay === false) return;
+    if (slides.length <= 1 || isPaused || !currentSlide || currentSlide.autoPlay === false) return;
 
     timerRef.current = setInterval(() => {
       nextSlide();
@@ -151,10 +116,11 @@ export const useHeroSlider = (intervalMs = 3000) => {
   }, [slides.length, isPaused, nextSlide, intervalMs, currentSlide]);
 
   return {
-    slides: slides.length > 0 ? slides : fallbackSlides,
+    slides: slides.length > 0 ? slides : HERO_SLIDES_FALLBACK,
     currentSlide,
     currentIndex,
     loading,
+    error,
     nextSlide,
     prevSlide,
     goToSlide,
