@@ -5,6 +5,7 @@ import { seedInitialData } from './src/utils/seedData.js';
 
 dotenv.config();
 
+
 // Railway dynamic PORT configuration with fallback
 const PORT = process.env.PORT || 8080;
 
