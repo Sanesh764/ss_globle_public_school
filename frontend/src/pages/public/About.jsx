@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PageHeader from '../../components/common/PageHeader';
+import SEO from '../../components/common/SEO';
 import { SettingContext } from '../../context/SettingContext';
 import { getImageUrl } from '../../services/api';
 import { FiEye, FiTarget, FiHeart, FiAward, FiShield, FiBookOpen, FiCheckCircle } from 'react-icons/fi';
@@ -29,6 +30,25 @@ const About = () => {
   const principalName = settings.principalName || 'Ashutosh Kumar';
   const principalMessage = settings.principalMessage || 'Welcome to S.S. Global Public School, Daudnagar. Our commitment is to foster academic excellence, holistic development, and moral values in a modern learning environment.';
 
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://ssglobalpublicschool.com/',
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'About School',
+        'item': 'https://ssglobalpublicschool.com/about',
+      },
+    ],
+  };
+
   const defaultFeatures = [
     'Affiliated & aligned with CBSE Academic Standards',
     'Interactive Smart Classrooms & Digital Learning',
@@ -50,7 +70,14 @@ const About = () => {
   ];
 
   return (
-    <div>
+    <main>
+      <SEO
+        title="About S.S. Global Public School | Mission & Leadership in Daudnagar"
+        description="Learn about S.S. Global Public School, Daudnagar, Bihar. Founded by Shambhu Sharan Singh, led by Er. Manish Singh & Ashutosh Kumar, offering top CBSE education."
+        keywords="About S.S. Global Public School, Shambhu Sharan Singh, Er Manish Singh, Ashutosh Kumar Principal, Daudnagar school history, CBSE school mission Bihar"
+        canonicalUrl="https://ssglobalpublicschool.com/about"
+        jsonLd={aboutSchema}
+      />
       <PageHeader
         title={heroTitle}
         subtitle={heroSubtitle}
@@ -99,7 +126,7 @@ const About = () => {
                   className="w-full h-96 object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-2 sm:right-6 z-20 bg-slate-900 text-white p-5 rounded-2xl shadow-xl border border-slate-700 max-w-xs">
+              <div className="absolute -bottom-6 right-2 sm:right-6 z-20 bg-slate-900 text-white p-5 rounded-2xl shadow-xl border border-slate-700 max-w-xs">
                 <span className="text-3xl font-extrabold text-amber-400 font-serif block">{expNumber}</span>
                 <span className="text-xs text-slate-300 font-medium uppercase tracking-wider block">{expText}</span>
               </div>
@@ -245,7 +272,7 @@ const About = () => {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import SEO from '../../components/common/SEO';
 import { useAuth } from '../../hooks/useAuth';
 import { useToast } from '../../hooks/useToast';
 import { FiLock, FiMail, FiHome } from 'react-icons/fi';
@@ -43,6 +44,11 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 relative overflow-hidden">
+      <SEO
+        title="Admin Portal Sign In | S.S. Global Public School"
+        description="Admin Authentication Control Panel for S.S. Global Public School staff and administrators."
+        noindex={true}
+      />
       {/* Subtle Background Glow */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>

@@ -36,16 +36,16 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-slate-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-blue-600 font-bold text-xs uppercase tracking-wider bg-blue-50 px-3.5 py-1 rounded-full border border-blue-200">
+    <section className="py-20 bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+          <span className="text-blue-300 font-bold text-xs uppercase tracking-wider bg-blue-500/10 px-3.5 py-1 rounded-full border border-blue-400/30">
             Why Parents Trust Us
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 mt-3">
+          <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-white mt-3">
             Why Choose S.S. Global Public School?
           </h2>
-          <p className="text-slate-600 mt-3 text-base">
+          <p className="text-slate-400 text-base">
             We provide an environment where children excel academically, grow emotionally, and discover their true potential.
           </p>
         </div>
@@ -54,15 +54,15 @@ const WhyChooseUs = () => {
           {reasons.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/80 card-hover group"
+              className="glass-card p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-800 card-hover group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-inner">
+              <div className="w-14 h-14 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-inner">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 font-serif group-hover:text-blue-600 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-3 font-serif group-hover:text-blue-400 transition-colors">
                 {item.title}
               </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <p className="text-slate-300 text-sm leading-relaxed">
                 {item.description}
               </p>
             </div>

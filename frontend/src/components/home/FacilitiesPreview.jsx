@@ -50,20 +50,20 @@ const FacilitiesPreview = () => {
   }
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-slate-900 text-white border-t border-slate-800 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <span className="text-blue-600 font-bold text-xs uppercase tracking-wider bg-blue-50 px-3.5 py-1 rounded-full border border-blue-200">
+            <span className="text-blue-300 font-bold text-xs uppercase tracking-wider bg-blue-500/10 px-3.5 py-1 rounded-full border border-blue-400/30">
               World Class Infrastructure
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 mt-3">
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-white mt-3">
               Modern Campus Facilities
             </h2>
           </div>
           <Link
             to="/facilities"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-bold text-sm hover:underline"
+            className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-bold text-sm hover:underline"
           >
             View All Facilities <FiArrowRight />
           </Link>
@@ -71,14 +71,14 @@ const FacilitiesPreview = () => {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-slate-500 text-sm font-medium">Loading campus facilities...</p>
+            <p className="text-slate-400 text-sm font-medium">Loading campus facilities...</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {displayList.map((fac, idx) => (
               <div
                 key={fac._id || idx}
-                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col card-hover"
+                className="group glass-card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-800 flex flex-col card-hover"
               >
                 <div className="h-48 overflow-hidden relative">
                   <img
@@ -90,17 +90,17 @@ const FacilitiesPreview = () => {
                     decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md p-2.5 rounded-xl shadow-md">
+                  <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md p-2.5 rounded-2xl border border-white/10 shadow-lg">
                     {renderIcon(fac.icon)}
                   </div>
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 font-serif mb-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-lg font-bold text-white font-serif mb-2 group-hover:text-blue-400 transition-colors">
                       {fac.title}
                     </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">
+                    <p className="text-xs text-slate-300 leading-relaxed line-clamp-3">
                       {fac.shortDescription}
                     </p>
                   </div>

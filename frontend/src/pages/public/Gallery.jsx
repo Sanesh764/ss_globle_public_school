@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PageHeader from '../../components/common/PageHeader';
+import SEO from '../../components/common/SEO';
 import { GALLERY_CATEGORIES } from '../../utils/constants';
 import { useFetch } from '../../hooks/useFetch';
 import { getGalleryApi } from '../../services/galleryService';
@@ -17,8 +18,34 @@ const Gallery = () => {
   const fetchedImages = data?.data?.images || data?.images || (Array.isArray(data?.data) ? data.data : []);
   const galleryItems = Array.isArray(fetchedImages) ? fetchedImages : [];
 
+  const gallerySchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://ssglobalpublicschool.com/',
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Photo Gallery',
+        'item': 'https://ssglobalpublicschool.com/gallery',
+      },
+    ],
+  };
+
   return (
-    <div>
+    <main>
+      <SEO
+        title="Photo & Event Gallery | Campus Life at S.S. Global Public School"
+        description="View photos of academic events, sports competitions, celebrations, and campus activities at S.S. Global Public School, Daudnagar, Bihar."
+        keywords="S.S. Global Public School gallery, Daudnagar school photos, campus life Bihar, school sports Aurangabad, annual day photos"
+        canonicalUrl="https://ssglobalpublicschool.com/gallery"
+        jsonLd={gallerySchema}
+      />
       <PageHeader
         title="Photo Gallery"
         subtitle="Capturing memorable academic moments, sports competitions, celebrations, and campus life at S.S. Global Public School."
@@ -122,7 +149,7 @@ const Gallery = () => {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 

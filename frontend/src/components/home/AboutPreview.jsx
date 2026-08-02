@@ -47,7 +47,7 @@ const AboutPreview = () => {
               />
             </div>
             {/* Overlay badge */}
-            <div className="absolute -bottom-6 -right-2 sm:right-6 z-20 bg-slate-900 text-white p-5 rounded-2xl shadow-xl border border-slate-700 max-w-xs">
+            <div className="absolute -bottom-6 right-2 sm:right-6 z-20 bg-slate-900 text-white p-5 rounded-2xl shadow-xl border border-slate-700 max-w-xs">
               <span className="text-3xl font-extrabold text-amber-400 font-serif block">{expNumber}</span>
               <span className="text-xs text-slate-300 font-medium uppercase tracking-wider block">{expText}</span>
             </div>

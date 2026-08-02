@@ -1,5 +1,6 @@
 import React from 'react';
 import PageHeader from '../../components/common/PageHeader';
+import SEO from '../../components/common/SEO';
 import { getImageUrl } from '../../services/api';
 import {
   FiMonitor,
@@ -44,8 +45,34 @@ const Facilities = () => {
     facilityList = Array.isArray(fetchedList) ? fetchedList : FACILITIES_FALLBACK;
   }
 
+  const facilitiesSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://ssglobalpublicschool.com/',
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Facilities',
+        'item': 'https://ssglobalpublicschool.com/facilities',
+      },
+    ],
+  };
+
   return (
-    <div>
+    <main>
+      <SEO
+        title="Campus Infrastructure & Facilities | S.S. Global Public School"
+        description="Explore world-class facilities at S.S. Global Public School, Daudnagar: interactive smart classrooms, science labs, computer labs, sports & safe transport."
+        keywords="S.S. Global Public School facilities, Daudnagar school infrastructure, smart classrooms Daudnagar, science lab Bihar, school transport Aurangabad"
+        canonicalUrl="https://ssglobalpublicschool.com/facilities"
+        jsonLd={facilitiesSchema}
+      />
       <PageHeader
         title="Campus Infrastructure & Facilities"
         subtitle="World-class educational facilities engineered to nurture curiosity, safety, and physical well-being."
@@ -116,7 +143,7 @@ const Facilities = () => {
           )}
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

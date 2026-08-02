@@ -57,7 +57,7 @@ const GoogleMap = memo(({
         style={{ height }}
         className={`w-full bg-slate-900 text-white rounded-2xl p-5 flex flex-col justify-between border border-slate-800 shadow-inner relative overflow-hidden group ${className}`}
       >
-        <div className="absolute top-0 right-0 -mt-4 -mr-4 w-28 h-28 bg-blue-600/10 rounded-full blur-xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-28 h-28 bg-blue-600/10 rounded-full blur-xl pointer-events-none" />
 
         <div className="space-y-3 z-10">
           <div className="flex items-center gap-2">

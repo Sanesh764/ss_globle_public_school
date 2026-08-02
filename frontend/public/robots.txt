@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://www.ssglobalpublicschool.com/sitemap.xml
+Sitemap: https://ssglobalpublicschool.com/sitemap.xml

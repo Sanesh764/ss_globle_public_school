@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PageHeader from '../../components/common/PageHeader';
+import SEO from '../../components/common/SEO';
 import SearchBar from '../../components/common/SearchBar';
 import Pagination from '../../components/common/Pagination';
 import NoticeModal from '../../components/common/NoticeModal';
@@ -24,8 +25,34 @@ const NoticeBoard = () => {
   const noticesList = data?.data?.notices || data?.notices || [];
   const totalPages = data?.data?.pages || data?.pages || 1;
 
+  const noticesSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://ssglobalpublicschool.com/',
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Notice Board',
+        'item': 'https://ssglobalpublicschool.com/notices',
+      },
+    ],
+  };
+
   return (
-    <div>
+    <main>
+      <SEO
+        title="Official School Notice Board | S.S. Global Public School"
+        description="Stay updated with official school notices, examination date sheets, holiday announcements & admissions at S.S. Global Public School, Daudnagar."
+        keywords="S.S. Global Public School notice board, Daudnagar school circulars, exam schedule Daudnagar, school holidays Bihar"
+        canonicalUrl="https://ssglobalpublicschool.com/notices"
+        jsonLd={noticesSchema}
+      />
       <PageHeader
         title="Official Notice Board"
         subtitle="Stay updated with official school circulars, exam date sheets, holiday announcements, and admissions."
@@ -126,7 +153,7 @@ const NoticeBoard = () => {
 
       {/* Notice Detail Popup */}
       <NoticeModal notice={selectedNotice} onClose={() => setSelectedNotice(null)} />
-    </div>
+    </main>
   );
 };
 

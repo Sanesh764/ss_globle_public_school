@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../../components/common/PageHeader';
+import SEO from '../../components/common/SEO';
 import { FiBookOpen, FiImage, FiClock, FiEye, FiDownload, FiX, FiCalendar } from 'react-icons/fi';
 import useFetch from '../../hooks/useFetch';
 import { getPublicAcademicResourcesApi } from '../../services/academicResourceService';
@@ -24,8 +25,34 @@ const Downloads = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  const downloadsSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://ssglobalpublicschool.com/',
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Academic Resources',
+        'item': 'https://ssglobalpublicschool.com/downloads',
+      },
+    ],
+  };
+
   return (
-    <div>
+    <main>
+      <SEO
+        title="Academic Resources & Downloads | CBSE Syllabus & Calendar"
+        description="Download official academic resources, Academic Calendar, syllabus, book lists & examination routines for S.S. Global Public School, Daudnagar."
+        keywords="S.S. Global Public School academic calendar, CBSE syllabus Daudnagar, school book list Aurangabad, academic resources Bihar"
+        canonicalUrl="https://ssglobalpublicschool.com/downloads"
+        jsonLd={downloadsSchema}
+      />
       <PageHeader
         title="Academic Resources"
         subtitle="Access official academic documents including the Academic Calendar, syllabus, book lists, and examination schedules."
@@ -197,7 +224,7 @@ const Downloads = () => {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 

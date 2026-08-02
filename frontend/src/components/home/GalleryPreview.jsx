@@ -14,20 +14,20 @@ const GalleryPreview = () => {
   const imagesToShow = Array.isArray(fetchedImages) ? fetchedImages.slice(0, 6) : [];
 
   return (
-    <section className="py-20 bg-slate-50 min-h-[450px]">
+    <section className="py-20 bg-slate-900 text-white min-h-[450px] border-t border-slate-800 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <span className="text-blue-600 font-bold text-xs uppercase tracking-wider bg-blue-100 px-3.5 py-1 rounded-full">
+            <span className="text-blue-300 font-bold text-xs uppercase tracking-wider bg-blue-500/10 px-3.5 py-1 rounded-full border border-blue-400/30">
               Campus Life
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 mt-3">
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-white mt-3">
               Photo & Event Gallery
             </h2>
           </div>
           <Link
             to="/gallery"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-bold text-sm hover:underline"
+            className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-bold text-sm hover:underline"
           >
             Explore Full Photo Gallery <FiArrowRight />
           </Link>
@@ -38,7 +38,7 @@ const GalleryPreview = () => {
             <LoadingSpinner />
           </div>
         ) : error ? (
-          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-amber-800 text-sm font-semibold">
+          <div className="p-12 text-center bg-amber-500/10 rounded-2xl border border-amber-400/30 text-amber-300 text-sm font-semibold">
             Information is temporarily unavailable. Please check again shortly.
           </div>
         ) : imagesToShow.length > 0 ? (
@@ -47,7 +47,7 @@ const GalleryPreview = () => {
               <div
                 key={item._id || idx}
                 onClick={() => setSelectedImg(item)}
-                className="group relative rounded-2xl overflow-hidden shadow-md cursor-pointer aspect-video bg-slate-200 border border-slate-200 card-hover"
+                className="group relative rounded-3xl overflow-hidden shadow-xl cursor-pointer aspect-video bg-slate-950 border border-slate-800 card-hover"
               >
                 <img
                   src={getImageUrl(item.image)}
@@ -58,20 +58,20 @@ const GalleryPreview = () => {
                   decoding="async"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
-                  <span className="text-amber-400 font-semibold text-xs uppercase tracking-wider">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+                  <span className="text-amber-400 font-bold text-xs uppercase tracking-wider mb-1">
                     {item.category || 'Event'}
                   </span>
                   <h3 className="text-white font-bold text-base font-serif flex items-center justify-between">
                     {item.title}
-                    <FiEye className="text-xl text-amber-400" />
+                    <FiEye className="text-xl text-amber-400 shrink-0" />
                   </h3>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500">
+          <div className="p-12 text-center bg-slate-950 rounded-2xl border border-slate-800 text-slate-400">
             No gallery photos available at this time.
           </div>
         )}

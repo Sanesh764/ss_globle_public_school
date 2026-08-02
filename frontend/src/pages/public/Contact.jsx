@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PageHeader from '../../components/common/PageHeader';
+import SEO from '../../components/common/SEO';
 import LocationSection from '../../components/common/LocationSection';
 import { SettingContext } from '../../context/SettingContext';
 import { useToast } from '../../hooks/useToast';
@@ -24,6 +25,27 @@ const Contact = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
+
+  const contactSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    'name': 'Contact & Admissions - S.S. Global Public School',
+    'url': 'https://ssglobalpublicschool.com/contact',
+    'mainEntity': {
+      '@type': 'EducationalOrganization',
+      'name': 'S.S. Global Public School',
+      'telephone': '+919876543210',
+      'email': 'info@ssglobalpublicschool.edu.in',
+      'address': {
+        '@type': 'PostalAddress',
+        'streetAddress': 'Daudnagar',
+        'addressLocality': 'Daudnagar',
+        'addressRegion': 'Bihar',
+        'postalCode': '824143',
+        'addressCountry': 'IN',
+      },
+    },
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +77,14 @@ const Contact = () => {
   };
 
   return (
-    <div>
+    <main>
+      <SEO
+        title="Contact Us & Admissions 2026-27 | S.S. Global Public School"
+        description="Contact S.S. Global Public School admin office in Daudnagar, Bihar. Phone: +91 98765 43210. Submit online admission inquiries & get campus location directions."
+        keywords="Contact S.S. Global Public School, Daudnagar school phone number, admission inquiry Daudnagar, school address Aurangabad Bihar"
+        canonicalUrl="https://ssglobalpublicschool.com/contact"
+        jsonLd={contactSchema}
+      />
       <PageHeader
         title="Contact & Admission Inquiries"
         subtitle="Get in touch with S.S. Global Public School admin office or submit an online inquiry."
@@ -289,7 +318,7 @@ const Contact = () => {
           <LocationSection />
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

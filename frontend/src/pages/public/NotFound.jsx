@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../../components/common/SEO';
 import { FiHome, FiAlertCircle, FiLock } from 'react-icons/fi';
 
 const NotFound = () => {
   return (
-    <div className="min-h-[75vh] flex items-center justify-center bg-slate-50 px-4 py-16">
+    <main className="min-h-[75vh] flex items-center justify-center bg-slate-50 px-4 py-16">
+      <SEO
+        title="404 Page Not Found | S.S. Global Public School"
+        description="The requested page could not be found on S.S. Global Public School website."
+        noindex={true}
+      />
       <div className="text-center max-w-lg w-full space-y-6 bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-slate-200">
         <div className="w-20 h-20 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-4xl mx-auto shadow-inner">
           <FiAlertCircle />
@@ -33,7 +39,7 @@ const NotFound = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
