@@ -31,7 +31,7 @@ export const SCHOOL_DETAILS_FALLBACK = {
   aboutText1: 'S.S. Global Public School was established with a singular objective: to bring high quality CBSE education within reach of every student in Daudnagar and surrounding regions. Under visionary guidance, the institution has grown into a premier seat of learning.',
   aboutText2: 'We believe that education must extend beyond textbooks. Our campus blends modern technology with traditional Indian ethics, giving students the tools to compete globally while remaining rooted in strong values.',
   aboutImage: '/school.webp',
-  expNumber: '15+',
+  expNumber: '10+',
   expText: 'Years of Educational Excellence',
   vision: 'To create a benchmark educational institution that nurtures confident, compassionate, and globally competent citizens equipped with modern technology and ethical values.',
   mission: 'Providing quality education with modern facilities, smart classrooms, science laboratories, holistic sports, and strong moral grounding for every child.',

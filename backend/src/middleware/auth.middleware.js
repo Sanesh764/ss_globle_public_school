@@ -20,7 +20,7 @@ export const verifyJWT = async (req, res, next) => {
 
     const decodedToken = jwt.verify(
       token,
-      process.env.JWT_SECRET || 'ss_global_public_school_super_secret_jwt_key_2026'
+      process.env.JWT_SECRET
     );
 
     const admin = await Admin.findById(decodedToken.userId);
@@ -58,7 +58,7 @@ export const verifyJWTForLogout = async (req, res, next) => {
       try {
         const decodedToken = jwt.verify(
           token,
-          process.env.JWT_SECRET || 'ss_global_public_school_super_secret_jwt_key_2026'
+          process.env.JWT_SECRET
         );
         const admin = await Admin.findById(decodedToken.userId);
         if (admin) req.admin = admin;

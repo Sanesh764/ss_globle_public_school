@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import helmet from 'helmet';
 import compression from 'compression';
 
+
 import authRoutes from './routes/authRoutes.js';
 import noticeRoutes from './routes/noticeRoutes.js';
 import galleryRoutes from './routes/galleryRoutes.js';
@@ -36,6 +37,7 @@ const allowedOrigins = [
   'https://www.ssglobalpublicschool.com',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
+
 
 // 3. Preflight OPTIONS & Express CORS Middleware
 app.use((req, res, next) => {

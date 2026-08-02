@@ -15,7 +15,7 @@ if (!fs.existsSync(uploadsDir)) {
 
 // Storage configuration for Images
 const storage = multer.diskStorage({
-  destination(req, file, cb) {
+  destination(req, file, cb) {//cb -> call back
     cb(null, uploadsDir);
   },
   filename(req, file, cb) {
