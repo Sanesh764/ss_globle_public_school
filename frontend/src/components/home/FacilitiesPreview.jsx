@@ -50,11 +50,11 @@ const FacilitiesPreview = () => {
   }
 
   return (
-    <section className="py-20 bg-slate-900 text-white border-t border-slate-800 relative">
+    <section className="py-20 bg-slate-900 text-white border-t border-b border-slate-800 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <span className="text-blue-300 font-bold text-xs uppercase tracking-wider bg-blue-500/10 px-3.5 py-1 rounded-full border border-blue-400/30">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-500/10 text-blue-300 text-xs font-bold uppercase tracking-wider border border-blue-400/30">
               World Class Infrastructure
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-white mt-3">
@@ -78,9 +78,9 @@ const FacilitiesPreview = () => {
             {displayList.map((fac, idx) => (
               <div
                 key={fac._id || idx}
-                className="group glass-card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-800 flex flex-col card-hover"
+                className="group bg-slate-800/80 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-700/80 flex flex-col card-hover"
               >
-                <div className="h-48 overflow-hidden relative">
+                <div className="h-48 overflow-hidden relative bg-slate-950">
                   <img
                     src={getImageUrl(fac.image)}
                     alt={fac.title}
@@ -88,7 +88,7 @@ const FacilitiesPreview = () => {
                     height="192"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md p-2.5 rounded-2xl border border-white/10 shadow-lg">
                     {renderIcon(fac.icon)}

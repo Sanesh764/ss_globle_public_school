@@ -51,24 +51,24 @@ const PREVIEW_RESOURCES = [
 
 const DownloadsPreview = () => {
   return (
-    <section className="py-16 bg-slate-900 text-white relative overflow-hidden">
+    <section className="py-20 bg-slate-900 text-white border-t border-b border-slate-800 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3">
-            <span className="text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-400/10 border border-amber-400/20 px-3.5 py-1 rounded-full inline-block">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-500/10 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/30">
               ACADEMIC RESOURCES
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold font-serif tracking-tight text-white border-l-4 border-amber-400 pl-3">
               Official School Publications
             </h2>
-            <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">
+            <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
               Access official academic documents including the Academic Calendar, Book List, Syllabus, Holiday Calendar, and Annual Calendar. Additional resources will be published as they become available.
             </p>
           </div>
 
           <Link
             to="/downloads"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all shrink-0"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all shrink-0"
           >
             Explore All Resources <FiArrowRight />
           </Link>
@@ -78,8 +78,8 @@ const DownloadsPreview = () => {
           {PREVIEW_RESOURCES.map((item) => (
             <div
               key={item.id}
-              className={`bg-slate-800/90 border rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 shadow-lg group hover:-translate-y-1 ${
-                item.isAvailable ? 'border-amber-400/80 shadow-amber-500/5' : 'border-slate-700/80 hover:border-amber-400/60'
+              className={`bg-slate-800/90 rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 shadow-xl card-hover border ${
+                item.isAvailable ? 'border-amber-400/80 shadow-amber-500/5' : 'border-slate-700/80 hover:border-blue-400/60'
               }`}
             >
               <div className="space-y-3">
@@ -90,7 +90,7 @@ const DownloadsPreview = () => {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-slate-700/60 border border-slate-600 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
                     {item.icon}
                   </div>
                   <div>
@@ -113,7 +113,7 @@ const DownloadsPreview = () => {
                       href={item.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3 py-1.5 bg-slate-700/80 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold text-xs rounded-xl border border-slate-600 transition-colors inline-flex items-center gap-1 shrink-0"
+                      className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold text-xs rounded-xl border border-slate-700 transition-colors inline-flex items-center gap-1 shrink-0"
                       title="View Calendar in New Tab"
                     >
                       <FiEye className="text-sm" /> View
@@ -121,7 +121,7 @@ const DownloadsPreview = () => {
                     <a
                       href={item.pdfUrl}
                       download="Academic_Calendar_SS_Global_Public_School.pdf"
-                      className="px-4 py-1.5 bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs rounded-xl shadow-md transition-colors inline-flex items-center gap-1.5 shrink-0"
+                      className="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs rounded-xl shadow-md transition-colors inline-flex items-center gap-1.5 shrink-0"
                     >
                       <FiDownload className="text-sm" /> Download Calendar
                     </a>
@@ -129,7 +129,7 @@ const DownloadsPreview = () => {
                 ) : (
                   <button
                     disabled
-                    className="px-3.5 py-1.5 bg-slate-700/60 text-slate-400 font-bold text-[11px] rounded-xl cursor-not-allowed border border-slate-600/50"
+                    className="px-3.5 py-2 bg-slate-800/60 text-slate-500 font-bold text-[11px] rounded-xl cursor-not-allowed border border-slate-700/50"
                   >
                     📄 Available Soon
                   </button>

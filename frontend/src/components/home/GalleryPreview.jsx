@@ -14,11 +14,11 @@ const GalleryPreview = () => {
   const imagesToShow = Array.isArray(fetchedImages) ? fetchedImages.slice(0, 6) : [];
 
   return (
-    <section className="py-20 bg-slate-900 text-white min-h-[450px] border-t border-slate-800 relative">
+    <section className="py-20 bg-slate-900 text-white min-h-[450px] border-t border-b border-slate-800 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <span className="text-blue-300 font-bold text-xs uppercase tracking-wider bg-blue-500/10 px-3.5 py-1 rounded-full border border-blue-400/30">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-500/10 text-blue-300 text-xs font-bold uppercase tracking-wider border border-blue-400/30">
               Campus Life
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-white mt-3">
@@ -56,7 +56,7 @@ const GalleryPreview = () => {
                   height="225"
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
                   <span className="text-amber-400 font-bold text-xs uppercase tracking-wider mb-1">

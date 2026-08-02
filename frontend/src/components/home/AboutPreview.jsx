@@ -30,12 +30,12 @@ const AboutPreview = () => {
     : (Array.isArray(settings.aboutFeatures) && settings.aboutFeatures.length > 0 ? settings.aboutFeatures : defaultFeatures);
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-20 bg-slate-900 text-white border-t border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Image Collage */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-100">
+          {/* Image Section (Framed with Soft Hover Zoom & Non-Overlapping Stats Row) */}
+          <div className="lg:col-span-6 space-y-4">
+            <div className="group rounded-3xl overflow-hidden shadow-xl border border-slate-700/80 relative bg-slate-950">
               <img
                 src={aboutImage}
                 alt="S.S. Global Public School Building"
@@ -43,43 +43,59 @@ const AboutPreview = () => {
                 height="380"
                 loading="lazy"
                 decoding="async"
-                className="w-full h-[380px] object-cover hover:scale-105 transition-transform duration-500"
+                className="w-full h-[360px] sm:h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            {/* Overlay badge */}
-            <div className="absolute -bottom-6 right-2 sm:right-6 z-20 bg-slate-900 text-white p-5 rounded-2xl shadow-xl border border-slate-700 max-w-xs">
-              <span className="text-3xl font-extrabold text-amber-400 font-serif block">{expNumber}</span>
-              <span className="text-xs text-slate-300 font-medium uppercase tracking-wider block">{expText}</span>
+
+            {/* Clean Non-Overlapping Statistics Row Below Image */}
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-slate-800/80 border border-slate-700/80 p-4 rounded-2xl text-center shadow-md">
+                <span className="text-xl sm:text-2xl font-extrabold font-serif text-amber-400 block">{expNumber}</span>
+                <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block mt-0.5">Excellence</span>
+              </div>
+              <div className="bg-slate-800/80 border border-slate-700/80 p-4 rounded-2xl text-center shadow-md">
+                <span className="text-xl sm:text-2xl font-extrabold font-serif text-blue-400 block">1,200+</span>
+                <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block mt-0.5">Students</span>
+              </div>
+              <div className="bg-slate-800/80 border border-slate-700/80 p-4 rounded-2xl text-center shadow-md">
+                <span className="text-xl sm:text-2xl font-extrabold font-serif text-emerald-400 block">CBSE</span>
+                <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block mt-0.5">Affiliated</span>
+              </div>
             </div>
           </div>
 
-          {/* Text Content */}
+          {/* Content Section */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-block px-3.5 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-500/10 text-blue-300 text-xs font-bold uppercase tracking-wider border border-blue-400/30">
               {aboutBadge}
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-white leading-tight tracking-tight">
               {aboutTitle}
             </h2>
-            <p className="text-slate-600 text-base leading-relaxed">
+            <p className="text-slate-300 text-base leading-relaxed max-w-xl">
               {aboutText}
             </p>
 
+            {/* Feature List */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               {features.map((pt, idx) => (
-                <div key={idx} className="flex items-start gap-2 text-sm text-slate-700 font-medium">
-                  <FiCheckCircle className="text-blue-600 text-lg shrink-0 mt-0.5" />
+                <div
+                  key={idx}
+                  className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 hover:border-blue-500/40 transition-colors flex items-center gap-2.5 text-xs sm:text-sm text-slate-200 font-medium"
+                >
+                  <FiCheckCircle className="text-blue-400 text-base shrink-0" />
                   <span>{pt}</span>
                 </div>
               ))}
             </div>
 
+            {/* Call To Action Premium Button */}
             <div className="pt-4">
               <Link
                 to={buttonLink}
-                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-bold text-base hover:underline"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 group"
               >
-                {buttonText} <FiArrowRight />
+                {buttonText} <FiArrowRight className="text-base transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
           </div>

@@ -91,64 +91,64 @@ const Contact = () => {
         breadcrumb={[{ label: 'Contact' }]}
       />
 
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-slate-950 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Contact Information & Office Hours Cards */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 space-y-6">
-                <h3 className="text-2xl font-bold font-serif text-slate-900 border-l-4 border-blue-600 pl-3">
+              <div className="bg-slate-900 p-8 rounded-3xl shadow-xl border border-slate-800 space-y-6 card-hover">
+                <h3 className="text-2xl font-bold font-serif text-white border-l-4 border-blue-500 pl-3">
                   School Administrative Office
                 </h3>
 
-                <div className="space-y-4 text-sm text-slate-700">
-                  <div className="flex items-start gap-3">
-                    <FiMapPin className="text-blue-600 text-xl mt-1 shrink-0" />
+                <div className="space-y-3.5 text-sm text-slate-300">
+                  <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-start gap-3.5 transition-colors hover:border-blue-500/40">
+                    <FiMapPin className="text-blue-400 text-xl mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-slate-900">School Campus Address</h4>
-                      <p className="text-slate-600">{settings.address || 'Daudnagar, Bihar - 824143, India'}</p>
+                      <h4 className="font-bold text-white font-serif">School Campus Address</h4>
+                      <p className="text-slate-300 text-xs sm:text-sm mt-0.5 leading-relaxed">{settings.address || 'Daudnagar, Bihar - 824143, India'}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <FiPhone className="text-amber-500 text-xl mt-1 shrink-0" />
+                  <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-start gap-3.5 transition-colors hover:border-amber-400/40">
+                    <FiPhone className="text-amber-400 text-xl mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-slate-900">Phone Numbers</h4>
-                      <a href={`tel:${settings.phone || '+919876543210'}`} className="text-slate-600 hover:text-blue-600 font-semibold block">
+                      <h4 className="font-bold text-white font-serif">Phone Numbers</h4>
+                      <a href={`tel:${settings.phone || '+919876543210'}`} className="text-slate-300 hover:text-amber-300 font-semibold block text-xs sm:text-sm">
                         {settings.phone || '+91 98765 43210'}
                       </a>
                       {settings.altPhone && (
-                        <a href={`tel:${settings.altPhone}`} className="text-slate-600 hover:text-blue-600 font-semibold block">
+                        <a href={`tel:${settings.altPhone}`} className="text-slate-300 hover:text-amber-300 font-semibold block text-xs sm:text-sm">
                           {settings.altPhone}
                         </a>
                       )}
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <FiMail className="text-emerald-600 text-xl mt-1 shrink-0" />
+                  <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-start gap-3.5 transition-colors hover:border-emerald-400/40">
+                    <FiMail className="text-emerald-400 text-xl mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-slate-900">Email Address</h4>
-                      <a href={`mailto:${settings.email || 'info@ssglobalpublicschool.edu.in'}`} className="text-slate-600 hover:text-blue-600 font-semibold break-all block">
+                      <h4 className="font-bold text-white font-serif">Email Address</h4>
+                      <a href={`mailto:${settings.email || 'info@ssglobalpublicschool.edu.in'}`} className="text-slate-300 hover:text-blue-400 font-semibold break-all block text-xs sm:text-sm">
                         {settings.email || 'info@ssglobalpublicschool.edu.in'}
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <FiClock className="text-purple-600 text-xl mt-1 shrink-0" />
+                  <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-start gap-3.5 transition-colors hover:border-purple-400/40">
+                    <FiClock className="text-purple-400 text-xl mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-slate-900">Office Working Hours</h4>
-                      <p className="text-slate-600">{settings.officeHours || 'Monday - Saturday: 8:00 AM - 3:00 PM'}</p>
+                      <h4 className="font-bold text-white font-serif">Office Working Hours</h4>
+                      <p className="text-slate-300 text-xs sm:text-sm mt-0.5">{settings.officeHours || 'Monday - Saturday: 8:00 AM - 3:00 PM'}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Admission Note */}
-              <div className="primary-gradient text-white p-6 rounded-3xl shadow-md space-y-2">
+              <div className="primary-gradient text-white p-6 rounded-3xl shadow-xl space-y-2 border border-blue-400/30">
                 <h4 className="font-bold font-serif text-lg flex items-center gap-2">
-                  <FiCheckCircle className="text-amber-400" /> Admissions Open 2026-2027
+                  <FiCheckCircle className="text-amber-400 text-xl" /> Admissions Open 2026-2027
                 </h4>
                 <p className="text-xs text-blue-100 leading-relaxed">
                   Parents can visit the school office during working hours to obtain the prospectus and admission registration form.
@@ -157,17 +157,17 @@ const Contact = () => {
             </div>
 
             {/* Contact Inquiry Form */}
-            <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl shadow-sm border border-slate-200">
-              <h3 className="text-2xl font-bold font-serif text-slate-900 mb-2">
+            <div className="lg:col-span-7 bg-slate-900 p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-800 card-hover">
+              <h3 className="text-2xl font-bold font-serif text-white mb-2">
                 Send Us a Direct Inquiry
               </h3>
-              <p className="text-slate-600 text-sm mb-6">
+              <p className="text-slate-400 text-sm mb-6">
                 Fill out the form below and our administrative team will respond promptly.
               </p>
 
               {successMsg && (
-                <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-sm font-semibold flex items-center gap-2">
-                  <FiCheckCircle className="text-emerald-600 text-xl shrink-0" />
+                <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-400/30 rounded-2xl text-emerald-300 text-sm font-semibold flex items-center gap-2">
+                  <FiCheckCircle className="text-emerald-400 text-xl shrink-0" />
                   {successMsg}
                 </div>
               )}
@@ -175,7 +175,7 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
                       Full Name *
                     </label>
                     <input
@@ -184,12 +184,12 @@ const Contact = () => {
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       placeholder="e.g. Ramesh Kumar"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
                       Email Address *
                     </label>
                     <input
@@ -198,14 +198,14 @@ const Contact = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="name@example.com"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
                       Mobile Number *
                     </label>
                     <input
@@ -214,18 +214,18 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+91 98765 43210"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
                       Inquiry Subject *
                     </label>
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="Admission Inquiry">Admission Inquiry</option>
                       <option value="Fee Structure">Fee Structure</option>
@@ -237,7 +237,7 @@ const Contact = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
                       State
                     </label>
                     <input
@@ -245,12 +245,12 @@ const Contact = () => {
                       value={formData.state}
                       onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                       placeholder="Bihar"
-                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
                       District
                     </label>
                     <input
@@ -258,12 +258,12 @@ const Contact = () => {
                       value={formData.district}
                       onChange={(e) => setFormData({ ...formData, district: e.target.value })}
                       placeholder="Aurangabad"
-                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
                       City / Village
                     </label>
                     <input
@@ -271,13 +271,13 @@ const Contact = () => {
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                       placeholder="Daudnagar"
-                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
                     PIN Code (Optional)
                   </label>
                   <input
@@ -285,12 +285,12 @@ const Contact = () => {
                     value={formData.pinCode}
                     onChange={(e) => setFormData({ ...formData, pinCode: e.target.value })}
                     placeholder="e.g. 824143"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
                     Your Message / Question *
                   </label>
                   <textarea
@@ -299,14 +299,14 @@ const Contact = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Enter your message or questions regarding admission..."
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-base rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <FiSend /> {submitting ? 'Submitting...' : 'Submit Inquiry'}
                 </button>

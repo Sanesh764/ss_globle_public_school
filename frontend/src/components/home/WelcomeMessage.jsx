@@ -30,8 +30,8 @@ const WelcomeMessage = () => {
   }
 
   return (
-    <section className="py-20 bg-slate-950 text-white border-y border-slate-800/80 relative overflow-hidden">
-      {/* Background Decorative Glow */}
+    <section className="py-20 bg-slate-950 text-white border-b border-slate-800 relative overflow-hidden">
+      {/* Subtle Background Glow */}
       <div className="absolute top-1/4 left-10 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -44,7 +44,7 @@ const WelcomeMessage = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-white tracking-tight">
             Messages From Our Leadership
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
             Guided by visionary founders and experienced academic leaders dedicated to nurturing academic excellence, moral integrity, and holistic personality development.
           </p>
         </div>
@@ -62,7 +62,7 @@ const WelcomeMessage = () => {
               return (
                 <div
                   key={leader._id || idx}
-                  className="glass-card rounded-3xl p-7 shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-800 flex flex-col justify-between card-hover relative overflow-hidden group"
+                  className="bg-slate-900 p-7 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-800 flex flex-col justify-between card-hover relative overflow-hidden group"
                 >
                   {/* Subtle Top Accent Bar */}
                   <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-blue-600 via-amber-400 to-sky-400 group-hover:h-2 transition-all"></div>
@@ -79,13 +79,13 @@ const WelcomeMessage = () => {
                             height="144"
                             loading="lazy"
                             decoding="async"
-                            className="w-full h-full object-cover rounded-full bg-slate-900"
+                            className="w-full h-full object-cover rounded-full bg-slate-950"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <span className="inline-block bg-amber-400/20 text-amber-300 border border-amber-400/40 text-[11px] font-extrabold uppercase px-3 py-1 rounded-full tracking-wider mb-1.5">
+                        <span className="inline-block bg-amber-400/10 text-amber-300 border border-amber-400/30 text-[11px] font-extrabold uppercase px-3 py-1 rounded-full tracking-wider mb-1.5">
                           {leader.designation}
                         </span>
                         <h3 className="text-xl font-bold font-serif text-white block group-hover:text-blue-400 transition-colors">
@@ -100,14 +100,14 @@ const WelcomeMessage = () => {
                     {/* Heading / Address Title */}
                     {leader.heading && (
                       <div className="text-center pt-1 border-t border-slate-800">
-                        <h4 className="text-sm font-bold font-serif text-amber-200 leading-snug">
+                        <h4 className="text-sm font-bold font-serif text-amber-300 leading-snug">
                           "{leader.heading}"
                         </h4>
                       </div>
                     )}
 
                     {/* Detailed Message Block */}
-                    <div className="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 flex-1 flex flex-col justify-between space-y-2 relative">
+                    <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 flex-1 flex flex-col justify-between space-y-2 relative">
                       <FaQuoteLeft className="text-blue-400/20 text-2xl absolute top-3 left-3 opacity-40" />
                       <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic relative z-10 pl-3">
                         "{leader.message}"
