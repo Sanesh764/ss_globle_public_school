@@ -31,25 +31,23 @@ const Navbar = () => {
 
   return (
     <header className={`sticky top-0 z-50 w-full glass-nav transition-all duration-300 ${isScrolled ? 'shadow-xl shadow-slate-950/40 bg-slate-950/95 border-b border-slate-800' : 'bg-slate-950/85 border-b border-slate-800/60'}`}>
-      {/* Top Header Contact Bar (Compact & Sleek) */}
-      <div className="bg-slate-950/95 text-slate-300 text-[11px] py-1.5 px-4 border-b border-slate-800/60 min-h-[32px] flex items-center">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1.5 w-full">
-          <div className="flex items-center space-x-4">
-            <span className="flex items-center gap-1.5 hover:text-white transition-colors">
+      {/* Top Header Contact Bar (Optimized Mobile Height & Compact Layout) */}
+      <div className="bg-slate-950/95 text-slate-300 text-[11px] py-1 px-3 sm:py-1.5 sm:px-4 border-b border-slate-800/60 min-h-[30px] sm:min-h-[32px] flex items-center">
+        <div className="max-w-7xl mx-auto flex flex-row justify-between items-center gap-1.5 w-full">
+          <div className="flex items-center space-x-3 text-slate-300">
+            <a href={`tel:${settings.phone || '+919122490003'}`} className="hover:text-amber-300 transition-colors flex items-center gap-1 text-[11px] font-medium">
+              <FiPhone className="text-amber-400 shrink-0 text-xs" /> {settings.phone || '+91 9122490003'}
+            </a>
+            <span className="hidden sm:inline-flex items-center gap-1.5 hover:text-white transition-colors">
               <FiMapPin className="text-amber-400 shrink-0 text-xs" /> {settings.address || 'Daudnagar, Bihar, India'}
             </span>
-            <div className="flex items-center space-x-6 text-slate-300">
-              <a href={`tel:${settings.phone || '+919122490003'}`} className="hover:text-amber-300 transition-colors flex items-center gap-1.5">
-                <FiPhone className="text-amber-400 shrink-0 text-xs" /> {settings.phone || '+91 9122490003'}
-              </a>
-              <a href={`mailto:${settings.email || 'ssglobalpublicschool0@gmail.com'}`} className="hover:text-amber-300 transition-colors flex items-center gap-1.5">
-                <FiMail className="text-amber-400 shrink-0 text-xs" /> {settings.email || 'ssglobalpublicschool0@gmail.com'}
-              </a>
-            </div>
+            <a href={`mailto:${settings.email || 'ssglobalpublicschool0@gmail.com'}`} className="hidden lg:flex hover:text-amber-300 transition-colors items-center gap-1.5">
+              <FiMail className="text-amber-400 shrink-0 text-xs" /> {settings.email || 'ssglobalpublicschool0@gmail.com'}
+            </a>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <span className="bg-amber-500/10 text-amber-300 border border-amber-400/30 px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wider backdrop-blur-sm animate-pulse">
+          <div className="flex items-center space-x-2.5">
+            <span className="bg-amber-500/10 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wider backdrop-blur-sm animate-pulse">
               Admissions Open 2026-27
             </span>
 
@@ -65,7 +63,7 @@ const Navbar = () => {
                 to="/admin/login"
                 className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors font-medium text-[11px]"
               >
-                <FiLock className="text-amber-400 shrink-0 text-xs" /> Admin Login
+                <FiLock className="text-amber-400 shrink-0 text-xs" /> Admin
               </Link>
             )}
           </div>
