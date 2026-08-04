@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { getPublicHeroSlidesApi } from '../services/heroSliderService';
-import { HERO_SLIDES_FALLBACK } from '../config/fallbackData';
+import { HERO_SLIDES_FALLBACK, NEW_FIRST_HERO_SLIDE } from '../config/fallbackData';
 
-export const useHeroSlider = (intervalMs = 3000) => {
+export const useHeroSlider = (intervalMs = 5000) => {
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -20,10 +20,12 @@ export const useHeroSlider = (intervalMs = 3000) => {
         setError(false);
         const res = await getPublicHeroSlidesApi();
         if (isMounted) {
-          if (res?.success && Array.isArray(res.slides)) {
-            setSlides(res.slides);
+          if (res?.success && Array.isArray(res.slides) && res.slides.length > 0) {
+            const apiSlides = res.slides.filter(
+              (s) => s._id !== 'hero-community-first' && !s.backgroundImage?.includes('hero-4')
+            );
+            setSlides([NEW_FIRST_HERO_SLIDE, ...apiSlides]);
           } else {
-            // Unexpected response structure without explicit thrown error
             setError(true);
             setSlides(HERO_SLIDES_FALLBACK);
           }

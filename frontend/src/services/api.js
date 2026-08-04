@@ -34,6 +34,11 @@ export const getImageUrl = (imagePath) => {
   if (!imagePath) return '/school.webp';
   if (typeof imagePath !== 'string') return '/school.webp';
 
+  // Handle hero-4 image filename variations
+  if (imagePath.includes('hero-4')) {
+    return '/hero-4.jpg';
+  }
+
   const backendHost = getBackendBaseUrl();
 
   // If DB contains a localhost / 127.0.0.1 URL but app is running in production, replace with backendHost
@@ -60,7 +65,11 @@ export const getImageUrl = (imagePath) => {
     return `${backendHost}${imagePath}`;
   }
 
-  // Relative frontend static asset path: /school.webp, /classRoom.webp, etc.
+  // Ensure relative static paths start with '/'
+  if (!imagePath.startsWith('/')) {
+    return `/${imagePath}`;
+  }
+
   return imagePath;
 };
 

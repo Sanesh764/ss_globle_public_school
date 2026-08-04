@@ -105,7 +105,23 @@ export const FACILITIES_FALLBACK = [
   },
 ];
 
+export const NEW_FIRST_HERO_SLIDE = {
+  _id: 'hero-community-first',
+  backgroundImage: '/hero-4.jpg',
+  badge: '🏫 Excellence in Education',
+  title: 'Building Bright',
+  highlightTitle: 'Futures Together',
+  subtitle: 'Students, Teachers & Parents Growing as One Community',
+  description: 'At S.S. Global Public School, we nurture academic excellence, discipline, confidence, leadership, and holistic development through quality education in a safe and inspiring learning environment.',
+  primaryButtonText: 'Apply for Admission',
+  primaryButtonLink: '/contact',
+  secondaryButtonText: 'Explore Our Campus',
+  secondaryButtonLink: '/about',
+  autoPlay: true,
+};
+
 export const HERO_SLIDES_FALLBACK = [
+  NEW_FIRST_HERO_SLIDE,
   {
     _id: 'fallback-hero-1',
     backgroundImage: '/school.webp',
