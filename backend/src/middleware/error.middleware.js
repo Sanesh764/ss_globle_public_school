@@ -36,9 +36,11 @@ export const errorHandler = (err, req, res, next) => {
     error = new ApiError(422, message, errors);
   }
 
-  // Log error
+  // Log error cleanly
   if (error.statusCode >= 500) {
     logger.error(`[500 Internal Server Error] ${req.method} ${req.originalUrl}`, error);
+  } else if (error.statusCode === 401) {
+    logger.info(`[401 Unauthorized] ${req.method} ${req.originalUrl} - ${error.message}`);
   } else {
     logger.warn(`[${error.statusCode}] ${req.method} ${req.originalUrl} - ${error.message}`);
   }

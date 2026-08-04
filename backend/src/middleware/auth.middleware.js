@@ -14,7 +14,7 @@ export const verifyJWT = async (req, res, next) => {
     }
 
     if (!token) {
-      logger.security('UNAUTHORIZED_ACCESS_ATTEMPT', { path: req.originalUrl, ip: req.ip });
+      logger.info(`[401 Session Check] Token missing for ${req.originalUrl}`);
       throw new ApiError(401, 'Unauthorized request - Token missing or expired');
     }
 

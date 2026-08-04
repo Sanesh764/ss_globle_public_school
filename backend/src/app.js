@@ -86,7 +86,18 @@ app.use(cookieParser());
 // 8. Static Assets Serving
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-// 9. Root Health & Status Route
+// 9. Robots.txt Handler (Serves backend crawler directives)
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.send('User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin/\nSitemap: https://www.ssglobalpublicschool.com/sitemap.xml\n');
+});
+
+// 10. Favicon Request Handler (Prevents 404 log noise)
+app.get('/favicon.ico', (req, res) => {
+  res.status(204).end();
+});
+
+// 11. Root Health & Status Route
 app.get('/', (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -96,7 +107,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// 10. API Health Route
+// 12. API Health Route
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
