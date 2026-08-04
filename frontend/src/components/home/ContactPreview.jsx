@@ -9,7 +9,8 @@ const ContactPreview = memo(() => {
 
   const schoolName = settings?.schoolName || 'S.S. Global Public School';
   const schoolAddress = settings?.address || 'Daudnagar, Bihar - 824143, India';
-  const phone = settings?.phone || '+91 98765 43210';
+  const phone = settings?.phone || '+91 9122490003';
+  const email = settings?.email || 'ssglobalpublicschool0@gmail.com';
 
   return (
     <section className="py-20 bg-slate-950 text-white border-t border-slate-800 relative overflow-hidden">
@@ -51,7 +52,7 @@ const ContactPreview = memo(() => {
                 <FiMail className="text-emerald-400 text-xl mt-0.5 shrink-0" />
                 <div>
                   <h4 className="font-bold text-white font-serif">Email Address</h4>
-                  <p className="text-slate-300 text-xs sm:text-sm mt-0.5 break-all">{settings.email || 'info@ssglobalpublicschool.edu.in'}</p>
+                  <p className="text-slate-300 text-xs sm:text-sm mt-0.5 break-all">{settings.email || 'ssglobalpublicschool0@gmail.com'}</p>
                 </div>
               </div>
             </div>

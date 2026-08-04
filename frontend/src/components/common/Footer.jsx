@@ -30,7 +30,7 @@ const Footer = memo(() => {
 
   const schoolName = settings?.schoolName || 'S.S. Global Public School';
   const schoolAddress = settings?.address || 'Daudnagar, Bihar - 824143, India';
-  const phone = settings?.phone || '+91 98765 43210';
+  const phone = settings?.phone || '+91 9122490003';
   const logoSrc = settings?.logo || '/logo.webp';
 
   return (
@@ -168,7 +168,7 @@ const Footer = memo(() => {
                 <FiMail className="text-emerald-400 text-base shrink-0 mt-0.5" />
                 <div>
                   <h5 className="font-bold text-white text-[11px] font-serif uppercase tracking-wider">Email Address</h5>
-                  <p className="mt-0.5 text-slate-300 break-all">{settings?.email || 'info@ssglobalpublicschool.edu.in'}</p>
+                  <p className="mt-0.5 text-slate-300 break-all">{settings?.email || 'ssglobalpublicschool0@gmail.com'}</p>
                 </div>
               </div>
 

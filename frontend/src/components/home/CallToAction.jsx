@@ -30,10 +30,10 @@ const CallToAction = () => {
             Apply Online / Contact Office <FiArrowRight />
           </Link>
           <a
-            href={`tel:${settings.phone || '+919876543210'}`}
-            className="px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-base backdrop-blur-md border border-white/20 transition-all flex items-center gap-2"
+            href={`tel:${settings.phone || '+919122490003'}`}
+            className="px-8 py-4 rounded-xl bg-slate-900/90 hover:bg-slate-900 text-white font-bold text-base border border-slate-700 shadow-xl transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 group"
           >
-            <FiPhoneCall className="text-amber-400" /> Call {settings.phone || '+91 98765 43210'}
+            <FiPhoneCall className="text-amber-400" /> Call {settings.phone || '+91 9122490003'}
           </a>
         </div>
       </div>

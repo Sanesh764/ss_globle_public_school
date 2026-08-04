@@ -33,13 +33,13 @@ const Downloads = () => {
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': 'https://ssglobalpublicschool.com/',
+        'item': 'https://www.ssglobalpublicschool.com/',
       },
       {
         '@type': 'ListItem',
         'position': 2,
         'name': 'Academic Resources',
-        'item': 'https://ssglobalpublicschool.com/downloads',
+        'item': 'https://www.ssglobalpublicschool.com/downloads',
       },
     ],
   };
@@ -47,10 +47,10 @@ const Downloads = () => {
   return (
     <main>
       <SEO
-        title="Academic Resources & Downloads | CBSE Syllabus & Calendar"
-        description="Download official academic resources, Academic Calendar, syllabus, book lists & examination routines for S.S. Global Public School, Daudnagar."
-        keywords="S.S. Global Public School academic calendar, CBSE syllabus Daudnagar, school book list Aurangabad, academic resources Bihar"
-        canonicalUrl="https://ssglobalpublicschool.com/downloads"
+        title="Academic Resources & Downloads | S.S. Global Public School Daudnagar"
+        description="Download official academic resources, CBSE syllabus guidelines, book lists & Academic Calendar for S.S. Global Public School, Daudnagar, Bihar."
+        keywords="S.S. Global Public School academic calendar, S.S. Global Public School Daudnagar, CBSE syllabus Daudnagar, school book list Aurangabad, academic resources Bihar"
+        canonicalUrl="https://www.ssglobalpublicschool.com/downloads"
         jsonLd={downloadsSchema}
       />
       <PageHeader

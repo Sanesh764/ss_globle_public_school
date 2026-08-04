@@ -29,13 +29,13 @@ const Contact = () => {
   const contactSchema = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    'name': 'Contact & Admissions - S.S. Global Public School',
-    'url': 'https://ssglobalpublicschool.com/contact',
+    'name': 'Contact & Admissions - S.S. Global Public School Daudnagar',
+    'url': 'https://www.ssglobalpublicschool.com/contact',
     'mainEntity': {
       '@type': 'EducationalOrganization',
       'name': 'S.S. Global Public School',
-      'telephone': '+919876543210',
-      'email': 'info@ssglobalpublicschool.edu.in',
+      'telephone': '+919122490003',
+      'email': 'ssglobalpublicschool0@gmail.com',
       'address': {
         '@type': 'PostalAddress',
         'streetAddress': 'Daudnagar',
@@ -79,10 +79,10 @@ const Contact = () => {
   return (
     <main>
       <SEO
-        title="Contact Us & Admissions 2026-27 | S.S. Global Public School"
-        description="Contact S.S. Global Public School admin office in Daudnagar, Bihar. Phone: +91 98765 43210. Submit online admission inquiries & get campus location directions."
-        keywords="Contact S.S. Global Public School, Daudnagar school phone number, admission inquiry Daudnagar, school address Aurangabad Bihar"
-        canonicalUrl="https://ssglobalpublicschool.com/contact"
+        title="Contact Us & Admissions 2026-27 | S.S. Global Public School Daudnagar"
+        description="Contact S.S. Global Public School admin office in Daudnagar, Bihar. Phone: +91 9122490003. Email: ssglobalpublicschool0@gmail.com. Submit online admission inquiries & get campus location directions."
+        keywords="Contact S.S. Global Public School, S.S. Global Public School Daudnagar, Daudnagar school phone number, admission inquiry Daudnagar, school address Aurangabad Bihar"
+        canonicalUrl="https://www.ssglobalpublicschool.com/contact"
         jsonLd={contactSchema}
       />
       <PageHeader
@@ -114,14 +114,9 @@ const Contact = () => {
                     <FiPhone className="text-amber-400 text-xl mt-0.5 shrink-0" />
                     <div>
                       <h4 className="font-bold text-white font-serif">Phone Numbers</h4>
-                      <a href={`tel:${settings.phone || '+919876543210'}`} className="text-slate-300 hover:text-amber-300 font-semibold block text-xs sm:text-sm">
-                        {settings.phone || '+91 98765 43210'}
+                      <a href={`tel:${settings.phone || '+919122490003'}`} className="text-slate-300 hover:text-amber-300 font-semibold block text-xs sm:text-sm">
+                        {settings.phone || '+91 9122490003'}
                       </a>
-                      {settings.altPhone && (
-                        <a href={`tel:${settings.altPhone}`} className="text-slate-300 hover:text-amber-300 font-semibold block text-xs sm:text-sm">
-                          {settings.altPhone}
-                        </a>
-                      )}
                     </div>
                   </div>
 
@@ -129,8 +124,8 @@ const Contact = () => {
                     <FiMail className="text-emerald-400 text-xl mt-0.5 shrink-0" />
                     <div>
                       <h4 className="font-bold text-white font-serif">Email Address</h4>
-                      <a href={`mailto:${settings.email || 'info@ssglobalpublicschool.edu.in'}`} className="text-slate-300 hover:text-blue-400 font-semibold break-all block text-xs sm:text-sm">
-                        {settings.email || 'info@ssglobalpublicschool.edu.in'}
+                      <a href={`mailto:${settings.email || 'ssglobalpublicschool0@gmail.com'}`} className="text-slate-300 hover:text-blue-400 font-semibold break-all block text-xs sm:text-sm">
+                        {settings.email || 'ssglobalpublicschool0@gmail.com'}
                       </a>
                     </div>
                   </div>
@@ -213,7 +208,7 @@ const Contact = () => {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+91 98765 43210"
+                      placeholder="+91 9122490003"
                       className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>

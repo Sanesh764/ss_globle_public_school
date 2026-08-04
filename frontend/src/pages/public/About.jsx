@@ -38,13 +38,13 @@ const About = () => {
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': 'https://ssglobalpublicschool.com/',
+        'item': 'https://www.ssglobalpublicschool.com/',
       },
       {
         '@type': 'ListItem',
         'position': 2,
         'name': 'About School',
-        'item': 'https://ssglobalpublicschool.com/about',
+        'item': 'https://www.ssglobalpublicschool.com/about',
       },
     ],
   };
@@ -72,10 +72,10 @@ const About = () => {
   return (
     <main>
       <SEO
-        title="About S.S. Global Public School | Mission & Leadership in Daudnagar"
-        description="Learn about S.S. Global Public School, Daudnagar, Bihar. Founded by Shambhu Sharan Singh, led by Er. Manish Singh & Ashutosh Kumar, offering top CBSE education."
-        keywords="About S.S. Global Public School, Shambhu Sharan Singh, Er Manish Singh, Ashutosh Kumar Principal, Daudnagar school history, CBSE school mission Bihar"
-        canonicalUrl="https://ssglobalpublicschool.com/about"
+        title="About S.S. Global Public School | Best CBSE School in Daudnagar"
+        description="Learn about S.S. Global Public School, Daudnagar, Bihar. Founded by Shambhu Sharan Singh, led by Er. Manish Singh & Ashutosh Kumar, offering top CBSE education & values."
+        keywords="About S.S. Global Public School, S.S. Global Public School Daudnagar, Best CBSE School in Daudnagar, Shambhu Sharan Singh, Er Manish Singh, Ashutosh Kumar Principal, Daudnagar school history, CBSE school mission Bihar"
+        canonicalUrl="https://www.ssglobalpublicschool.com/about"
         jsonLd={aboutSchema}
       />
       <PageHeader

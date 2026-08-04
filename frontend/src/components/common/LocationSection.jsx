@@ -7,13 +7,12 @@ import GoogleMap from './GoogleMap';
 const LocationSection = memo(() => {
   const { settings } = useContext(SettingContext);
 
-  const schoolAddress =
-    settings?.address || 'Sambhu Nagar, Near Teacher Training College, Daudnagar, Bihar - 824143, India';
-  const phone = settings?.phone || '+91 98765 43210';
-  const altPhone = settings?.altPhone;
-  const email = settings?.email || 'info@ssglobalpublicschool.edu.in';
-  const officeHours = settings?.officeHours || 'Monday - Saturday: 8:00 AM - 3:00 PM';
   const schoolName = settings?.schoolName || 'S.S. Global Public School';
+  const schoolAddress = settings?.address || 'Daudnagar, Bihar - 824143, India';
+  const phone = settings?.phone || '+91 9122490003';
+  const altPhone = settings?.altPhone;
+  const email = settings?.email || 'ssglobalpublicschool0@gmail.com';
+  const officeHours = settings?.officeHours || 'Monday - Saturday: 8:00 AM - 3:00 PM';
 
   return (
     <section className="py-16 bg-slate-900 text-white rounded-3xl border border-slate-800 shadow-xl overflow-hidden relative">

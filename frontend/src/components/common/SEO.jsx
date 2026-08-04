@@ -1,16 +1,29 @@
 import React, { useEffect } from 'react';
 
+const CANONICAL_DOMAIN = 'https://www.ssglobalpublicschool.com';
+
+const normalizeUrl = (url) => {
+  if (!url) {
+    const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+    return `${CANONICAL_DOMAIN}${pathname === '/' ? '' : pathname}`;
+  }
+  if (url.startsWith('/')) {
+    return `${CANONICAL_DOMAIN}${url === '/' ? '' : url}`;
+  }
+  return url.replace('https://ssglobalpublicschool.com', CANONICAL_DOMAIN);
+};
+
 /**
  * Production SEO Component
  * Dynamically updates document title, meta descriptions, keywords, robots tags,
  * canonical links, Open Graph, Twitter Card tags, and JSON-LD structured data.
  */
 const SEO = ({
-  title = 'S.S. Global Public School | Daudnagar, Bihar',
+  title = 'S.S. Global Public School | Best CBSE School in Daudnagar, Bihar',
   description = 'S.S. Global Public School in Daudnagar, Bihar offers top quality CBSE education, interactive smart classrooms, science labs, sports, and holistic character development.',
-  keywords = 'S.S. Global Public School, Daudnagar, Bihar school, CBSE school Daudnagar, best school in Daudnagar, Top School in Aurangabad Bihar, admission 2026',
+  keywords = 'S.S. Global Public School, S.S. Global Public School Daudnagar, Best School in Daudnagar, Best CBSE School in Daudnagar, CBSE School in Daudnagar, Top School in Daudnagar, School in Daudnagar Bihar, Best School in Aurangabad Bihar, CBSE School in Aurangabad Bihar, admission 2026',
   canonicalUrl,
-  ogImage = 'https://ssglobalpublicschool.com/school.webp',
+  ogImage = 'https://www.ssglobalpublicschool.com/school.webp',
   ogType = 'website',
   noindex = false,
   jsonLd = null,
@@ -59,19 +72,20 @@ const SEO = ({
       : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
     updateMetaTag('meta[name="robots"]', 'name', 'robots', robotsContent);
 
-    // 5. Canonical Link
-    const currentCanonical = canonicalUrl || window.location.href.split('?')[0];
-    updateLinkTag('canonical', currentCanonical);
-    updateMetaTag('meta[property="og:url"]', 'property', 'og:url', currentCanonical);
+    // 5. Canonical Link & Open Graph URL
+    const resolvedCanonical = normalizeUrl(canonicalUrl);
+    updateLinkTag('canonical', resolvedCanonical);
+    updateMetaTag('meta[property="og:url"]', 'property', 'og:url', resolvedCanonical);
 
     // 6. Open Graph & Twitter Cards
     if (title) {
       updateMetaTag('meta[property="og:title"]', 'property', 'og:title', title);
       updateMetaTag('meta[property="twitter:title"]', 'property', 'twitter:title', title);
     }
+    const resolvedOgImage = normalizeUrl(ogImage);
     updateMetaTag('meta[property="og:type"]', 'property', 'og:type', ogType);
-    updateMetaTag('meta[property="og:image"]', 'property', 'og:image', ogImage);
-    updateMetaTag('meta[property="twitter:image"]', 'property', 'twitter:image', ogImage);
+    updateMetaTag('meta[property="og:image"]', 'property', 'og:image', resolvedOgImage);
+    updateMetaTag('meta[property="twitter:image"]', 'property', 'twitter:image', resolvedOgImage);
     updateMetaTag('meta[property="twitter:card"]', 'property', 'twitter:card', 'summary_large_image');
     updateMetaTag('meta[property="og:site_name"]', 'property', 'og:site_name', 'S.S. Global Public School');
     updateMetaTag('meta[property="og:locale"]', 'property', 'og:locale', 'en_US');

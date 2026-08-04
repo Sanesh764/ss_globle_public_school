@@ -53,13 +53,13 @@ const Facilities = () => {
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': 'https://ssglobalpublicschool.com/',
+        'item': 'https://www.ssglobalpublicschool.com/',
       },
       {
         '@type': 'ListItem',
         'position': 2,
         'name': 'Facilities',
-        'item': 'https://ssglobalpublicschool.com/facilities',
+        'item': 'https://www.ssglobalpublicschool.com/facilities',
       },
     ],
   };
@@ -67,10 +67,10 @@ const Facilities = () => {
   return (
     <main>
       <SEO
-        title="Campus Infrastructure & Facilities | S.S. Global Public School"
-        description="Explore world-class facilities at S.S. Global Public School, Daudnagar: interactive smart classrooms, science labs, computer labs, sports & safe transport."
-        keywords="S.S. Global Public School facilities, Daudnagar school infrastructure, smart classrooms Daudnagar, science lab Bihar, school transport Aurangabad"
-        canonicalUrl="https://ssglobalpublicschool.com/facilities"
+        title="Campus Infrastructure & Facilities | S.S. Global Public School Daudnagar"
+        description="Explore modern campus facilities at S.S. Global Public School, Daudnagar, Bihar: interactive smart classrooms, physics & chemistry labs, computer labs, sports & transport."
+        keywords="S.S. Global Public School facilities, S.S. Global Public School Daudnagar, Daudnagar school infrastructure, smart classrooms Daudnagar, science lab Bihar, school transport Aurangabad"
+        canonicalUrl="https://www.ssglobalpublicschool.com/facilities"
         jsonLd={facilitiesSchema}
       />
       <PageHeader

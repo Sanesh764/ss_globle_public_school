@@ -26,13 +26,13 @@ const Gallery = () => {
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': 'https://ssglobalpublicschool.com/',
+        'item': 'https://www.ssglobalpublicschool.com/',
       },
       {
         '@type': 'ListItem',
         'position': 2,
         'name': 'Photo Gallery',
-        'item': 'https://ssglobalpublicschool.com/gallery',
+        'item': 'https://www.ssglobalpublicschool.com/gallery',
       },
     ],
   };
@@ -40,10 +40,10 @@ const Gallery = () => {
   return (
     <main>
       <SEO
-        title="Photo & Event Gallery | Campus Life at S.S. Global Public School"
-        description="View photos of academic events, sports competitions, celebrations, and campus activities at S.S. Global Public School, Daudnagar, Bihar."
-        keywords="S.S. Global Public School gallery, Daudnagar school photos, campus life Bihar, school sports Aurangabad, annual day photos"
-        canonicalUrl="https://ssglobalpublicschool.com/gallery"
+        title="Photo & Event Gallery | S.S. Global Public School Daudnagar"
+        description="Browse photos of academic events, sports competitions, cultural programs, and campus activities at S.S. Global Public School, Daudnagar, Bihar."
+        keywords="S.S. Global Public School gallery, S.S. Global Public School Daudnagar, Daudnagar school photos, campus life Bihar, school sports Aurangabad, annual day photos"
+        canonicalUrl="https://www.ssglobalpublicschool.com/gallery"
         jsonLd={gallerySchema}
       />
       <PageHeader

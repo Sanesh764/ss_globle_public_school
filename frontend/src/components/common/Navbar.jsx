@@ -38,12 +38,14 @@ const Navbar = () => {
             <span className="flex items-center gap-1.5 hover:text-white transition-colors">
               <FiMapPin className="text-amber-400 shrink-0 text-xs" /> {settings.address || 'Daudnagar, Bihar, India'}
             </span>
-            <span className="hidden md:flex items-center gap-1.5 hover:text-white transition-colors">
-              <FiPhone className="text-amber-400 shrink-0 text-xs" /> {settings.phone || '+91 98765 43210'}
-            </span>
-            <span className="hidden lg:flex items-center gap-1.5 hover:text-white transition-colors">
-              <FiMail className="text-amber-400 shrink-0 text-xs" /> {settings.email || 'info@ssglobalpublicschool.edu.in'}
-            </span>
+            <div className="flex items-center space-x-6 text-slate-300">
+              <a href={`tel:${settings.phone || '+919122490003'}`} className="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                <FiPhone className="text-amber-400 shrink-0 text-xs" /> {settings.phone || '+91 9122490003'}
+              </a>
+              <a href={`mailto:${settings.email || 'ssglobalpublicschool0@gmail.com'}`} className="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                <FiMail className="text-amber-400 shrink-0 text-xs" /> {settings.email || 'ssglobalpublicschool0@gmail.com'}
+              </a>
+            </div>
           </div>
 
           <div className="flex items-center space-x-3">

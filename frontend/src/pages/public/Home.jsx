@@ -19,12 +19,12 @@ const Home = () => {
     '@type': ['School', 'EducationalOrganization', 'LocalBusiness'],
     'name': 'S.S. Global Public School',
     'alternateName': 'SS Global Public School Daudnagar',
-    'url': 'https://ssglobalpublicschool.com/',
-    'logo': 'https://ssglobalpublicschool.com/android-chrome-512x512.png',
-    'image': 'https://ssglobalpublicschool.com/school.webp',
+    'url': 'https://www.ssglobalpublicschool.com/',
+    'logo': 'https://www.ssglobalpublicschool.com/android-chrome-512x512.png',
+    'image': 'https://www.ssglobalpublicschool.com/hero-4.jpg',
     'description': 'Premier CBSE curriculum school in Daudnagar, Bihar offering interactive smart classrooms, computer and science laboratories, sports, and leadership development.',
-    'telephone': '+919876543210',
-    'email': 'info@ssglobalpublicschool.edu.in',
+    'telephone': '+919122490003',
+    'email': 'ssglobalpublicschool0@gmail.com',
     'address': {
       '@type': 'PostalAddress',
       'streetAddress': 'Daudnagar',
@@ -33,17 +33,6 @@ const Home = () => {
       'postalCode': '824143',
       'addressCountry': 'IN',
     },
-    'geo': {
-      '@type': 'GeoCoordinates',
-      'latitude': '24.9800',
-      'longitude': '84.4000',
-    },
-    'sameAs': [
-      'https://facebook.com/ssglobalpublicschool',
-      'https://twitter.com/ssglobalschool',
-      'https://instagram.com/ssglobalschool',
-      'https://youtube.com/ssglobalschool',
-    ],
   };
 
   return (
@@ -51,8 +40,8 @@ const Home = () => {
       <SEO
         title="S.S. Global Public School | Best CBSE School in Daudnagar, Bihar"
         description="S.S. Global Public School, Daudnagar, Bihar is a premier CBSE institution offering interactive smart classrooms, science labs, sports, and holistic character building."
-        keywords="S.S. Global Public School, Daudnagar, Bihar school, CBSE school Daudnagar, Best School in Daudnagar, Top School in Aurangabad Bihar, Admissions 2026"
-        canonicalUrl="https://ssglobalpublicschool.com/"
+        keywords="S.S. Global Public School, S.S. Global Public School Daudnagar, Best School in Daudnagar, Best CBSE School in Daudnagar, CBSE School in Daudnagar, Top School in Daudnagar, School in Daudnagar Bihar, Best School in Aurangabad Bihar, CBSE School in Aurangabad Bihar, Admissions 2026"
+        canonicalUrl="https://www.ssglobalpublicschool.com/"
         jsonLd={homeSchema}
       />
       <HeroSection />

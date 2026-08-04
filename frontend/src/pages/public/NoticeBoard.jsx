@@ -33,13 +33,13 @@ const NoticeBoard = () => {
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': 'https://ssglobalpublicschool.com/',
+        'item': 'https://www.ssglobalpublicschool.com/',
       },
       {
         '@type': 'ListItem',
         'position': 2,
         'name': 'Notice Board',
-        'item': 'https://ssglobalpublicschool.com/notices',
+        'item': 'https://www.ssglobalpublicschool.com/notices',
       },
     ],
   };
@@ -47,10 +47,10 @@ const NoticeBoard = () => {
   return (
     <main>
       <SEO
-        title="Official School Notice Board | S.S. Global Public School"
-        description="Stay updated with official school notices, examination date sheets, holiday announcements & admissions at S.S. Global Public School, Daudnagar."
-        keywords="S.S. Global Public School notice board, Daudnagar school circulars, exam schedule Daudnagar, school holidays Bihar"
-        canonicalUrl="https://ssglobalpublicschool.com/notices"
+        title="Official Notice Board & Circulars | S.S. Global Public School Daudnagar"
+        description="Stay updated with official school notices, exam date sheets, holiday lists & admission announcements at S.S. Global Public School, Daudnagar."
+        keywords="S.S. Global Public School notice board, S.S. Global Public School Daudnagar, Daudnagar school circulars, exam schedule Daudnagar, school holidays Bihar"
+        canonicalUrl="https://www.ssglobalpublicschool.com/notices"
         jsonLd={noticesSchema}
       />
       <PageHeader
