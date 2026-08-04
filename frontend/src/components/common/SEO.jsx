@@ -104,7 +104,23 @@ const SEO = ({
     updateMetaTag('meta[property="og:site_name"]', 'property', 'og:site_name', 'S.S. Global Public School');
     updateMetaTag('meta[property="og:locale"]', 'property', 'og:locale', 'en_US');
 
-    // 7. JSON-LD Dynamic Schema
+    // 7. Dynamic Hero LCP Image Preload (Homepage Only)
+    let heroPreload = document.querySelector('link[rel="preload"][href="/hero-4.jpg"]');
+    if (location.pathname === '/') {
+      if (!heroPreload) {
+        heroPreload = document.createElement('link');
+        heroPreload.setAttribute('rel', 'preload');
+        heroPreload.setAttribute('as', 'image');
+        heroPreload.setAttribute('href', '/hero-4.jpg');
+        heroPreload.setAttribute('type', 'image/jpeg');
+        heroPreload.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(heroPreload);
+      }
+    } else if (heroPreload) {
+      heroPreload.remove();
+    }
+
+    // 8. JSON-LD Dynamic Schema
     let scriptTag = document.querySelector('#dynamic-seo-schema');
     if (jsonLd) {
       if (!scriptTag) {

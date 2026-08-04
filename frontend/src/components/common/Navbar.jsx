@@ -24,6 +24,7 @@ const Navbar = () => {
     { name: 'About', path: '/about' },
     { name: 'Facilities', path: '/facilities' },
     { name: 'Gallery', path: '/gallery' },
+    { name: 'Video Gallery', path: '/videos' },
     { name: 'Notice Board', path: '/notices' },
     { name: 'Academic Resources', path: '/downloads' },
     { name: 'Contact', path: '/contact' },

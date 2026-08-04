@@ -7,6 +7,7 @@ import {
   FiCheckSquare,
   FiUsers,
   FiImage,
+  FiVideo,
   FiBell,
   FiMail,
   FiSliders,
@@ -48,7 +49,8 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
       category: 'Media',
       staffAllowed: true,
       items: [
-        { name: 'Gallery', path: '/admin/gallery', icon: <FiImage className="text-xl" />, staffAllowed: true },
+        { name: 'Photo Gallery', path: '/admin/gallery', icon: <FiImage className="text-xl" />, staffAllowed: true },
+        { name: 'Video Gallery', path: '/admin/videos', icon: <FiVideo className="text-xl" />, staffAllowed: true },
       ],
     },
     {

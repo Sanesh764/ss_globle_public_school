@@ -17,6 +17,7 @@ import { publicHeroSliderRouter, adminHeroSliderRouter } from './routes/heroSlid
 import { publicContactRouter, adminContactRouter } from './routes/contactRoutes.js';
 import { publicFacilityRouter, adminFacilityRouter } from './routes/facilityRoutes.js';
 import { publicAcademicResourceRouter, adminAcademicResourceRouter } from './routes/academicResourceRoutes.js';
+import { publicVideoRouter, adminVideoRouter } from './routes/videoRoutes.js';
 import { notFoundHandler, errorHandler } from './middleware/error.middleware.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -122,9 +123,11 @@ app.use('/api/admin/messages', adminContactRouter);
 app.use('/api/admin/hero-slider', adminHeroSliderRouter);
 app.use('/api/admin/leadership', adminLeadershipRouter);
 app.use('/api/admin/facilities', adminFacilityRouter);
+app.use('/api/admin/videos', adminVideoRouter);
 app.use('/api/admin', authRoutes);
 app.use('/api/academic-resources', publicAcademicResourceRouter);
 app.use('/api/facilities', publicFacilityRouter);
+app.use('/api/videos', publicVideoRouter);
 app.use('/api/notices', noticeRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/settings', settingRoutes);

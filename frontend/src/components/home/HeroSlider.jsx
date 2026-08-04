@@ -58,16 +58,31 @@ const HeroSlider = () => {
 
         return (
           <React.Fragment key={slideId}>
-            <div
-              className={`absolute inset-0 bg-cover bg-no-repeat ${objectPosClass} transition-all duration-[1000ms] ease-in-out ${
-                isActive
-                  ? 'opacity-100 scale-105 transition-transform duration-[8000ms] ease-out z-0'
-                  : 'opacity-0 scale-100 -z-10'
-              }`}
-              style={{
-                backgroundImage: `url('${bgUrl}')`,
-              }}
-            />
+            {isHero4 ? (
+              <img
+                src="/hero-4.jpg"
+                alt="S.S. Global Public School Students & Faculty"
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+                className={`absolute inset-0 w-full h-full object-cover object-[center_top_15%] sm:object-center transition-all duration-[1000ms] ease-in-out ${
+                  isActive
+                    ? 'opacity-100 scale-105 transition-transform duration-[8000ms] ease-out z-0'
+                    : 'opacity-0 scale-100 -z-10'
+                }`}
+              />
+            ) : (
+              <div
+                className={`absolute inset-0 bg-cover bg-no-repeat ${objectPosClass} transition-all duration-[1000ms] ease-in-out ${
+                  isActive
+                    ? 'opacity-100 scale-105 transition-transform duration-[8000ms] ease-out z-0'
+                    : 'opacity-0 scale-100 -z-10'
+                }`}
+                style={{
+                  backgroundImage: `url('${bgUrl}')`,
+                }}
+              />
+            )}
             {/* Hidden img tag to catch 404 / network load failures */}
             {!isHero4 && (
               <img

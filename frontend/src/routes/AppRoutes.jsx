@@ -12,6 +12,7 @@ const Home = lazy(() => import('../pages/public/Home'));
 const About = lazy(() => import('../pages/public/About'));
 const Facilities = lazy(() => import('../pages/public/Facilities'));
 const Gallery = lazy(() => import('../pages/public/Gallery'));
+const VideoGallery = lazy(() => import('../pages/public/VideoGallery'));
 const NoticeBoard = lazy(() => import('../pages/public/NoticeBoard'));
 const Downloads = lazy(() => import('../pages/public/Downloads'));
 const Contact = lazy(() => import('../pages/public/Contact'));
@@ -24,6 +25,7 @@ const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard'));
 const AdminAbout = lazy(() => import('../pages/admin/AdminAbout'));
 const AdminNotices = lazy(() => import('../pages/admin/AdminNotices'));
 const AdminGallery = lazy(() => import('../pages/admin/AdminGallery'));
+const AdminVideos = lazy(() => import('../pages/admin/AdminVideos'));
 const AdminFacilities = lazy(() => import('../pages/admin/AdminFacilities'));
 const AdminUsers = lazy(() => import('../pages/admin/AdminUsers'));
 const AdminSettings = lazy(() => import('../pages/admin/AdminSettings'));
@@ -48,6 +50,7 @@ const AppRoutes = () => {
         <Route path="about" element={<SuspenseWrapper><About /></SuspenseWrapper>} />
         <Route path="facilities" element={<SuspenseWrapper><Facilities /></SuspenseWrapper>} />
         <Route path="gallery" element={<SuspenseWrapper><Gallery /></SuspenseWrapper>} />
+        <Route path="videos" element={<SuspenseWrapper><VideoGallery /></SuspenseWrapper>} />
         <Route path="notices" element={<SuspenseWrapper><NoticeBoard /></SuspenseWrapper>} />
         <Route path="downloads" element={<SuspenseWrapper><Downloads /></SuspenseWrapper>} />
         <Route path="contact" element={<SuspenseWrapper><Contact /></SuspenseWrapper>} />
@@ -65,6 +68,7 @@ const AppRoutes = () => {
           <Route path="dashboard" element={<SuspenseWrapper><AdminDashboard /></SuspenseWrapper>} />
           <Route path="notices" element={<SuspenseWrapper><AdminNotices /></SuspenseWrapper>} />
           <Route path="gallery" element={<SuspenseWrapper><AdminGallery /></SuspenseWrapper>} />
+          <Route path="videos" element={<SuspenseWrapper><AdminVideos /></SuspenseWrapper>} />
           <Route path="messages" element={<SuspenseWrapper><AdminMessages /></SuspenseWrapper>} />
           <Route path="academic-resources" element={<SuspenseWrapper><AdminAcademicResources /></SuspenseWrapper>} />
 

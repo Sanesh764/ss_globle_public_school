@@ -7,6 +7,7 @@ import WhyChooseUs from '../../components/home/WhyChooseUs';
 import StatsSection from '../../components/home/StatsSection';
 import FacilitiesPreview from '../../components/home/FacilitiesPreview';
 import GalleryPreview from '../../components/home/GalleryPreview';
+import VideoGallerySection from '../../components/home/VideoGallerySection';
 import LatestNotices from '../../components/home/LatestNotices';
 import DownloadsPreview from '../../components/home/DownloadsPreview';
 import Testimonials from '../../components/home/Testimonials';
@@ -51,6 +52,7 @@ const Home = () => {
       <StatsSection />
       <FacilitiesPreview />
       <GalleryPreview />
+      <VideoGallerySection />
       <LatestNotices />
       <DownloadsPreview />
       <Testimonials />

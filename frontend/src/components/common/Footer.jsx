@@ -23,6 +23,7 @@ const Footer = memo(() => {
     { name: 'About School', path: '/about' },
     { name: 'Facilities & Infrastructure', path: '/facilities' },
     { name: 'Photo & Event Gallery', path: '/gallery' },
+    { name: 'School Video Gallery', path: '/videos' },
     { name: 'Digital Notice Board', path: '/notices' },
     { name: 'Academic Resources', path: '/downloads' },
     { name: 'Contact & Admissions', path: '/contact' },
