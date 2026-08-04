@@ -1,16 +1,25 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const CANONICAL_DOMAIN = 'https://www.ssglobalpublicschool.com';
 
-const normalizeUrl = (url) => {
-  if (!url) {
-    const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
-    return `${CANONICAL_DOMAIN}${pathname === '/' ? '' : pathname}`;
+const formatCanonicalUrl = (passedUrl, currentPathname) => {
+  if (passedUrl) {
+    if (passedUrl.startsWith('/')) {
+      const cleanPath = passedUrl === '/' ? '/' : passedUrl;
+      return `${CANONICAL_DOMAIN}${cleanPath}`;
+    }
+    // Normalize any passed full URL
+    try {
+      const urlObj = new URL(passedUrl.replace('https://ssglobalpublicschool.com', CANONICAL_DOMAIN));
+      return `${CANONICAL_DOMAIN}${urlObj.pathname}`;
+    } catch {
+      return passedUrl;
+    }
   }
-  if (url.startsWith('/')) {
-    return `${CANONICAL_DOMAIN}${url === '/' ? '' : url}`;
-  }
-  return url.replace('https://ssglobalpublicschool.com', CANONICAL_DOMAIN);
+
+  const cleanPath = currentPathname === '/' ? '/' : currentPathname;
+  return `${CANONICAL_DOMAIN}${cleanPath}`;
 };
 
 /**
@@ -28,6 +37,8 @@ const SEO = ({
   noindex = false,
   jsonLd = null,
 }) => {
+  const location = useLocation();
+
   useEffect(() => {
     // 1. Title Tag
     if (title) {
@@ -72,17 +83,20 @@ const SEO = ({
       : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
     updateMetaTag('meta[name="robots"]', 'name', 'robots', robotsContent);
 
-    // 5. Canonical Link & Open Graph URL
-    const resolvedCanonical = normalizeUrl(canonicalUrl);
-    updateLinkTag('canonical', resolvedCanonical);
-    updateMetaTag('meta[property="og:url"]', 'property', 'og:url', resolvedCanonical);
+    // 5. Exact Dynamic Canonical URL based on current route
+    const targetCanonical = formatCanonicalUrl(canonicalUrl, location.pathname);
+
+    updateLinkTag('canonical', targetCanonical);
+    updateMetaTag('meta[property="og:url"]', 'property', 'og:url', targetCanonical);
+    updateMetaTag('meta[property="twitter:url"]', 'property', 'twitter:url', targetCanonical);
 
     // 6. Open Graph & Twitter Cards
     if (title) {
       updateMetaTag('meta[property="og:title"]', 'property', 'og:title', title);
       updateMetaTag('meta[property="twitter:title"]', 'property', 'twitter:title', title);
     }
-    const resolvedOgImage = normalizeUrl(ogImage);
+
+    const resolvedOgImage = ogImage.startsWith('/') ? `${CANONICAL_DOMAIN}${ogImage}` : ogImage;
     updateMetaTag('meta[property="og:type"]', 'property', 'og:type', ogType);
     updateMetaTag('meta[property="og:image"]', 'property', 'og:image', resolvedOgImage);
     updateMetaTag('meta[property="twitter:image"]', 'property', 'twitter:image', resolvedOgImage);
@@ -103,7 +117,7 @@ const SEO = ({
     } else if (scriptTag) {
       scriptTag.remove();
     }
-  }, [title, description, keywords, canonicalUrl, ogImage, ogType, noindex, jsonLd]);
+  }, [title, description, keywords, canonicalUrl, ogImage, ogType, noindex, jsonLd, location.pathname]);
 
   return null;
 };
