@@ -1,6 +1,8 @@
 import React from 'react';
 import SEO from '../../components/common/SEO';
+import IndependenceDayTicker from '../../components/home/IndependenceDayTicker';
 import HeroSection from '../../components/home/HeroSection';
+import IndependenceDaySection from '../../components/home/IndependenceDaySection';
 import WelcomeMessage from '../../components/home/WelcomeMessage';
 import AboutPreview from '../../components/home/AboutPreview';
 import WhyChooseUs from '../../components/home/WhyChooseUs';
@@ -45,7 +47,9 @@ const Home = () => {
         canonicalUrl="https://www.ssglobalpublicschool.com/"
         jsonLd={homeSchema}
       />
+      <IndependenceDayTicker />
       <HeroSection />
+      <IndependenceDaySection />
       <WelcomeMessage />
       <AboutPreview />
       <WhyChooseUs />

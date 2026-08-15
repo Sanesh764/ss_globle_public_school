@@ -1,6 +1,23 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { getPublicHeroSlidesApi } from '../services/heroSliderService';
 import { HERO_SLIDES_FALLBACK, NEW_FIRST_HERO_SLIDE } from '../config/fallbackData';
+import { isIndependenceDay2026 } from '../utils/formatDate';
+
+export const INDEPENDENCE_DAY_HERO_SLIDE = {
+  _id: 'hero-independence-day-2026',
+  isIndependenceDay: true,
+  backgroundImage: '/hero-4.jpg',
+  badge: '🇮🇳 INDEPENDENCE DAY 2026',
+  title: 'Celebrating Freedom,',
+  highlightTitle: 'Inspiring Young Minds',
+  subtitle: 'S.S. GLOBAL PUBLIC SCHOOL • 15 AUGUST 2026',
+  description: 'S.S. Global Public School wishes everyone a very Happy Independence Day. May the spirit of freedom, unity and learning inspire every young mind.',
+  primaryButtonText: 'Explore Our School',
+  primaryButtonLink: '/about',
+  secondaryButtonText: 'View Gallery',
+  secondaryButtonLink: '/gallery',
+  autoPlay: true,
+};
 
 export const useHeroSlider = (intervalMs = 5000) => {
   const [slides, setSlides] = useState([]);
@@ -20,14 +37,21 @@ export const useHeroSlider = (intervalMs = 5000) => {
         setError(false);
         const res = await getPublicHeroSlidesApi();
         if (isMounted) {
+          let baseSlides = [];
           if (res?.success && Array.isArray(res.slides) && res.slides.length > 0) {
             const apiSlides = res.slides.filter(
               (s) => s._id !== 'hero-community-first' && !s.backgroundImage?.includes('hero-4')
             );
-            setSlides([NEW_FIRST_HERO_SLIDE, ...apiSlides]);
+            baseSlides = [NEW_FIRST_HERO_SLIDE, ...apiSlides];
           } else {
             setError(true);
-            setSlides(HERO_SLIDES_FALLBACK);
+            baseSlides = HERO_SLIDES_FALLBACK;
+          }
+
+          if (isIndependenceDay2026()) {
+            setSlides([INDEPENDENCE_DAY_HERO_SLIDE, ...baseSlides]);
+          } else {
+            setSlides(baseSlides);
           }
         }
       } catch (err) {
@@ -36,7 +60,12 @@ export const useHeroSlider = (intervalMs = 5000) => {
         }
         if (isMounted) {
           setError(true);
-          setSlides(HERO_SLIDES_FALLBACK);
+          const baseSlides = HERO_SLIDES_FALLBACK;
+          if (isIndependenceDay2026()) {
+            setSlides([INDEPENDENCE_DAY_HERO_SLIDE, ...baseSlides]);
+          } else {
+            setSlides(baseSlides);
+          }
         }
       } finally {
         if (isMounted) setLoading(false);

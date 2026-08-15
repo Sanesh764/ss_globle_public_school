@@ -48,7 +48,7 @@ const HeroSlider = () => {
         const isActive = idx === currentIndex;
         const slideId = s._id || idx;
         const rawUrl = getImageUrl(s.backgroundImage);
-        const isHero4 = s.backgroundImage?.includes('hero-4') || s._id === 'hero-community-first';
+        const isHero4 = s.backgroundImage?.includes('hero-4') || s._id === 'hero-community-first' || s.isIndependenceDay;
         const bgUrl = (failedImages[slideId] && !isHero4) ? '/school.webp' : (isHero4 ? '/hero-4.jpg' : rawUrl);
 
         // Custom mobile object position framing to ensure student/teacher faces are never cropped
@@ -106,15 +106,24 @@ const HeroSlider = () => {
         <div className="max-w-3xl space-y-4 sm:space-y-6 pb-6 sm:pb-0">
           {/* Badge Pill */}
           {slide.badge && (
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-[13px] sm:text-sm font-bold backdrop-blur-xl shadow-lg shadow-amber-400/10 animate-in fade-in slide-in-from-bottom duration-500">
-              <FiCheckCircle className="text-amber-400 text-sm sm:text-base shrink-0" /> {slide.badge}
+            <div className={`inline-flex items-center gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full ${
+              slide.isIndependenceDay
+                ? 'bg-slate-900/90 border border-amber-400/50 text-amber-300 shadow-xl shadow-amber-400/10'
+                : 'bg-amber-400/20 border border-amber-400/40 text-amber-300'
+            } text-[13px] sm:text-sm font-bold backdrop-blur-xl shadow-lg animate-in fade-in slide-in-from-bottom duration-500`}>
+              {!slide.isIndependenceDay && <FiCheckCircle className="text-amber-400 text-sm sm:text-base shrink-0" />}
+              <span>{slide.badge}</span>
             </div>
           )}
 
           {/* Title & Gradient Highlight */}
           <h1 className="text-[34px] sm:text-4xl md:text-[54px] lg:text-6xl font-extrabold font-serif leading-[1.12] sm:leading-[1.15] text-white tracking-tight animate-in fade-in slide-in-from-bottom duration-700">
             {slide.title || 'Welcome to'} <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-amber-300 bg-clip-text text-transparent">
+            <span className={
+              slide.isIndependenceDay
+                ? 'bg-gradient-to-r from-orange-400 via-amber-200 to-emerald-400 bg-clip-text text-transparent'
+                : 'bg-gradient-to-r from-blue-400 via-sky-300 to-amber-300 bg-clip-text text-transparent'
+            }>
               {slide.highlightTitle || 'S.S. Global Public School'}
             </span>
           </h1>

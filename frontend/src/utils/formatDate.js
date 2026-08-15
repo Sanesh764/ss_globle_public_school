@@ -19,3 +19,9 @@ export const formatDateTime = (dateString) => {
     minute: '2-digit',
   }).format(date);
 };
+
+export const isIndependenceDay2026 = () => {
+  const now = new Date();
+  return now.getFullYear() === 2026 && now.getMonth() === 7 && now.getDate() === 15;
+};
+

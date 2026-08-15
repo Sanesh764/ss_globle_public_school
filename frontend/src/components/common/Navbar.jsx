@@ -71,63 +71,68 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Main Navbar (Reduced Height ~15%: h-16) */}
+      {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo & School Name */}
-          <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-10 h-10 rounded-xl primary-gradient text-white flex items-center justify-center font-bold text-lg shadow-md shadow-blue-600/30 group-hover:scale-105 transition-all duration-300 shrink-0 border border-blue-400/20 overflow-hidden">
-              {settings.logo ? (
-                <img
-                  src={settings.logo}
-                  alt="S.S. Global Public School Logo"
-                  width="40"
-                  height="40"
-                  loading="eager"
-                  decoding="async"
-                  className="w-full h-full object-cover rounded-xl"
-                />
-              ) : (
-                'SS'
-              )}
-            </div>
-            <div>
-              <span className="text-lg sm:text-xl font-extrabold font-serif tracking-tight text-white block group-hover:text-blue-400 transition-colors leading-snug">
-                {settings.schoolName || 'S.S. Global Public School'}
-              </span>
-              <span className="text-[10px] font-semibold text-amber-400 tracking-widest uppercase block -mt-0.5">
-                Daudnagar, Bihar
-              </span>
-            </div>
-          </Link>
+          {/* School Branding Block (Anchored Far Left) */}
+          <div className="flex items-center shrink-0 pr-3 lg:pr-5 xl:pr-7 border-none lg:border-r border-slate-800/80">
+            <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+              <div className="w-10 h-10 rounded-xl primary-gradient text-white flex items-center justify-center font-bold text-lg shadow-md shadow-blue-600/30 group-hover:scale-105 transition-all duration-300 shrink-0 border border-blue-400/20 overflow-hidden">
+                {settings.logo ? (
+                  <img
+                    src={settings.logo}
+                    alt="S.S. Global Public School Logo"
+                    width="40"
+                    height="40"
+                    loading="eager"
+                    decoding="async"
+                    className="w-full h-full object-cover rounded-xl"
+                  />
+                ) : (
+                  'SS'
+                )}
+              </div>
+              <div className="flex flex-col shrink-0">
+                <span className="text-base sm:text-lg xl:text-xl font-extrabold font-serif tracking-tight text-white block group-hover:text-blue-400 transition-colors leading-snug whitespace-nowrap">
+                  {settings.schoolName || 'S.S. Global Public School'}
+                </span>
+                <span className="text-[10px] font-bold text-amber-400 tracking-widest uppercase block -mt-0.5 whitespace-nowrap">
+                  Daudnagar, Bihar
+                </span>
+              </div>
+            </Link>
+          </div>
 
-          {/* Desktop Nav Links (Uniform Spacing & Smooth Active Indicator) */}
-          <nav className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
-                    isActive
-                      ? 'bg-blue-600/20 text-blue-300 border border-blue-500/30 font-bold shadow-xs'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-                  }`
-                }
-              >
-                {link.name}
-              </NavLink>
-            ))}
+          {/* Desktop Navigation Block (Anchored Far Right with ml-auto to Prevent Overlap) */}
+          <div className="hidden lg:flex items-center ml-auto shrink-0 space-x-1 lg:space-x-1.5 xl:space-x-2">
+            <nav className="flex items-center space-x-0.5 lg:space-x-1 xl:space-x-1.5 shrink-0">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `px-2 py-1.5 lg:px-2 xl:px-2.5 2xl:px-3 rounded-xl text-[11px] lg:text-[12px] xl:text-xs 2xl:text-sm font-semibold whitespace-nowrap shrink-0 transition-all duration-200 ${
+                      isActive
+                        ? 'bg-blue-600/20 text-blue-300 border border-blue-500/30 font-bold shadow-xs'
+                        : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                    }`
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+            </nav>
 
-            {/* Premium Admission Open Button (Softer 16px border radius, subtle hover glow) */}
+            {/* Premium Admission Open Button */}
             <Link
               to="/contact"
               onClick={() => trackAdmissionClick('Navbar Desktop')}
-              className="ml-3 px-4.5 py-2 rounded-[16px] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-extrabold text-xs sm:text-sm shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/35 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-1.5"
+              className="ml-2 lg:ml-2.5 xl:ml-3 px-3 py-1.5 xl:py-2 rounded-[16px] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-extrabold text-[11px] lg:text-[12px] xl:text-xs 2xl:text-sm shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/35 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-1.5 shrink-0 whitespace-nowrap"
             >
-              Admission Open <FiArrowRight className="text-xs transition-transform group-hover:translate-x-0.5" />
+              <span>Admission Open</span>
+              <FiArrowRight className="text-xs transition-transform group-hover:translate-x-0.5 shrink-0" />
             </Link>
-          </nav>
+          </div>
 
           {/* Mobile Hamburger Toggle */}
           <div className="flex items-center lg:hidden">

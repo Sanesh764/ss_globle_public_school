@@ -10,7 +10,8 @@ import {
   FiInstagram,
   FiYoutube,
   FiChevronRight,
-  FiShield
+  FiShield,
+  FiGithub
 } from 'react-icons/fi';
 import { SettingContext } from '../../context/SettingContext';
 import GoogleMap from './GoogleMap';
@@ -203,8 +204,21 @@ const Footer = memo(() => {
 
         {/* Bottom Copyright & Accreditation Footer */}
         <div className="flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-4 pt-2">
-          <p className="text-center md:text-left font-medium">
-            © 2026 <span className="text-white font-semibold">{schoolName}</span>, Daudnagar. All Rights Reserved.
+          <p className="text-center md:text-left font-medium flex flex-wrap items-center justify-center md:justify-start gap-1">
+            <span>© 2026 <span className="text-white font-semibold">{schoolName}</span>, Daudnagar. All Rights Reserved.</span>
+            <span className="hidden sm:inline text-slate-700">•</span>
+            <span className="text-slate-400 inline-flex items-center gap-1.5 text-[11px]">
+              Designed &amp; Developed by{' '}
+              <a
+                href="https://github.com/Sanesh764"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-300 hover:text-amber-400 transition-colors font-medium inline-flex items-center gap-1"
+              >
+                <FiGithub className="text-xs text-slate-400" />
+                <span>Sanesh Kumar</span>
+              </a>
+            </span>
           </p>
 
           <div className="flex items-center flex-wrap justify-center gap-2 sm:gap-3 text-[11px]">

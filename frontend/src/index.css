@@ -123,3 +123,30 @@
 .animate-ticker:hover {
   animation-play-state: paused;
 }
+
+/* Seamless Horizontal Ticker Animation for Independence Day */
+@keyframes ticker-horizontal {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker-horizontal {
+  display: flex;
+  width: max-content;
+  animation: ticker-horizontal 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-ticker-horizontal:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker-horizontal {
+    animation: none !important;
+    width: 100% !important;
+    justify-content: center !important;
+    transform: none !important;
+  }
+}
+
