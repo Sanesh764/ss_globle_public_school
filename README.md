@@ -243,10 +243,10 @@ npm install
 Create a `.env` file in the `backend/` directory:
 ```env
 PORT=8080
-NODE_ENV=development
-MONGO_URI=mongodb://localhost:27017/ss_global_school
-JWT_SECRET=your_super_secret_jwt_key_here_min_32_chars
-JWT_EXPIRE=24h
+NODE_ENV=
+MONGO_URI=
+JWT_SECRET=your_super_secret
+JWT_EXPIRE=
 
 # Cloudinary Setup (Optional - leave empty for local file storage)
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
