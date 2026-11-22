@@ -2,39 +2,40 @@ import mongoose from 'mongoose';
 import dns from 'dns';
 import logger from '../utils/logger.js';
 
+dns.setServers(['1.1.1.1','8.8.8.8']);
 /**
  * Helper to resolve SRV records for mongodb+srv URIs using custom public DNS servers
  * when local OS/network DNS resolvers fail to resolve _mongodb._tcp SRV records.
  */
-const resolveSrvUri = async (srvUri) => {
-  try {
-    const match = srvUri.match(/^mongodb\+srv:\/\/([^:]+):([^@]+)@([^/]+)\/([^?]+)(\?.*)?$/);
-    if (!match) return null;
+// const resolveSrvUri = async (srvUri) => {
+//   try {
+//     const match = srvUri.match(/^mongodb\+srv:\/\/([^:]+):([^@]+)@([^/]+)\/([^?]+)(\?.*)?$/);
+//     if (!match) return null;
 
-    const [, username, password, host, dbName] = match;
-    const srvDomain = `_mongodb._tcp.${host}`;
+//     const [, username, password, host, dbName] = match;
+//     const srvDomain = `_mongodb._tcp.${host}`;
 
-    const resolver = new dns.Resolver();
-    resolver.setServers(['8.8.8.8', '1.1.1.1', '8.8.4.4']);
+//     const resolver = new dns.Resolver();
+//     resolver.setServers(['8.8.8.8', '1.1.1.1', '8.8.4.4']);
 
-    const addresses = await new Promise((resolve, reject) => {
-      resolver.resolveSrv(srvDomain, (err, addrs) => {
-        if (err) reject(err);
-        else resolve(addrs);
-      });
-    });
+//     const addresses = await new Promise((resolve, reject) => {
+//       resolver.resolveSrv(srvDomain, (err, addrs) => {
+//         if (err) reject(err);
+//         else resolve(addrs);
+//       });
+//     });
 
-    if (!addresses || addresses.length === 0) return null;
+//     if (!addresses || addresses.length === 0) return null;
 
-    const hostList = addresses.map((a) => `${a.name}:${a.port || 27017}`).join(',');
-    const resolvedUri = `mongodb://${username}:${password}@${hostList}/${dbName}?ssl=true&authSource=admin&retryWrites=true&w=majority`;
+//     const hostList = addresses.map((a) => `${a.name}:${a.port || 27017}`).join(',');
+//     const resolvedUri = `mongodb://${username}:${password}@${hostList}/${dbName}?ssl=true&authSource=admin&retryWrites=true&w=majority`;
 
-    return resolvedUri;
-  } catch (err) {
-    logger.warn(`[Database SRV Resolver] Custom DNS SRV lookup failed: ${err.message}`);
-    return null;
-  }
-};
+//     return resolvedUri;
+//   } catch (err) {
+//     logger.warn(`[Database SRV Resolver] Custom DNS SRV lookup failed: ${err.message}`);
+//     return null;
+//   }
+// };
 
 const connectDB = async () => {
   const isProduction = process.env.NODE_ENV === 'production';
