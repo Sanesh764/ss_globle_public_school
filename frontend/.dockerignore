@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.env
+.env.*
+.git/
+.gitignore
+*.md
+README.md
+.oxlintrc.json
+*.log
+logs/
+.vscode/
+.idea/
