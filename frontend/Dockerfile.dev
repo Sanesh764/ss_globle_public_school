@@ -1,0 +1,19 @@
+# Pinned exact Node.js 22 LTS Alpine image (v22.23.5 on Alpine 3.21)
+FROM node:22-alpine@sha256:1314fb30ec37592d5845e5a160d522c0e680972aa534549940b8d73bde88481a
+
+WORKDIR /app
+
+# Copy dependency manifests first for layer caching
+COPY package.json package-lock.json ./
+
+# Install exact dependencies reproducibly
+RUN npm ci
+
+# Copy application source code
+COPY . .
+
+# Expose Vite development server port
+EXPOSE 5173
+
+# Start Vite development server listening on 0.0.0.0 for container networking
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

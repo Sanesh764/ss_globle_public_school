@@ -28,9 +28,13 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email.trim() || !password.trim()) {
+      addToast('Please enter both email/username and password.', 'error');
+      return;
+    }
     try {
       setSubmitting(true);
-      const res = await login(email, password);
+      const res = await login(email.trim(), password);
       if (res.success) {
         addToast('Admin login successful!', 'success');
         navigate('/admin/dashboard', { replace: true });
@@ -107,7 +111,7 @@ const AdminLogin = () => {
           <form onSubmit={handleSubmit} className="space-y-4 pt-1">
             <div>
               <label htmlFor="email" className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                Admin Email Address
+                Admin Email Address or Username
               </label>
               <div className="relative group/input">
                 <FiMail className="absolute left-4 top-3.5 text-slate-400 group-focus-within/input:text-blue-400 transition-colors text-base" />

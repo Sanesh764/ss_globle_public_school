@@ -8,6 +8,7 @@ build/
 *.md
 README.md
 .oxlintrc.json
+tests/
 *.log
 logs/
 .vscode/

@@ -6,6 +6,7 @@ node_modules/
 *.md
 README.md
 test_*.js
+tests/
 *.log
 logs/
 .vscode/

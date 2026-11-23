@@ -3,9 +3,14 @@ import jwt from 'jsonwebtoken';
 const generateToken = (res, userId) => {
   const expiresIn = process.env.JWT_EXPIRES_IN || '24h';
 
+  const jwtSecret = process.env.JWT_SECRET;
+  if (!jwtSecret) {
+    throw new Error('FATAL: JWT_SECRET environment variable is missing. Authentication cannot function securely.');
+  }
+
   const token = jwt.sign(
     { userId },
-    process.env.JWT_SECRET || 'ss_global_public_school_super_secret_jwt_key_2026',
+    jwtSecret,
     {
       expiresIn,
     }
