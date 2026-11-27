@@ -1,0 +1,41 @@
+# Dependencies
+**/node_modules/
+node_modules/
+
+# Environment files and credentials
+**/.env
+**/.env.*
+.env
+.env.*
+
+# Version control
+.git/
+.gitignore
+
+# Build outputs
+**/dist/
+dist/
+**/build/
+build/
+
+# Documentation and linter configs
+*.md
+**/*.md
+**/.oxlintrc.json
+
+# Test scripts
+backend/test_*.js
+
+# Logs
+**/*.log
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

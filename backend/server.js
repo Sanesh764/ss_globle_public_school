@@ -5,6 +5,15 @@ import connectDB from './src/config/db.js';
 
 dotenv.config();
 
+// Validate required security environment variables on startup
+const jwtSecret = process.env.JWT_SECRET;
+const placeholderSecrets = ['replace_with_a_secure_random_jwt_secret_key_2026', 'your_jwt_secret', 'secret'];
+if (!jwtSecret || jwtSecret.trim() === '' || placeholderSecrets.includes(jwtSecret.trim())) {
+  console.error('[SECURITY ERROR] Insecure or missing JWT_SECRET environment variable.');
+  console.error('[SECURITY ERROR] Please provide a valid, secure JWT_SECRET in your .env file.');
+  process.exit(1);
+}
+
 // Railway dynamic PORT configuration with fallback
 const PORT = process.env.PORT || 8080;
 

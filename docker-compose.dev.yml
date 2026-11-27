@@ -1,0 +1,52 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    restart: unless-stopped
+    ports:
+      - "${PORT:-5000}:5000"
+    environment:
+      PORT: "5000"
+      NODE_ENV: "development"
+      MONGO_URI: "${MONGO_URI:?MONGO_URI is required in .env}"
+      JWT_SECRET: "${JWT_SECRET:?JWT_SECRET is required in .env}"
+      JWT_EXPIRES_IN: "${JWT_EXPIRES_IN:-24h}"
+      FRONTEND_URL: "${FRONTEND_URL:-http://localhost:5173}"
+      ADMIN_EMAIL: "${ADMIN_EMAIL:-}"
+      CLOUDINARY_CLOUD_NAME: "${CLOUDINARY_CLOUD_NAME:-}"
+      CLOUDINARY_API_KEY: "${CLOUDINARY_API_KEY:-}"
+      CLOUDINARY_API_SECRET: "${CLOUDINARY_API_SECRET:-}"
+    volumes:
+      - ./backend:/app
+      - backend_node_modules:/app/node_modules
+    networks:
+      - ss_global_dev_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    environment:
+      BACKEND_PROXY_TARGET: "http://backend:5000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    networks:
+      - ss_global_dev_network
+
+volumes:
+  backend_node_modules:
+    name: ss_global_backend_node_modules
+  frontend_node_modules:
+    name: ss_global_frontend_node_modules
+
+networks:
+  ss_global_dev_network:
+    name: ss_global_dev_network
+    driver: bridge
