@@ -49,7 +49,7 @@ mongoose.connection.on('reconnected', () => {
 });
 
 const connectDB = async () => {
-  const mongoUri = process.env.MONGO_URI;
+  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
 
   if (!mongoUri) {
     logger.error('[Database Error] FATAL: MONGO_URI environment variable is missing!');

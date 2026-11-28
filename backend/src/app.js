@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import helmet from 'helmet';
 import compression from 'compression';
+import mongoose from 'mongoose';
 
 
 import authRoutes from './routes/authRoutes.js';
@@ -32,40 +33,39 @@ const app = express();
 // 1. Enable Trust Proxy for Railway, Render, and single reverse proxies
 app.set('trust proxy', 1);
 
-// 2. Allowed Origins Whitelist
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
+// 2. Allowed Origins Whitelist (exclude local dev origins in production)
+const isProduction = process.env.NODE_ENV === 'production';
+const frontendOrigins = (process.env.FRONTEND_URL || '')
+  .split(',')
+  .map((url) => url.trim().replace(/\/+$/, ''))
+  .filter(Boolean);
+
+const allowedOrigins = new Set([
   'https://www.ssglobalpublicschool.com',
-  process.env.FRONTEND_URL,
-].filter(Boolean);
+  'https://ssglobalpublicschool.com',
+  ...frontendOrigins,
+  ...(!isProduction ? ['http://localhost:5173', 'http://127.0.0.1:5173'] : []),
+]);
 
-
-// 3. Preflight OPTIONS & Express CORS Middleware
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    const origin = req.headers.origin || '*';
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, Origin, X-Requested-With');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    return res.status(200).end();
-  }
-  next();
-});
-
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
+// 3. Express CORS Middleware (supports credentials & preflight for allowlisted origins)
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    const normalizedOrigin = origin.trim().replace(/\/+$/, '');
+    if (allowedOrigins.has(normalizedOrigin)) {
       return callback(null, true);
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
-    optionsSuccessStatus: 200,
-  })
-);
+    }
+    return callback(
+      Object.assign(new Error('Origin not allowed by CORS'), { statusCode: 403 })
+    );
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 // 4. Security HTTP Headers
 app.use(
@@ -109,10 +109,12 @@ app.get('/', (req, res) => {
   });
 });
 
-// 12. API Health Route
+// 12. API Health Route (distinguishes app liveness from MongoDB readiness)
 app.get('/api/health', (req, res) => {
-  res.status(200).json({
-    status: 'OK',
+  const dbConnected = mongoose.connection.readyState === 1;
+  res.status(dbConnected ? 200 : 503).json({
+    status: dbConnected ? 'OK' : 'DEGRADED',
+    database: dbConnected ? 'connected' : 'disconnected',
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),
   });

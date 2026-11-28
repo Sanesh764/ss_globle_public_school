@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy dependency manifests first for optimal Docker layer caching
 COPY package.json package-lock.json ./
 
-# Install exact dependencies
-RUN npm ci
+# Install production dependencies only
+RUN npm ci --omit=dev
 
 # Copy application source code with non-root ownership
 COPY --chown=node:node . .
