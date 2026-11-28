@@ -2,6 +2,7 @@ import React from 'react';
 import SEO from '../../components/common/SEO';
 import IndependenceDayTicker from '../../components/home/IndependenceDayTicker';
 import HeroSection from '../../components/home/HeroSection';
+import StudentRegistrationSection from '../../components/home/StudentRegistrationSection';
 import IndependenceDaySection from '../../components/home/IndependenceDaySection';
 import WelcomeMessage from '../../components/home/WelcomeMessage';
 import AboutPreview from '../../components/home/AboutPreview';
@@ -49,6 +50,7 @@ const Home = () => {
       />
       <IndependenceDayTicker />
       <HeroSection />
+      <StudentRegistrationSection />
       <IndependenceDaySection />
       <WelcomeMessage />
       <AboutPreview />

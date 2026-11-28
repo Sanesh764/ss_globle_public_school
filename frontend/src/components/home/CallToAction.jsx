@@ -25,11 +25,17 @@ const CallToAction = () => {
 
         <div className="flex flex-wrap justify-center items-center gap-4 pt-3">
           <Link
-            to="/contact"
+            to="/register"
             className="px-7 py-3.5 rounded-sm bg-[#AD8746] hover:bg-[#8E6D35] text-white font-semibold text-sm tracking-wide transition-colors flex items-center gap-2"
           >
-            <span>Apply Online / Contact Office</span>
+            <span>Apply Online</span>
             <FiArrowRight />
+          </Link>
+          <Link
+            to="/contact"
+            className="px-7 py-3.5 rounded-sm bg-[#27372D] hover:bg-[#1E2B23] text-[#F4EFE3] font-semibold text-sm tracking-wide border border-[#4B6353] transition-colors flex items-center justify-center gap-2"
+          >
+            <span>Contact Office</span>
           </Link>
           <a
             href={`tel:${settings.phone || '+919122490003'}`}
