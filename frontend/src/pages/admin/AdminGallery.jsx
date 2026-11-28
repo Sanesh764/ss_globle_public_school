@@ -62,7 +62,7 @@ const AdminGallery = () => {
 
       <main className="p-4 sm:p-6 lg:p-8 space-y-6">
         {/* Top Control Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-5 rounded-sm shadow-sm border border-[#CFC5B1]">
           <div className="flex flex-wrap gap-2">
             {GALLERY_CATEGORIES.map((cat) => (
               <button
@@ -70,7 +70,7 @@ const AdminGallery = () => {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
                   activeCategory === cat
-                    ? 'bg-blue-600 text-white shadow-md'
+                    ? 'bg-[#34483B] text-[#F4EFE3] shadow-md'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
@@ -81,7 +81,7 @@ const AdminGallery = () => {
 
           <button
             onClick={() => setModalOpen(true)}
-            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md transition-colors flex items-center justify-center gap-2 shrink-0"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#AD8746] hover:bg-[#8E6D35] text-white font-bold text-sm shadow-md transition-colors flex items-center justify-center gap-2 shrink-0"
           >
             <FiPlus className="text-lg" /> Upload New Photo
           </button>
@@ -95,7 +95,7 @@ const AdminGallery = () => {
             {images.map((item) => (
               <div
                 key={item._id}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 flex flex-col group card-hover"
+                className="bg-white rounded-sm overflow-hidden shadow-sm border border-[#CFC5B1] flex flex-col group card-hover"
               >
                 <div className="h-48 overflow-hidden relative bg-slate-100">
                   <img
@@ -110,7 +110,7 @@ const AdminGallery = () => {
                 </div>
 
                 <div className="p-4 flex items-center justify-between">
-                  <h4 className="font-serif font-bold text-slate-900 text-sm line-clamp-1">
+                  <h4 className="font-serif font-bold text-[#34483B] text-sm line-clamp-1">
                     {item.title}
                   </h4>
                   <button
@@ -125,7 +125,7 @@ const AdminGallery = () => {
             ))}
           </div>
         ) : (
-          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500">
+          <div className="p-12 text-center bg-white rounded-sm border border-[#CFC5B1] text-slate-500">
             No gallery photos in "{activeCategory}". Click "Upload New Photo" to add one.
           </div>
         )}

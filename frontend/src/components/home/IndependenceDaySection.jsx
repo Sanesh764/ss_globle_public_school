@@ -15,15 +15,13 @@ const IndependenceDaySection = () => {
       subtitle: 'Respecting the National Flag',
       description: 'Honouring national pride through disciplined morning assembly, flag hoisting, and national anthem.',
       icon: FiFlag,
-      accentColor: 'border-orange-500/40 text-orange-400 bg-orange-500/10',
     },
     {
       id: 'cultural-celebration',
       title: 'Cultural Celebration',
       subtitle: 'Celebrating Student Talent',
-      description: 'Showcasing patriotic songs, dance performances, and speeches honoring India\'s rich heritage and freedom fighters.',
+      description: "Showcasing patriotic songs, dance performances, and speeches honoring India's rich heritage and freedom fighters.",
       icon: FiHeart,
-      accentColor: 'border-amber-400/40 text-amber-300 bg-amber-400/10',
     },
     {
       id: 'young-india',
@@ -31,75 +29,65 @@ const IndependenceDaySection = () => {
       subtitle: 'Inspiring Stronger Tomorrow',
       description: 'Empowering students with quality education, values, and vision to contribute towards a progressive nation.',
       icon: FiTrendingUp,
-      accentColor: 'border-emerald-500/40 text-emerald-400 bg-emerald-500/10',
     },
   ];
 
   return (
-    <section className="relative bg-slate-950 text-white py-10 sm:py-14 border-y border-amber-500/30 overflow-hidden font-sans">
-      {/* Subtle Background Glows */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 via-white to-emerald-500 opacity-90" />
-      <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8">
-        {/* Header Block */}
+    <section className="relative bg-[#34483B] text-[#F4EFE3] py-12 sm:py-16 border-y border-[#AD8746]/50 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900 border border-amber-400/40 text-amber-300 text-xs font-bold uppercase tracking-wider shadow-md">
-            <span>🇮🇳 OUR FREEDOM, OUR RESPONSIBILITY</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-[#27372D] border border-[#AD8746]/60 text-[#EBE2CC] text-xs font-semibold uppercase tracking-widest">
+            <span>🇮🇳 Our Freedom, Our Responsibility</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-serif text-white tracking-tight leading-tight">
-            Education is the Foundation of a <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-orange-400 via-amber-200 to-emerald-400 bg-clip-text text-transparent">
-              Stronger and Better India
-            </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-serif text-[#F4EFE3] tracking-tight leading-tight">
+            Education is the Foundation of a{' '}
+            <span className="italic text-[#AD8746]">Stronger and Better India</span>
           </h2>
 
-          <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
+          <p className="text-xs sm:text-sm text-[#EBE2CC]/85 max-w-xl mx-auto leading-relaxed">
             S.S. Global Public School, Daudnagar salutes the heroes of our nation and reaffirms our commitment to empowering future leaders.
           </p>
 
           <div className="pt-1">
-            <span className="inline-block text-xs font-bold font-serif text-amber-400 uppercase tracking-widest bg-amber-400/10 px-4 py-1.5 rounded-full border border-amber-400/30">
+            <span className="inline-block text-[11px] font-semibold text-[#AD8746] uppercase tracking-[0.18em] border-b border-[#AD8746]/50 pb-1">
               15 August 2026 Celebration
             </span>
           </div>
         </div>
 
-        {/* 3 Highlight Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {highlights.map((item) => {
             const Icon = item.icon;
             return (
               <div
                 key={item.id}
-                className="bg-slate-900/90 backdrop-blur-md border border-slate-800 hover:border-amber-400/40 p-6 rounded-2xl shadow-xl transition-all duration-300 flex flex-col justify-between space-y-4 group card-hover"
+                className="bg-[#27372D] border border-[#4B6353] hover:border-[#AD8746] p-6 rounded-sm transition-colors flex flex-col justify-between space-y-5"
               >
                 <div className="space-y-3">
-                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center shrink-0 ${item.accentColor}`}>
-                    <Icon className="text-xl" />
+                  <div className="w-10 h-10 rounded-sm border border-[#AD8746]/50 bg-[#34483B] text-[#AD8746] flex items-center justify-center shrink-0">
+                    <Icon className="text-lg" />
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-bold font-serif text-white group-hover:text-amber-300 transition-colors">
+                    <h3 className="text-lg font-bold font-serif text-[#F4EFE3]">
                       {item.title}
                     </h3>
-                    <span className="text-[11px] font-semibold text-amber-400/90 uppercase tracking-wider block mt-0.5">
+                    <span className="text-[11px] font-semibold text-[#AD8746] uppercase tracking-wider block mt-0.5">
                       {item.subtitle}
                     </span>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-[#EBE2CC]/85 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between">
-                  <span className="text-[11px] font-medium text-slate-400">S.S. Global Celebration</span>
+                <div className="pt-3 border-t border-[#3F5547] flex items-center justify-between">
+                  <span className="text-[11px] font-medium text-[#EBE2CC]/70">S.S. Global Celebration</span>
                   <Link
                     to="/gallery"
-                    className="text-xs font-bold text-amber-400 hover:text-amber-300 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                    className="text-xs font-semibold text-[#AD8746] hover:text-[#F4EFE3] inline-flex items-center gap-1 transition-colors"
                   >
                     <span>View Gallery</span>
                     <FiArrowRight className="text-xs" />

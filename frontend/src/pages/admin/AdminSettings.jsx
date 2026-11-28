@@ -164,8 +164,8 @@ const AdminSettings = () => {
       <main className="p-4 sm:p-6 lg:p-8 space-y-6">
         <form onSubmit={handleSubmit} className="space-y-8 max-w-5xl">
           {/* Section 1: General Branding */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-            <h3 className="text-lg font-bold font-serif text-slate-900 border-l-4 border-blue-600 pl-3">
+          <div className="bg-white p-6 sm:p-8 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
+            <h3 className="text-lg font-bold font-serif text-[#34483B] border-l-4 border-blue-600 pl-3">
               1. General Identity & Branding
             </h3>
 
@@ -179,7 +179,7 @@ const AdminSettings = () => {
                   required
                   value={formData.schoolName}
                   onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -191,7 +191,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.tagline}
                   onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -205,7 +205,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.admissionButtonText}
                   onChange={(e) => setFormData({ ...formData, admissionButtonText: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -217,7 +217,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.admissionButtonLink}
                   onChange={(e) => setFormData({ ...formData, admissionButtonLink: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -234,7 +234,7 @@ const AdminSettings = () => {
               />
               {settings?.logo && (
                 <div className="mt-2 flex items-center gap-2">
-                  <img src={settings.logo} alt="Logo Preview" className="w-10 h-10 rounded-xl object-cover border border-slate-200" />
+                  <img src={settings.logo} alt="Logo Preview" className="w-10 h-10 rounded-xl object-cover border border-[#CFC5B1]" />
                   <span className="text-xs text-slate-500">Current Logo attached</span>
                 </div>
               )}
@@ -242,8 +242,8 @@ const AdminSettings = () => {
           </div>
 
           {/* Section 2: Contact Info & Address */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-            <h3 className="text-lg font-bold font-serif text-slate-900 border-l-4 border-amber-500 pl-3">
+          <div className="bg-white p-6 sm:p-8 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
+            <h3 className="text-lg font-bold font-serif text-[#34483B] border-l-4 border-amber-500 pl-3">
               2. Contact Information & Office Hours
             </h3>
 
@@ -257,7 +257,7 @@ const AdminSettings = () => {
                   required
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -270,7 +270,7 @@ const AdminSettings = () => {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -285,7 +285,7 @@ const AdminSettings = () => {
                   required
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -297,7 +297,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.altPhone}
                   onChange={(e) => setFormData({ ...formData, altPhone: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -309,7 +309,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.officeHours}
                   onChange={(e) => setFormData({ ...formData, officeHours: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -323,10 +323,10 @@ const AdminSettings = () => {
                 value={formData.googleMapUrl}
                 onChange={handleMapUrlChange}
                 placeholder="https://www.google.com/maps/embed?pb=..."
-                className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl text-sm focus:outline-none focus:ring-2 ${
+                className={`w-full px-4 py-2.5 bg-[#EBE2CC]/50 border rounded-xl text-sm focus:outline-none focus:ring-2 ${
                   mapUrlError
                     ? 'border-red-500 focus:ring-red-500 bg-red-50/30'
-                    : 'border-slate-300 focus:ring-blue-600'
+                    : 'border-[#CFC5B1] focus:ring-[#34483B] focus:border-[#34483B]'
                 }`}
               />
               {mapUrlError && (
@@ -340,7 +340,7 @@ const AdminSettings = () => {
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-2">
                   Map Live Preview
                 </label>
-                <div className="rounded-2xl overflow-hidden border border-slate-200 h-64">
+                <div className="rounded-sm overflow-hidden border border-[#CFC5B1] h-64">
                   <GoogleMap
                     src={formData.googleMapUrl}
                     schoolName={formData.schoolName || 'S.S. Global Public School'}
@@ -354,8 +354,8 @@ const AdminSettings = () => {
           </div>
 
           {/* Section 3: About Institute Content */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-            <h3 className="text-lg font-bold font-serif text-slate-900 border-l-4 border-indigo-600 pl-3">
+          <div className="bg-white p-6 sm:p-8 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
+            <h3 className="text-lg font-bold font-serif text-[#34483B] border-l-4 border-indigo-600 pl-3">
               3. About Institute Section
             </h3>
 
@@ -369,7 +369,7 @@ const AdminSettings = () => {
                   value={formData.aboutBadge}
                   onChange={(e) => setFormData({ ...formData, aboutBadge: e.target.value })}
                   placeholder="e.g. ABOUT OUR INSTITUTE"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -382,7 +382,7 @@ const AdminSettings = () => {
                   value={formData.aboutTitle}
                   onChange={(e) => setFormData({ ...formData, aboutTitle: e.target.value })}
                   placeholder="e.g. Dedicated to Excellence in Education"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -396,7 +396,7 @@ const AdminSettings = () => {
                 value={formData.aboutText}
                 onChange={(e) => setFormData({ ...formData, aboutText: e.target.value })}
                 placeholder="Full description of the institute..."
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
               ></textarea>
             </div>
 
@@ -410,7 +410,7 @@ const AdminSettings = () => {
                   value={formData.aboutExpNumber}
                   onChange={(e) => setFormData({ ...formData, aboutExpNumber: e.target.value })}
                   placeholder="e.g. 15+"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -423,7 +423,7 @@ const AdminSettings = () => {
                   value={formData.aboutExpText}
                   onChange={(e) => setFormData({ ...formData, aboutExpText: e.target.value })}
                   placeholder="e.g. Years of Educational Excellence"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -437,7 +437,7 @@ const AdminSettings = () => {
                 value={formData.aboutFeatures}
                 onChange={(e) => setFormData({ ...formData, aboutFeatures: e.target.value })}
                 placeholder="e.g. CBSE Curriculum, Smart Classrooms, Experienced Faculty, Holistic Sports"
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
               />
             </div>
 
@@ -450,7 +450,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.aboutButtonText}
                   onChange={(e) => setFormData({ ...formData, aboutButtonText: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -462,7 +462,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.aboutButtonLink}
                   onChange={(e) => setFormData({ ...formData, aboutButtonLink: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -479,7 +479,7 @@ const AdminSettings = () => {
               />
               {settings?.aboutImage && (
                 <div className="mt-2 flex items-center gap-3">
-                  <img src={settings.aboutImage} alt="Campus Building" className="w-16 h-12 rounded-xl object-cover border border-slate-200" />
+                  <img src={settings.aboutImage} alt="Campus Building" className="w-16 h-12 rounded-xl object-cover border border-[#CFC5B1]" />
                   <span className="text-xs text-slate-500">Current Building Image Attached</span>
                 </div>
               )}
@@ -487,8 +487,8 @@ const AdminSettings = () => {
           </div>
 
           {/* Section 4: Leadership Messages */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-            <h3 className="text-lg font-bold font-serif text-slate-900 border-l-4 border-purple-600 pl-3">
+          <div className="bg-white p-6 sm:p-8 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
+            <h3 className="text-lg font-bold font-serif text-[#34483B] border-l-4 border-purple-600 pl-3">
               4. Leadership Messages
             </h3>
 
@@ -501,7 +501,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.principalName}
                   onChange={(e) => setFormData({ ...formData, principalName: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -513,7 +513,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.directorName}
                   onChange={(e) => setFormData({ ...formData, directorName: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -531,7 +531,7 @@ const AdminSettings = () => {
                 />
                 {settings?.principalPhoto && (
                   <div className="mt-2 flex items-center gap-2">
-                    <img src={settings.principalPhoto} alt="Principal Preview" className="w-10 h-10 rounded-full object-cover border border-slate-200" />
+                    <img src={settings.principalPhoto} alt="Principal Preview" className="w-10 h-10 rounded-full object-cover border border-[#CFC5B1]" />
                     <span className="text-xs text-slate-500">Current Principal Photo</span>
                   </div>
                 )}
@@ -549,7 +549,7 @@ const AdminSettings = () => {
                 />
                 {settings?.directorPhoto && (
                   <div className="mt-2 flex items-center gap-2">
-                    <img src={settings.directorPhoto} alt="Director Preview" className="w-10 h-10 rounded-full object-cover border border-slate-200" />
+                    <img src={settings.directorPhoto} alt="Director Preview" className="w-10 h-10 rounded-full object-cover border border-[#CFC5B1]" />
                     <span className="text-xs text-slate-500">Current Director Photo</span>
                   </div>
                 )}
@@ -564,7 +564,7 @@ const AdminSettings = () => {
                 rows="3"
                 value={formData.principalMessage}
                 onChange={(e) => setFormData({ ...formData, principalMessage: e.target.value })}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
               ></textarea>
             </div>
 
@@ -576,14 +576,14 @@ const AdminSettings = () => {
                 rows="3"
                 value={formData.directorMessage}
                 onChange={(e) => setFormData({ ...formData, directorMessage: e.target.value })}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
               ></textarea>
             </div>
           </div>
 
           {/* Section 5: Social Media Links */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-            <h3 className="text-lg font-bold font-serif text-slate-900 border-l-4 border-emerald-500 pl-3">
+          <div className="bg-white p-6 sm:p-8 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
+            <h3 className="text-lg font-bold font-serif text-[#34483B] border-l-4 border-emerald-500 pl-3">
               5. Social Media Platform Links
             </h3>
 
@@ -594,7 +594,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.facebook}
                   onChange={(e) => setFormData({ ...formData, facebook: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm"
                 />
               </div>
 
@@ -604,7 +604,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.instagram}
                   onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm"
                 />
               </div>
 
@@ -614,7 +614,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.twitter}
                   onChange={(e) => setFormData({ ...formData, twitter: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm"
                 />
               </div>
 
@@ -624,7 +624,7 @@ const AdminSettings = () => {
                   type="text"
                   value={formData.youtube}
                   onChange={(e) => setFormData({ ...formData, youtube: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm"
                 />
               </div>
             </div>
@@ -634,7 +634,7 @@ const AdminSettings = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-base shadow-xl shadow-blue-600/30 transition-all flex items-center gap-2 disabled:opacity-50"
+              className="px-8 py-3.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-base shadow-xl  transition-all flex items-center gap-2 disabled:opacity-50"
             >
               <FiSave className="text-xl" /> {submitting ? 'Saving Settings...' : 'Save All Settings'}
             </button>

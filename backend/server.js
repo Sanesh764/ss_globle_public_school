@@ -1,9 +1,6 @@
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import app from './src/app.js';
 import connectDB from './src/config/db.js';
-
-dotenv.config();
 
 // Validate required security environment variables on startup
 const jwtSecret = process.env.JWT_SECRET;
@@ -22,11 +19,7 @@ let server;
 // Connect to Database and start HTTP server (NO automatic production seeding)
 connectDB().then(() => {
   server = app.listen(PORT, () => {
-    console.log(`=======================================================`);
     console.log(` [STARTUP] S.S. Global Public School Server Running on Port ${PORT}`);
-    console.log(` [STARTUP] Environment: ${process.env.NODE_ENV || 'production'}`);
-    console.log(` [STARTUP] Health Check Endpoint: /api/health`);
-    console.log(`=======================================================`);
   });
 }).catch((err) => {
   console.error('[DATABASE ERROR] Failed to initialize server:', err.message);

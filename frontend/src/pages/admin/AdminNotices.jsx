@@ -84,7 +84,7 @@ const AdminNotices = () => {
 
       <main className="p-4 sm:p-6 lg:p-8 space-y-6">
         {/* Top Control Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-5 rounded-sm shadow-sm border border-[#CFC5B1]">
           <SearchBar
             value={search}
             onChange={(val) => {
@@ -97,7 +97,7 @@ const AdminNotices = () => {
 
           <button
             onClick={handleCreateNew}
-            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-colors flex items-center justify-center gap-2 shrink-0"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-sm shadow-md transition-colors flex items-center justify-center gap-2 shrink-0"
           >
             <FiPlus className="text-lg" /> Publish New Notice
           </button>
@@ -107,7 +107,7 @@ const AdminNotices = () => {
         {loading ? (
           <LoadingSpinner />
         ) : noticesList.length > 0 ? (
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="bg-white rounded-sm shadow-sm border border-[#CFC5B1] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm text-slate-700">
                 <thead className="bg-slate-900 text-slate-200 uppercase text-[11px] tracking-wider font-bold">
@@ -121,9 +121,9 @@ const AdminNotices = () => {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {noticesList.map((notice) => (
-                    <tr key={notice._id} className="hover:bg-slate-50 transition-colors">
+                    <tr key={notice._id} className="hover:bg-[#EBE2CC]/50 transition-colors">
                       <td className="px-6 py-4 max-w-md">
-                        <span className="font-bold text-slate-900 font-serif block">{notice.title}</span>
+                        <span className="font-bold text-[#34483B] font-serif block">{notice.title}</span>
                         <span className="text-xs text-slate-500 line-clamp-1">{notice.description}</span>
                       </td>
                       <td className="px-6 py-4">
@@ -146,7 +146,7 @@ const AdminNotices = () => {
                       <td className="px-6 py-4 text-right space-x-2">
                         <button
                           onClick={() => handleEdit(notice)}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          className="p-2 text-[#34483B] hover:bg-blue-50 rounded-lg transition-colors"
                           title="Edit Notice"
                         >
                           <FiEdit2 className="text-base" />
@@ -174,7 +174,7 @@ const AdminNotices = () => {
             </div>
           </div>
         ) : (
-          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500">
+          <div className="p-12 text-center bg-white rounded-sm border border-[#CFC5B1] text-slate-500">
             No notices found. Click "Publish New Notice" to create one.
           </div>
         )}

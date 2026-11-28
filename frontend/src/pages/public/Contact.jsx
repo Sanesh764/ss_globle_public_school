@@ -29,20 +29,20 @@ const Contact = () => {
   const contactSchema = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    'name': 'Contact & Admissions - S.S. Global Public School Daudnagar',
-    'url': 'https://www.ssglobalpublicschool.com/contact',
-    'mainEntity': {
+    name: 'Contact & Admissions - S.S. Global Public School Daudnagar',
+    url: 'https://www.ssglobalpublicschool.com/contact',
+    mainEntity: {
       '@type': 'EducationalOrganization',
-      'name': 'S.S. Global Public School',
-      'telephone': '+919122490003',
-      'email': 'ssglobalpublicschool0@gmail.com',
-      'address': {
+      name: 'S.S. Global Public School',
+      telephone: '+919122490003',
+      email: 'ssglobalpublicschool0@gmail.com',
+      address: {
         '@type': 'PostalAddress',
-        'streetAddress': 'Daudnagar',
-        'addressLocality': 'Daudnagar',
-        'addressRegion': 'Bihar',
-        'postalCode': '824143',
-        'addressCountry': 'IN',
+        streetAddress: 'Daudnagar',
+        addressLocality: 'Daudnagar',
+        addressRegion: 'Bihar',
+        postalCode: '824143',
+        addressCountry: 'IN',
       },
     },
   };
@@ -54,7 +54,8 @@ const Contact = () => {
       setSuccessMsg('');
       const res = await submitContactApi(formData);
       if (res.success) {
-        const msg = res.message || 'Thank you! Your inquiry has been received. Our team will contact you soon.';
+        const msg =
+          res.message || 'Thank you! Your inquiry has been received. Our team will contact you soon.';
         setSuccessMsg(msg);
         addToast(msg, 'success');
         setFormData({
@@ -76,8 +77,12 @@ const Contact = () => {
     }
   };
 
+  const inputClass =
+    'w-full px-3.5 py-2.5 bg-[#F4EFE3] border border-[#CFC5B1] rounded-sm text-sm text-[#252821] placeholder-[#55594E]/60 focus:outline-none focus:border-[#34483B] focus:ring-1 focus:ring-[#34483B] transition-colors';
+  const labelClass = 'block text-[11px] font-semibold text-[#34483B] uppercase tracking-wider mb-1.5';
+
   return (
-    <main>
+    <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
         title="Contact Us & Admissions 2026-27 | S.S. Global Public School Daudnagar"
         description="Contact S.S. Global Public School admin office in Daudnagar, Bihar. Phone: +91 9122490003. Email: ssglobalpublicschool0@gmail.com. Submit online admission inquiries & get campus location directions."
@@ -91,136 +96,138 @@ const Contact = () => {
         breadcrumb={[{ label: 'Contact' }]}
       />
 
-      <section className="py-16 bg-slate-950 text-white">
+      <section className="py-14 bg-[#F4EFE3]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            {/* Contact Information & Office Hours Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+            {/* Contact Information Column */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-slate-900 p-8 rounded-3xl shadow-xl border border-slate-800 space-y-6 card-hover">
-                <h3 className="text-2xl font-bold font-serif text-white border-l-4 border-blue-500 pl-3">
+              <div className="bg-[#EBE2CC]/60 p-7 sm:p-8 rounded-sm border border-[#CFC5B1] space-y-6">
+                <h2 className="text-2xl font-bold font-serif text-[#34483B] border-l-2 border-[#AD8746] pl-3">
                   School Administrative Office
-                </h3>
+                </h2>
 
-                <div className="space-y-3.5 text-sm text-slate-300">
-                  <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-start gap-3.5 transition-colors hover:border-blue-500/40">
-                    <FiMapPin className="text-blue-400 text-xl mt-0.5 shrink-0" />
+                <div className="divide-y divide-[#CFC5B1] border-t border-b border-[#CFC5B1] text-sm">
+                  <div className="py-3.5 flex items-start gap-3.5">
+                    <FiMapPin className="text-[#34483B] text-lg mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-white font-serif">School Campus Address</h4>
-                      <p className="text-slate-300 text-xs sm:text-sm mt-0.5 leading-relaxed">{settings.address || 'Daudnagar, Bihar - 824143, India'}</p>
+                      <h4 className="font-semibold text-[#34483B] text-xs uppercase tracking-wider">School Campus Address</h4>
+                      <p className="text-[#252821] text-xs sm:text-sm mt-0.5 leading-relaxed">
+                        {settings.address || 'Daudnagar, Bihar - 824143, India'}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-start gap-3.5 transition-colors hover:border-amber-400/40">
-                    <FiPhone className="text-amber-400 text-xl mt-0.5 shrink-0" />
+                  <div className="py-3.5 flex items-start gap-3.5">
+                    <FiPhone className="text-[#34483B] text-lg mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-white font-serif">Phone Numbers</h4>
-                      <a href={`tel:${settings.phone || '+919122490003'}`} className="text-slate-300 hover:text-amber-300 font-semibold block text-xs sm:text-sm">
+                      <h4 className="font-semibold text-[#34483B] text-xs uppercase tracking-wider">Phone Numbers</h4>
+                      <a
+                        href={`tel:${settings.phone || '+919122490003'}`}
+                        className="text-[#252821] hover:text-[#AD8746] font-medium block text-xs sm:text-sm mt-0.5"
+                      >
                         {settings.phone || '+91 9122490003'}
                       </a>
                     </div>
                   </div>
 
-                  <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-start gap-3.5 transition-colors hover:border-emerald-400/40">
-                    <FiMail className="text-emerald-400 text-xl mt-0.5 shrink-0" />
+                  <div className="py-3.5 flex items-start gap-3.5">
+                    <FiMail className="text-[#34483B] text-lg mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-white font-serif">Email Address</h4>
-                      <a href={`mailto:${settings.email || 'ssglobalpublicschool0@gmail.com'}`} className="text-slate-300 hover:text-blue-400 font-semibold break-all block text-xs sm:text-sm">
+                      <h4 className="font-semibold text-[#34483B] text-xs uppercase tracking-wider">Email Address</h4>
+                      <a
+                        href={`mailto:${settings.email || 'ssglobalpublicschool0@gmail.com'}`}
+                        className="text-[#252821] hover:text-[#AD8746] font-medium break-all block text-xs sm:text-sm mt-0.5"
+                      >
                         {settings.email || 'ssglobalpublicschool0@gmail.com'}
                       </a>
                     </div>
                   </div>
 
-                  <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-start gap-3.5 transition-colors hover:border-purple-400/40">
-                    <FiClock className="text-purple-400 text-xl mt-0.5 shrink-0" />
+                  <div className="py-3.5 flex items-start gap-3.5">
+                    <FiClock className="text-[#34483B] text-lg mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="font-bold text-white font-serif">Office Working Hours</h4>
-                      <p className="text-slate-300 text-xs sm:text-sm mt-0.5">{settings.officeHours || 'Monday - Saturday: 8:00 AM - 3:00 PM'}</p>
+                      <h4 className="font-semibold text-[#34483B] text-xs uppercase tracking-wider">Office Working Hours</h4>
+                      <p className="text-[#252821] text-xs sm:text-sm mt-0.5">
+                        {settings.officeHours || 'Monday - Saturday: 8:00 AM - 3:00 PM'}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Admission Note */}
-              <div className="primary-gradient text-white p-6 rounded-3xl shadow-xl space-y-2 border border-blue-400/30">
+              <div className="bg-[#34483B] text-[#F4EFE3] p-6 rounded-sm border border-[#27372D] space-y-2">
                 <h4 className="font-bold font-serif text-lg flex items-center gap-2">
-                  <FiCheckCircle className="text-amber-400 text-xl" /> Admissions Open 2026-2027
+                  <FiCheckCircle className="text-[#AD8746] text-lg" /> Admissions Open 2026–2027
                 </h4>
-                <p className="text-xs text-blue-100 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#EBE2CC]/85 leading-relaxed">
                   Parents can visit the school office during working hours to obtain the prospectus and admission registration form.
                 </p>
               </div>
             </div>
 
             {/* Contact Inquiry Form */}
-            <div className="lg:col-span-7 bg-slate-900 p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-800 card-hover">
-              <h3 className="text-2xl font-bold font-serif text-white mb-2">
+            <div className="lg:col-span-7 bg-[#EBE2CC]/55 p-7 sm:p-10 rounded-sm border border-[#CFC5B1]">
+              <h2 className="text-2xl font-bold font-serif text-[#34483B] mb-1.5">
                 Send Us a Direct Inquiry
-              </h3>
-              <p className="text-slate-400 text-sm mb-6">
+              </h2>
+              <p className="text-[#55594E] text-sm mb-6">
                 Fill out the form below and our administrative team will respond promptly.
               </p>
 
               {successMsg && (
-                <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-400/30 rounded-2xl text-emerald-300 text-sm font-semibold flex items-center gap-2">
-                  <FiCheckCircle className="text-emerald-400 text-xl shrink-0" />
-                  {successMsg}
+                <div className="mb-6 p-4 bg-[#34483B]/10 border border-[#34483B]/40 rounded-sm text-[#34483B] text-sm font-medium flex items-center gap-2">
+                  <FiCheckCircle className="text-[#34483B] text-lg shrink-0" />
+                  <span>{successMsg}</span>
                 </div>
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
-                      Full Name *
-                    </label>
+                    <label className={labelClass}>Full Name *</label>
                     <input
                       type="text"
                       required
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       placeholder="e.g. Ramesh Kumar"
-                      className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={inputClass}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
-                      Email Address *
-                    </label>
+                    <label className={labelClass}>Email Address *</label>
                     <input
                       type="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="name@example.com"
-                      className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={inputClass}
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
-                      Mobile Number *
-                    </label>
+                    <label className={labelClass}>Mobile Number *</label>
                     <input
                       type="tel"
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+91 9122490003"
-                      className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={inputClass}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
-                      Inquiry Subject *
-                    </label>
+                    <label className={labelClass}>Inquiry Subject *</label>
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={inputClass}
                     >
                       <option value="Admission Inquiry">Admission Inquiry</option>
                       <option value="Fee Structure">Fee Structure</option>
@@ -232,84 +239,74 @@ const Contact = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
-                      State
-                    </label>
+                    <label className={labelClass}>State</label>
                     <input
                       type="text"
                       value={formData.state}
                       onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                       placeholder="Bihar"
-                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={inputClass}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
-                      District
-                    </label>
+                    <label className={labelClass}>District</label>
                     <input
                       type="text"
                       value={formData.district}
                       onChange={(e) => setFormData({ ...formData, district: e.target.value })}
                       placeholder="Aurangabad"
-                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={inputClass}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
-                      City / Village
-                    </label>
+                    <label className={labelClass}>City / Village</label>
                     <input
                       type="text"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                       placeholder="Daudnagar"
-                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={inputClass}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
-                    PIN Code (Optional)
-                  </label>
+                  <label className={labelClass}>PIN Code (Optional)</label>
                   <input
                     type="text"
                     value={formData.pinCode}
                     onChange={(e) => setFormData({ ...formData, pinCode: e.target.value })}
                     placeholder="e.g. 824143"
-                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={inputClass}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">
-                    Your Message / Question *
-                  </label>
+                  <label className={labelClass}>Your Message / Question *</label>
                   <textarea
                     required
                     rows="4"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Enter your message or questions regarding admission..."
-                    className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={inputClass}
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-base rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full py-3.5 bg-[#34483B] hover:bg-[#27372D] text-[#F4EFE3] font-semibold text-sm tracking-wide rounded-sm transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  <FiSend /> {submitting ? 'Submitting...' : 'Submit Inquiry'}
+                  <FiSend className="text-[#AD8746]" />
+                  <span>{submitting ? 'Submitting...' : 'Submit Inquiry'}</span>
                 </button>
               </form>
             </div>
           </div>
 
-          {/* Location & Directions Section */}
           <LocationSection />
         </div>
       </section>

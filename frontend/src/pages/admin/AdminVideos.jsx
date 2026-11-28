@@ -296,57 +296,57 @@ const AdminVideos = () => {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen pb-12 font-sans">
+    <div className="bg-[#EBE2CC]/50 min-h-screen pb-12 font-sans">
       <AdminHeader setMobileOpen={setMobileOpen} title="Video Gallery Management" />
 
       <main className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
         {/* Dashboard Statistics Overview Cards */}
         {stats && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold">
+            <div className="bg-white p-5 rounded-sm border border-[#CFC5B1] shadow-sm flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#34483B] flex items-center justify-center text-2xl font-bold">
                 <FiVideo />
               </div>
               <div>
                 <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Total Videos</span>
-                <h3 className="text-2xl font-extrabold font-serif text-slate-900">{stats.totalVideos || 0}</h3>
+                <h3 className="text-2xl font-extrabold font-serif text-[#34483B]">{stats.totalVideos || 0}</h3>
               </div>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+            <div className="bg-white p-5 rounded-sm border border-[#CFC5B1] shadow-sm flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl font-bold">
                 <FiCheckCircle />
               </div>
               <div>
                 <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Active Public</span>
-                <h3 className="text-2xl font-extrabold font-serif text-slate-900">{stats.activeVideos || 0}</h3>
+                <h3 className="text-2xl font-extrabold font-serif text-[#34483B]">{stats.activeVideos || 0}</h3>
               </div>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+            <div className="bg-white p-5 rounded-sm border border-[#CFC5B1] shadow-sm flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl font-bold">
                 <FiTrendingUp />
               </div>
               <div>
                 <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Added This Month</span>
-                <h3 className="text-2xl font-extrabold font-serif text-slate-900">{stats.addedThisMonth || 0}</h3>
+                <h3 className="text-2xl font-extrabold font-serif text-[#34483B]">{stats.addedThisMonth || 0}</h3>
               </div>
             </div>
 
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+            <div className="bg-white p-5 rounded-sm border border-[#CFC5B1] shadow-sm flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-2xl font-bold">
                 <FiXCircle />
               </div>
               <div>
                 <span className="text-xs text-slate-500 font-bold uppercase tracking-wider">Inactive Hidden</span>
-                <h3 className="text-2xl font-extrabold font-serif text-slate-900">{stats.inactiveVideos || 0}</h3>
+                <h3 className="text-2xl font-extrabold font-serif text-[#34483B]">{stats.inactiveVideos || 0}</h3>
               </div>
             </div>
           </div>
         )}
 
         {/* Control Bar: Search, Filters, Bulk Actions, Add Button */}
-        <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+        <div className="bg-white p-5 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
             {/* Search */}
             <div className="w-full lg:w-80">
@@ -369,7 +369,7 @@ const AdminVideos = () => {
                   setCategoryFilter(e.target.value);
                   setPage(1);
                 }}
-                className="bg-slate-50 border border-slate-300 text-slate-700 text-xs font-semibold rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500"
+                className="bg-[#EBE2CC]/50 border border-[#CFC5B1] text-slate-700 text-xs font-semibold rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500"
               >
                 <option value="All">All Categories</option>
                 {CATEGORIES.map((c) => (
@@ -383,7 +383,7 @@ const AdminVideos = () => {
                   setStatusFilter(e.target.value);
                   setPage(1);
                 }}
-                className="bg-slate-50 border border-slate-300 text-slate-700 text-xs font-semibold rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500"
+                className="bg-[#EBE2CC]/50 border border-[#CFC5B1] text-slate-700 text-xs font-semibold rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500"
               >
                 <option value="All">All Statuses</option>
                 <option value="active">Active Only</option>
@@ -396,7 +396,7 @@ const AdminVideos = () => {
                   setFeaturedFilter(e.target.value);
                   setPage(1);
                 }}
-                className="bg-slate-50 border border-slate-300 text-slate-700 text-xs font-semibold rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500"
+                className="bg-[#EBE2CC]/50 border border-[#CFC5B1] text-slate-700 text-xs font-semibold rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500"
               >
                 <option value="All">Featured & Standard</option>
                 <option value="true">Featured Only</option>
@@ -404,7 +404,7 @@ const AdminVideos = () => {
 
               <button
                 onClick={fetchVideosAndStats}
-                className="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors shrink-0 border border-slate-300"
+                className="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors shrink-0 border border-[#CFC5B1]"
                 title="Refresh Table"
               >
                 <FiRefreshCw className={loading ? 'animate-spin' : ''} />
@@ -414,7 +414,7 @@ const AdminVideos = () => {
             {/* Add New Video Action */}
             <button
               onClick={handleOpenAddModal}
-              className="w-full lg:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md transition-colors flex items-center justify-center gap-2 shrink-0"
+              className="w-full lg:w-auto px-5 py-2.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-xs sm:text-sm shadow-md transition-colors flex items-center justify-center gap-2 shrink-0"
             >
               <FiPlus className="text-lg" /> Add YouTube Video
             </button>
@@ -454,7 +454,7 @@ const AdminVideos = () => {
         {loading ? (
           <LoadingSpinner />
         ) : videos.length > 0 ? (
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="bg-white rounded-sm shadow-sm border border-[#CFC5B1] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm text-slate-700">
                 <thead className="bg-slate-900 text-slate-200 uppercase text-[11px] tracking-wider font-bold">
@@ -464,7 +464,7 @@ const AdminVideos = () => {
                         type="checkbox"
                         checked={videos.length > 0 && selectedIds.length === videos.length}
                         onChange={handleSelectAll}
-                        className="rounded border-slate-700 text-blue-600 focus:ring-blue-500"
+                        className="rounded border-slate-700 text-[#34483B] focus:ring-[#34483B] focus:border-[#34483B]"
                       />
                     </th>
                     <th className="px-4 py-4">Thumbnail</th>
@@ -479,20 +479,20 @@ const AdminVideos = () => {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {videos.map((video) => (
-                    <tr key={video._id} className="hover:bg-slate-50/80 transition-colors">
+                    <tr key={video._id} className="hover:bg-[#EBE2CC]/50/80 transition-colors">
                       {/* Select Checkbox */}
                       <td className="px-4 py-4 text-center">
                         <input
                           type="checkbox"
                           checked={selectedIds.includes(video._id)}
                           onChange={() => handleToggleSelect(video._id)}
-                          className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                          className="rounded border-[#CFC5B1] text-[#34483B] focus:ring-[#34483B] focus:border-[#34483B]"
                         />
                       </td>
 
                       {/* Thumbnail & YouTube Quick Trigger */}
                       <td className="px-4 py-4">
-                        <div className="relative w-24 aspect-video rounded-xl overflow-hidden bg-slate-900 border border-slate-200 shadow-xs group">
+                        <div className="relative w-24 aspect-video rounded-xl overflow-hidden bg-slate-900 border border-[#CFC5B1] shadow-xs group">
                           <img
                             src={video.thumbnail}
                             alt={video.title}
@@ -511,7 +511,7 @@ const AdminVideos = () => {
                       {/* Title & Description */}
                       <td className="px-6 py-4 max-w-xs sm:max-w-md">
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-slate-900 font-serif block text-sm">
+                          <span className="font-bold text-[#34483B] font-serif block text-sm">
                             {video.title}
                           </span>
                         </div>
@@ -538,7 +538,7 @@ const AdminVideos = () => {
                           type="number"
                           value={video.displayOrder}
                           onChange={(e) => handleOrderChange(video._id, e.target.value)}
-                          className="w-14 text-center bg-slate-50 border border-slate-300 rounded-lg py-1 text-xs font-bold focus:outline-none focus:border-blue-500"
+                          className="w-14 text-center bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-lg py-1 text-xs font-bold focus:outline-none focus:border-blue-500"
                         />
                       </td>
 
@@ -587,7 +587,7 @@ const AdminVideos = () => {
                         </button>
                         <button
                           onClick={() => handleOpenEditModal(video)}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          className="p-2 text-[#34483B] hover:bg-blue-50 rounded-lg transition-colors"
                           title="Edit Video Details"
                         >
                           <FiEdit2 className="text-base" />
@@ -617,7 +617,7 @@ const AdminVideos = () => {
           </div>
         ) : (
           /* Empty State */
-          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500 space-y-3">
+          <div className="p-12 text-center bg-white rounded-sm border border-[#CFC5B1] text-slate-500 space-y-3">
             <FiVideo className="text-4xl text-slate-400 mx-auto" />
             <h4 className="text-lg font-bold text-slate-800 font-serif">No videos available yet</h4>
             <p className="text-xs text-slate-500 max-w-sm mx-auto">
@@ -625,7 +625,7 @@ const AdminVideos = () => {
             </p>
             <button
               onClick={handleOpenAddModal}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-bold text-xs rounded-xl shadow-sm hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#34483B] text-[#F4EFE3] font-bold text-xs rounded-xl shadow-sm hover:bg-blue-700 transition-colors"
             >
               <FiPlus /> Add First Video
             </button>
@@ -636,11 +636,11 @@ const AdminVideos = () => {
       {/* Add / Edit Video Modal */}
       {formModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-6 relative my-8 animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-sm max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-[#CFC5B1] space-y-6 relative my-8 animate-in fade-in zoom-in-95 duration-200">
             {/* Modal Header */}
             <div className="flex justify-between items-center border-b border-slate-100 pb-4">
               <div>
-                <h3 className="text-xl font-bold font-serif text-slate-900">
+                <h3 className="text-xl font-bold font-serif text-[#34483B]">
                   {editingVideo ? 'Edit Video Details' : 'Add New YouTube Video'}
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
@@ -668,10 +668,10 @@ const AdminVideos = () => {
                   value={formData.youtubeUrl}
                   onChange={(e) => setFormData({ ...formData, youtubeUrl: e.target.value })}
                   placeholder="https://www.youtube.com/watch?v=XXXXX or https://youtu.be/XXXXX"
-                  className={`w-full px-4 py-3 bg-slate-50 border rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full px-4 py-3 bg-[#EBE2CC]/50 border rounded-xl text-sm text-[#34483B] focus:outline-none focus:ring-2 transition-all ${
                     !isUrlValid
                       ? 'border-rose-400 focus:ring-rose-500/20'
-                      : 'border-slate-300 focus:ring-blue-500/20 focus:border-blue-500'
+                      : 'border-[#CFC5B1] focus:ring-[#34483B] focus:border-[#34483B]/20 focus:border-blue-500'
                   }`}
                 />
                 {!isUrlValid && (
@@ -683,7 +683,7 @@ const AdminVideos = () => {
 
               {/* Instant Live Thumbnail Preview */}
               {liveThumbnail && (
-                <div className="bg-slate-900 p-3 rounded-2xl border border-slate-800 space-y-2">
+                <div className="bg-slate-900 p-3 rounded-sm border border-slate-800 space-y-2">
                   <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1">
                     <FiEye /> Automatic Thumbnail Preview
                   </span>
@@ -711,7 +711,7 @@ const AdminVideos = () => {
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="Enter descriptive video title"
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-3 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm text-[#34483B] focus:outline-none focus:border-blue-500"
                 />
               </div>
 
@@ -725,7 +725,7 @@ const AdminVideos = () => {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Short description of the event or activity featured in the video..."
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-blue-500 resize-none"
+                  className="w-full px-4 py-3 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm text-[#34483B] focus:outline-none focus:border-blue-500 resize-none"
                 />
               </div>
 
@@ -738,7 +738,7 @@ const AdminVideos = () => {
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-blue-500 font-semibold"
+                    className="w-full px-4 py-3 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm text-[#34483B] focus:outline-none focus:border-blue-500 font-semibold"
                   >
                     {CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>{cat}</option>
@@ -754,19 +754,19 @@ const AdminVideos = () => {
                     type="number"
                     value={formData.displayOrder}
                     onChange={(e) => setFormData({ ...formData, displayOrder: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-3 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm text-[#34483B] focus:outline-none focus:border-blue-500"
                   />
                 </div>
               </div>
 
               {/* Checkbox Toggles */}
-              <div className="flex flex-wrap gap-6 pt-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
+              <div className="flex flex-wrap gap-6 pt-2 bg-[#EBE2CC]/50 p-4 rounded-xl border border-[#CFC5B1]">
                 <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-700">
                   <input
                     type="checkbox"
                     checked={formData.isActive}
                     onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                    className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 w-4 h-4"
+                    className="rounded border-[#CFC5B1] text-[#34483B] focus:ring-[#34483B] focus:border-[#34483B] w-4 h-4"
                   />
                   <span>Active on Public Website</span>
                 </label>
@@ -776,7 +776,7 @@ const AdminVideos = () => {
                     type="checkbox"
                     checked={formData.isFeatured}
                     onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
-                    className="rounded border-slate-300 text-amber-600 focus:ring-amber-500 w-4 h-4"
+                    className="rounded border-[#CFC5B1] text-amber-600 focus:ring-amber-500 w-4 h-4"
                   />
                   <span>Mark as Featured (Shown first)</span>
                 </label>
@@ -787,14 +787,14 @@ const AdminVideos = () => {
                 <button
                   type="button"
                   onClick={() => setFormModalOpen(false)}
-                  className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors"
+                  className="px-5 py-2.5 rounded-xl border border-[#CFC5B1] text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting || !isUrlValid}
-                  className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition-colors disabled:opacity-50 flex items-center gap-2"
+                  className="px-6 py-2.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-xs shadow-md transition-colors disabled:opacity-50 flex items-center gap-2"
                 >
                   {submitting ? 'Saving Video...' : (editingVideo ? 'Save Changes' : 'Publish Video')}
                 </button>
@@ -807,7 +807,7 @@ const AdminVideos = () => {
       {/* Video Preview Modal */}
       {previewVideo && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-          <div className="bg-slate-900 text-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-slate-800 space-y-4 relative">
+          <div className="bg-slate-900 text-white rounded-sm max-w-2xl w-full p-6 shadow-2xl border border-slate-800 space-y-4 relative">
             <div className="flex justify-between items-center border-b border-slate-800 pb-3">
               <h4 className="font-serif font-bold text-lg text-white">{previewVideo.title}</h4>
               <button
@@ -819,7 +819,7 @@ const AdminVideos = () => {
             </div>
 
             {/* Embedded YouTube Iframe Preview */}
-            <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-black border border-slate-800 shadow-inner">
+            <div className="relative aspect-video w-full rounded-sm overflow-hidden bg-black border border-slate-800 shadow-inner">
               <iframe
                 src={`https://www.youtube.com/embed/${previewVideo.youtubeVideoId}?autoplay=1`}
                 title={previewVideo.title}
@@ -847,12 +847,12 @@ const AdminVideos = () => {
       {/* Single Delete Confirmation Modal */}
       {confirmDeleteId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
+          <div className="bg-white rounded-sm max-w-md w-full p-6 shadow-2xl border border-[#CFC5B1] text-center space-y-4">
             <div className="w-14 h-14 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mx-auto">
               <FiTrash2 />
             </div>
             <div>
-              <h4 className="text-lg font-bold font-serif text-slate-900">Confirm Video Deletion</h4>
+              <h4 className="text-lg font-bold font-serif text-[#34483B]">Confirm Video Deletion</h4>
               <p className="text-xs text-slate-500 mt-1">
                 Are you sure you want to remove this video from the school gallery? This action cannot be undone.
               </p>
@@ -860,7 +860,7 @@ const AdminVideos = () => {
             <div className="flex justify-center gap-3 pt-2">
               <button
                 onClick={() => setConfirmDeleteId(null)}
-                className="px-5 py-2 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors"
+                className="px-5 py-2 rounded-xl border border-[#CFC5B1] text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors"
               >
                 Cancel
               </button>
@@ -878,12 +878,12 @@ const AdminVideos = () => {
       {/* Bulk Delete Confirmation Modal */}
       {confirmBulkDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
+          <div className="bg-white rounded-sm max-w-md w-full p-6 shadow-2xl border border-[#CFC5B1] text-center space-y-4">
             <div className="w-14 h-14 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mx-auto">
               <FiLayers />
             </div>
             <div>
-              <h4 className="text-lg font-bold font-serif text-slate-900">Bulk Delete {selectedIds.length} Videos</h4>
+              <h4 className="text-lg font-bold font-serif text-[#34483B]">Bulk Delete {selectedIds.length} Videos</h4>
               <p className="text-xs text-slate-500 mt-1">
                 Are you sure you want to delete all {selectedIds.length} selected videos? This operation cannot be undone.
               </p>
@@ -891,7 +891,7 @@ const AdminVideos = () => {
             <div className="flex justify-center gap-3 pt-2">
               <button
                 onClick={() => setConfirmBulkDelete(false)}
-                className="px-5 py-2 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors"
+                className="px-5 py-2 rounded-xl border border-[#CFC5B1] text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors"
               >
                 Cancel
               </button>

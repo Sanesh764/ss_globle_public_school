@@ -31,90 +31,107 @@ const Navbar = () => {
   ];
 
   return (
-    <header className={`sticky top-0 z-50 w-full glass-nav transition-all duration-300 ${isScrolled ? 'shadow-xl shadow-slate-950/40 bg-slate-950/95 border-b border-slate-800' : 'bg-slate-950/85 border-b border-slate-800/60'}`}>
-      {/* Top Header Contact Bar (Optimized Mobile Height & Compact Layout) */}
-      <div className="bg-slate-950/95 text-slate-300 text-[11px] py-1 px-3 sm:py-1.5 sm:px-4 border-b border-slate-800/60 min-h-[30px] sm:min-h-[32px] flex items-center">
-        <div className="max-w-7xl mx-auto flex flex-row justify-between items-center gap-1.5 w-full">
-          <div className="flex items-center space-x-3 text-slate-300">
-            <a href={`tel:${settings.phone || '+919122490003'}`} className="hover:text-amber-300 transition-colors flex items-center gap-1 text-[11px] font-medium">
-              <FiPhone className="text-amber-400 shrink-0 text-xs" /> {settings.phone || '+91 9122490003'}
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? 'bg-[#F4EFE3]/98 shadow-sm border-b border-[#CFC5B1]'
+          : 'bg-[#F4EFE3] border-b border-[#CFC5B1]'
+      }`}
+    >
+      {/* Top Institutional Information Bar */}
+      <div className="bg-[#34483B] text-[#EBE2CC] text-[11px] py-1.5 px-3 sm:px-4 border-b border-[#27372D]">
+        <div className="max-w-7xl mx-auto flex flex-row justify-between items-center gap-2 w-full">
+          <div className="flex items-center space-x-4">
+            <a
+              href={`tel:${settings.phone || '+919122490003'}`}
+              className="hover:text-white transition-colors flex items-center gap-1.5 text-[11px] font-medium"
+            >
+              <FiPhone className="text-[#AD8746] shrink-0 text-xs" />
+              <span>{settings.phone || '+91 9122490003'}</span>
             </a>
-            <span className="hidden sm:inline-flex items-center gap-1.5 hover:text-white transition-colors">
-              <FiMapPin className="text-amber-400 shrink-0 text-xs" /> {settings.address || 'Daudnagar, Bihar, India'}
+            <span className="hidden sm:inline-flex items-center gap-1.5 text-[#EBE2CC]/90">
+              <FiMapPin className="text-[#AD8746] shrink-0 text-xs" />
+              <span>{settings.address || 'Daudnagar, Bihar, India'}</span>
             </span>
-            <a href={`mailto:${settings.email || 'ssglobalpublicschool0@gmail.com'}`} className="hidden lg:flex hover:text-amber-300 transition-colors items-center gap-1.5">
-              <FiMail className="text-amber-400 shrink-0 text-xs" /> {settings.email || 'ssglobalpublicschool0@gmail.com'}
+            <a
+              href={`mailto:${settings.email || 'ssglobalpublicschool0@gmail.com'}`}
+              className="hidden lg:flex hover:text-white transition-colors items-center gap-1.5"
+            >
+              <FiMail className="text-[#AD8746] shrink-0 text-xs" />
+              <span>{settings.email || 'ssglobalpublicschool0@gmail.com'}</span>
             </a>
           </div>
 
-          <div className="flex items-center space-x-2.5">
-            <span className="bg-amber-500/10 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wider backdrop-blur-sm animate-pulse">
-              Admissions Open 2026-27
+          <div className="flex items-center space-x-3">
+            <span className="hidden xs:inline-block sm:inline-block text-[#EBE2CC] border-r border-[#4B6353] pr-3 text-[10px] font-semibold tracking-widest uppercase">
+              Admissions Open 2026–27
             </span>
 
             {isAuthenticated ? (
               <Link
                 to="/admin/dashboard"
-                className="flex items-center gap-1 text-amber-400 font-semibold hover:text-amber-300 transition-colors text-[11px]"
+                className="flex items-center gap-1.5 text-[#EBE2CC] font-semibold hover:text-white transition-colors text-[11px]"
               >
-                <FiUserCheck className="shrink-0 text-xs" /> Dashboard
+                <FiUserCheck className="text-[#AD8746] shrink-0 text-xs" />
+                <span>Dashboard</span>
               </Link>
             ) : (
               <Link
                 to="/admin/login"
-                className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors font-medium text-[11px]"
+                className="flex items-center gap-1.5 text-[#EBE2CC]/90 hover:text-white transition-colors font-medium text-[11px]"
               >
-                <FiLock className="text-amber-400 shrink-0 text-xs" /> Admin
+                <FiLock className="text-[#AD8746] shrink-0 text-xs" />
+                <span>Admin Portal</span>
               </Link>
             )}
           </div>
         </div>
       </div>
 
-      {/* Main Navbar */}
+      {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* School Branding Block (Anchored Far Left) */}
-          <div className="flex items-center shrink-0 pr-3 lg:pr-5 xl:pr-7 border-none lg:border-r border-slate-800/80">
-            <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-              <div className="w-10 h-10 rounded-xl primary-gradient text-white flex items-center justify-center font-bold text-lg shadow-md shadow-blue-600/30 group-hover:scale-105 transition-all duration-300 shrink-0 border border-blue-400/20 overflow-hidden">
+        <div className="flex justify-between items-center h-[70px]">
+          {/* School Branding Block */}
+          <div className="flex items-center shrink-0 pr-3 lg:pr-5 xl:pr-6 lg:border-r border-[#CFC5B1]">
+            <Link to="/" className="flex items-center gap-3 group shrink-0">
+              <div className="w-11 h-11 rounded-sm bg-[#EBE2CC] border border-[#CFC5B1] p-0.5 flex items-center justify-center font-serif font-bold text-lg text-[#34483B] shrink-0 overflow-hidden transition-colors group-hover:border-[#AD8746]">
                 {settings.logo ? (
                   <img
                     src={settings.logo}
                     alt="S.S. Global Public School Logo"
-                    width="40"
-                    height="40"
+                    width="44"
+                    height="44"
                     loading="eager"
                     decoding="async"
-                    className="w-full h-full object-cover rounded-xl"
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   'SS'
                 )}
               </div>
               <div className="flex flex-col shrink-0">
-                <span className="text-base sm:text-lg xl:text-xl font-extrabold font-serif tracking-tight text-white block group-hover:text-blue-400 transition-colors leading-snug whitespace-nowrap">
+                <span className="text-base sm:text-lg xl:text-[19px] font-bold font-serif tracking-tight text-[#34483B] block group-hover:text-[#27372D] transition-colors leading-tight whitespace-nowrap">
                   {settings.schoolName || 'S.S. Global Public School'}
                 </span>
-                <span className="text-[10px] font-bold text-amber-400 tracking-widest uppercase block -mt-0.5 whitespace-nowrap">
+                <span className="text-[10px] font-semibold text-[#AD8746] tracking-[0.16em] uppercase block mt-0.5 whitespace-nowrap">
                   Daudnagar, Bihar
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* Desktop Navigation Block (Anchored Far Right with ml-auto to Prevent Overlap) */}
-          <div className="hidden lg:flex items-center ml-auto shrink-0 space-x-1 lg:space-x-1.5 xl:space-x-2">
-            <nav className="flex items-center space-x-0.5 lg:space-x-1 xl:space-x-1.5 shrink-0">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center ml-auto shrink-0 space-x-1 xl:space-x-2">
+            <nav className="flex items-center space-x-0.5 xl:space-x-1 shrink-0" aria-label="Main Navigation">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.path}
                   to={link.path}
                   className={({ isActive }) =>
-                    `px-2 py-1.5 lg:px-2 xl:px-2.5 2xl:px-3 rounded-xl text-[11px] lg:text-[12px] xl:text-xs 2xl:text-sm font-semibold whitespace-nowrap shrink-0 transition-all duration-200 ${
+                    `px-2 py-2 xl:px-2.5 2xl:px-3 text-[11px] lg:text-[12px] xl:text-[13px] font-medium whitespace-nowrap shrink-0 transition-colors duration-200 border-b-2 ${
                       isActive
-                        ? 'bg-blue-600/20 text-blue-300 border border-blue-500/30 font-bold shadow-xs'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                        ? 'text-[#34483B] font-semibold border-[#AD8746]'
+                        : 'text-[#252821] border-transparent hover:text-[#34483B] hover:border-[#CFC5B1]'
                     }`
                   }
                 >
@@ -123,22 +140,22 @@ const Navbar = () => {
               ))}
             </nav>
 
-            {/* Premium Admission Open Button */}
+            {/* Refined Admissions CTA */}
             <Link
               to="/contact"
               onClick={() => trackAdmissionClick('Navbar Desktop')}
-              className="ml-2 lg:ml-2.5 xl:ml-3 px-3 py-1.5 xl:py-2 rounded-[16px] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-extrabold text-[11px] lg:text-[12px] xl:text-xs 2xl:text-sm shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/35 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+              className="ml-2 xl:ml-3 px-4 py-2 rounded-sm bg-[#34483B] hover:bg-[#27372D] text-[#F4EFE3] font-semibold text-[11px] lg:text-[12px] xl:text-xs tracking-wide transition-colors duration-200 flex items-center gap-1.5 shrink-0 whitespace-nowrap border border-[#34483B]"
             >
               <span>Admission Open</span>
-              <FiArrowRight className="text-xs transition-transform group-hover:translate-x-0.5 shrink-0" />
+              <FiArrowRight className="text-xs text-[#AD8746] shrink-0" />
             </Link>
           </div>
 
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile Menu Toggle */}
           <div className="flex items-center lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/80 focus:outline-none transition-colors border border-slate-800"
+              className="p-2 rounded-sm text-[#34483B] hover:bg-[#EBE2CC] focus:outline-none transition-colors border border-[#CFC5B1]"
               aria-label="Toggle Navigation Menu"
             >
               {isOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
@@ -147,17 +164,19 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Navigation Drawer */}
       {isOpen && (
-        <div className="lg:hidden glass-panel border-t border-slate-800 shadow-2xl px-4 pt-3 pb-5 space-y-2 animate-fadeIn">
+        <div className="lg:hidden bg-[#F4EFE3] border-t border-[#CFC5B1] px-4 pt-3 pb-5 space-y-1">
           {navLinks.map((link) => (
             <NavLink
               key={link.path}
               to={link.path}
               onClick={() => setIsOpen(false)}
               className={({ isActive }) =>
-                `block px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                  isActive ? 'bg-blue-600 text-white shadow-md' : 'text-slate-200 hover:bg-slate-800/80'
+                `block px-3.5 py-2.5 rounded-sm text-sm font-medium transition-colors border-l-2 ${
+                  isActive
+                    ? 'bg-[#EBE2CC] text-[#34483B] font-semibold border-[#AD8746]'
+                    : 'text-[#252821] border-transparent hover:bg-[#EBE2CC]/60'
                 }`
               }
             >
@@ -165,25 +184,23 @@ const Navbar = () => {
             </NavLink>
           ))}
 
-          <div className="pt-2">
+          <div className="pt-3 mt-2 border-t border-[#CFC5B1] space-y-2">
             <Link
               to="/contact"
               onClick={() => {
                 setIsOpen(false);
                 trackAdmissionClick('Navbar Mobile');
               }}
-              className="block text-center w-full px-5 py-2.5 rounded-[16px] bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm shadow-md"
+              className="block text-center w-full px-5 py-2.5 rounded-sm bg-[#34483B] hover:bg-[#27372D] text-[#F4EFE3] font-semibold text-sm tracking-wide transition-colors"
             >
-              Admission Open 2026-27
+              Admission Open 2026–27
             </Link>
-          </div>
 
-          <div className="pt-2 border-t border-slate-800">
             {isAuthenticated ? (
               <Link
                 to="/admin/dashboard"
                 onClick={() => setIsOpen(false)}
-                className="block text-center w-full px-4 py-2 rounded-xl bg-slate-800 text-white font-semibold text-xs hover:bg-slate-700"
+                className="block text-center w-full px-4 py-2 rounded-sm bg-[#EBE2CC] text-[#34483B] font-semibold text-xs border border-[#CFC5B1]"
               >
                 Go to Admin Dashboard
               </Link>
@@ -191,7 +208,7 @@ const Navbar = () => {
               <Link
                 to="/admin/login"
                 onClick={() => setIsOpen(false)}
-                className="block text-center w-full px-4 py-2 rounded-xl border border-slate-700 text-slate-300 font-semibold text-xs hover:bg-slate-800/80"
+                className="block text-center w-full px-4 py-2 rounded-sm border border-[#CFC5B1] text-[#252821] font-medium text-xs hover:bg-[#EBE2CC]"
               >
                 Admin Login
               </Link>

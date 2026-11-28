@@ -29,40 +29,36 @@ const GalleryUploadModal = ({ isOpen, onClose, onSubmit, loading = false }) => {
     onSubmit(formData);
   };
 
+  const inputClass =
+    'w-full px-3.5 py-2.5 bg-white border border-[#CFC5B1] rounded-sm text-sm text-[#252821] focus:outline-none focus:border-[#34483B] focus:ring-1 focus:ring-[#34483B]';
+  const labelClass = 'block text-[11px] font-semibold text-[#34483B] uppercase tracking-wider mb-1.5';
+
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden border border-slate-200">
-        <div className="bg-slate-900 px-6 py-4 text-white flex items-center justify-between">
+    <div className="fixed inset-0 z-50 bg-[#252821]/60 backdrop-blur-xs flex items-center justify-center p-4">
+      <div className="bg-[#F4EFE3] rounded-sm max-w-lg w-full shadow-xl overflow-hidden border border-[#CFC5B1]">
+        <div className="bg-[#34483B] px-6 py-4 text-[#F4EFE3] flex items-center justify-between border-b-2 border-[#AD8746]">
           <h3 className="font-serif font-bold text-lg">Upload Gallery Photo</h3>
-          <button onClick={onClose} className="text-slate-400 hover:text-white p-1">
+          <button onClick={onClose} className="text-[#EBE2CC] hover:text-white p-1" aria-label="Close">
             <FiX className="text-xl" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-              Image Title *
-            </label>
+            <label className={labelClass}>Image Title *</label>
             <input
               type="text"
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Science Exhibition 2026"
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className={inputClass}
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-              Category *
-            </label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
-            >
+            <label className={labelClass}>Category *</label>
+            <select value={category} onChange={(e) => setCategory(e.target.value)} className={inputClass}>
               {GALLERY_CATEGORIES.filter((c) => c !== 'All').map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
@@ -71,49 +67,44 @@ const GalleryUploadModal = ({ isOpen, onClose, onSubmit, loading = false }) => {
             </select>
           </div>
 
-          {/* Option A: File Upload */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-              Upload Image File (Multer / Cloudinary)
-            </label>
+            <label className={labelClass}>Upload Image File (Multer / Cloudinary)</label>
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setFile(e.target.files[0])}
-              className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              className="w-full text-sm text-[#55594E] file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border file:border-[#CFC5B1] file:text-xs file:font-semibold file:bg-[#EBE2CC] file:text-[#34483B] hover:file:bg-[#DED5C1]"
             />
           </div>
 
-          <div className="text-center text-xs text-slate-400 font-bold uppercase my-1">OR</div>
+          <div className="text-center text-xs text-[#55594E] font-semibold uppercase my-1">OR</div>
 
-          {/* Option B: Direct Image URL */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-              Image Direct URL
-            </label>
+            <label className={labelClass}>Image Direct URL</label>
             <input
               type="text"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
               placeholder="https://images.unsplash.com/..."
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className={inputClass}
             />
           </div>
 
-          <div className="pt-4 border-t border-slate-200 flex justify-end gap-3">
+          <div className="pt-4 border-t border-[#CFC5B1] flex justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-sm font-semibold hover:bg-slate-100"
+              className="px-5 py-2.5 rounded-sm border border-[#CFC5B1] bg-[#EBE2CC] text-[#252821] text-sm font-semibold hover:bg-[#DED5C1]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-sm font-bold shadow-md disabled:opacity-50 flex items-center gap-2"
+              className="px-6 py-2.5 rounded-sm bg-[#34483B] hover:bg-[#27372D] text-[#F4EFE3] text-sm font-semibold disabled:opacity-50 flex items-center gap-2"
             >
-              <FiUploadCloud className="text-lg" /> {loading ? 'Uploading...' : 'Upload Image'}
+              <FiUploadCloud className="text-lg text-[#AD8746]" />
+              <span>{loading ? 'Uploading...' : 'Upload Image'}</span>
             </button>
           </div>
         </form>

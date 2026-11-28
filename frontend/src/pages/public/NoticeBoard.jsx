@@ -28,24 +28,14 @@ const NoticeBoard = () => {
   const noticesSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    'itemListElement': [
-      {
-        '@type': 'ListItem',
-        'position': 1,
-        'name': 'Home',
-        'item': 'https://www.ssglobalpublicschool.com/',
-      },
-      {
-        '@type': 'ListItem',
-        'position': 2,
-        'name': 'Notice Board',
-        'item': 'https://www.ssglobalpublicschool.com/notices',
-      },
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.ssglobalpublicschool.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Notice Board', item: 'https://www.ssglobalpublicschool.com/notices' },
     ],
   };
 
   return (
-    <main>
+    <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
         title="Official Notice Board & Circulars | S.S. Global Public School Daudnagar"
         description="Stay updated with official school notices, exam date sheets, holiday lists & admission announcements at S.S. Global Public School, Daudnagar."
@@ -59,10 +49,10 @@ const NoticeBoard = () => {
         breadcrumb={[{ label: 'Notice Board' }]}
       />
 
-      <section className="py-16 bg-slate-50 min-h-[60vh]">
+      <section className="py-14 bg-[#F4EFE3] min-h-[60vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          {/* Controls Bar: Search & Category Tabs */}
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+          {/* Controls Bar */}
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-[#EBE2CC] p-5 sm:p-6 rounded-sm border border-[#CFC5B1]">
             <SearchBar
               value={search}
               onChange={(val) => {
@@ -81,10 +71,10 @@ const NoticeBoard = () => {
                     setCategory(cat);
                     setPage(1);
                   }}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+                  className={`px-3.5 py-2 rounded-sm text-xs font-semibold transition-colors border ${
                     category === cat
-                      ? 'bg-blue-600 text-white shadow-md'
-                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      ? 'bg-[#34483B] text-[#F4EFE3] border-[#34483B]'
+                      : 'bg-[#F4EFE3] text-[#252821] border-[#CFC5B1] hover:bg-[#DED5C1]'
                   }`}
                 >
                   {cat}
@@ -93,49 +83,48 @@ const NoticeBoard = () => {
             </div>
           </div>
 
-          {/* Notices Grid */}
           {loading ? (
-            <LoadingSpinner />
+            <LoadingSpinner text="Loading Circulars..." />
           ) : error ? (
-            <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-amber-800 text-sm font-semibold">
+            <div className="p-10 text-center bg-[#EBE2CC] rounded-sm border border-[#CFC5B1] text-[#55594E] text-sm font-medium">
               Information is temporarily unavailable. Please check again shortly.
             </div>
           ) : noticesList.length > 0 ? (
-            <div className="space-y-4">
-              {noticesList.map((notice) => (
-                <div
-                  key={notice._id}
-                  onClick={() => setSelectedNotice(notice)}
-                  className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer flex flex-col md:flex-row items-start md:items-center justify-between gap-4 card-hover"
-                >
-                  <div className="space-y-2 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="bg-blue-600 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">
-                        {notice.category || 'General'}
-                      </span>
-                      {notice.isImportant && (
-                        <span className="bg-rose-500 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                          <FiAlertCircle /> Urgent / Important
+            <div className="space-y-6">
+              <div className="bg-[#EBE2CC]/45 border border-[#CFC5B1] rounded-sm divide-y divide-[#CFC5B1]">
+                {noticesList.map((notice) => (
+                  <div
+                    key={notice._id}
+                    onClick={() => setSelectedNotice(notice)}
+                    className="p-5 sm:p-6 hover:bg-[#EBE2CC] transition-colors cursor-pointer flex flex-col md:flex-row items-start md:items-center justify-between gap-4 group"
+                  >
+                    <div className="space-y-2 flex-1">
+                      <div className="flex items-center gap-2.5 flex-wrap">
+                        <span className="bg-[#34483B] text-[#F4EFE3] text-[10px] font-semibold px-2.5 py-0.5 rounded-sm uppercase tracking-wider">
+                          {notice.category || 'General'}
                         </span>
-                      )}
-                      <span className="text-xs text-slate-500 flex items-center gap-1">
-                        <FiCalendar /> Published: {formatDate(notice.createdAt)}
-                      </span>
+                        {notice.isImportant && (
+                          <span className="bg-[#7F2E2E] text-[#F4EFE3] text-[10px] font-semibold px-2.5 py-0.5 rounded-sm flex items-center gap-1 uppercase tracking-wider">
+                            <FiAlertCircle /> Urgent / Important
+                          </span>
+                        )}
+                        <span className="text-xs text-[#55594E] flex items-center gap-1">
+                          <FiCalendar className="text-[#AD8746]" /> Published: {formatDate(notice.createdAt)}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg font-bold text-[#34483B] font-serif group-hover:text-[#AD8746] transition-colors">
+                        {notice.title}
+                      </h3>
+                      <p className="text-sm text-[#55594E] line-clamp-2">{notice.description}</p>
                     </div>
 
-                    <h3 className="text-lg font-bold text-slate-900 font-serif hover:text-blue-600 transition-colors">
-                      {notice.title}
-                    </h3>
-                    <p className="text-sm text-slate-600 line-clamp-2">
-                      {notice.description}
-                    </p>
+                    <button className="shrink-0 px-4 py-2 bg-[#F4EFE3] border border-[#CFC5B1] text-[#34483B] font-semibold text-xs rounded-sm group-hover:bg-[#34483B] group-hover:text-[#F4EFE3] group-hover:border-[#34483B] transition-colors">
+                      Read Full Circular
+                    </button>
                   </div>
-
-                  <button className="shrink-0 px-5 py-2.5 bg-blue-50 border border-blue-200 text-blue-700 font-semibold text-xs rounded-xl hover:bg-blue-600 hover:text-white transition-colors">
-                    Read Full Circular
-                  </button>
-                </div>
-              ))}
+                ))}
+              </div>
 
               <Pagination
                 currentPage={page}
@@ -144,14 +133,13 @@ const NoticeBoard = () => {
               />
             </div>
           ) : (
-            <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500">
+            <div className="p-12 text-center bg-[#EBE2CC] rounded-sm border border-[#CFC5B1] text-[#55594E] text-sm">
               No notices match your current search or category filter.
             </div>
           )}
         </div>
       </section>
 
-      {/* Notice Detail Popup */}
       <NoticeModal notice={selectedNotice} onClose={() => setSelectedNotice(null)} />
     </main>
   );

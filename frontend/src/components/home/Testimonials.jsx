@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { FaQuoteLeft, FaStar } from 'react-icons/fa';
 
 const TESTIMONIALS_DATA = [
@@ -92,7 +92,6 @@ const Testimonials = () => {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
-  // Responsive Items Per Page Listener
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
@@ -110,82 +109,66 @@ const Testimonials = () => {
 
   const maxIndex = Math.max(0, TESTIMONIALS_DATA.length - itemsPerPage);
 
-  // Auto slide every 5 seconds (5000ms)
   useEffect(() => {
     if (isPaused) return;
-
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 5000);
-
     return () => clearInterval(timer);
   }, [isPaused, maxIndex]);
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  };
+  const nextSlide = () => setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  const prevSlide = () => setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  };
-
-  // Touch Swipe Handlers for Mobile
   const handleTouchStart = (e) => {
     setIsPaused(true);
     touchStartX.current = e.targetTouches[0].clientX;
   };
-
   const handleTouchMove = (e) => {
     touchEndX.current = e.targetTouches[0].clientX;
   };
-
   const handleTouchEnd = () => {
     const diffX = touchStartX.current - touchEndX.current;
-    if (diffX > 50) {
-      nextSlide();
-    } else if (diffX < -50) {
-      prevSlide();
-    }
+    if (diffX > 50) nextSlide();
+    else if (diffX < -50) prevSlide();
     setIsPaused(false);
   };
 
   return (
-    <section className="py-20 bg-slate-900 text-white border-t border-b border-slate-800 overflow-hidden relative">
+    <section className="py-16 sm:py-20 bg-[#F4EFE3] text-[#252821] border-b border-[#CFC5B1] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="space-y-3">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-500/10 text-blue-300 text-xs font-bold uppercase tracking-wider border border-blue-400/30">
-              Community Voices
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-white tracking-tight">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-5 border-b border-[#CFC5B1]">
+          <div className="space-y-2.5">
+            <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#AD8746]">
+              <span className="w-6 h-[1.5px] bg-[#AD8746]" />
+              <span>Community Voices</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#34483B] tracking-tight">
               What Our Community Says
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+            <p className="text-[#55594E] text-sm sm:text-base max-w-2xl leading-relaxed">
               Hear directly from parents, students, alumni, and guardians about their experiences at S.S. Global Public School, Daudnagar.
             </p>
           </div>
 
-          {/* Navigation Control Buttons */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={prevSlide}
               aria-label="Previous Testimonials"
-              className="w-11 h-11 rounded-full bg-slate-800 hover:bg-blue-600 text-slate-200 hover:text-white border border-slate-700 shadow-md flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+              className="w-10 h-10 rounded-sm bg-[#EBE2CC] hover:bg-[#34483B] text-[#34483B] hover:text-[#F4EFE3] border border-[#CFC5B1] flex items-center justify-center transition-colors"
             >
-              <FiChevronLeft className="text-xl" />
+              <FiChevronLeft className="text-lg" />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Next Testimonials"
-              className="w-11 h-11 rounded-full bg-slate-800 hover:bg-blue-600 text-slate-200 hover:text-white border border-slate-700 shadow-md flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+              className="w-10 h-10 rounded-sm bg-[#EBE2CC] hover:bg-[#34483B] text-[#34483B] hover:text-[#F4EFE3] border border-[#CFC5B1] flex items-center justify-center transition-colors"
             >
-              <FiChevronRight className="text-xl" />
+              <FiChevronRight className="text-lg" />
             </button>
           </div>
         </div>
 
-        {/* Carousel Outer Window (Pause on Hover & Touch Swipe) */}
         <div
           className="overflow-hidden relative"
           onMouseEnter={() => setIsPaused(true)}
@@ -194,7 +177,6 @@ const Testimonials = () => {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Slider Container with Hardware Accelerated CSS Transform */}
           <div
             className="flex transition-transform duration-500 ease-out"
             style={{
@@ -207,32 +189,29 @@ const Testimonials = () => {
                 className="px-3 shrink-0"
                 style={{ width: `${100 / itemsPerPage}%` }}
               >
-                <div className="bg-slate-800/80 rounded-3xl p-7 shadow-xl hover:shadow-2xl border border-slate-700/80 flex flex-col justify-between h-full transition-all duration-300 card-hover relative group">
-                  <FaQuoteLeft className="text-3xl text-blue-400/10 absolute top-6 right-6" />
+                <div className="bg-[#EBE2CC]/60 rounded-sm p-6 sm:p-7 border border-[#CFC5B1] hover:border-[#AD8746] flex flex-col justify-between h-full transition-colors relative">
+                  <FaQuoteLeft className="text-2xl text-[#CFC5B1] absolute top-6 right-6" />
 
                   <div className="space-y-4 relative z-10">
-                    {/* Star Rating */}
-                    <div className="flex items-center space-x-1 text-amber-400">
+                    <div className="flex items-center space-x-1 text-[#AD8746]">
                       {Array.from({ length: item.rating }).map((_, i) => (
-                        <FaStar key={i} className="text-sm fill-current" />
+                        <FaStar key={i} className="text-xs fill-current" />
                       ))}
                     </div>
 
-                    {/* Quote Text */}
-                    <p className="text-slate-300 text-sm leading-relaxed italic">
-                      "{item.quote}"
+                    <p className="text-[#252821] text-sm leading-relaxed italic">
+                      “{item.quote}”
                     </p>
                   </div>
 
-                  {/* Profile & Avatar */}
-                  <div className="mt-6 pt-4 border-t border-slate-700/60 flex items-center gap-3.5">
-                    <div className="w-11 h-11 rounded-full primary-gradient text-white flex items-center justify-center font-bold text-sm shadow-md shrink-0 border border-blue-400/20">
+                  <div className="mt-6 pt-4 border-t border-[#CFC5B1] flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-sm bg-[#34483B] text-[#F4EFE3] flex items-center justify-center font-serif font-bold text-sm shrink-0">
                       {item.name.charAt(0)}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h4 className="text-sm font-bold text-white font-serif truncate">{item.name}</h4>
-                      <p className="text-xs text-blue-400 font-semibold truncate">
-                        {item.role} • <span className="text-slate-400 font-medium">{item.batch}</span>
+                      <h4 className="text-sm font-bold text-[#34483B] font-serif truncate">{item.name}</h4>
+                      <p className="text-xs text-[#AD8746] font-semibold truncate">
+                        {item.role} • <span className="text-[#55594E] font-normal">{item.batch}</span>
                       </p>
                     </div>
                   </div>
@@ -242,17 +221,17 @@ const Testimonials = () => {
           </div>
         </div>
 
-        {/* Pagination Dots */}
+        {/* Progress Indicators */}
         <div className="flex items-center justify-center gap-2 pt-8">
           {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               aria-label={`Go to slide ${idx + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-sm transition-all duration-300 ${
                 idx === currentIndex
-                  ? 'w-8 bg-amber-400 shadow-md shadow-amber-400/30'
-                  : 'w-2.5 bg-slate-700 hover:bg-slate-600'
+                  ? 'w-8 bg-[#34483B]'
+                  : 'w-2.5 bg-[#CFC5B1] hover:bg-[#AD8746]'
               }`}
             />
           ))}

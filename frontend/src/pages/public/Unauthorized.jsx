@@ -4,26 +4,26 @@ import { FiShieldOff, FiLock, FiHome } from 'react-icons/fi';
 
 const Unauthorized = () => {
   return (
-    <div className="min-h-[75vh] flex items-center justify-center bg-slate-50 px-4 py-16">
-      <div className="text-center max-w-md space-y-6 bg-white p-10 rounded-3xl shadow-xl border border-slate-200">
-        <div className="w-20 h-20 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-4xl mx-auto shadow-inner">
+    <div className="min-h-[75vh] flex items-center justify-center bg-[#F4EFE3] px-4 py-16">
+      <div className="text-center max-w-md space-y-5 bg-[#EBE2CC] p-10 rounded-sm border border-[#CFC5B1]">
+        <div className="w-16 h-16 rounded-sm bg-[#F4EFE3] border border-[#CFC5B1] text-[#7F2E2E] flex items-center justify-center text-3xl mx-auto">
           <FiShieldOff />
         </div>
-        <h1 className="text-4xl font-extrabold font-serif text-slate-900">403</h1>
-        <h2 className="text-2xl font-bold font-serif text-slate-800">Access Denied</h2>
-        <p className="text-slate-600 text-sm leading-relaxed">
+        <h1 className="text-4xl font-bold font-serif text-[#34483B]">403</h1>
+        <h2 className="text-2xl font-bold font-serif text-[#252821]">Access Denied</h2>
+        <p className="text-[#55594E] text-sm leading-relaxed">
           You do not have administrator permissions to access this private route. Please log in with valid credentials.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
           <Link
             to="/admin/login"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow-md transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#34483B] hover:bg-[#27372D] text-[#F4EFE3] font-semibold text-sm rounded-sm transition-colors"
           >
-            <FiLock /> Admin Sign In
+            <FiLock className="text-[#AD8746]" /> Admin Sign In
           </Link>
           <Link
             to="/"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm rounded-xl border border-slate-300 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#F4EFE3] hover:bg-[#DED5C1] text-[#252821] font-semibold text-sm rounded-sm border border-[#CFC5B1] transition-colors"
           >
             <FiHome /> Return Home
           </Link>

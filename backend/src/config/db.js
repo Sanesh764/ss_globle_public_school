@@ -59,7 +59,7 @@ const connectDB = async () => {
 
   try {
     const conn = await mongoose.connect(mongoUri);
-    logger.info(`[Database] MongoDB Atlas connected successfully: ${conn.connection.host} (DB: ${conn.connection.name})`);
+    logger.info(`[Database] MongoDB Atlas connected successfully`);
     return conn;
   } catch (primaryError) {
     logger.warn(`[Database] Primary Atlas connection attempt failed: ${primaryError.message}`);

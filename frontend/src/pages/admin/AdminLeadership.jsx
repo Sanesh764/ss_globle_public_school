@@ -148,7 +148,7 @@ const AdminLeadership = () => {
         action={
           <button
             onClick={handleOpenAddModal}
-            className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm rounded-xl shadow-lg flex items-center gap-2 transition-all"
+            className="px-5 py-2.5 bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-sm rounded-xl shadow-lg flex items-center gap-2 transition-all"
           >
             <FiPlus className="text-lg" /> Add Leadership Member
           </button>
@@ -158,10 +158,10 @@ const AdminLeadership = () => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+        <div className="bg-white border border-[#CFC5B1] rounded-sm shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-slate-700">
-              <thead className="bg-slate-50 text-slate-900 font-serif font-bold border-b border-slate-200 uppercase text-xs">
+              <thead className="bg-[#EBE2CC]/50 text-[#34483B] font-serif font-bold border-b border-[#CFC5B1] uppercase text-xs">
                 <tr>
                   <th className="py-4 px-6">Order</th>
                   <th className="py-4 px-6">Member Profile</th>
@@ -174,9 +174,9 @@ const AdminLeadership = () => {
               <tbody className="divide-y divide-slate-100">
                 {members.length > 0 ? (
                   members.map((member) => (
-                    <tr key={member._id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-4 px-6 font-bold text-slate-900">
-                        <span className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 border border-blue-200 inline-flex items-center justify-center font-mono">
+                    <tr key={member._id} className="hover:bg-[#EBE2CC]/50/80 transition-colors">
+                      <td className="py-4 px-6 font-bold text-[#34483B]">
+                        <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#34483B] border border-blue-200 inline-flex items-center justify-center font-mono">
                           #{member.displayOrder}
                         </span>
                       </td>
@@ -188,7 +188,7 @@ const AdminLeadership = () => {
                             className="w-12 h-12 rounded-full object-cover border-2 border-amber-400 bg-slate-100 shrink-0"
                           />
                           <div>
-                            <span className="font-bold text-slate-900 block font-serif">{member.name}</span>
+                            <span className="font-bold text-[#34483B] block font-serif">{member.name}</span>
                             <span className="text-xs text-slate-500">{member.location}</span>
                           </div>
                         </div>
@@ -199,7 +199,7 @@ const AdminLeadership = () => {
                         </span>
                       </td>
                       <td className="py-4 px-6 max-w-xs">
-                        <span className="font-semibold text-slate-900 block truncate">{member.heading}</span>
+                        <span className="font-semibold text-[#34483B] block truncate">{member.heading}</span>
                         <span className="text-xs text-slate-500 line-clamp-1 italic">"{member.message}"</span>
                       </td>
                       <td className="py-4 px-6">
@@ -218,7 +218,7 @@ const AdminLeadership = () => {
                       <td className="py-4 px-6 text-right space-x-2">
                         <button
                           onClick={() => handleOpenEditModal(member)}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          className="p-2 text-[#34483B] hover:bg-blue-50 rounded-lg transition-colors"
                           title="Edit Profile"
                         >
                           <FiEdit className="text-lg" />
@@ -249,9 +249,9 @@ const AdminLeadership = () => {
       {/* Modal Dialog */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto space-y-6">
+          <div className="bg-white rounded-sm max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-[#CFC5B1] max-h-[90vh] overflow-y-auto space-y-6">
             <div className="flex justify-between items-center border-b border-slate-100 pb-4">
-              <h3 className="text-xl font-bold font-serif text-slate-900">
+              <h3 className="text-xl font-bold font-serif text-[#34483B]">
                 {editingMember ? 'Edit Leadership Member' : 'Add New Leadership Member'}
               </h3>
               <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 font-bold text-lg">
@@ -271,7 +271,7 @@ const AdminLeadership = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Er. R. P. Singh"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
 
@@ -285,7 +285,7 @@ const AdminLeadership = () => {
                     value={formData.designation}
                     onChange={(e) => setFormData({ ...formData, designation: e.target.value })}
                     placeholder="e.g. Founder / Co-Founder / Principal"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
               </div>
@@ -299,7 +299,7 @@ const AdminLeadership = () => {
                   value={formData.heading}
                   onChange={(e) => setFormData({ ...formData, heading: e.target.value })}
                   placeholder="e.g. Building Strong Foundations for Tomorrow"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -313,7 +313,7 @@ const AdminLeadership = () => {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Enter leadership message..."
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 ></textarea>
               </div>
 
@@ -327,7 +327,7 @@ const AdminLeadership = () => {
                     value={formData.location}
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                     placeholder="Daudnagar, Bihar"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
 
@@ -341,7 +341,7 @@ const AdminLeadership = () => {
                     required
                     value={formData.displayOrder}
                     onChange={(e) => setFormData({ ...formData, displayOrder: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
               </div>
@@ -354,7 +354,7 @@ const AdminLeadership = () => {
                   type="file"
                   accept="image/*"
                   onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
-                  className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm"
+                  className="w-full px-4 py-2 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm"
                 />
               </div>
 
@@ -364,7 +364,7 @@ const AdminLeadership = () => {
                     type="checkbox"
                     checked={formData.isActive}
                     onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                    className="w-4 h-4 text-blue-600 rounded"
+                    className="w-4 h-4 text-[#34483B] rounded"
                   />
                   Active Status
                 </label>
@@ -374,7 +374,7 @@ const AdminLeadership = () => {
                     type="checkbox"
                     checked={formData.showOnHomepage}
                     onChange={(e) => setFormData({ ...formData, showOnHomepage: e.target.checked })}
-                    className="w-4 h-4 text-blue-600 rounded"
+                    className="w-4 h-4 text-[#34483B] rounded"
                   />
                   Show on Homepage
                 </label>
@@ -384,14 +384,14 @@ const AdminLeadership = () => {
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-100"
+                  className="px-5 py-2.5 rounded-xl border border-[#CFC5B1] text-slate-700 font-semibold text-sm hover:bg-slate-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-sm shadow-lg disabled:opacity-50"
                 >
                   {submitting ? 'Saving...' : editingMember ? 'Update Profile' : 'Save Member'}
                 </button>

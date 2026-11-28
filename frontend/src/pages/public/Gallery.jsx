@@ -21,24 +21,14 @@ const Gallery = () => {
   const gallerySchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    'itemListElement': [
-      {
-        '@type': 'ListItem',
-        'position': 1,
-        'name': 'Home',
-        'item': 'https://www.ssglobalpublicschool.com/',
-      },
-      {
-        '@type': 'ListItem',
-        'position': 2,
-        'name': 'Photo Gallery',
-        'item': 'https://www.ssglobalpublicschool.com/gallery',
-      },
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.ssglobalpublicschool.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Photo Gallery', item: 'https://www.ssglobalpublicschool.com/gallery' },
     ],
   };
 
   return (
-    <main>
+    <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
         title="Photo & Event Gallery | S.S. Global Public School Daudnagar"
         description="Browse photos of academic events, sports competitions, cultural programs, and campus activities at S.S. Global Public School, Daudnagar, Bihar."
@@ -52,18 +42,18 @@ const Gallery = () => {
         breadcrumb={[{ label: 'Gallery' }]}
       />
 
-      <section className="py-16 bg-white min-h-[60vh]">
+      <section className="py-14 bg-[#F4EFE3] min-h-[60vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Category Filter Tabs */}
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap justify-center gap-2 border-b border-[#CFC5B1] pb-6">
             {GALLERY_CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+                className={`px-4 py-2 rounded-sm text-xs sm:text-sm font-semibold transition-colors border ${
                   activeCategory === cat
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    ? 'bg-[#34483B] text-[#F4EFE3] border-[#34483B]'
+                    : 'bg-[#EBE2CC]/60 text-[#252821] border-[#CFC5B1] hover:bg-[#DED5C1]'
                 }`}
               >
                 {cat}
@@ -72,46 +62,50 @@ const Gallery = () => {
           </div>
 
           {loading ? (
-            <LoadingSpinner />
+            <LoadingSpinner text="Loading Photographs..." />
           ) : error ? (
-            <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-amber-800 text-sm font-semibold">
+            <div className="p-10 text-center bg-[#EBE2CC] rounded-sm border border-[#CFC5B1] text-[#55594E] text-sm font-medium">
               Information is temporarily unavailable. Please check again shortly.
             </div>
           ) : galleryItems.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {galleryItems.map((item, idx) => (
-                <div
+                <figure
                   key={item._id || idx}
                   onClick={() => {
                     setSelectedImg(item);
                     trackGalleryImageClick(item.title, item.category);
                   }}
-                  className="group relative rounded-2xl overflow-hidden shadow-md cursor-pointer aspect-video bg-slate-200 border border-slate-200 card-hover"
+                  className="group cursor-pointer bg-[#EBE2CC]/55 border border-[#CFC5B1] hover:border-[#AD8746] rounded-sm overflow-hidden transition-colors"
                 >
-                  <img
-                    src={getImageUrl(item.image)}
-                    alt={item.title}
-                    width="400"
-                    height="225"
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
-                    <span className="text-amber-400 font-semibold text-xs uppercase tracking-wider">
+                  <div className="aspect-video overflow-hidden bg-[#DED5C1] relative">
+                    <img
+                      src={getImageUrl(item.image)}
+                      alt={item.title}
+                      width="400"
+                      height="225"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 right-3 w-8 h-8 rounded-sm bg-[#F4EFE3]/90 border border-[#CFC5B1] text-[#34483B] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <FiEye className="text-sm" />
+                    </div>
+                  </div>
+                  <figcaption className="px-4 py-3 border-t border-[#CFC5B1]">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#AD8746] block">
                       {item.category || 'Gallery'}
                     </span>
-                    <h3 className="text-white font-bold text-base font-serif flex items-center justify-between">
+                    <h3 className="text-sm font-bold font-serif text-[#34483B] truncate mt-0.5">
                       {item.title}
-                      <FiEye className="text-xl text-amber-400" />
                     </h3>
-                  </div>
-                </div>
+                  </figcaption>
+                </figure>
               ))}
             </div>
           ) : (
-            <div className="p-12 text-center bg-slate-50 rounded-2xl text-slate-500">
-              No photos found in category "{activeCategory}".
+            <div className="p-12 text-center bg-[#EBE2CC] rounded-sm border border-[#CFC5B1] text-[#55594E] text-sm">
+              No photos found in category “{activeCategory}”.
             </div>
           )}
         </div>
@@ -120,30 +114,33 @@ const Gallery = () => {
       {/* Lightbox Modal */}
       {selectedImg && (
         <div
-          className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-[#252821]/85 backdrop-blur-xs flex items-center justify-center p-4"
           onClick={() => setSelectedImg(null)}
         >
           <div
-            className="max-w-4xl w-full bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-800 relative"
+            className="max-w-4xl w-full bg-[#F4EFE3] rounded-sm overflow-hidden border border-[#CFC5B1] shadow-xl relative"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-4 bg-slate-950 text-white flex justify-between items-center border-b border-slate-800">
+            <div className="px-5 py-3.5 bg-[#34483B] text-[#F4EFE3] flex justify-between items-center border-b border-[#AD8746]">
               <div>
-                <span className="text-xs text-amber-400 font-semibold uppercase">{selectedImg.category}</span>
-                <h3 className="font-serif font-bold text-lg">{selectedImg.title}</h3>
+                <span className="text-[10px] text-[#AD8746] font-semibold uppercase tracking-wider block">
+                  {selectedImg.category}
+                </span>
+                <h3 className="font-serif font-bold text-base sm:text-lg">{selectedImg.title}</h3>
               </div>
               <button
                 onClick={() => setSelectedImg(null)}
-                className="p-2 text-slate-400 hover:text-white bg-slate-800 rounded-full"
+                className="p-1.5 text-[#EBE2CC] hover:text-white bg-[#27372D] rounded-sm border border-[#4B6353]"
+                aria-label="Close Preview"
               >
-                <FiX className="text-xl" />
+                <FiX className="text-lg" />
               </button>
             </div>
-            <div className="p-3 flex justify-center max-h-[75vh]">
+            <div className="p-3 bg-[#EBE2CC] flex justify-center max-h-[75vh]">
               <img
                 src={getImageUrl(selectedImg.image)}
                 alt={selectedImg.title}
-                className="max-h-[70vh] object-contain rounded-xl"
+                className="max-h-[70vh] object-contain"
               />
             </div>
           </div>

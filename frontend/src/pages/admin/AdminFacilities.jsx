@@ -168,10 +168,10 @@ const AdminFacilities = () => {
 
       <main className="p-4 sm:p-6 lg:p-8 space-y-6">
         {/* Top Bar */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-sm shadow-sm border border-[#CFC5B1]">
           <div>
-            <h2 className="text-xl font-bold font-serif text-slate-900 flex items-center gap-2">
-              <FiCheckSquare className="text-blue-600" /> Manage Campus Facilities
+            <h2 className="text-xl font-bold font-serif text-[#34483B] flex items-center gap-2">
+              <FiCheckSquare className="text-[#34483B]" /> Manage Campus Facilities
             </h2>
             <p className="text-xs text-slate-500 mt-1">
               Add, edit, reorder, or upload images for modern campus facilities visible on Homepage and Facilities page.
@@ -180,7 +180,7 @@ const AdminFacilities = () => {
 
           <button
             onClick={() => handleOpenModal()}
-            className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all flex items-center gap-2 shrink-0 active:scale-95"
+            className="px-6 py-3 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-sm shadow-lg  transition-all flex items-center gap-2 shrink-0 active:scale-95"
           >
             <FiPlus className="text-lg" /> Add Facility
           </button>
@@ -188,16 +188,16 @@ const AdminFacilities = () => {
 
         {/* Facilities Table */}
         {loading ? (
-          <div className="bg-white p-12 rounded-3xl shadow-sm border border-slate-200 text-center">
-            <FiRefreshCw className="animate-spin text-3xl text-blue-600 mx-auto mb-3" />
+          <div className="bg-white p-12 rounded-sm shadow-sm border border-[#CFC5B1] text-center">
+            <FiRefreshCw className="animate-spin text-3xl text-[#34483B] mx-auto mb-3" />
             <p className="text-sm font-semibold text-slate-600">Loading campus facilities...</p>
           </div>
         ) : facilities.length > 0 ? (
-          <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="bg-white rounded-sm shadow-sm border border-[#CFC5B1] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <tr className="bg-[#EBE2CC]/50 border-b border-[#CFC5B1] text-xs font-bold uppercase tracking-wider text-slate-500">
                     <th className="py-4 px-4 text-center">Order</th>
                     <th className="py-4 px-6">Facility</th>
                     <th className="py-4 px-6">Short Description</th>
@@ -207,7 +207,7 @@ const AdminFacilities = () => {
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-sm">
                   {facilities.map((fac) => (
-                    <tr key={fac._id} className="hover:bg-slate-50/80 transition-colors">
+                    <tr key={fac._id} className="hover:bg-[#EBE2CC]/50/80 transition-colors">
                       <td className="py-4 px-4 text-center font-bold text-slate-500">
                         #{fac.displayOrder}
                       </td>
@@ -218,15 +218,15 @@ const AdminFacilities = () => {
                             <img
                               src={getImageUrl(fac.image)}
                               alt={fac.title}
-                              className="w-12 h-12 rounded-xl object-cover border border-slate-200"
+                              className="w-12 h-12 rounded-xl object-cover border border-[#CFC5B1]"
                             />
                           ) : (
-                            <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold border border-blue-100">
+                            <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#34483B] flex items-center justify-center text-xl font-bold border border-blue-100">
                               <FiCheckSquare />
                             </div>
                           )}
                           <div>
-                            <h4 className="font-bold font-serif text-slate-900 text-sm">{fac.title}</h4>
+                            <h4 className="font-bold font-serif text-[#34483B] text-sm">{fac.title}</h4>
                             <span className="text-[11px] text-slate-400 font-mono">Icon: {fac.icon}</span>
                           </div>
                         </div>
@@ -271,7 +271,7 @@ const AdminFacilities = () => {
             </div>
           </div>
         ) : (
-          <div className="bg-white p-12 rounded-3xl shadow-sm border border-slate-200 text-center max-w-md mx-auto space-y-3">
+          <div className="bg-white p-12 rounded-sm shadow-sm border border-[#CFC5B1] text-center max-w-md mx-auto space-y-3">
             <FiCheckSquare className="text-4xl text-slate-300 mx-auto" />
             <h3 className="text-lg font-bold font-serif text-slate-800">No Facilities Added</h3>
             <p className="text-xs text-slate-500">
@@ -284,7 +284,7 @@ const AdminFacilities = () => {
       {/* Add / Edit Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden border border-slate-200 my-8">
+          <div className="bg-white rounded-sm max-w-lg w-full shadow-2xl overflow-hidden border border-[#CFC5B1] my-8">
             <div className="primary-gradient text-white p-6 flex justify-between items-center">
               <h3 className="text-lg font-bold font-serif flex items-center gap-2">
                 <FiCheckSquare /> {editingItem ? 'Edit Facility' : 'Add New Campus Facility'}
@@ -305,7 +305,7 @@ const AdminFacilities = () => {
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="e.g. Smart Classrooms"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -316,7 +316,7 @@ const AdminFacilities = () => {
                 <select
                   value={formData.icon}
                   onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 >
                   {ICON_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -336,7 +336,7 @@ const AdminFacilities = () => {
                   value={formData.shortDescription}
                   onChange={(e) => setFormData({ ...formData, shortDescription: e.target.value })}
                   placeholder="Brief overview of facility..."
-                  className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 ></textarea>
               </div>
 
@@ -349,7 +349,7 @@ const AdminFacilities = () => {
                   value={formData.detailedDescription}
                   onChange={(e) => setFormData({ ...formData, detailedDescription: e.target.value })}
                   placeholder="Full detailed information..."
-                  className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 ></textarea>
               </div>
 
@@ -362,7 +362,7 @@ const AdminFacilities = () => {
                     type="number"
                     value={formData.displayOrder}
                     onChange={(e) => setFormData({ ...formData, displayOrder: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
 
@@ -373,7 +373,7 @@ const AdminFacilities = () => {
                   <select
                     value={formData.isActive ? 'true' : 'false'}
                     onChange={(e) => setFormData({ ...formData, isActive: e.target.value === 'true' })}
-                    className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   >
                     <option value="true">Active (Visible)</option>
                     <option value="false">Inactive (Hidden)</option>
@@ -385,8 +385,8 @@ const AdminFacilities = () => {
                 <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                   Facility Image (Optional)
                 </label>
-                <div className="p-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl text-center space-y-2">
-                  <FiUploadCloud className="text-3xl text-blue-600 mx-auto" />
+                <div className="p-4 bg-[#EBE2CC]/50 border-2 border-dashed border-[#CFC5B1] rounded-sm text-center space-y-2">
+                  <FiUploadCloud className="text-3xl text-[#34483B] mx-auto" />
                   <input
                     type="file"
                     accept="image/*"
@@ -407,14 +407,14 @@ const AdminFacilities = () => {
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50"
+                  className="px-5 py-2.5 rounded-xl border border-[#CFC5B1] text-slate-700 font-bold text-xs hover:bg-[#EBE2CC]/50"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition-all disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-xs shadow-md  transition-all disabled:opacity-50"
                 >
                   {submitting ? 'Saving...' : editingItem ? 'Save Changes' : 'Create Facility'}
                 </button>
@@ -427,18 +427,18 @@ const AdminFacilities = () => {
       {/* Delete Confirmation Modal */}
       {deleteConfirmItem && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl border border-slate-200">
+          <div className="bg-white rounded-sm max-w-md w-full p-6 text-center space-y-4 shadow-2xl border border-[#CFC5B1]">
             <div className="w-14 h-14 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mx-auto">
               <FiTrash2 />
             </div>
-            <h3 className="text-lg font-bold font-serif text-slate-900">Delete Campus Facility?</h3>
+            <h3 className="text-lg font-bold font-serif text-[#34483B]">Delete Campus Facility?</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Are you sure you want to delete <strong className="text-slate-900">"{deleteConfirmItem.title}"</strong>?
+              Are you sure you want to delete <strong className="text-[#34483B]">"{deleteConfirmItem.title}"</strong>?
             </p>
             <div className="flex justify-center gap-3 pt-2">
               <button
                 onClick={() => setDeleteConfirmItem(null)}
-                className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50"
+                className="px-5 py-2.5 rounded-xl border border-[#CFC5B1] text-slate-700 font-bold text-xs hover:bg-[#EBE2CC]/50"
               >
                 Cancel
               </button>

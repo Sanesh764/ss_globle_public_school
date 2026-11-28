@@ -10,6 +10,7 @@ import {
   FiActivity,
   FiShield,
   FiCheckCircle,
+  FiCheck,
 } from 'react-icons/fi';
 import useFetch from '../../hooks/useFetch';
 import { getPublicFacilitiesApi } from '../../services/facilityService';
@@ -18,19 +19,19 @@ import { FACILITIES_FALLBACK } from '../../config/fallbackData';
 const renderIcon = (iconName) => {
   switch (iconName) {
     case 'FiMonitor':
-      return <FiMonitor className="text-3xl text-blue-600" />;
+      return <FiMonitor className="text-xl text-[#34483B]" />;
     case 'FiZap':
-      return <FiZap className="text-3xl text-amber-500" />;
+      return <FiZap className="text-xl text-[#AD8746]" />;
     case 'FiCpu':
-      return <FiCpu className="text-3xl text-purple-600" />;
+      return <FiCpu className="text-xl text-[#34483B]" />;
     case 'FiBookOpen':
-      return <FiBookOpen className="text-3xl text-indigo-600" />;
+      return <FiBookOpen className="text-xl text-[#34483B]" />;
     case 'FiActivity':
-      return <FiActivity className="text-3xl text-rose-500" />;
+      return <FiActivity className="text-xl text-[#AD8746]" />;
     case 'FiShield':
-      return <FiShield className="text-3xl text-sky-600" />;
+      return <FiShield className="text-xl text-[#34483B]" />;
     default:
-      return <FiCheckCircle className="text-3xl text-blue-600" />;
+      return <FiCheckCircle className="text-xl text-[#34483B]" />;
   }
 };
 
@@ -48,24 +49,14 @@ const Facilities = () => {
   const facilitiesSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    'itemListElement': [
-      {
-        '@type': 'ListItem',
-        'position': 1,
-        'name': 'Home',
-        'item': 'https://www.ssglobalpublicschool.com/',
-      },
-      {
-        '@type': 'ListItem',
-        'position': 2,
-        'name': 'Facilities',
-        'item': 'https://www.ssglobalpublicschool.com/facilities',
-      },
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.ssglobalpublicschool.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Facilities', item: 'https://www.ssglobalpublicschool.com/facilities' },
     ],
   };
 
   return (
-    <main>
+    <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
         title="Campus Infrastructure & Facilities | S.S. Global Public School Daudnagar"
         description="Explore modern campus facilities at S.S. Global Public School, Daudnagar, Bihar: interactive smart classrooms, physics & chemistry labs, computer labs, sports & transport."
@@ -79,21 +70,19 @@ const Facilities = () => {
         breadcrumb={[{ label: 'Facilities' }]}
       />
 
-      <section className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="py-16 bg-[#F4EFE3]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {loading ? (
             <div className="text-center py-12">
-              <p className="text-slate-500 text-sm font-medium">Loading campus facilities...</p>
+              <p className="text-[#55594E] text-sm font-medium">Loading campus facilities...</p>
             </div>
           ) : facilityList.length > 0 ? (
             facilityList.map((fac, idx) => (
-              <div
+              <article
                 key={fac._id || idx}
-                className={`bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-8 card-hover ${
-                  idx % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                }`}
+                className="bg-[#EBE2CC]/55 rounded-sm overflow-hidden border border-[#CFC5B1] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-8"
               >
-                <div className="lg:col-span-5 h-64 sm:h-80 rounded-2xl overflow-hidden shadow-inner bg-slate-100">
+                <div className={`lg:col-span-5 h-64 sm:h-72 rounded-sm overflow-hidden border border-[#CFC5B1] bg-[#DED5C1] ${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
                   <img
                     src={getImageUrl(fac.image)}
                     alt={fac.title}
@@ -101,44 +90,46 @@ const Facilities = () => {
                     height="320"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover hover:scale-[1.02] transition-transform duration-500"
                   />
                 </div>
 
-                <div className="lg:col-span-7 space-y-4">
+                <div className={`lg:col-span-7 space-y-4 ${idx % 2 === 1 ? 'lg:order-1' : ''}`}>
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-slate-100 rounded-2xl shadow-sm">{renderIcon(fac.icon)}</div>
-                    <h3 className="text-2xl font-bold font-serif text-slate-900">{fac.title}</h3>
+                    <div className="p-2.5 bg-[#F4EFE3] rounded-sm border border-[#CFC5B1]">
+                      {renderIcon(fac.icon)}
+                    </div>
+                    <h2 className="text-2xl font-bold font-serif text-[#34483B]">{fac.title}</h2>
                   </div>
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                  <p className="text-[#55594E] text-sm sm:text-base leading-relaxed">
                     {fac.detailedDescription || fac.shortDescription}
                   </p>
 
-                  <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
-                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0"></span>
+                  <div className="pt-3 border-t border-[#CFC5B1] grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-[#252821]">
+                      <FiCheck className="text-[#34483B] shrink-0" />
                       <span>CBSE Standard Approved Infrastructure</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
-                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0"></span>
-                      <span>Dedicated Faculty & Supervision</span>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-[#252821]">
+                      <FiCheck className="text-[#34483B] shrink-0" />
+                      <span>Dedicated Faculty &amp; Supervision</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
-                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0"></span>
-                      <span>Safe & Hygienic Environment</span>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-[#252821]">
+                      <FiCheck className="text-[#34483B] shrink-0" />
+                      <span>Safe &amp; Hygienic Environment</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
-                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0"></span>
-                      <span>Regular Maintenance & Upgrades</span>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-[#252821]">
+                      <FiCheck className="text-[#34483B] shrink-0" />
+                      <span>Regular Maintenance &amp; Upgrades</span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </article>
             ))
           ) : (
-            <div className="bg-white p-12 rounded-3xl text-center border border-slate-200 max-w-md mx-auto space-y-2">
-              <h3 className="text-lg font-bold font-serif text-slate-800">No Facilities Available</h3>
-              <p className="text-xs text-slate-500">Facilities will appear here once added from the admin dashboard.</p>
+            <div className="bg-[#EBE2CC] p-12 rounded-sm text-center border border-[#CFC5B1] max-w-md mx-auto space-y-2">
+              <h3 className="text-lg font-bold font-serif text-[#34483B]">No Facilities Available</h3>
+              <p className="text-xs text-[#55594E]">Facilities will appear here once added from the admin dashboard.</p>
             </div>
           )}
         </div>

@@ -138,10 +138,10 @@ const AdminProfile = () => {
 
       <main className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-5xl">
         {/* Page Banner */}
-        <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="bg-white p-6 rounded-sm shadow-sm border border-[#CFC5B1] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h2 className="text-xl font-bold font-serif text-slate-900 flex items-center gap-2">
-              <FiUser className="text-blue-600" /> Super Admin Profile Settings
+            <h2 className="text-xl font-bold font-serif text-[#34483B] flex items-center gap-2">
+              <FiUser className="text-[#34483B]" /> Super Admin Profile Settings
             </h2>
             <p className="text-xs text-slate-500 mt-1">
               Manage your personal administrator account details and password security.
@@ -154,17 +154,17 @@ const AdminProfile = () => {
         </div>
 
         {loading ? (
-          <div className="bg-white p-12 rounded-3xl shadow-sm border border-slate-200 text-center">
-            <FiRefreshCw className="animate-spin text-3xl text-blue-600 mx-auto mb-3" />
+          <div className="bg-white p-12 rounded-sm shadow-sm border border-[#CFC5B1] text-center">
+            <FiRefreshCw className="animate-spin text-3xl text-[#34483B] mx-auto mb-3" />
             <p className="text-sm font-semibold text-slate-600">Loading administrator profile...</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Profile Information Form */}
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-6">
+            <div className="bg-white p-6 rounded-sm shadow-sm border border-[#CFC5B1] space-y-6">
               <div className="border-b border-slate-100 pb-4 flex items-center justify-between">
-                <h3 className="font-serif font-bold text-slate-900 text-lg flex items-center gap-2">
-                  <FiUser className="text-blue-600" /> Account Details
+                <h3 className="font-serif font-bold text-[#34483B] text-lg flex items-center gap-2">
+                  <FiUser className="text-[#34483B]" /> Account Details
                 </h3>
                 <span className="text-xs text-slate-400 font-mono">Editable</span>
               </div>
@@ -180,7 +180,7 @@ const AdminProfile = () => {
                     value={profileData.name}
                     onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
                     placeholder="Super Admin Name"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B] font-medium"
                   />
                 </div>
 
@@ -194,7 +194,7 @@ const AdminProfile = () => {
                     value={profileData.username}
                     onChange={(e) => setProfileData({ ...profileData, username: e.target.value })}
                     placeholder="admin"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B] font-medium"
                   />
                 </div>
 
@@ -208,7 +208,7 @@ const AdminProfile = () => {
                     value={profileData.email}
                     onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
                     placeholder="admin@ssglobalpublicschool.edu.in"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B] font-medium"
                   />
                 </div>
 
@@ -217,7 +217,7 @@ const AdminProfile = () => {
                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
                       Account Role (Read-only)
                     </label>
-                    <div className="px-4 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-amber-800 flex items-center gap-1.5">
+                    <div className="px-4 py-2.5 bg-slate-100 border border-[#CFC5B1] rounded-xl text-xs font-bold text-amber-800 flex items-center gap-1.5">
                       <FiShield /> Super Admin
                     </div>
                   </div>
@@ -226,7 +226,7 @@ const AdminProfile = () => {
                     <label className="block text-xs font-bold text-slate-500 uppercase mb-1">
                       Created Date (Read-only)
                     </label>
-                    <div className="px-4 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                    <div className="px-4 py-2.5 bg-slate-100 border border-[#CFC5B1] rounded-xl text-xs font-bold text-slate-700 flex items-center gap-1.5">
                       <FiCalendar /> {formatDate(profileData.createdAt)}
                     </div>
                   </div>
@@ -236,7 +236,7 @@ const AdminProfile = () => {
                   <button
                     type="submit"
                     disabled={submittingProfile}
-                    className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition-all flex items-center gap-2 disabled:opacity-50"
+                    className="px-6 py-2.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-xs shadow-md  transition-all flex items-center gap-2 disabled:opacity-50"
                   >
                     <FiSave /> {submittingProfile ? 'Saving Profile...' : 'Save Profile Changes'}
                   </button>
@@ -245,9 +245,9 @@ const AdminProfile = () => {
             </div>
 
             {/* Change Password Form */}
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-6">
+            <div className="bg-white p-6 rounded-sm shadow-sm border border-[#CFC5B1] space-y-6">
               <div className="border-b border-slate-100 pb-4 flex items-center justify-between">
-                <h3 className="font-serif font-bold text-slate-900 text-lg flex items-center gap-2">
+                <h3 className="font-serif font-bold text-[#34483B] text-lg flex items-center gap-2">
                   <FiKey className="text-amber-600" /> Change Security Password
                 </h3>
                 <span className="text-xs text-amber-600 font-semibold">Min 8 Characters</span>
@@ -264,7 +264,7 @@ const AdminProfile = () => {
                     value={passwordData.currentPassword}
                     onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
                     placeholder="Enter current password..."
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
                   />
                 </div>
 
@@ -278,7 +278,7 @@ const AdminProfile = () => {
                     value={passwordData.newPassword}
                     onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
                     placeholder="Minimum 8 characters..."
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
                   />
                 </div>
 
@@ -292,11 +292,11 @@ const AdminProfile = () => {
                     value={passwordData.confirmPassword}
                     onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
                     placeholder="Re-enter new password..."
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
                   />
                 </div>
 
-                <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 leading-relaxed flex items-start gap-2">
+                <div className="p-3 bg-amber-50 rounded-sm border border-amber-200 text-xs text-amber-900 leading-relaxed flex items-start gap-2">
                   <FiLock className="text-base text-amber-600 shrink-0 mt-0.5" />
                   <span>
                     Changing your password will require you to log back in with your new credentials immediately.

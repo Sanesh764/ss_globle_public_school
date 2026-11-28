@@ -18,19 +18,19 @@ import { FACILITIES_FALLBACK } from '../../config/fallbackData';
 const renderIcon = (iconName) => {
   switch (iconName) {
     case 'FiMonitor':
-      return <FiMonitor className="text-2xl text-blue-600" />;
+      return <FiMonitor className="text-lg text-[#34483B]" />;
     case 'FiZap':
-      return <FiZap className="text-2xl text-amber-500" />;
+      return <FiZap className="text-lg text-[#AD8746]" />;
     case 'FiCpu':
-      return <FiCpu className="text-2xl text-purple-600" />;
+      return <FiCpu className="text-lg text-[#34483B]" />;
     case 'FiBookOpen':
-      return <FiBookOpen className="text-2xl text-indigo-600" />;
+      return <FiBookOpen className="text-lg text-[#34483B]" />;
     case 'FiActivity':
-      return <FiActivity className="text-2xl text-rose-500" />;
+      return <FiActivity className="text-lg text-[#AD8746]" />;
     case 'FiShield':
-      return <FiShield className="text-2xl text-emerald-600" />;
+      return <FiShield className="text-lg text-[#34483B]" />;
     default:
-      return <FiCheckCircle className="text-2xl text-blue-600" />;
+      return <FiCheckCircle className="text-lg text-[#34483B]" />;
   }
 };
 
@@ -50,37 +50,39 @@ const FacilitiesPreview = () => {
   }
 
   return (
-    <section className="py-20 bg-slate-900 text-white border-t border-b border-slate-800 relative">
+    <section className="py-16 sm:py-20 bg-[#EBE2CC] text-[#252821] border-b border-[#CFC5B1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4 pb-5 border-b border-[#CFC5B1]">
           <div>
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-500/10 text-blue-300 text-xs font-bold uppercase tracking-wider border border-blue-400/30">
-              World Class Infrastructure
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-white mt-3">
+            <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#AD8746]">
+              <span className="w-6 h-[1.5px] bg-[#AD8746]" />
+              <span>Campus Infrastructure</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#34483B] mt-2 tracking-tight">
               Modern Campus Facilities
             </h2>
           </div>
           <Link
             to="/facilities"
-            className="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-bold text-sm hover:underline"
+            className="inline-flex items-center gap-2 text-[#34483B] hover:text-[#AD8746] font-semibold text-sm transition-colors"
           >
-            View All Facilities <FiArrowRight />
+            <span>View All Facilities</span>
+            <FiArrowRight />
           </Link>
         </div>
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-slate-400 text-sm font-medium">Loading campus facilities...</p>
+            <p className="text-[#55594E] text-sm font-medium">Loading campus facilities...</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {displayList.map((fac, idx) => (
-              <div
+              <article
                 key={fac._id || idx}
-                className="group bg-slate-800/80 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-700/80 flex flex-col card-hover"
+                className="group bg-[#F4EFE3] rounded-sm overflow-hidden border border-[#CFC5B1] hover:border-[#AD8746] transition-colors flex flex-col"
               >
-                <div className="h-48 overflow-hidden relative bg-slate-950">
+                <div className="h-48 overflow-hidden relative bg-[#DED5C1] border-b border-[#CFC5B1]">
                   <img
                     src={getImageUrl(fac.image)}
                     alt={fac.title}
@@ -88,24 +90,24 @@ const FacilitiesPreview = () => {
                     height="192"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
                   />
-                  <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md p-2.5 rounded-2xl border border-white/10 shadow-lg">
+                  <div className="absolute top-3 left-3 bg-[#F4EFE3]/95 p-2 rounded-sm border border-[#CFC5B1]">
                     {renderIcon(fac.icon)}
                   </div>
                 </div>
 
-                <div className="p-6 flex-1 flex flex-col justify-between">
+                <div className="p-5 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-lg font-bold text-white font-serif mb-2 group-hover:text-blue-400 transition-colors">
+                    <h3 className="text-lg font-bold text-[#34483B] font-serif mb-2 leading-snug">
                       {fac.title}
                     </h3>
-                    <p className="text-xs text-slate-300 leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-[13px] text-[#55594E] leading-relaxed line-clamp-3">
                       {fac.shortDescription}
                     </p>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         )}

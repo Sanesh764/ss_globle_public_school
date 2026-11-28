@@ -6,7 +6,7 @@ const AdminLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-100 flex">
+    <div className="min-h-screen bg-[#F4EFE3] text-[#252821] flex">
       <AdminSidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
         <Outlet context={{ setMobileOpen }} />

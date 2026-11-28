@@ -201,7 +201,7 @@ const AdminHeroSlider = () => {
         action={
           <button
             onClick={handleOpenAddModal}
-            className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm rounded-xl shadow-lg flex items-center gap-2 transition-all"
+            className="px-5 py-2.5 bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-sm rounded-xl shadow-lg flex items-center gap-2 transition-all"
           >
             <FiPlus className="text-lg" /> Add New Hero Slide
           </button>
@@ -211,10 +211,10 @@ const AdminHeroSlider = () => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+        <div className="bg-white border border-[#CFC5B1] rounded-sm shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-slate-700">
-              <thead className="bg-slate-50 text-slate-900 font-serif font-bold border-b border-slate-200 uppercase text-xs">
+              <thead className="bg-[#EBE2CC]/50 text-[#34483B] font-serif font-bold border-b border-[#CFC5B1] uppercase text-xs">
                 <tr>
                   <th className="py-4 px-6">Order</th>
                   <th className="py-4 px-6">Background Image</th>
@@ -227,10 +227,10 @@ const AdminHeroSlider = () => {
               <tbody className="divide-y divide-slate-100">
                 {slides.length > 0 ? (
                   slides.map((slide, idx) => (
-                    <tr key={slide._id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-4 px-6 font-bold text-slate-900">
+                    <tr key={slide._id} className="hover:bg-[#EBE2CC]/50/80 transition-colors">
+                      <td className="py-4 px-6 font-bold text-[#34483B]">
                         <div className="flex items-center gap-1.5">
-                          <span className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 border border-blue-200 inline-flex items-center justify-center font-mono">
+                          <span className="w-8 h-8 rounded-lg bg-blue-50 text-[#34483B] border border-blue-200 inline-flex items-center justify-center font-mono">
                             #{slide.displayOrder}
                           </span>
                           <div className="flex flex-col gap-0.5">
@@ -254,7 +254,7 @@ const AdminHeroSlider = () => {
                         </div>
                       </td>
                       <td className="py-4 px-6">
-                        <div className="w-24 h-14 rounded-xl overflow-hidden border border-slate-200 bg-slate-100 relative group">
+                        <div className="w-24 h-14 rounded-xl overflow-hidden border border-[#CFC5B1] bg-slate-100 relative group">
                           <img
                             src={getImageUrl(slide.backgroundImage)}
                             alt={slide.highlightTitle}
@@ -275,7 +275,7 @@ const AdminHeroSlider = () => {
                           </span>
                         )}
                         <span className="text-xs text-slate-500 block">{slide.title}</span>
-                        <span className="font-bold text-slate-900 block truncate font-serif">{slide.highlightTitle}</span>
+                        <span className="font-bold text-[#34483B] block truncate font-serif">{slide.highlightTitle}</span>
                         <span className="text-xs text-slate-500 line-clamp-1 italic">"{slide.description}"</span>
                       </td>
                       <td className="py-4 px-6 text-xs space-y-1">
@@ -311,7 +311,7 @@ const AdminHeroSlider = () => {
                         </button>
                         <button
                           onClick={() => handleOpenEditModal(slide)}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          className="p-2 text-[#34483B] hover:bg-blue-50 rounded-lg transition-colors"
                           title="Edit Slide"
                         >
                           <FiEdit className="text-lg" />
@@ -342,9 +342,9 @@ const AdminHeroSlider = () => {
       {/* Add / Edit Slide Modal */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto space-y-6">
+          <div className="bg-white rounded-sm max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-[#CFC5B1] max-h-[90vh] overflow-y-auto space-y-6">
             <div className="flex justify-between items-center border-b border-slate-100 pb-4">
-              <h3 className="text-xl font-bold font-serif text-slate-900">
+              <h3 className="text-xl font-bold font-serif text-[#34483B]">
                 {editingSlide ? 'Edit Hero Slide' : 'Add New Hero Slide'}
               </h3>
               <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 font-bold text-lg">
@@ -361,7 +361,7 @@ const AdminHeroSlider = () => {
                   type="file"
                   accept="image/*"
                   onChange={(e) => setFormData({ ...formData, backgroundImage: e.target.files[0] })}
-                  className="w-full px-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm"
+                  className="w-full px-4 py-2 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm"
                 />
               </div>
 
@@ -374,7 +374,7 @@ const AdminHeroSlider = () => {
                   value={formData.badge}
                   onChange={(e) => setFormData({ ...formData, badge: e.target.value })}
                   placeholder="e.g. Admissions Open 2026-2027"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -388,7 +388,7 @@ const AdminHeroSlider = () => {
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     placeholder="e.g. Welcome to"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
 
@@ -402,7 +402,7 @@ const AdminHeroSlider = () => {
                     value={formData.highlightTitle}
                     onChange={(e) => setFormData({ ...formData, highlightTitle: e.target.value })}
                     placeholder="e.g. S.S. Global Public School"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
               </div>
@@ -417,7 +417,7 @@ const AdminHeroSlider = () => {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Enter slide description text..."
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 ></textarea>
               </div>
 
@@ -431,7 +431,7 @@ const AdminHeroSlider = () => {
                     value={formData.primaryButtonText}
                     onChange={(e) => setFormData({ ...formData, primaryButtonText: e.target.value })}
                     placeholder="e.g. Apply For Admission"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
 
@@ -444,7 +444,7 @@ const AdminHeroSlider = () => {
                     value={formData.primaryButtonLink}
                     onChange={(e) => setFormData({ ...formData, primaryButtonLink: e.target.value })}
                     placeholder="/contact"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
               </div>
@@ -459,7 +459,7 @@ const AdminHeroSlider = () => {
                     value={formData.secondaryButtonText}
                     onChange={(e) => setFormData({ ...formData, secondaryButtonText: e.target.value })}
                     placeholder="e.g. Explore School Vision"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
 
@@ -472,7 +472,7 @@ const AdminHeroSlider = () => {
                     value={formData.secondaryButtonLink}
                     onChange={(e) => setFormData({ ...formData, secondaryButtonLink: e.target.value })}
                     placeholder="/about"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
               </div>
@@ -488,7 +488,7 @@ const AdminHeroSlider = () => {
                     required
                     value={formData.displayOrder}
                     onChange={(e) => setFormData({ ...formData, displayOrder: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   />
                 </div>
 
@@ -498,7 +498,7 @@ const AdminHeroSlider = () => {
                       type="checkbox"
                       checked={formData.isActive}
                       onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                      className="w-4 h-4 text-blue-600 rounded"
+                      className="w-4 h-4 text-[#34483B] rounded"
                     />
                     Active Slide
                   </label>
@@ -510,7 +510,7 @@ const AdminHeroSlider = () => {
                       type="checkbox"
                       checked={formData.autoPlay}
                       onChange={(e) => setFormData({ ...formData, autoPlay: e.target.checked })}
-                      className="w-4 h-4 text-blue-600 rounded"
+                      className="w-4 h-4 text-[#34483B] rounded"
                     />
                     Auto-Play Slide
                   </label>
@@ -521,14 +521,14 @@ const AdminHeroSlider = () => {
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-100"
+                  className="px-5 py-2.5 rounded-xl border border-[#CFC5B1] text-slate-700 font-semibold text-sm hover:bg-slate-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-sm shadow-lg disabled:opacity-50"
                 >
                   {submitting ? 'Saving...' : editingSlide ? 'Update Slide' : 'Save Hero Slide'}
                 </button>
@@ -541,7 +541,7 @@ const AdminHeroSlider = () => {
       {/* Slide Preview Modal */}
       {previewSlide && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-950 rounded-3xl max-w-4xl w-full p-6 shadow-2xl border border-slate-800 space-y-4 text-white relative">
+          <div className="bg-slate-950 rounded-sm max-w-4xl w-full p-6 shadow-2xl border border-slate-800 space-y-4 text-white relative">
             <div className="flex justify-between items-center border-b border-slate-800 pb-3">
               <h4 className="font-bold text-lg flex items-center gap-2">
                 <FiLayers className="text-amber-400" /> Slide Preview (# {previewSlide.displayOrder})
@@ -551,7 +551,7 @@ const AdminHeroSlider = () => {
               </button>
             </div>
 
-            <div className="relative min-h-[400px] rounded-2xl overflow-hidden flex items-center p-8 bg-cover bg-center"
+            <div className="relative min-h-[400px] rounded-sm overflow-hidden flex items-center p-8 bg-cover bg-center"
                  style={{ backgroundImage: `url('${getImageUrl(previewSlide.backgroundImage)}')` }}>
               <div className="absolute inset-0 bg-slate-950/70 z-0"></div>
               <div className="relative z-10 max-w-xl space-y-4">

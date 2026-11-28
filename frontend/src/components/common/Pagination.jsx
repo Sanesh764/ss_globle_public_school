@@ -11,20 +11,20 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2.5 rounded-lg border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        className="p-2.5 rounded-sm border border-[#CFC5B1] bg-[#F4EFE3] text-[#34483B] hover:bg-[#EBE2CC] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         aria-label="Previous Page"
       >
-        <FiChevronLeft className="text-lg" />
+        <FiChevronLeft className="text-base" />
       </button>
 
       {pages.map((p) => (
         <button
           key={p}
           onClick={() => onPageChange(p)}
-          className={`w-10 h-10 rounded-lg text-sm font-semibold transition-all ${
+          className={`w-9 h-9 rounded-sm text-sm font-semibold transition-colors ${
             currentPage === p
-              ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-              : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-50'
+              ? 'bg-[#34483B] text-[#F4EFE3] border border-[#34483B]'
+              : 'bg-[#F4EFE3] border border-[#CFC5B1] text-[#252821] hover:bg-[#EBE2CC]'
           }`}
         >
           {p}
@@ -34,10 +34,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2.5 rounded-lg border border-slate-300 bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        className="p-2.5 rounded-sm border border-[#CFC5B1] bg-[#F4EFE3] text-[#34483B] hover:bg-[#EBE2CC] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         aria-label="Next Page"
       >
-        <FiChevronRight className="text-lg" />
+        <FiChevronRight className="text-base" />
       </button>
     </div>
   );

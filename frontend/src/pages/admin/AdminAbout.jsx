@@ -191,9 +191,9 @@ const AdminAbout = () => {
       <main className="p-4 sm:p-6 lg:p-8 space-y-6">
         <form onSubmit={handleSubmit} className="space-y-8 max-w-5xl">
           {/* Section 1: Hero Header */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-            <h3 className="text-lg font-bold font-serif text-slate-900 border-l-4 border-blue-600 pl-3 flex items-center gap-2">
-              <FiLayers className="text-blue-600" /> 1. About Page Hero Header
+          <div className="bg-white p-6 sm:p-8 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
+            <h3 className="text-lg font-bold font-serif text-[#34483B] border-l-4 border-blue-600 pl-3 flex items-center gap-2">
+              <FiLayers className="text-[#34483B]" /> 1. About Page Hero Header
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -206,7 +206,7 @@ const AdminAbout = () => {
                   required
                   value={formData.aboutHeroTitle}
                   onChange={(e) => setFormData({ ...formData, aboutHeroTitle: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -218,7 +218,7 @@ const AdminAbout = () => {
                   type="text"
                   value={formData.aboutHeroSubtitle}
                   onChange={(e) => setFormData({ ...formData, aboutHeroSubtitle: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -235,7 +235,7 @@ const AdminAbout = () => {
               />
               {settings?.aboutHeroBgImage && (
                 <div className="mt-2 flex items-center gap-3">
-                  <img src={settings.aboutHeroBgImage} alt="Hero Background" className="w-20 h-12 rounded-xl object-cover border border-slate-200" />
+                  <img src={settings.aboutHeroBgImage} alt="Hero Background" className="w-20 h-12 rounded-xl object-cover border border-[#CFC5B1]" />
                   <span className="text-xs text-slate-500">Current Hero Background Image Attached</span>
                 </div>
               )}
@@ -243,8 +243,8 @@ const AdminAbout = () => {
           </div>
 
           {/* Section 2: Main About Content */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-            <h3 className="text-lg font-bold font-serif text-slate-900 border-l-4 border-amber-500 pl-3 flex items-center gap-2">
+          <div className="bg-white p-6 sm:p-8 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
+            <h3 className="text-lg font-bold font-serif text-[#34483B] border-l-4 border-amber-500 pl-3 flex items-center gap-2">
               <FiFileText className="text-amber-500" /> 2. About Section Content & Paragraphs
             </h3>
 
@@ -257,7 +257,7 @@ const AdminAbout = () => {
                   type="text"
                   value={formData.aboutBadge}
                   onChange={(e) => setFormData({ ...formData, aboutBadge: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -270,7 +270,7 @@ const AdminAbout = () => {
                   required
                   value={formData.aboutTitle}
                   onChange={(e) => setFormData({ ...formData, aboutTitle: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -283,7 +283,7 @@ const AdminAbout = () => {
                 rows="3"
                 value={formData.aboutText1}
                 onChange={(e) => setFormData({ ...formData, aboutText1: e.target.value })}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
               ></textarea>
             </div>
 
@@ -295,7 +295,7 @@ const AdminAbout = () => {
                 rows="3"
                 value={formData.aboutText2}
                 onChange={(e) => setFormData({ ...formData, aboutText2: e.target.value })}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
               ></textarea>
             </div>
 
@@ -308,7 +308,7 @@ const AdminAbout = () => {
                   type="text"
                   value={formData.aboutExpNumber}
                   onChange={(e) => setFormData({ ...formData, aboutExpNumber: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -320,7 +320,7 @@ const AdminAbout = () => {
                   type="text"
                   value={formData.aboutExpText}
                   onChange={(e) => setFormData({ ...formData, aboutExpText: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -329,8 +329,8 @@ const AdminAbout = () => {
               <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                 Upload School Building / Campus Photo
               </label>
-              <div className="p-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl text-center space-y-2">
-                <FiUploadCloud className="text-3xl text-blue-600 mx-auto" />
+              <div className="p-4 bg-[#EBE2CC]/50 border-2 border-dashed border-[#CFC5B1] rounded-sm text-center space-y-2">
+                <FiUploadCloud className="text-3xl text-[#34483B] mx-auto" />
                 <input
                   type="file"
                   accept="image/*"
@@ -343,7 +343,7 @@ const AdminAbout = () => {
                   </p>
                 ) : settings?.aboutImage ? (
                   <div className="flex items-center justify-center gap-3 pt-2">
-                    <img src={settings.aboutImage} alt="Campus Building" className="w-16 h-12 rounded-xl object-cover border border-slate-200" />
+                    <img src={settings.aboutImage} alt="Campus Building" className="w-16 h-12 rounded-xl object-cover border border-[#CFC5B1]" />
                     <span className="text-xs text-slate-500">Current Building Image Attached</span>
                   </div>
                 ) : null}
@@ -352,15 +352,15 @@ const AdminAbout = () => {
           </div>
 
           {/* Section 3: Features List CRUD */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
+          <div className="bg-white p-6 sm:p-8 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
             <div className="flex justify-between items-center border-b border-slate-100 pb-3">
-              <h3 className="text-lg font-bold font-serif text-slate-900 border-l-4 border-indigo-600 pl-3">
+              <h3 className="text-lg font-bold font-serif text-[#34483B] border-l-4 border-indigo-600 pl-3">
                 3. Key Highlights & Features List
               </h3>
               <button
                 type="button"
                 onClick={() => handleOpenFeatureModal()}
-                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md flex items-center gap-1.5"
+                className="px-4 py-2 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-xs shadow-md flex items-center gap-1.5"
               >
                 <FiPlus /> Add Feature Item
               </button>
@@ -370,14 +370,14 @@ const AdminAbout = () => {
               {featuresList.map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between gap-3"
+                  className="p-3.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-sm flex items-center justify-between gap-3"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-base font-bold shrink-0">
                       <FiCheckCircle />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900 line-clamp-1">{item.title}</h4>
+                      <h4 className="text-xs font-bold text-[#34483B] line-clamp-1">{item.title}</h4>
                       <span className="text-[10px] text-slate-400 font-mono">Icon: {item.icon}</span>
                     </div>
                   </div>
@@ -385,7 +385,7 @@ const AdminAbout = () => {
                     <button
                       type="button"
                       onClick={() => handleOpenFeatureModal(idx)}
-                      className="p-1.5 text-blue-600 hover:bg-blue-100 rounded-lg"
+                      className="p-1.5 text-[#34483B] hover:bg-blue-100 rounded-lg"
                       title="Edit Item"
                     >
                       <FiEdit />
@@ -405,8 +405,8 @@ const AdminAbout = () => {
           </div>
 
           {/* Section 4: Leadership Messages & Photos */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4">
-            <h3 className="text-lg font-bold font-serif text-slate-900 border-l-4 border-purple-600 pl-3">
+          <div className="bg-white p-6 sm:p-8 rounded-sm shadow-sm border border-[#CFC5B1] space-y-4">
+            <h3 className="text-lg font-bold font-serif text-[#34483B] border-l-4 border-purple-600 pl-3">
               4. Leadership Messages & Photos
             </h3>
 
@@ -419,7 +419,7 @@ const AdminAbout = () => {
                   type="text"
                   value={formData.principalName}
                   onChange={(e) => setFormData({ ...formData, principalName: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -431,7 +431,7 @@ const AdminAbout = () => {
                   type="text"
                   value={formData.directorName}
                   onChange={(e) => setFormData({ ...formData, directorName: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
             </div>
@@ -449,7 +449,7 @@ const AdminAbout = () => {
                 />
                 {settings?.principalPhoto && (
                   <div className="mt-2 flex items-center gap-2">
-                    <img src={settings.principalPhoto} alt="Principal Preview" className="w-10 h-10 rounded-full object-cover border border-slate-200" />
+                    <img src={settings.principalPhoto} alt="Principal Preview" className="w-10 h-10 rounded-full object-cover border border-[#CFC5B1]" />
                     <span className="text-xs text-slate-500">Current Principal Photo</span>
                   </div>
                 )}
@@ -467,7 +467,7 @@ const AdminAbout = () => {
                 />
                 {settings?.directorPhoto && (
                   <div className="mt-2 flex items-center gap-2">
-                    <img src={settings.directorPhoto} alt="Director Preview" className="w-10 h-10 rounded-full object-cover border border-slate-200" />
+                    <img src={settings.directorPhoto} alt="Director Preview" className="w-10 h-10 rounded-full object-cover border border-[#CFC5B1]" />
                     <span className="text-xs text-slate-500">Current Director Photo</span>
                   </div>
                 )}
@@ -482,7 +482,7 @@ const AdminAbout = () => {
                 rows="3"
                 value={formData.principalMessage}
                 onChange={(e) => setFormData({ ...formData, principalMessage: e.target.value })}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
               ></textarea>
             </div>
 
@@ -494,7 +494,7 @@ const AdminAbout = () => {
                 rows="3"
                 value={formData.directorMessage}
                 onChange={(e) => setFormData({ ...formData, directorMessage: e.target.value })}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
               ></textarea>
             </div>
           </div>
@@ -503,7 +503,7 @@ const AdminAbout = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-base shadow-xl shadow-blue-600/30 transition-all flex items-center gap-2 disabled:opacity-50"
+              className="px-8 py-3.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-base shadow-xl  transition-all flex items-center gap-2 disabled:opacity-50"
             >
               <FiSave className="text-xl" /> {submitting ? 'Saving Changes...' : 'Save All About Content'}
             </button>
@@ -514,9 +514,9 @@ const AdminAbout = () => {
       {/* Feature Add/Edit Modal */}
       {isFeatureModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200">
+          <div className="bg-white rounded-sm max-w-md w-full p-6 space-y-4 shadow-2xl border border-[#CFC5B1]">
             <div className="flex justify-between items-center border-b border-slate-100 pb-3">
-              <h3 className="text-base font-bold font-serif text-slate-900">
+              <h3 className="text-base font-bold font-serif text-[#34483B]">
                 {editingFeatureIndex !== null ? 'Edit Feature Item' : 'Add New Feature Item'}
               </h3>
               <button onClick={() => setIsFeatureModalOpen(false)} className="p-1 text-slate-400 hover:text-slate-700">
@@ -535,7 +535,7 @@ const AdminAbout = () => {
                   value={featureForm.title}
                   onChange={(e) => setFeatureForm({ ...featureForm, title: e.target.value })}
                   placeholder="e.g. Interactive Smart Classrooms & Digital Labs"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 />
               </div>
 
@@ -546,7 +546,7 @@ const AdminAbout = () => {
                 <select
                   value={featureForm.icon}
                   onChange={(e) => setFeatureForm({ ...featureForm, icon: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 >
                   {ICON_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -560,13 +560,13 @@ const AdminAbout = () => {
                 <button
                   type="button"
                   onClick={() => setIsFeatureModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50"
+                  className="px-4 py-2 rounded-xl border border-[#CFC5B1] text-slate-700 font-bold text-xs hover:bg-[#EBE2CC]/50"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md"
+                  className="px-5 py-2 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-xs shadow-md"
                 >
                   Save Item
                 </button>

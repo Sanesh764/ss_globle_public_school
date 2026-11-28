@@ -205,10 +205,10 @@ const AdminUsers = () => {
 
       <main className="p-4 sm:p-6 lg:p-8 space-y-6">
         {/* Top Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-sm shadow-sm border border-[#CFC5B1]">
           <div>
-            <h2 className="text-xl font-bold font-serif text-slate-900 flex items-center gap-2">
-              <FiUsers className="text-blue-600" /> Manage Staff Accounts
+            <h2 className="text-xl font-bold font-serif text-[#34483B] flex items-center gap-2">
+              <FiUsers className="text-[#34483B]" /> Manage Staff Accounts
             </h2>
             <p className="text-xs text-slate-500 mt-1">
               Create, edit, reset passwords, or enable/disable access permissions for staff accounts.
@@ -217,7 +217,7 @@ const AdminUsers = () => {
 
           <button
             onClick={() => handleOpenModal()}
-            className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all flex items-center gap-2 shrink-0 active:scale-95"
+            className="px-6 py-3 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-sm shadow-lg  transition-all flex items-center gap-2 shrink-0 active:scale-95"
           >
             <FiUserPlus className="text-lg" /> Create Staff Account
           </button>
@@ -225,16 +225,16 @@ const AdminUsers = () => {
 
         {/* Users Table */}
         {loading ? (
-          <div className="bg-white p-12 rounded-3xl shadow-sm border border-slate-200 text-center">
-            <FiRefreshCw className="animate-spin text-3xl text-blue-600 mx-auto mb-3" />
+          <div className="bg-white p-12 rounded-sm shadow-sm border border-[#CFC5B1] text-center">
+            <FiRefreshCw className="animate-spin text-3xl text-[#34483B] mx-auto mb-3" />
             <p className="text-sm font-semibold text-slate-600">Loading staff user accounts...</p>
           </div>
         ) : users.length > 0 ? (
-          <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="bg-white rounded-sm shadow-sm border border-[#CFC5B1] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <tr className="bg-[#EBE2CC]/50 border-b border-[#CFC5B1] text-xs font-bold uppercase tracking-wider text-slate-500">
                     <th className="py-4 px-6">Name</th>
                     <th className="py-4 px-4">Username</th>
                     <th className="py-4 px-6">Email Address</th>
@@ -246,14 +246,14 @@ const AdminUsers = () => {
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-sm">
                   {users.map((u) => (
-                    <tr key={u._id} className="hover:bg-slate-50/80 transition-colors">
+                    <tr key={u._id} className="hover:bg-[#EBE2CC]/50/80 transition-colors">
                       <td className="py-4 px-6">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-base font-bold border border-blue-100 shrink-0">
+                          <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#34483B] flex items-center justify-center text-base font-bold border border-blue-100 shrink-0">
                             {u.name ? u.name.charAt(0).toUpperCase() : 'U'}
                           </div>
                           <div>
-                            <h4 className="font-bold font-serif text-slate-900 text-sm">{u.name}</h4>
+                            <h4 className="font-bold font-serif text-[#34483B] text-sm">{u.name}</h4>
                             <span className="text-[11px] text-slate-400">ID: {u._id.slice(-6)}</span>
                           </div>
                         </div>
@@ -272,7 +272,7 @@ const AdminUsers = () => {
                           className={`px-3 py-1 rounded-full text-xs font-bold ${
                             u.role === 'superadmin' || u.role === 'admin'
                               ? 'bg-amber-100 text-amber-800 border border-amber-200'
-                              : 'bg-slate-100 text-slate-700 border border-slate-200'
+                              : 'bg-slate-100 text-slate-700 border border-[#CFC5B1]'
                           }`}
                         >
                           {u.role === 'superadmin' ? 'Super Admin' : 'Staff Admin'}
@@ -333,7 +333,7 @@ const AdminUsers = () => {
             </div>
           </div>
         ) : (
-          <div className="bg-white p-12 rounded-3xl shadow-sm border border-slate-200 text-center max-w-md mx-auto space-y-3">
+          <div className="bg-white p-12 rounded-sm shadow-sm border border-[#CFC5B1] text-center max-w-md mx-auto space-y-3">
             <FiUsers className="text-4xl text-slate-300 mx-auto" />
             <h3 className="text-lg font-bold font-serif text-slate-800">No Staff Accounts Created</h3>
             <p className="text-xs text-slate-500">
@@ -346,7 +346,7 @@ const AdminUsers = () => {
       {/* Create / Edit Staff Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl overflow-hidden border border-slate-200 my-8">
+          <div className="bg-white rounded-sm max-w-md w-full shadow-2xl overflow-hidden border border-[#CFC5B1] my-8">
             <div className="primary-gradient text-white p-6 flex justify-between items-center">
               <h3 className="text-lg font-bold font-serif flex items-center gap-2">
                 <FiShield /> {editingUser ? 'Edit Staff Account' : 'Create Staff Account'}
@@ -367,7 +367,7 @@ const AdminUsers = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g. Rahul Kumar (Teacher)"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B] font-medium"
                 />
               </div>
 
@@ -381,7 +381,7 @@ const AdminUsers = () => {
                   value={formData.username}
                   onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                   placeholder="e.g. rahulkumar"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B] font-medium"
                 />
               </div>
 
@@ -395,7 +395,7 @@ const AdminUsers = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="staff@ssglobalpublicschool.edu.in"
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B] font-medium"
                 />
               </div>
 
@@ -410,7 +410,7 @@ const AdminUsers = () => {
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     placeholder="Set temporary password..."
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B] font-medium"
                   />
                 </div>
               )}
@@ -422,7 +422,7 @@ const AdminUsers = () => {
                 <select
                   value={formData.role}
                   onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                 >
                   <option value="staff">Staff Admin (Restricted Access: Gallery, Notices, Messages, Academic Resources)</option>
                   <option value="superadmin">Super Admin (Full Access to Everything)</option>
@@ -437,7 +437,7 @@ const AdminUsers = () => {
                   <select
                     value={formData.isActive ? 'true' : 'false'}
                     onChange={(e) => setFormData({ ...formData, isActive: e.target.value === 'true' })}
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
                   >
                     <option value="true">Active (Allowed to log in)</option>
                     <option value="false">Disabled (Login Blocked)</option>
@@ -449,14 +449,14 @@ const AdminUsers = () => {
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50"
+                  className="px-5 py-2.5 rounded-xl border border-[#CFC5B1] text-slate-700 font-bold text-xs hover:bg-[#EBE2CC]/50"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition-all disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-[#34483B] hover:bg-[#27372D] text-white font-bold text-xs shadow-md  transition-all disabled:opacity-50"
                 >
                   {submitting ? 'Saving...' : editingUser ? 'Save Changes' : 'Create Staff Account'}
                 </button>
@@ -469,12 +469,12 @@ const AdminUsers = () => {
       {/* Reset Password Modal */}
       {resetPasswordUser && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200">
-            <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mx-auto font-bold">
+          <div className="bg-white rounded-sm max-w-md w-full p-6 space-y-4 shadow-2xl border border-[#CFC5B1]">
+            <div className="w-12 h-12 rounded-sm bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mx-auto font-bold">
               <FiKey />
             </div>
             <div className="text-center">
-              <h3 className="text-lg font-bold font-serif text-slate-900">Reset Staff Password</h3>
+              <h3 className="text-lg font-bold font-serif text-[#34483B]">Reset Staff Password</h3>
               <p className="text-xs text-slate-500">
                 Set a new password for <strong className="text-slate-800">{resetPasswordUser.name}</strong> ({resetPasswordUser.email}).
               </p>
@@ -491,7 +491,7 @@ const AdminUsers = () => {
                   value={resetPasswordData.newPassword}
                   onChange={(e) => setResetPasswordData({ ...resetPasswordData, newPassword: e.target.value })}
                   placeholder="Enter new password..."
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
                 />
               </div>
 
@@ -505,7 +505,7 @@ const AdminUsers = () => {
                   value={resetPasswordData.confirmPassword}
                   onChange={(e) => setResetPasswordData({ ...resetPasswordData, confirmPassword: e.target.value })}
                   placeholder="Re-enter new password..."
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
+                  className="w-full px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium"
                 />
               </div>
 
@@ -513,7 +513,7 @@ const AdminUsers = () => {
                 <button
                   type="button"
                   onClick={() => setResetPasswordUser(null)}
-                  className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50"
+                  className="px-5 py-2.5 rounded-xl border border-[#CFC5B1] text-slate-700 font-bold text-xs hover:bg-[#EBE2CC]/50"
                 >
                   Cancel
                 </button>
@@ -533,18 +533,18 @@ const AdminUsers = () => {
       {/* Delete Confirmation Modal */}
       {deleteConfirmUser && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl border border-slate-200">
+          <div className="bg-white rounded-sm max-w-md w-full p-6 text-center space-y-4 shadow-2xl border border-[#CFC5B1]">
             <div className="w-14 h-14 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mx-auto">
               <FiTrash2 />
             </div>
-            <h3 className="text-lg font-bold font-serif text-slate-900">Delete Staff Account?</h3>
+            <h3 className="text-lg font-bold font-serif text-[#34483B]">Delete Staff Account?</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Are you sure you want to permanently delete the admin account for <strong className="text-slate-900">"{deleteConfirmUser.name}"</strong> ({deleteConfirmUser.email})?
+              Are you sure you want to permanently delete the admin account for <strong className="text-[#34483B]">"{deleteConfirmUser.name}"</strong> ({deleteConfirmUser.email})?
             </p>
             <div className="flex justify-center gap-3 pt-2">
               <button
                 onClick={() => setDeleteConfirmUser(null)}
-                className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50"
+                className="px-5 py-2.5 rounded-xl border border-[#CFC5B1] text-slate-700 font-bold text-xs hover:bg-[#EBE2CC]/50"
               >
                 Cancel
               </button>

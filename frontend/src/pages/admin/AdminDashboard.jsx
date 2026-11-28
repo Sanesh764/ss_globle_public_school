@@ -37,74 +37,71 @@ const AdminDashboard = () => {
       <main className="p-4 sm:p-6 lg:p-8 space-y-8">
         {/* Stat Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {/* Notices Stat */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between card-hover">
+          <div className="bg-[#EBE2CC]/60 p-6 rounded-sm border border-[#CFC5B1] flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Notices</span>
-              <h3 className="text-3xl font-extrabold font-serif text-slate-900 mt-1">{totalNotices}</h3>
-              <Link to="/admin/notices" className="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1 mt-2">
+              <span className="text-[11px] font-semibold text-[#55594E] uppercase tracking-wider">Total Notices</span>
+              <h3 className="text-3xl font-bold font-serif text-[#34483B] mt-1">{totalNotices}</h3>
+              <Link to="/admin/notices" className="text-xs font-semibold text-[#34483B] hover:text-[#AD8746] flex items-center gap-1 mt-2">
                 Manage Notices <FiArrowRight />
               </Link>
             </div>
-            <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-2xl shadow-inner">
+            <div className="w-12 h-12 rounded-sm bg-[#F4EFE3] border border-[#CFC5B1] text-[#34483B] flex items-center justify-center text-xl">
               <FiBell />
             </div>
           </div>
 
-          {/* Gallery Stat */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between card-hover">
+          <div className="bg-[#EBE2CC]/60 p-6 rounded-sm border border-[#CFC5B1] flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Gallery Images</span>
-              <h3 className="text-3xl font-extrabold font-serif text-slate-900 mt-1">{totalGallery}</h3>
-              <Link to="/admin/gallery" className="text-xs font-semibold text-amber-600 hover:underline flex items-center gap-1 mt-2">
+              <span className="text-[11px] font-semibold text-[#55594E] uppercase tracking-wider">Gallery Images</span>
+              <h3 className="text-3xl font-bold font-serif text-[#34483B] mt-1">{totalGallery}</h3>
+              <Link to="/admin/gallery" className="text-xs font-semibold text-[#34483B] hover:text-[#AD8746] flex items-center gap-1 mt-2">
                 Manage Gallery <FiArrowRight />
               </Link>
             </div>
-            <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-2xl shadow-inner">
+            <div className="w-12 h-12 rounded-sm bg-[#F4EFE3] border border-[#CFC5B1] text-[#AD8746] flex items-center justify-center text-xl">
               <FiImage />
             </div>
           </div>
 
-          {/* Messages Stat */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between card-hover">
+          <div className="bg-[#EBE2CC]/60 p-6 rounded-sm border border-[#CFC5B1] flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Contact Messages</span>
-              <h3 className="text-3xl font-extrabold font-serif text-slate-900 mt-1">{totalMessages}</h3>
-              <Link to="/admin/messages" className="text-xs font-semibold text-emerald-600 hover:underline flex items-center gap-1 mt-2">
+              <span className="text-[11px] font-semibold text-[#55594E] uppercase tracking-wider">Contact Messages</span>
+              <h3 className="text-3xl font-bold font-serif text-[#34483B] mt-1">{totalMessages}</h3>
+              <Link to="/admin/messages" className="text-xs font-semibold text-[#34483B] hover:text-[#AD8746] flex items-center gap-1 mt-2">
                 View Inbox <FiArrowRight />
               </Link>
             </div>
-            <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-2xl shadow-inner">
+            <div className="w-12 h-12 rounded-sm bg-[#F4EFE3] border border-[#CFC5B1] text-[#34483B] flex items-center justify-center text-xl">
               <FiMail />
             </div>
           </div>
         </div>
 
         {/* Quick Action Bar */}
-        <div className="bg-slate-900 text-white p-6 rounded-3xl shadow-xl flex flex-wrap items-center justify-between gap-4">
+        <div className="bg-[#34483B] text-[#F4EFE3] p-6 rounded-sm border border-[#27372D] flex flex-wrap items-center justify-between gap-4">
           <div>
             <h3 className="text-lg font-bold font-serif">Quick Management Shortcuts</h3>
-            <p className="text-xs text-slate-400">Publish notices, update school info, or add photos to gallery.</p>
+            <p className="text-xs text-[#EBE2CC]/80 mt-0.5">Publish notices, update school info, or add photos to gallery.</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
               to="/admin/notices"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-xl shadow transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 bg-[#AD8746] hover:bg-[#8E6D35] text-white text-xs font-semibold rounded-sm transition-colors flex items-center gap-1.5"
             >
               <FiPlusCircle /> Add Notice
             </Link>
             <Link
               to="/admin/gallery"
-              className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold rounded-xl shadow transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 bg-[#F4EFE3] hover:bg-[#EBE2CC] text-[#34483B] text-xs font-semibold rounded-sm transition-colors flex items-center gap-1.5"
             >
               <FiImage /> Upload Photo
             </Link>
             {!isStaff && (
               <Link
                 to="/admin/settings"
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl shadow transition-colors flex items-center gap-1.5 border border-slate-700"
+                className="px-4 py-2 bg-[#27372D] hover:bg-[#1E2B23] text-[#EBE2CC] text-xs font-semibold rounded-sm transition-colors flex items-center gap-1.5 border border-[#4B6353]"
               >
-                <FiSliders /> Edit Settings
+                <FiSliders className="text-[#AD8746]" /> Edit Settings
               </Link>
             )}
           </div>
@@ -115,60 +112,62 @@ const AdminDashboard = () => {
           <LoadingSpinner />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Recent Notices */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 className="font-serif font-bold text-slate-900 text-lg flex items-center gap-2">
-                  <FiBell className="text-blue-600" /> Recent Published Notices
+            <div className="bg-[#EBE2CC]/45 p-6 rounded-sm border border-[#CFC5B1] space-y-4">
+              <div className="flex items-center justify-between border-b border-[#CFC5B1] pb-3">
+                <h3 className="font-serif font-bold text-[#34483B] text-lg flex items-center gap-2">
+                  <FiBell className="text-[#AD8746]" /> Recent Published Notices
                 </h3>
-                <Link to="/admin/notices" className="text-xs text-blue-600 font-semibold hover:underline">View All</Link>
+                <Link to="/admin/notices" className="text-xs text-[#34483B] font-semibold hover:text-[#AD8746]">
+                  View All
+                </Link>
               </div>
 
-              <div className="space-y-3">
+              <div className="divide-y divide-[#CFC5B1]">
                 {noticesList.length > 0 ? (
                   noticesList.slice(0, 4).map((n) => (
-                    <div key={n._id} className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center text-sm">
-                      <div>
-                        <h4 className="font-semibold text-slate-900 line-clamp-1">{n.title}</h4>
-                        <span className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
-                          <FiClock /> {formatDate(n.createdAt)} • {n.category}
+                    <div key={n._id} className="py-3 flex justify-between items-center text-sm gap-3">
+                      <div className="min-w-0">
+                        <h4 className="font-semibold text-[#252821] line-clamp-1">{n.title}</h4>
+                        <span className="text-[11px] text-[#55594E] flex items-center gap-1 mt-0.5">
+                          <FiClock className="text-[#AD8746]" /> {formatDate(n.createdAt)} • {n.category}
                         </span>
                       </div>
-                      <span className="text-xs bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded">
+                      <span className="text-[10px] bg-[#34483B] text-[#F4EFE3] font-semibold px-2 py-0.5 rounded-sm uppercase tracking-wider shrink-0">
                         Active
                       </span>
                     </div>
                   ))
                 ) : (
-                  <p className="text-sm text-slate-500 py-4 text-center">No notices found.</p>
+                  <p className="text-sm text-[#55594E] py-4 text-center">No notices found.</p>
                 )}
               </div>
             </div>
 
-            {/* Recent Inquiries */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 className="font-serif font-bold text-slate-900 text-lg flex items-center gap-2">
-                  <FiMail className="text-emerald-600" /> Recent Contact Messages
+            <div className="bg-[#EBE2CC]/45 p-6 rounded-sm border border-[#CFC5B1] space-y-4">
+              <div className="flex items-center justify-between border-b border-[#CFC5B1] pb-3">
+                <h3 className="font-serif font-bold text-[#34483B] text-lg flex items-center gap-2">
+                  <FiMail className="text-[#AD8746]" /> Recent Contact Messages
                 </h3>
-                <Link to="/admin/messages" className="text-xs text-blue-600 font-semibold hover:underline">View Inbox</Link>
+                <Link to="/admin/messages" className="text-xs text-[#34483B] font-semibold hover:text-[#AD8746]">
+                  View Inbox
+                </Link>
               </div>
 
-              <div className="space-y-3">
+              <div className="divide-y divide-[#CFC5B1]">
                 {messagesList.length > 0 ? (
                   messagesList.slice(0, 4).map((m) => (
-                    <div key={m._id} className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center text-sm">
-                      <div>
-                        <h4 className="font-semibold text-slate-900">{m.name}</h4>
-                        <p className="text-xs text-slate-500 line-clamp-1">{m.subject || m.message}</p>
+                    <div key={m._id} className="py-3 flex justify-between items-center text-sm gap-3">
+                      <div className="min-w-0">
+                        <h4 className="font-semibold text-[#252821]">{m.name || m.fullName}</h4>
+                        <p className="text-xs text-[#55594E] line-clamp-1">{m.subject || m.message}</p>
                       </div>
-                      <span className="text-[11px] text-slate-400">
+                      <span className="text-[11px] text-[#55594E] shrink-0">
                         {formatDate(m.createdAt)}
                       </span>
                     </div>
                   ))
                 ) : (
-                  <p className="text-sm text-slate-500 py-4 text-center">No messages received yet.</p>
+                  <p className="text-sm text-[#55594E] py-4 text-center">No messages received yet.</p>
                 )}
               </div>
             </div>

@@ -29,95 +29,92 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
 
   const navigationSections = [
     {
-      category: null, // Dashboard top level
+      category: null,
       staffAllowed: true,
       items: [
-        { name: 'Dashboard', path: '/admin/dashboard', icon: <FiGrid className="text-xl" />, staffAllowed: true },
+        { name: 'Dashboard', path: '/admin/dashboard', icon: <FiGrid className="text-lg" />, staffAllowed: true },
       ],
     },
     {
       category: 'Content Management',
       staffAllowed: false,
       items: [
-        { name: 'Hero Slider', path: '/admin/hero-slider', icon: <FiFilm className="text-xl" />, staffAllowed: false },
-        { name: 'About Page', path: '/admin/about', icon: <FiFileText className="text-xl" />, staffAllowed: false },
-        { name: 'Facilities', path: '/admin/facilities', icon: <FiCheckSquare className="text-xl" />, staffAllowed: false },
-        { name: 'Leadership', path: '/admin/leadership', icon: <FiUsers className="text-xl" />, staffAllowed: false },
+        { name: 'Hero Slider', path: '/admin/hero-slider', icon: <FiFilm className="text-lg" />, staffAllowed: false },
+        { name: 'About Page', path: '/admin/about', icon: <FiFileText className="text-lg" />, staffAllowed: false },
+        { name: 'Facilities', path: '/admin/facilities', icon: <FiCheckSquare className="text-lg" />, staffAllowed: false },
+        { name: 'Leadership', path: '/admin/leadership', icon: <FiUsers className="text-lg" />, staffAllowed: false },
       ],
     },
     {
       category: 'Media',
       staffAllowed: true,
       items: [
-        { name: 'Photo Gallery', path: '/admin/gallery', icon: <FiImage className="text-xl" />, staffAllowed: true },
-        { name: 'Video Gallery', path: '/admin/videos', icon: <FiVideo className="text-xl" />, staffAllowed: true },
+        { name: 'Photo Gallery', path: '/admin/gallery', icon: <FiImage className="text-lg" />, staffAllowed: true },
+        { name: 'Video Gallery', path: '/admin/videos', icon: <FiVideo className="text-lg" />, staffAllowed: true },
       ],
     },
     {
       category: 'Communication',
       staffAllowed: true,
       items: [
-        { name: 'Notices', path: '/admin/notices', icon: <FiBell className="text-xl" />, staffAllowed: true },
-        { name: 'Contact Messages', path: '/admin/messages', icon: <FiMail className="text-xl" />, staffAllowed: true },
+        { name: 'Notices', path: '/admin/notices', icon: <FiBell className="text-lg" />, staffAllowed: true },
+        { name: 'Contact Messages', path: '/admin/messages', icon: <FiMail className="text-lg" />, staffAllowed: true },
       ],
     },
     {
       category: 'Academic',
       staffAllowed: true,
       items: [
-        { name: 'Academic Resources', path: '/admin/academic-resources', icon: <FiBookOpen className="text-xl" />, staffAllowed: true },
+        { name: 'Academic Resources', path: '/admin/academic-resources', icon: <FiBookOpen className="text-lg" />, staffAllowed: true },
       ],
     },
     {
       category: 'Website',
       staffAllowed: false,
       items: [
-        { name: 'Website Settings', path: '/admin/settings', icon: <FiSliders className="text-xl" />, staffAllowed: false },
+        { name: 'Website Settings', path: '/admin/settings', icon: <FiSliders className="text-lg" />, staffAllowed: false },
       ],
     },
     {
       category: 'Administration',
       staffAllowed: false,
       items: [
-        { name: 'My Profile', path: '/admin/profile', icon: <FiUser className="text-xl" />, staffAllowed: false },
-        { name: 'Staff Users', path: '/admin/users', icon: <FiUserCheck className="text-xl" />, staffAllowed: false },
+        { name: 'My Profile', path: '/admin/profile', icon: <FiUser className="text-lg" />, staffAllowed: false },
+        { name: 'Staff Users', path: '/admin/users', icon: <FiUserCheck className="text-lg" />, staffAllowed: false },
       ],
     },
   ];
 
   return (
     <>
-      {/* Mobile overlay */}
       {mobileOpen && (
         <div
           onClick={() => setMobileOpen(false)}
-          className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm lg:hidden"
-        ></div>
+          className="fixed inset-0 z-40 bg-[#252821]/60 backdrop-blur-xs lg:hidden"
+        />
       )}
 
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-slate-950 text-white flex flex-col justify-between transition-transform duration-300 transform lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-[#27372D] text-[#EBE2CC] flex flex-col justify-between transition-transform duration-300 transform lg:translate-x-0 ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
-        } border-r border-slate-800 shadow-2xl`}
+        } border-r border-[#3F5547]`}
       >
-        {/* Brand Header */}
         <div>
-          <div className="p-6 border-b border-slate-800 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl primary-gradient text-white flex items-center justify-center font-bold text-lg shadow-md">
+          <div className="p-5 border-b border-[#3F5547] flex items-center gap-3">
+            <div className="w-10 h-10 rounded-sm bg-[#F4EFE3] text-[#34483B] border border-[#AD8746] flex items-center justify-center font-serif font-bold text-base">
               SS
             </div>
             <div>
-              <h2 className="font-serif font-extrabold text-base text-white leading-tight">
+              <h2 className="font-serif font-bold text-base text-[#F4EFE3] leading-tight">
                 S.S. Global Admin
               </h2>
-              <span className="text-xs text-amber-400 font-semibold flex items-center gap-1">
-                <FiShield /> {isStaffAdmin ? 'Staff Portal' : 'Super Admin'}
+              <span className="text-[11px] text-[#AD8746] font-semibold flex items-center gap-1 mt-0.5">
+                <FiShield className="text-xs" /> {isStaffAdmin ? 'Staff Portal' : 'Super Admin'}
               </span>
             </div>
           </div>
 
-          {/* Navigation Links with Category Headers */}
-          <nav className="p-4 space-y-4 overflow-y-auto max-h-[calc(100vh-210px)]">
+          <nav className="p-3.5 space-y-3.5 overflow-y-auto max-h-[calc(100vh-205px)]">
             {navigationSections.map((sec, secIdx) => {
               const visibleItems = isStaffAdmin
                 ? sec.items.filter((item) => item.staffAllowed)
@@ -128,7 +125,7 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
               return (
                 <div key={secIdx} className="space-y-1">
                   {sec.category && (
-                    <h3 className="px-4 text-[10px] font-extrabold text-slate-500 uppercase tracking-widest pt-2 pb-1">
+                    <h3 className="px-3 text-[10px] font-semibold text-[#AD8746] uppercase tracking-[0.16em] pt-2 pb-1">
                       {sec.category}
                     </h3>
                   )}
@@ -139,10 +136,10 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
                       to={link.path}
                       onClick={() => setMobileOpen(false)}
                       className={({ isActive }) =>
-                        `flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                        `flex items-center gap-3 px-3.5 py-2 rounded-sm text-xs font-medium transition-colors border-l-2 ${
                           isActive
-                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                            : 'text-slate-400 hover:text-white hover:bg-slate-900'
+                            ? 'bg-[#34483B] text-[#F4EFE3] border-[#AD8746] font-semibold'
+                            : 'text-[#EBE2CC]/80 border-transparent hover:text-[#F4EFE3] hover:bg-[#34483B]/50'
                         }`
                       }
                     >
@@ -156,28 +153,27 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
           </nav>
         </div>
 
-        {/* Footer Actions */}
-        <div className="p-4 border-t border-slate-800 space-y-2">
+        <div className="p-3.5 border-t border-[#3F5547] space-y-1.5">
           <Link
             to="/"
             target="_blank"
-            className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900 transition-colors"
+            className="flex items-center gap-3 px-3.5 py-2 rounded-sm text-xs font-medium text-[#EBE2CC]/90 hover:text-white hover:bg-[#34483B]/60 transition-colors"
           >
-            <FiHome className="text-lg text-amber-400" />
+            <FiHome className="text-base text-[#AD8746]" />
             <span>View Public Website</span>
           </Link>
 
           <button
             onClick={logout}
-            className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-xs font-bold text-rose-400 hover:text-white hover:bg-rose-900/40 transition-colors"
+            className="flex items-center gap-3 w-full px-3.5 py-2 rounded-sm text-xs font-semibold text-[#E8A598] hover:text-white hover:bg-[#7F2E2E]/60 transition-colors"
           >
-            <FiLogOut className="text-lg" />
+            <FiLogOut className="text-base" />
             <span>Log Out Admin</span>
           </button>
 
           {admin && (
-            <div className="pt-2 text-[11px] text-slate-500 text-center border-t border-slate-900">
-              Logged in as <span className="text-slate-300 font-semibold">{admin.email}</span>
+            <div className="pt-2 text-[11px] text-[#EBE2CC]/70 text-center border-t border-[#3F5547] truncate">
+              Signed in as <span className="text-[#F4EFE3] font-medium">{admin.email}</span>
             </div>
           )}
         </div>

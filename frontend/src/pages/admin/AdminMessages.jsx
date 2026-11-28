@@ -116,39 +116,39 @@ const AdminMessages = () => {
 
       {/* Stats Header Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center text-2xl font-bold">
+        <div className="bg-white p-6 rounded-sm border border-[#CFC5B1] shadow-sm flex items-center gap-4">
+          <div className="w-14 h-14 rounded-sm bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center text-2xl font-bold">
             <FiInbox />
           </div>
           <div>
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Unread Inquiries</span>
-            <span className="text-3xl font-extrabold text-slate-900 font-mono">{stats.unreadCount}</span>
+            <span className="text-3xl font-extrabold text-[#34483B] font-mono">{stats.unreadCount}</span>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center text-2xl font-bold">
+        <div className="bg-white p-6 rounded-sm border border-[#CFC5B1] shadow-sm flex items-center gap-4">
+          <div className="w-14 h-14 rounded-sm bg-blue-50 border border-blue-200 text-[#34483B] flex items-center justify-center text-2xl font-bold">
             <FiMessageSquare />
           </div>
           <div>
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Total Inquiries</span>
-            <span className="text-3xl font-extrabold text-slate-900 font-mono">{stats.totalInquiries}</span>
+            <span className="text-3xl font-extrabold text-[#34483B] font-mono">{stats.totalInquiries}</span>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center text-2xl font-bold">
+        <div className="bg-white p-6 rounded-sm border border-[#CFC5B1] shadow-sm flex items-center gap-4">
+          <div className="w-14 h-14 rounded-sm bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center text-2xl font-bold">
             <FiClock />
           </div>
           <div>
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Today's Inquiries</span>
-            <span className="text-3xl font-extrabold text-slate-900 font-mono">{stats.todayInquiries}</span>
+            <span className="text-3xl font-extrabold text-[#34483B] font-mono">{stats.todayInquiries}</span>
           </div>
         </div>
       </div>
 
       {/* Controls Bar */}
-      <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between gap-4">
+      <div className="bg-white p-6 rounded-sm border border-[#CFC5B1] shadow-sm space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between gap-4">
         <div className="max-w-md w-full">
           <SearchBar
             value={search}
@@ -168,7 +168,7 @@ const AdminMessages = () => {
               setFilterStatus(e.target.value);
               setPage(1);
             }}
-            className="px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="px-4 py-2.5 bg-[#EBE2CC]/50 border border-[#CFC5B1] rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#34483B] focus:border-[#34483B]"
           >
             <option value="All">All Inquiries</option>
             <option value="Unread">Unread Only</option>
@@ -184,10 +184,10 @@ const AdminMessages = () => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+        <div className="bg-white border border-[#CFC5B1] rounded-sm shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-slate-700">
-              <thead className="bg-slate-50 text-slate-900 font-serif font-bold border-b border-slate-200 uppercase text-xs">
+              <thead className="bg-[#EBE2CC]/50 text-[#34483B] font-serif font-bold border-b border-[#CFC5B1] uppercase text-xs">
                 <tr>
                   <th className="py-4 px-6">Name</th>
                   <th className="py-4 px-6">Direct Contact</th>
@@ -206,9 +206,9 @@ const AdminMessages = () => {
                     const cleanPhone = (msg.phone || '').replace(/[^\d+]/g, '');
 
                     return (
-                      <tr key={msg._id} className={`hover:bg-slate-50/80 transition-colors ${status === 'Unread' ? 'bg-amber-50/30 font-semibold' : ''}`}>
+                      <tr key={msg._id} className={`hover:bg-[#EBE2CC]/50/80 transition-colors ${status === 'Unread' ? 'bg-amber-50/30 font-semibold' : ''}`}>
                         <td className="py-4 px-6">
-                          <span className="font-bold text-slate-900 block font-serif">{name}</span>
+                          <span className="font-bold text-[#34483B] block font-serif">{name}</span>
                         </td>
                         <td className="py-4 px-6 text-xs space-y-1">
                           <div className="flex items-center gap-2">
@@ -223,7 +223,7 @@ const AdminMessages = () => {
                           <div className="flex items-center gap-2">
                             <a
                               href={`mailto:${msg.email}`}
-                              className="inline-flex items-center gap-1 text-slate-600 hover:text-blue-600 font-medium"
+                              className="inline-flex items-center gap-1 text-slate-600 hover:text-[#34483B] font-medium"
                               title="Send direct email"
                             >
                               <FiMail className="text-blue-500" /> {msg.email}
@@ -234,7 +234,7 @@ const AdminMessages = () => {
                           {msg.city || 'Daudnagar'}, {msg.district || 'Aurangabad'}
                         </td>
                         <td className="py-4 px-6 max-w-xs">
-                          <span className="font-bold text-slate-900 block truncate">{msg.subject}</span>
+                          <span className="font-bold text-[#34483B] block truncate">{msg.subject}</span>
                           <span className="text-xs text-slate-500 line-clamp-1 italic">"{msg.message}"</span>
                         </td>
                         <td className="py-4 px-6">
@@ -263,7 +263,7 @@ const AdminMessages = () => {
                               setSelectedMessage(msg);
                               if (status === 'Unread') handleMarkRead(msg._id);
                             }}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-2 text-[#34483B] hover:bg-blue-50 rounded-lg transition-colors"
                             title="View Full Detail"
                           >
                             <FiEye className="text-lg" />
@@ -317,11 +317,11 @@ const AdminMessages = () => {
       {/* Inquiry Detail View Modal */}
       {selectedMessage && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto space-y-6">
+          <div className="bg-white rounded-sm max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-[#CFC5B1] max-h-[90vh] overflow-y-auto space-y-6">
             <div className="flex justify-between items-center border-b border-slate-100 pb-4">
               <div>
                 <span className="text-xs font-bold text-amber-600 uppercase tracking-wider block">Inquiry Detail</span>
-                <h3 className="text-xl font-bold font-serif text-slate-900">
+                <h3 className="text-xl font-bold font-serif text-[#34483B]">
                   {selectedMessage.subject}
                 </h3>
               </div>
@@ -331,10 +331,10 @@ const AdminMessages = () => {
             </div>
 
             {/* Sender Metadata Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-5 rounded-2xl border border-slate-100 text-xs sm:text-sm text-slate-700">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#EBE2CC]/50 p-5 rounded-sm border border-slate-100 text-xs sm:text-sm text-slate-700">
               <div>
                 <span className="text-slate-400 uppercase font-bold text-[10px] block">Full Name</span>
-                <span className="font-bold text-slate-900 text-base">{selectedMessage.fullName || selectedMessage.name}</span>
+                <span className="font-bold text-[#34483B] text-base">{selectedMessage.fullName || selectedMessage.name}</span>
               </div>
 
               <div>
@@ -382,7 +382,7 @@ const AdminMessages = () => {
             {/* Message Body */}
             <div>
               <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">Complete Message Text:</h4>
-              <div className="bg-slate-900 text-slate-100 p-5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap font-sans">
+              <div className="bg-slate-900 text-slate-100 p-5 rounded-sm text-sm leading-relaxed whitespace-pre-wrap font-sans">
                 {selectedMessage.message}
               </div>
             </div>
@@ -400,7 +400,7 @@ const AdminMessages = () => {
                 {selectedMessage.status !== 'Read' && (
                   <button
                     onClick={() => handleMarkRead(selectedMessage._id)}
-                    className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-500 font-bold text-xs rounded-xl shadow transition-colors flex items-center gap-1.5"
+                    className="px-4 py-2 bg-[#34483B] text-[#F4EFE3] hover:bg-blue-500 font-bold text-xs rounded-xl shadow transition-colors flex items-center gap-1.5"
                   >
                     <FiCheckCircle /> Mark as Read
                   </button>
@@ -415,7 +415,7 @@ const AdminMessages = () => {
                 )}
                 <button
                   onClick={() => setSelectedMessage(null)}
-                  className="px-4 py-2 border border-slate-300 text-slate-700 font-semibold text-xs rounded-xl hover:bg-slate-100"
+                  className="px-4 py-2 border border-[#CFC5B1] text-slate-700 font-semibold text-xs rounded-xl hover:bg-slate-100"
                 >
                   Close
                 </button>

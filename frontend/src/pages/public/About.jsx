@@ -3,49 +3,52 @@ import PageHeader from '../../components/common/PageHeader';
 import SEO from '../../components/common/SEO';
 import { SettingContext } from '../../context/SettingContext';
 import { getImageUrl } from '../../services/api';
-import { FiEye, FiTarget, FiHeart, FiAward, FiShield, FiBookOpen, FiCheckCircle } from 'react-icons/fi';
+import { FiEye, FiTarget, FiHeart, FiAward, FiShield, FiBookOpen, FiCheck } from 'react-icons/fi';
 
 const About = () => {
   const { settings } = useContext(SettingContext);
 
   const heroTitle = settings.aboutHeroTitle || 'About S.S. Global Public School';
-  const heroSubtitle = settings.aboutHeroSubtitle || 'Dedicated to excellence in education, character building, and leadership in Daudnagar, Bihar.';
+  const heroSubtitle =
+    settings.aboutHeroSubtitle ||
+    'Dedicated to excellence in education, character building, and leadership in Daudnagar, Bihar.';
   const aboutBadge = settings.aboutBadge || 'Our Legacy & History';
   const aboutTitle = settings.aboutTitle || 'Nurturing Potential, Shaping Destiny in Daudnagar';
-  const aboutText1 = settings.aboutText1 || settings.aboutText || settings.about || 'S.S. Global Public School was established with a singular objective: to bring high quality CBSE education within reach of every student in Daudnagar and surrounding regions. Under visionary guidance, the institution has grown into a premier seat of learning.';
-  const aboutText2 = settings.aboutText2 || 'We believe that education must extend beyond textbooks. Our campus blends modern technology with traditional Indian ethics, giving students the tools to compete globally while remaining rooted in strong values.';
+  const aboutText1 =
+    settings.aboutText1 ||
+    settings.aboutText ||
+    settings.about ||
+    'S.S. Global Public School was established with a singular objective: to bring high quality CBSE education within reach of every student in Daudnagar and surrounding regions. Under visionary guidance, the institution has grown into a premier seat of learning.';
+  const aboutText2 =
+    settings.aboutText2 ||
+    'We believe that education must extend beyond textbooks. Our campus blends modern technology with traditional Indian ethics, giving students the tools to compete globally while remaining rooted in strong values.';
   const buildingImg = getImageUrl(settings.aboutImage || settings.heroImage || '/school.webp');
   const expNumber = settings.aboutExpNumber || '15+';
-  const expText = settings.aboutExpText || 'Years of Educational Excellence';
 
   const founderPhoto = getImageUrl(settings.founderPhoto || '/founder_image.jpeg');
   const founderName = settings.founderName || 'Shambhu Sharan Singh';
-  const founderMessage = settings.founderMessage || 'Our foundational goal is to provide world-class CBSE education in Daudnagar. We empower students with critical thinking, sportsmanship, technological literacy, and strong moral grounding.';
+  const founderMessage =
+    settings.founderMessage ||
+    'Our foundational goal is to provide world-class CBSE education in Daudnagar. We empower students with critical thinking, sportsmanship, technological literacy, and strong moral grounding.';
 
   const directorPhoto = getImageUrl(settings.directorPhoto || '/Director_image.jpeg');
   const directorName = settings.directorName || 'Er. Manish Singh';
-  const directorMessage = settings.directorMessage || 'We believe every child has infinite potential. At S.S. Global, we provide world-class infrastructure, smart labs, and guidance to turn dreams into reality.';
+  const directorMessage =
+    settings.directorMessage ||
+    'We believe every child has infinite potential. At S.S. Global, we provide world-class infrastructure, smart labs, and guidance to turn dreams into reality.';
 
   const principalPhoto = getImageUrl(settings.principalPhoto || '/Principle_image.jpg');
   const principalName = settings.principalName || 'Ashutosh Kumar';
-  const principalMessage = settings.principalMessage || 'Welcome to S.S. Global Public School, Daudnagar. Our commitment is to foster academic excellence, holistic development, and moral values in a modern learning environment.';
+  const principalMessage =
+    settings.principalMessage ||
+    'Welcome to S.S. Global Public School, Daudnagar. Our commitment is to foster academic excellence, holistic development, and moral values in a modern learning environment.';
 
   const aboutSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    'itemListElement': [
-      {
-        '@type': 'ListItem',
-        'position': 1,
-        'name': 'Home',
-        'item': 'https://www.ssglobalpublicschool.com/',
-      },
-      {
-        '@type': 'ListItem',
-        'position': 2,
-        'name': 'About School',
-        'item': 'https://www.ssglobalpublicschool.com/about',
-      },
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.ssglobalpublicschool.com/' },
+      { '@type': 'ListItem', position: 2, name: 'About School', item: 'https://www.ssglobalpublicschool.com/about' },
     ],
   };
 
@@ -58,19 +61,62 @@ const About = () => {
     'Individual Attention under Principal Leadership',
   ];
 
-  const features = Array.isArray(settings.aboutFeaturesList) && settings.aboutFeaturesList.length > 0
-    ? settings.aboutFeaturesList.map((f) => (typeof f === 'object' ? f.title : f))
-    : (Array.isArray(settings.aboutFeatures) && settings.aboutFeatures.length > 0 ? settings.aboutFeatures : defaultFeatures);
+  const features =
+    Array.isArray(settings.aboutFeaturesList) && settings.aboutFeaturesList.length > 0
+      ? settings.aboutFeaturesList.map((f) => (typeof f === 'object' ? f.title : f))
+      : Array.isArray(settings.aboutFeatures) && settings.aboutFeatures.length > 0
+        ? settings.aboutFeatures
+        : defaultFeatures;
 
   const values = [
-    { title: 'Academic Excellence', desc: 'Striving for continuous improvement and highest standards in all disciplines.', icon: <FiAward className="text-amber-500 text-2xl" /> },
-    { title: 'Moral Integrity', desc: 'Instilling truthfulness, honesty, discipline, and respect for all human values.', icon: <FiHeart className="text-rose-500 text-2xl" /> },
-    { title: 'Innovation & Curiosity', desc: 'Encouraging inquiry, technological fluency, and creative problem solving.', icon: <FiBookOpen className="text-blue-500 text-2xl" /> },
-    { title: 'Inclusivity & Unity', desc: 'Creating a supportive community where every child feels valued and inspired.', icon: <FiShield className="text-emerald-500 text-2xl" /> },
+    {
+      title: 'Academic Excellence',
+      desc: 'Striving for continuous improvement and highest standards in all disciplines.',
+      icon: FiAward,
+    },
+    {
+      title: 'Moral Integrity',
+      desc: 'Instilling truthfulness, honesty, discipline, and respect for all human values.',
+      icon: FiHeart,
+    },
+    {
+      title: 'Innovation & Curiosity',
+      desc: 'Encouraging inquiry, technological fluency, and creative problem solving.',
+      icon: FiBookOpen,
+    },
+    {
+      title: 'Inclusivity & Unity',
+      desc: 'Creating a supportive community where every child feels valued and inspired.',
+      icon: FiShield,
+    },
+  ];
+
+  const leadershipList = [
+    {
+      role: "Founder's Message",
+      title: 'Founder, S.S. Global Public School',
+      name: founderName,
+      photo: founderPhoto,
+      message: founderMessage,
+    },
+    {
+      role: "Director's Message",
+      title: 'Director, S.S. Global Public School',
+      name: directorName,
+      photo: directorPhoto,
+      message: directorMessage,
+    },
+    {
+      role: "Principal's Message",
+      title: 'Principal, S.S. Global Public School',
+      name: principalName,
+      photo: principalPhoto,
+      message: principalMessage,
+    },
   ];
 
   return (
-    <main>
+    <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
         title="About S.S. Global Public School | Best CBSE School in Daudnagar"
         description="Learn about S.S. Global Public School, Daudnagar, Bihar. Founded by Shambhu Sharan Singh, led by Er. Manish Singh & Ashutosh Kumar, offering top CBSE education & values."
@@ -78,74 +124,69 @@ const About = () => {
         canonicalUrl="https://www.ssglobalpublicschool.com/about"
         jsonLd={aboutSchema}
       />
-      <PageHeader
-        title={heroTitle}
-        subtitle={heroSubtitle}
-        breadcrumb={[{ label: 'About School' }]}
-      />
+      <PageHeader title={heroTitle} subtitle={heroSubtitle} breadcrumb={[{ label: 'About School' }]} />
 
       {/* Intro & History Section */}
-      <section className="py-20 bg-white border-t border-slate-100">
+      <section className="py-16 sm:py-20 bg-[#F4EFE3] border-b border-[#CFC5B1]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Content Section */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider border border-blue-200">
-                {aboutBadge}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div className="lg:col-span-6 space-y-5">
+              <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#AD8746]">
+                <span className="w-6 h-[1.5px] bg-[#AD8746]" />
+                <span>{aboutBadge}</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 leading-tight tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#34483B] leading-tight tracking-tight">
                 {aboutTitle}
               </h2>
-              <p className="text-slate-600 text-base leading-relaxed">
-                {aboutText1}
-              </p>
-              {aboutText2 && (
-                <p className="text-slate-600 text-base leading-relaxed">
-                  {aboutText2}
-                </p>
-              )}
+              <p className="text-[#55594E] text-sm sm:text-base leading-relaxed">{aboutText1}</p>
+              {aboutText2 && <p className="text-[#55594E] text-sm sm:text-base leading-relaxed">{aboutText2}</p>}
 
-              {/* Feature List */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 pt-3 border-t border-[#CFC5B1]">
                 {features.map((feat, idx) => (
                   <div
                     key={idx}
-                    className="p-3 rounded-2xl bg-slate-50 border border-slate-200/70 hover:border-blue-200 transition-colors flex items-center gap-2.5 text-xs sm:text-sm text-slate-800 font-medium"
+                    className="py-2 border-b border-[#CFC5B1]/70 flex items-start gap-2.5 text-xs sm:text-sm text-[#252821] font-medium"
                   >
-                    <FiCheckCircle className="text-blue-600 text-base shrink-0" />
+                    <FiCheck className="text-[#34483B] text-sm shrink-0 mt-0.5" />
                     <span>{feat}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Image Section (Framed with Soft Hover Zoom & Non-Overlapping Stats Row) */}
-            <div className="lg:col-span-6 space-y-4">
-              <div className="group rounded-3xl overflow-hidden shadow-xl border border-slate-200/90 relative bg-slate-100">
-                <img
-                  src={buildingImg}
-                  alt="S.S. Global Public School Building"
-                  width="600"
-                  height="384"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-[360px] sm:h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+            <div className="lg:col-span-6 space-y-5">
+              <div className="bg-[#EBE2CC] p-2.5 rounded-sm border border-[#CFC5B1] overflow-hidden">
+                <div className="overflow-hidden">
+                  <img
+                    src={buildingImg}
+                    alt="S.S. Global Public School Building"
+                    width="600"
+                    height="384"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-[320px] sm:h-[400px] object-cover hover:scale-[1.02] transition-transform duration-500"
+                  />
+                </div>
               </div>
 
-              {/* Clean Non-Overlapping Statistics Row Below Image */}
-              <div className="grid grid-cols-3 gap-3">
-                <div className="bg-slate-50 border border-slate-200/80 p-4 rounded-2xl text-center shadow-xs">
-                  <span className="text-xl sm:text-2xl font-extrabold font-serif text-blue-600 block">{expNumber}</span>
-                  <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mt-0.5">Excellence</span>
+              <div className="grid grid-cols-3 bg-[#EBE2CC] border border-[#CFC5B1] rounded-sm divide-x divide-[#CFC5B1]">
+                <div className="py-4 px-3 text-center">
+                  <span className="text-xl sm:text-2xl font-bold font-serif text-[#34483B] block">{expNumber}</span>
+                  <span className="text-[10px] font-semibold text-[#AD8746] uppercase tracking-[0.14em] block mt-0.5">
+                    Excellence
+                  </span>
                 </div>
-                <div className="bg-slate-50 border border-slate-200/80 p-4 rounded-2xl text-center shadow-xs">
-                  <span className="text-xl sm:text-2xl font-extrabold font-serif text-amber-500 block">1,200+</span>
-                  <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mt-0.5">Students</span>
+                <div className="py-4 px-3 text-center">
+                  <span className="text-xl sm:text-2xl font-bold font-serif text-[#34483B] block">1,200+</span>
+                  <span className="text-[10px] font-semibold text-[#AD8746] uppercase tracking-[0.14em] block mt-0.5">
+                    Students
+                  </span>
                 </div>
-                <div className="bg-slate-50 border border-slate-200/80 p-4 rounded-2xl text-center shadow-xs">
-                  <span className="text-xl sm:text-2xl font-extrabold font-serif text-emerald-600 block">CBSE</span>
-                  <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mt-0.5">Affiliated</span>
+                <div className="py-4 px-3 text-center">
+                  <span className="text-xl sm:text-2xl font-bold font-serif text-[#34483B] block">CBSE</span>
+                  <span className="text-[10px] font-semibold text-[#AD8746] uppercase tracking-[0.14em] block mt-0.5">
+                    Affiliated
+                  </span>
                 </div>
               </div>
             </div>
@@ -153,29 +194,29 @@ const About = () => {
         </div>
       </section>
 
-      {/* Vision & Mission Cards */}
-      <section className="py-16 bg-slate-100">
+      {/* Vision & Mission */}
+      <section className="py-16 bg-[#EBE2CC] border-b border-[#CFC5B1]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Vision */}
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4 card-hover">
-              <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-2xl">
+            <div className="bg-[#F4EFE3] p-8 rounded-sm border border-[#CFC5B1] space-y-4">
+              <div className="w-11 h-11 rounded-sm bg-[#34483B] text-[#AD8746] flex items-center justify-center text-xl">
                 <FiEye />
               </div>
-              <h3 className="text-2xl font-bold font-serif text-slate-900">Our Vision</h3>
-              <p className="text-slate-600 text-base leading-relaxed">
-                {settings.vision || 'To create a benchmark educational institution that nurtures confident, compassionate, and globally competent citizens equipped with modern technology and ethical values.'}
+              <h3 className="text-2xl font-bold font-serif text-[#34483B]">Our Vision</h3>
+              <p className="text-[#55594E] text-sm sm:text-base leading-relaxed">
+                {settings.vision ||
+                  'To create a benchmark educational institution that nurtures confident, compassionate, and globally competent citizens equipped with modern technology and ethical values.'}
               </p>
             </div>
 
-            {/* Mission */}
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 space-y-4 card-hover">
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-2xl">
+            <div className="bg-[#F4EFE3] p-8 rounded-sm border border-[#CFC5B1] space-y-4">
+              <div className="w-11 h-11 rounded-sm bg-[#34483B] text-[#AD8746] flex items-center justify-center text-xl">
                 <FiTarget />
               </div>
-              <h3 className="text-2xl font-bold font-serif text-slate-900">Our Mission</h3>
-              <p className="text-slate-600 text-base leading-relaxed">
-                {settings.mission || 'Providing quality education with modern facilities, smart classrooms, science laboratories, holistic sports, and strong moral grounding for every child.'}
+              <h3 className="text-2xl font-bold font-serif text-[#34483B]">Our Mission</h3>
+              <p className="text-[#55594E] text-sm sm:text-base leading-relaxed">
+                {settings.mission ||
+                  'Providing quality education with modern facilities, smart classrooms, science laboratories, holistic sports, and strong moral grounding for every child.'}
               </p>
             </div>
           </div>
@@ -183,110 +224,80 @@ const About = () => {
       </section>
 
       {/* Leadership Messages */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-blue-600 font-bold text-xs uppercase tracking-wider bg-blue-50 px-3.5 py-1 rounded-full">
-              Leadership Guidance
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 mt-3">
+      <section className="py-16 sm:py-20 bg-[#F4EFE3] border-b border-[#CFC5B1]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div className="max-w-3xl space-y-2.5 pb-5 border-b border-[#CFC5B1]">
+            <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#AD8746]">
+              <span className="w-6 h-[1.5px] bg-[#AD8746]" />
+              <span>Leadership Guidance</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#34483B]">
               Messages From Our Leadership
             </h2>
           </div>
 
-          {/* Founder Message */}
-          <div className="bg-slate-50 p-8 sm:p-12 rounded-3xl border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-4 text-center">
-              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-amber-500 via-blue-600 to-sky-400 mx-auto shadow-lg mb-4 overflow-hidden">
-                <img
-                  src={founderPhoto}
-                  alt={`Founder ${founderName}`}
-                  width="192"
-                  height="192"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover rounded-full bg-slate-100"
-                />
+          <div className="space-y-8">
+            {leadershipList.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-[#EBE2CC]/60 p-7 sm:p-10 rounded-sm border border-[#CFC5B1] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                <div className="lg:col-span-3 flex flex-col items-center text-center">
+                  <div className="w-36 h-36 sm:w-40 sm:h-40 rounded-sm p-1.5 bg-[#F4EFE3] border border-[#CFC5B1] mb-3 overflow-hidden">
+                    <img
+                      src={item.photo}
+                      alt={item.name}
+                      width="160"
+                      height="160"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h4 className="text-lg font-bold text-[#34483B] font-serif">{item.name}</h4>
+                  <p className="text-[11px] font-semibold text-[#AD8746] uppercase tracking-wider mt-0.5">
+                    {item.title}
+                  </p>
+                </div>
+                <div className="lg:col-span-9 space-y-3 lg:border-l lg:border-[#CFC5B1] lg:pl-8">
+                  <h3 className="text-xl font-bold font-serif text-[#34483B]">{item.role}</h3>
+                  <p className="text-[#252821] italic leading-relaxed text-sm sm:text-base">
+                    “{item.message}”
+                  </p>
+                </div>
               </div>
-              <h4 className="text-xl font-bold text-slate-900 font-serif">{founderName}</h4>
-              <p className="text-xs font-semibold text-amber-700">Founder, S.S. Global Public School</p>
-            </div>
-            <div className="lg:col-span-8 space-y-3">
-              <h3 className="text-xl font-bold font-serif text-slate-900">Founder's Message</h3>
-              <p className="text-slate-600 italic leading-relaxed text-base">
-                "{founderMessage}"
-              </p>
-            </div>
-          </div>
-
-          {/* Director Message */}
-          <div className="bg-slate-50 p-8 sm:p-12 rounded-3xl border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-4 text-center">
-              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-amber-500 to-blue-600 mx-auto shadow-lg mb-4 overflow-hidden">
-                <img
-                  src={directorPhoto}
-                  alt={`Director ${directorName}`}
-                  width="192"
-                  height="192"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover rounded-full bg-slate-100"
-                />
-              </div>
-              <h4 className="text-xl font-bold text-slate-900 font-serif">{directorName}</h4>
-              <p className="text-xs font-semibold text-amber-600">Director, S.S. Global Public School</p>
-            </div>
-            <div className="lg:col-span-8 space-y-3">
-              <h3 className="text-xl font-bold font-serif text-slate-900">Director's Message</h3>
-              <p className="text-slate-600 italic leading-relaxed text-base">
-                "{directorMessage}"
-              </p>
-            </div>
-          </div>
-
-          {/* Principal Message */}
-          <div className="bg-slate-50 p-8 sm:p-12 rounded-3xl border border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-4 text-center">
-              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto shadow-lg mb-4 overflow-hidden">
-                <img
-                  src={principalPhoto}
-                  alt={`Principal ${principalName}`}
-                  width="192"
-                  height="192"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover rounded-full bg-slate-100"
-                />
-              </div>
-              <h4 className="text-xl font-bold text-slate-900 font-serif">{principalName}</h4>
-              <p className="text-xs font-semibold text-blue-600">Principal, S.S. Global Public School</p>
-            </div>
-            <div className="lg:col-span-8 space-y-3">
-              <h3 className="text-xl font-bold font-serif text-slate-900">Principal's Message</h3>
-              <p className="text-slate-600 italic leading-relaxed text-base">
-                "{principalMessage}"
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Core Values */}
-      <section className="py-16 bg-slate-100">
+      <section className="py-16 bg-[#EBE2CC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-extrabold font-serif text-slate-900">Our Core School Values</h2>
+          <div className="max-w-2xl mb-10 space-y-2">
+            <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#AD8746]">
+              <span className="w-6 h-[1.5px] bg-[#AD8746]" />
+              <span>Institutional Ethos</span>
+            </div>
+            <h2 className="text-3xl font-bold font-serif text-[#34483B]">Our Core School Values</h2>
           </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((v, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-3 card-hover">
-                <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center">
-                  {v.icon}
+            {values.map((v, i) => {
+              const Icon = v.icon;
+              return (
+                <div
+                  key={i}
+                  className="bg-[#F4EFE3] p-6 rounded-sm border border-[#CFC5B1] space-y-3"
+                >
+                  <div className="w-10 h-10 rounded-sm bg-[#EBE2CC] border border-[#CFC5B1] text-[#34483B] flex items-center justify-center">
+                    <Icon className="text-lg" />
+                  </div>
+                  <h4 className="font-bold text-lg text-[#34483B] font-serif">{v.title}</h4>
+                  <p className="text-xs sm:text-sm text-[#55594E] leading-relaxed">{v.desc}</p>
                 </div>
-                <h4 className="font-bold text-lg text-slate-900 font-serif">{v.title}</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">{v.desc}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
