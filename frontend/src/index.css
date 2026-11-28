@@ -189,4 +189,46 @@
     justify-content: center !important;
     transform: none !important;
   }
+
+  .logo-orbit-ring-outer,
+  .logo-orbit-ring-inner {
+    animation: none !important;
+  }
+}
+
+/* Header School Logo Circular Orbit Animation */
+@keyframes logo-orbit-cw {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes logo-orbit-ccw {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.logo-orbit-ring-outer {
+  border: 1px solid rgba(173, 135, 70, 0.42);
+  border-top-color: #34483B;
+  border-right-color: #AD8746;
+  box-shadow: 0 0 10px rgba(173, 135, 70, 0.16);
+  animation: logo-orbit-cw 18s linear infinite;
+  will-change: transform;
+}
+
+.logo-orbit-ring-inner {
+  border: 1px dashed rgba(173, 135, 70, 0.34);
+  border-bottom-color: #EBE2CC;
+  animation: logo-orbit-ccw 12s linear infinite;
+  will-change: transform;
+}
+
+.logo-orbit-particle-outer {
+  background-color: #AD8746;
+  box-shadow: 0 0 6px rgba(173, 135, 70, 0.55);
+}
+
+.logo-orbit-particle-inner {
+  background-color: #D4B475;
+  box-shadow: 0 0 5px rgba(173, 135, 70, 0.45);
 }

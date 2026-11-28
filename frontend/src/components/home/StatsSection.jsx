@@ -3,7 +3,7 @@ import { FiUsers, FiBookOpen, FiSmile, FiAward } from 'react-icons/fi';
 
 const StatsSection = () => {
   const stats = [
-    { icon: FiUsers, count: '1,200+', label: 'Enrolled Students' },
+    { icon: FiUsers, count: '3,000+', label: 'Enrolled Students' },
     { icon: FiBookOpen, count: '45+', label: 'Qualified Teachers' },
     { icon: FiSmile, count: '100%', label: 'CBSE Pass Rate' },
     { icon: FiAward, count: '25+', label: 'Academic & Sports Awards' },

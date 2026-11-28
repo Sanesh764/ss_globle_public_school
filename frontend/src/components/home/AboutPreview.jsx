@@ -65,7 +65,7 @@ const AboutPreview = () => {
                 </span>
               </div>
               <div className="py-4 px-3 text-center">
-                <span className="text-xl sm:text-2xl font-bold font-serif text-[#34483B] block">1,200+</span>
+                <span className="text-xl sm:text-2xl font-bold font-serif text-[#34483B] block">3,000+</span>
                 <span className="text-[10px] font-semibold text-[#AD8746] uppercase tracking-[0.14em] block mt-0.5">
                   Students
                 </span>

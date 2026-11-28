@@ -93,21 +93,40 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-[70px]">
           {/* School Branding Block */}
           <div className="flex items-center shrink-0 pr-3 lg:pr-5 xl:pr-6 lg:border-r border-[#CFC5B1]">
-            <Link to="/" className="flex items-center gap-3 group shrink-0">
-              <div className="w-11 h-11 rounded-sm bg-[#EBE2CC] border border-[#CFC5B1] p-0.5 flex items-center justify-center font-serif font-bold text-lg text-[#34483B] shrink-0 overflow-hidden transition-colors group-hover:border-[#AD8746]">
-                {settings.logo ? (
-                  <img
-                    src={settings.logo}
-                    alt="S.S. Global Public School Logo"
-                    width="44"
-                    height="44"
-                    loading="eager"
-                    decoding="async"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  'SS'
-                )}
+            <Link to="/" className="flex items-center gap-3 sm:gap-3.5 group shrink-0">
+              <div className="relative flex items-center justify-center w-[54px] h-[54px] sm:w-[58px] sm:h-[58px] lg:w-[62px] lg:h-[62px] shrink-0">
+                {/* Outer Slow Clockwise Orbit Ring + Particle */}
+                <span
+                  aria-hidden="true"
+                  className="logo-orbit-ring-outer pointer-events-none absolute inset-0 rounded-full"
+                >
+                  <span className="logo-orbit-particle-outer absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3.5px] h-[3.5px] sm:w-1 sm:h-1 lg:w-[4.5px] lg:h-[4.5px] rounded-full" />
+                </span>
+
+                {/* Inner Counter-Clockwise Orbit Ring + Particle */}
+                <span
+                  aria-hidden="true"
+                  className="logo-orbit-ring-inner pointer-events-none absolute inset-[3px] sm:inset-[3.5px] lg:inset-[4px] rounded-full"
+                >
+                  <span className="logo-orbit-particle-inner absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] sm:w-[3.5px] sm:h-[3.5px] lg:w-1 lg:h-1 rounded-full" />
+                </span>
+
+                {/* Stationary Original School Logo */}
+                <div className="relative z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-sm bg-[#EBE2CC] border border-[#CFC5B1] p-0.5 flex items-center justify-center font-serif font-bold text-lg text-[#34483B] shrink-0 overflow-hidden transition-colors group-hover:border-[#AD8746]">
+                  {settings.logo ? (
+                    <img
+                      src={settings.logo}
+                      alt="S.S. Global Public School Logo"
+                      width="44"
+                      height="44"
+                      loading="eager"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    'SS'
+                  )}
+                </div>
               </div>
               <div className="flex flex-col shrink-0">
                 <span className="text-base sm:text-lg xl:text-[19px] font-bold font-serif tracking-tight text-[#34483B] block group-hover:text-[#27372D] transition-colors leading-tight whitespace-nowrap">
