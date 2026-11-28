@@ -142,7 +142,7 @@ const Navbar = () => {
 
             {/* Refined Admissions CTA */}
             <Link
-              to="/contact"
+              to="/register"
               onClick={() => trackAdmissionClick('Navbar Desktop')}
               className="ml-2 xl:ml-3 px-4 py-2 rounded-sm bg-[#34483B] hover:bg-[#27372D] text-[#F4EFE3] font-semibold text-[11px] lg:text-[12px] xl:text-xs tracking-wide transition-colors duration-200 flex items-center gap-1.5 shrink-0 whitespace-nowrap border border-[#34483B]"
             >
@@ -186,7 +186,7 @@ const Navbar = () => {
 
           <div className="pt-3 mt-2 border-t border-[#CFC5B1] space-y-2">
             <Link
-              to="/contact"
+              to="/register"
               onClick={() => {
                 setIsOpen(false);
                 trackAdmissionClick('Navbar Mobile');

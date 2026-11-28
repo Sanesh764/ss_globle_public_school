@@ -22,3 +22,15 @@ export const contactSubmissionLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 });
+
+export const registrationSubmissionLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 15, // Limit each IP to 15 registration submissions per windowMs
+  skip: () => process.env.NODE_ENV === 'test',
+  message: {
+    success: false,
+    message: 'Too many registration applications submitted. Please wait a few minutes before trying again.',
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});

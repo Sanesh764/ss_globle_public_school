@@ -16,6 +16,7 @@ const VideoGallery = lazy(() => import('../pages/public/VideoGallery'));
 const NoticeBoard = lazy(() => import('../pages/public/NoticeBoard'));
 const Downloads = lazy(() => import('../pages/public/Downloads'));
 const Contact = lazy(() => import('../pages/public/Contact'));
+const StudentRegistration = lazy(() => import('../pages/public/StudentRegistration'));
 const NotFound = lazy(() => import('../pages/public/NotFound'));
 const Unauthorized = lazy(() => import('../pages/public/Unauthorized'));
 
@@ -33,6 +34,9 @@ const AdminMessages = lazy(() => import('../pages/admin/AdminMessages'));
 const AdminLeadership = lazy(() => import('../pages/admin/AdminLeadership'));
 const AdminHeroSlider = lazy(() => import('../pages/admin/AdminHeroSlider'));
 const AdminAcademicResources = lazy(() => import('../pages/admin/AdminAcademicResources'));
+const AdminApplications = lazy(() => import('../pages/admin/AdminApplications'));
+const AdminStudents = lazy(() => import('../pages/admin/AdminStudents'));
+const AdminAttendance = lazy(() => import('../pages/admin/AdminAttendance'));
 const AdminProfile = lazy(() => import('../pages/admin/AdminProfile'));
 
 const SuspenseWrapper = ({ children }) => (
@@ -54,6 +58,7 @@ const AppRoutes = () => {
         <Route path="notices" element={<SuspenseWrapper><NoticeBoard /></SuspenseWrapper>} />
         <Route path="downloads" element={<SuspenseWrapper><Downloads /></SuspenseWrapper>} />
         <Route path="contact" element={<SuspenseWrapper><Contact /></SuspenseWrapper>} />
+        <Route path="register" element={<SuspenseWrapper><StudentRegistration /></SuspenseWrapper>} />
         <Route path="unauthorized" element={<SuspenseWrapper><Unauthorized /></SuspenseWrapper>} />
         <Route path="*" element={<SuspenseWrapper><NotFound /></SuspenseWrapper>} />
       </Route>
@@ -71,6 +76,9 @@ const AppRoutes = () => {
           <Route path="videos" element={<SuspenseWrapper><AdminVideos /></SuspenseWrapper>} />
           <Route path="messages" element={<SuspenseWrapper><AdminMessages /></SuspenseWrapper>} />
           <Route path="academic-resources" element={<SuspenseWrapper><AdminAcademicResources /></SuspenseWrapper>} />
+          <Route path="applications" element={<SuspenseWrapper><AdminApplications /></SuspenseWrapper>} />
+          <Route path="students" element={<SuspenseWrapper><AdminStudents /></SuspenseWrapper>} />
+          <Route path="attendance" element={<SuspenseWrapper><AdminAttendance /></SuspenseWrapper>} />
 
           {/* Super Admin Restricted Routes (Staff Admin gets 403 / Unauthorized if manually typed) */}
           <Route element={<SuperAdminRoute />}>

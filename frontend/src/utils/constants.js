@@ -1,4 +1,4 @@
-import { SCHOOL_DETAILS_FALLBACK } from '../config/fallbackData';
+import { SCHOOL_DETAILS_FALLBACK } from '../config/fallbackData.js';
 
 export const API_BASE_URL = '/api';
 
@@ -14,4 +14,29 @@ export const ACADEMIC_RESOURCE_CATEGORIES = [
   'Academic Calendar',
   'Holiday Calendar',
   'Annual Calendar',
+];
+
+export const CLASS_OPTIONS = [
+  'Class 1',
+  'Class 2',
+  'Class 3',
+  'Class 4',
+  'Class 5',
+  'Class 6',
+  'Class 7',
+  'Class 8',
+  'Class 9',
+  'Class 10',
+  'Class 11',
+  'Class 12',
+];
+
+export const GENDER_OPTIONS = ['Male', 'Female', 'Other'];
+
+export const STUDENT_PHOTO_MAX_SIZE_BYTES = 2 * 1024 * 1024; // 2 MB
+
+export const STUDENT_PHOTO_ALLOWED_MIME_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/webp',
 ];

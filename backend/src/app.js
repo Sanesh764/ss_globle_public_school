@@ -18,6 +18,10 @@ import { publicContactRouter, adminContactRouter } from './routes/contactRoutes.
 import { publicFacilityRouter, adminFacilityRouter } from './routes/facilityRoutes.js';
 import { publicAcademicResourceRouter, adminAcademicResourceRouter } from './routes/academicResourceRoutes.js';
 import { publicVideoRouter, adminVideoRouter } from './routes/videoRoutes.js';
+import registrationRoutes from './routes/registrationRoutes.js';
+import adminApplicationRoutes from './routes/adminApplicationRoutes.js';
+import adminStudentRoutes from './routes/adminStudentRoutes.js';
+import adminAttendanceRoutes from './routes/adminAttendanceRoutes.js';
 import { notFoundHandler, errorHandler } from './middleware/error.middleware.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -121,6 +125,9 @@ app.use('/api/admin/hero-slider', adminHeroSliderRouter);
 app.use('/api/admin/leadership', adminLeadershipRouter);
 app.use('/api/admin/facilities', adminFacilityRouter);
 app.use('/api/admin/videos', adminVideoRouter);
+app.use('/api/admin/applications', adminApplicationRoutes);
+app.use('/api/admin/students', adminStudentRoutes);
+app.use('/api/admin/attendance', adminAttendanceRoutes);
 app.use('/api/admin', authRoutes);
 app.use('/api/academic-resources', publicAcademicResourceRouter);
 app.use('/api/facilities', publicFacilityRouter);
@@ -132,6 +139,7 @@ app.use('/api/contact', publicContactRouter);
 app.use('/api/hero', heroRoutes);
 app.use('/api/hero-slider', publicHeroSliderRouter);
 app.use('/api/leadership', publicLeadershipRouter);
+app.use('/api/registrations', registrationRoutes);
 
 // 12. Centralized Error Handling
 app.use(notFoundHandler);

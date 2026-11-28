@@ -16,7 +16,9 @@ import {
   FiLogOut,
   FiShield,
   FiBookOpen,
+  FiClipboard,
   FiUser,
+  FiCalendar,
 } from 'react-icons/fi';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -65,6 +67,9 @@ const AdminSidebar = ({ mobileOpen, setMobileOpen }) => {
       category: 'Academic',
       staffAllowed: true,
       items: [
+        { name: 'Student Applications', path: '/admin/applications', icon: <FiClipboard className="text-lg" />, staffAllowed: true },
+        { name: 'Students', path: '/admin/students', icon: <FiUsers className="text-lg" />, staffAllowed: true },
+        { name: 'Attendance', path: '/admin/attendance', icon: <FiCalendar className="text-lg" />, staffAllowed: true },
         { name: 'Academic Resources', path: '/admin/academic-resources', icon: <FiBookOpen className="text-lg" />, staffAllowed: true },
       ],
     },
