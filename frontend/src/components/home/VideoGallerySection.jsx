@@ -87,6 +87,8 @@ const VideoGallerySection = () => {
                   <img
                     src={video.thumbnail}
                     alt={video.title}
+                    width="480"
+                    height="270"
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"

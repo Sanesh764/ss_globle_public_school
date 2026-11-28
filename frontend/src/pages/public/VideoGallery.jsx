@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import SEO from '../../components/common/SEO';
+import { PUBLIC_ROUTE_SEO } from '../../utils/seoRoutesConfig';
 import PageHeader from '../../components/common/PageHeader';
 import { getPublicVideosApi } from '../../services/videoService';
 import { formatDate } from '../../utils/formatDate';
@@ -92,10 +93,9 @@ const VideoGallery = () => {
   return (
     <main className="bg-[#F4EFE3] text-[#252821] min-h-screen">
       <SEO
-        title="Video Gallery | S.S. Global Public School"
-        description="Watch official videos of S.S. Global Public School including annual functions, sports events, classroom activities, educational programs, and celebrations."
-        keywords="S.S. Global Public School videos, Daudnagar school video gallery, annual function videos Bihar, school events Daudnagar, CBSE school activities"
-        canonicalUrl="https://www.ssglobalpublicschool.com/videos"
+        title={PUBLIC_ROUTE_SEO['/videos'].title}
+        description={PUBLIC_ROUTE_SEO['/videos'].description}
+        canonicalUrl={PUBLIC_ROUTE_SEO['/videos'].canonicalUrl}
         ogImage={ogImageUrl}
       />
 
@@ -226,6 +226,8 @@ const VideoGallery = () => {
                   <img
                     src={video.thumbnail}
                     alt={video.title}
+                    width="480"
+                    height="270"
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"

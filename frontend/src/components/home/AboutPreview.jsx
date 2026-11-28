@@ -46,7 +46,7 @@ const AboutPreview = () => {
               <div className="overflow-hidden rounded-xs">
                 <img
                   src={aboutImage}
-                  alt="S.S. Global Public School Building"
+                  alt="S.S. Global Public School campus building in Daudnagar, Bihar"
                   width="600"
                   height="380"
                   loading="lazy"

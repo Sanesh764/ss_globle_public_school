@@ -1,26 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
-const CANONICAL_DOMAIN = 'https://www.ssglobalpublicschool.com';
-
-const formatCanonicalUrl = (passedUrl, currentPathname) => {
-  if (passedUrl) {
-    if (passedUrl.startsWith('/')) {
-      const cleanPath = passedUrl === '/' ? '/' : passedUrl;
-      return `${CANONICAL_DOMAIN}${cleanPath}`;
-    }
-    // Normalize any passed full URL
-    try {
-      const urlObj = new URL(passedUrl.replace('https://ssglobalpublicschool.com', CANONICAL_DOMAIN));
-      return `${CANONICAL_DOMAIN}${urlObj.pathname}`;
-    } catch {
-      return passedUrl;
-    }
-  }
-
-  const cleanPath = currentPathname === '/' ? '/' : currentPathname;
-  return `${CANONICAL_DOMAIN}${cleanPath}`;
-};
+import { CANONICAL_DOMAIN, formatCanonicalUrl } from '../../utils/seoCanonicalUtils';
 
 /**
  * Production SEO Component
@@ -28,9 +8,9 @@ const formatCanonicalUrl = (passedUrl, currentPathname) => {
  * canonical links, Open Graph, Twitter Card tags, and JSON-LD structured data.
  */
 const SEO = ({
-  title = 'S.S. Global Public School | Best CBSE School in Daudnagar, Bihar',
-  description = 'S.S. Global Public School in Daudnagar, Bihar offers top quality CBSE education, interactive smart classrooms, science labs, sports, and holistic character development.',
-  keywords = 'S.S. Global Public School, S.S. Global Public School Daudnagar, Best School in Daudnagar, Best CBSE School in Daudnagar, CBSE School in Daudnagar, Top School in Daudnagar, School in Daudnagar Bihar, Best School in Aurangabad Bihar, CBSE School in Aurangabad Bihar, admission 2026',
+  title = 'S.S. Global Public School, Daudnagar | CBSE English Medium',
+  description = 'S.S. Global Public School is a CBSE-affiliated English medium school in Daudnagar, Aurangabad district, Bihar, offering Classes 1 to 12 with smart classrooms and labs.',
+  keywords = '',
   canonicalUrl,
   ogImage = 'https://www.ssglobalpublicschool.com/school.webp',
   ogType = 'website',
@@ -69,12 +49,17 @@ const SEO = ({
     if (description) {
       updateMetaTag('meta[name="description"]', 'name', 'description', description);
       updateMetaTag('meta[property="og:description"]', 'property', 'og:description', description);
-      updateMetaTag('meta[property="twitter:description"]', 'property', 'twitter:description', description);
+      updateMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', description);
     }
 
-    // 3. Meta Keywords
-    if (keywords) {
+    // 3. Optional Meta Keywords (removed if empty to avoid keyword stuffing)
+    if (keywords && keywords.trim() !== '') {
       updateMetaTag('meta[name="keywords"]', 'name', 'keywords', keywords);
+    } else {
+      const existingKeywords = document.querySelector('meta[name="keywords"]');
+      if (existingKeywords) {
+        existingKeywords.remove();
+      }
     }
 
     // 4. Robots Indexing Directive
@@ -83,36 +68,45 @@ const SEO = ({
       : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
     updateMetaTag('meta[name="robots"]', 'name', 'robots', robotsContent);
 
-    // 5. Exact Dynamic Canonical URL based on current route
-    const targetCanonical = formatCanonicalUrl(canonicalUrl, location.pathname);
-
-    updateLinkTag('canonical', targetCanonical);
-    updateMetaTag('meta[property="og:url"]', 'property', 'og:url', targetCanonical);
-    updateMetaTag('meta[property="twitter:url"]', 'property', 'twitter:url', targetCanonical);
+    // 5. Exact Dynamic Canonical URL (only for indexable pages; remove on noindex pages)
+    const existingCanonicals = document.querySelectorAll('link[rel="canonical"]');
+    if (noindex) {
+      existingCanonicals.forEach((el) => el.remove());
+    } else {
+      const targetCanonical = formatCanonicalUrl(canonicalUrl, location.pathname);
+      if (existingCanonicals.length > 1) {
+        existingCanonicals.forEach((el, idx) => {
+          if (idx > 0) el.remove();
+        });
+      }
+      updateLinkTag('canonical', targetCanonical);
+      updateMetaTag('meta[property="og:url"]', 'property', 'og:url', targetCanonical);
+      updateMetaTag('meta[name="twitter:url"]', 'name', 'twitter:url', targetCanonical);
+    }
 
     // 6. Open Graph & Twitter Cards
     if (title) {
       updateMetaTag('meta[property="og:title"]', 'property', 'og:title', title);
-      updateMetaTag('meta[property="twitter:title"]', 'property', 'twitter:title', title);
+      updateMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', title);
     }
 
     const resolvedOgImage = ogImage.startsWith('/') ? `${CANONICAL_DOMAIN}${ogImage}` : ogImage;
     updateMetaTag('meta[property="og:type"]', 'property', 'og:type', ogType);
     updateMetaTag('meta[property="og:image"]', 'property', 'og:image', resolvedOgImage);
-    updateMetaTag('meta[property="twitter:image"]', 'property', 'twitter:image', resolvedOgImage);
-    updateMetaTag('meta[property="twitter:card"]', 'property', 'twitter:card', 'summary_large_image');
+    updateMetaTag('meta[name="twitter:image"]', 'name', 'twitter:image', resolvedOgImage);
+    updateMetaTag('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image');
     updateMetaTag('meta[property="og:site_name"]', 'property', 'og:site_name', 'S.S. Global Public School');
     updateMetaTag('meta[property="og:locale"]', 'property', 'og:locale', 'en_US');
 
     // 7. Dynamic Hero LCP Image Preload (Homepage Only)
-    let heroPreload = document.querySelector('link[rel="preload"][href="/hero-4.jpg"]');
+    let heroPreload = document.querySelector('link[rel="preload"][href="/hero-4.webp"]');
     if (location.pathname === '/') {
       if (!heroPreload) {
         heroPreload = document.createElement('link');
         heroPreload.setAttribute('rel', 'preload');
         heroPreload.setAttribute('as', 'image');
-        heroPreload.setAttribute('href', '/hero-4.jpg');
-        heroPreload.setAttribute('type', 'image/jpeg');
+        heroPreload.setAttribute('href', '/hero-4.webp');
+        heroPreload.setAttribute('type', 'image/webp');
         heroPreload.setAttribute('fetchpriority', 'high');
         document.head.appendChild(heroPreload);
       }

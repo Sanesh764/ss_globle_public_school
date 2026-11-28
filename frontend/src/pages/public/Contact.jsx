@@ -5,6 +5,8 @@ import LocationSection from '../../components/common/LocationSection';
 import { SettingContext } from '../../context/SettingContext';
 import { useToast } from '../../hooks/useToast';
 import { submitContactApi } from '../../services/contactService';
+import { getSchoolSchema } from '../../utils/seoSchema';
+import { PUBLIC_ROUTE_SEO } from '../../utils/seoRoutesConfig';
 import { FiMapPin, FiPhone, FiMail, FiClock, FiSend, FiCheckCircle } from 'react-icons/fi';
 
 const Contact = () => {
@@ -31,20 +33,7 @@ const Contact = () => {
     '@type': 'ContactPage',
     name: 'Contact & Admissions - S.S. Global Public School Daudnagar',
     url: 'https://www.ssglobalpublicschool.com/contact',
-    mainEntity: {
-      '@type': 'EducationalOrganization',
-      name: 'S.S. Global Public School',
-      telephone: '+919122490003',
-      email: 'ssglobalpublicschool0@gmail.com',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Daudnagar',
-        addressLocality: 'Daudnagar',
-        addressRegion: 'Bihar',
-        postalCode: '824143',
-        addressCountry: 'IN',
-      },
-    },
+    mainEntity: getSchoolSchema({ includeContext: false }),
   };
 
   const handleSubmit = async (e) => {
@@ -84,10 +73,9 @@ const Contact = () => {
   return (
     <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
-        title="Contact Us & Admissions 2026-27 | S.S. Global Public School Daudnagar"
-        description="Contact S.S. Global Public School admin office in Daudnagar, Bihar. Phone: +91 9122490003. Email: ssglobalpublicschool0@gmail.com. Submit online admission inquiries & get campus location directions."
-        keywords="Contact S.S. Global Public School, S.S. Global Public School Daudnagar, Daudnagar school phone number, admission inquiry Daudnagar, school address Aurangabad Bihar"
-        canonicalUrl="https://www.ssglobalpublicschool.com/contact"
+        title={PUBLIC_ROUTE_SEO['/contact'].title}
+        description={PUBLIC_ROUTE_SEO['/contact'].description}
+        canonicalUrl={PUBLIC_ROUTE_SEO['/contact'].canonicalUrl}
         jsonLd={contactSchema}
       />
       <PageHeader

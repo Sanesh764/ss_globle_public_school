@@ -107,7 +107,7 @@ export const FACILITIES_FALLBACK = [
 
 export const NEW_FIRST_HERO_SLIDE = {
   _id: 'hero-community-first',
-  backgroundImage: '/hero-4.jpg',
+  backgroundImage: '/hero-4.webp',
   badge: '🏫 Excellence in Education',
   title: 'Building Bright',
   highlightTitle: 'Futures Together',

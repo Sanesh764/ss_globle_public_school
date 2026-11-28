@@ -1,6 +1,7 @@
 import React from 'react';
 import PageHeader from '../../components/common/PageHeader';
 import SEO from '../../components/common/SEO';
+import { PUBLIC_ROUTE_SEO } from '../../utils/seoRoutesConfig';
 import { getImageUrl } from '../../services/api';
 import {
   FiMonitor,
@@ -58,10 +59,10 @@ const Facilities = () => {
   return (
     <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
-        title="Campus Infrastructure & Facilities | S.S. Global Public School Daudnagar"
-        description="Explore modern campus facilities at S.S. Global Public School, Daudnagar, Bihar: interactive smart classrooms, physics & chemistry labs, computer labs, sports & transport."
-        keywords="S.S. Global Public School facilities, S.S. Global Public School Daudnagar, Daudnagar school infrastructure, smart classrooms Daudnagar, science lab Bihar, school transport Aurangabad"
-        canonicalUrl="https://www.ssglobalpublicschool.com/facilities"
+        title={PUBLIC_ROUTE_SEO['/facilities'].title}
+        description={PUBLIC_ROUTE_SEO['/facilities'].description}
+        canonicalUrl={PUBLIC_ROUTE_SEO['/facilities'].canonicalUrl}
+        ogImage={PUBLIC_ROUTE_SEO['/facilities'].ogImage}
         jsonLd={facilitiesSchema}
       />
       <PageHeader

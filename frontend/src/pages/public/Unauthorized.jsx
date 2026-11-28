@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiShieldOff, FiLock, FiHome } from 'react-icons/fi';
+import SEO from '../../components/common/SEO';
 
 const Unauthorized = () => {
   return (
     <div className="min-h-[75vh] flex items-center justify-center bg-[#F4EFE3] px-4 py-16">
+      <SEO
+        title="Access Denied | S.S. Global Public School"
+        description="Administrator authentication is required to access this private route."
+        noindex={true}
+      />
       <div className="text-center max-w-md space-y-5 bg-[#EBE2CC] p-10 rounded-sm border border-[#CFC5B1]">
         <div className="w-16 h-16 rounded-sm bg-[#F4EFE3] border border-[#CFC5B1] text-[#7F2E2E] flex items-center justify-center text-3xl mx-auto">
           <FiShieldOff />

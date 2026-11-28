@@ -12,6 +12,7 @@ import {
 } from 'react-icons/fi';
 import PageHeader from '../../components/common/PageHeader';
 import SEO from '../../components/common/SEO';
+import { PUBLIC_ROUTE_SEO } from '../../utils/seoRoutesConfig';
 import { SettingContext } from '../../context/SettingContext';
 import { useToast } from '../../hooks/useToast';
 import { CLASS_OPTIONS, GENDER_OPTIONS } from '../../utils/constants';
@@ -222,9 +223,9 @@ const StudentRegistration = () => {
   return (
     <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
-        title="Student Registration 2026-27 | S.S. Global Public School Daudnagar"
-        description="Submit an online student registration application for Class 1 to Class 12 at S.S. Global Public School, Daudnagar, Bihar. No account or login required."
-        canonicalUrl="https://www.ssglobalpublicschool.com/register"
+        title={PUBLIC_ROUTE_SEO['/register'].title}
+        description={PUBLIC_ROUTE_SEO['/register'].description}
+        canonicalUrl={PUBLIC_ROUTE_SEO['/register'].canonicalUrl}
       />
 
       <PageHeader
@@ -681,6 +682,9 @@ const StudentRegistration = () => {
                               <img
                                 src={photoPreviewUrl}
                                 alt="Selected student photograph preview"
+                                width="64"
+                                height="64"
+                                decoding="async"
                                 className="w-16 h-16 object-cover rounded-sm border border-[#CFC5B1] shrink-0"
                               />
                               <div className="min-w-0">

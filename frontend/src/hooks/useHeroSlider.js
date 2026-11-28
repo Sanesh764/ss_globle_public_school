@@ -6,7 +6,7 @@ import { isIndependenceDay2026 } from '../utils/formatDate';
 export const INDEPENDENCE_DAY_HERO_SLIDE = {
   _id: 'hero-independence-day-2026',
   isIndependenceDay: true,
-  backgroundImage: '/hero-4.jpg',
+  backgroundImage: '/hero-4.webp',
   badge: '🇮🇳 INDEPENDENCE DAY 2026',
   title: 'Celebrating Freedom,',
   highlightTitle: 'Inspiring Young Minds',

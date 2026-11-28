@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PageHeader from '../../components/common/PageHeader';
 import SEO from '../../components/common/SEO';
+import { PUBLIC_ROUTE_SEO } from '../../utils/seoRoutesConfig';
 import SearchBar from '../../components/common/SearchBar';
 import Pagination from '../../components/common/Pagination';
 import NoticeModal from '../../components/common/NoticeModal';
@@ -37,10 +38,9 @@ const NoticeBoard = () => {
   return (
     <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
-        title="Official Notice Board & Circulars | S.S. Global Public School Daudnagar"
-        description="Stay updated with official school notices, exam date sheets, holiday lists & admission announcements at S.S. Global Public School, Daudnagar."
-        keywords="S.S. Global Public School notice board, S.S. Global Public School Daudnagar, Daudnagar school circulars, exam schedule Daudnagar, school holidays Bihar"
-        canonicalUrl="https://www.ssglobalpublicschool.com/notices"
+        title={PUBLIC_ROUTE_SEO['/notices'].title}
+        description={PUBLIC_ROUTE_SEO['/notices'].description}
+        canonicalUrl={PUBLIC_ROUTE_SEO['/notices'].canonicalUrl}
         jsonLd={noticesSchema}
       />
       <PageHeader

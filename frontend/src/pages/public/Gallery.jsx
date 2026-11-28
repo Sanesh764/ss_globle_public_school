@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PageHeader from '../../components/common/PageHeader';
 import SEO from '../../components/common/SEO';
+import { PUBLIC_ROUTE_SEO } from '../../utils/seoRoutesConfig';
 import { GALLERY_CATEGORIES } from '../../utils/constants';
 import { useFetch } from '../../hooks/useFetch';
 import { getGalleryApi } from '../../services/galleryService';
@@ -30,10 +31,10 @@ const Gallery = () => {
   return (
     <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
-        title="Photo & Event Gallery | S.S. Global Public School Daudnagar"
-        description="Browse photos of academic events, sports competitions, cultural programs, and campus activities at S.S. Global Public School, Daudnagar, Bihar."
-        keywords="S.S. Global Public School gallery, S.S. Global Public School Daudnagar, Daudnagar school photos, campus life Bihar, school sports Aurangabad, annual day photos"
-        canonicalUrl="https://www.ssglobalpublicschool.com/gallery"
+        title={PUBLIC_ROUTE_SEO['/gallery'].title}
+        description={PUBLIC_ROUTE_SEO['/gallery'].description}
+        canonicalUrl={PUBLIC_ROUTE_SEO['/gallery'].canonicalUrl}
+        ogImage={PUBLIC_ROUTE_SEO['/gallery'].ogImage}
         jsonLd={gallerySchema}
       />
       <PageHeader

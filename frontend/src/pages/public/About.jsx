@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PageHeader from '../../components/common/PageHeader';
 import SEO from '../../components/common/SEO';
+import { PUBLIC_ROUTE_SEO } from '../../utils/seoRoutesConfig';
 import { SettingContext } from '../../context/SettingContext';
 import { getImageUrl } from '../../services/api';
 import { FiEye, FiTarget, FiHeart, FiAward, FiShield, FiBookOpen, FiCheck } from 'react-icons/fi';
@@ -118,10 +119,10 @@ const About = () => {
   return (
     <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
-        title="About S.S. Global Public School | Best CBSE School in Daudnagar"
-        description="Learn about S.S. Global Public School, Daudnagar, Bihar. Founded by Shambhu Sharan Singh, led by Er. Manish Singh & Ashutosh Kumar, offering top CBSE education & values."
-        keywords="About S.S. Global Public School, S.S. Global Public School Daudnagar, Best CBSE School in Daudnagar, Shambhu Sharan Singh, Er Manish Singh, Ashutosh Kumar Principal, Daudnagar school history, CBSE school mission Bihar"
-        canonicalUrl="https://www.ssglobalpublicschool.com/about"
+        title={PUBLIC_ROUTE_SEO['/about'].title}
+        description={PUBLIC_ROUTE_SEO['/about'].description}
+        canonicalUrl={PUBLIC_ROUTE_SEO['/about'].canonicalUrl}
+        ogImage={PUBLIC_ROUTE_SEO['/about'].ogImage}
         jsonLd={aboutSchema}
       />
       <PageHeader title={heroTitle} subtitle={heroSubtitle} breadcrumb={[{ label: 'About School' }]} />
@@ -159,7 +160,7 @@ const About = () => {
                 <div className="overflow-hidden">
                   <img
                     src={buildingImg}
-                    alt="S.S. Global Public School Building"
+                    alt="S.S. Global Public School campus building in Daudnagar, Bihar"
                     width="600"
                     height="384"
                     loading="lazy"

@@ -16,36 +16,20 @@ import DownloadsPreview from '../../components/home/DownloadsPreview';
 import Testimonials from '../../components/home/Testimonials';
 import CallToAction from '../../components/home/CallToAction';
 import ContactPreview from '../../components/home/ContactPreview';
+import { getSchoolSchema } from '../../utils/seoSchema';
+import { PUBLIC_ROUTE_SEO } from '../../utils/seoRoutesConfig';
 
 const Home = () => {
-  const homeSchema = {
-    '@context': 'https://schema.org',
-    '@type': ['School', 'EducationalOrganization', 'LocalBusiness'],
-    'name': 'S.S. Global Public School',
-    'alternateName': 'SS Global Public School Daudnagar',
-    'url': 'https://www.ssglobalpublicschool.com/',
-    'logo': 'https://www.ssglobalpublicschool.com/android-chrome-512x512.png',
-    'image': 'https://www.ssglobalpublicschool.com/hero-4.jpg',
-    'description': 'Premier CBSE curriculum school in Daudnagar, Bihar offering interactive smart classrooms, computer and science laboratories, sports, and leadership development.',
-    'telephone': '+919122490003',
-    'email': 'ssglobalpublicschool0@gmail.com',
-    'address': {
-      '@type': 'PostalAddress',
-      'streetAddress': 'Daudnagar',
-      'addressLocality': 'Daudnagar',
-      'addressRegion': 'Bihar',
-      'postalCode': '824143',
-      'addressCountry': 'IN',
-    },
-  };
+  const homeSchema = getSchoolSchema();
+  const seoMeta = PUBLIC_ROUTE_SEO['/'];
 
   return (
     <main className="space-y-0">
       <SEO
-        title="S.S. Global Public School | Best CBSE School in Daudnagar, Bihar"
-        description="S.S. Global Public School, Daudnagar, Bihar is a premier CBSE institution offering interactive smart classrooms, science labs, sports, and holistic character building."
-        keywords="S.S. Global Public School, S.S. Global Public School Daudnagar, Best School in Daudnagar, Best CBSE School in Daudnagar, CBSE School in Daudnagar, Top School in Daudnagar, School in Daudnagar Bihar, Best School in Aurangabad Bihar, CBSE School in Aurangabad Bihar, Admissions 2026"
-        canonicalUrl="https://www.ssglobalpublicschool.com/"
+        title={seoMeta.title}
+        description={seoMeta.description}
+        canonicalUrl={seoMeta.canonicalUrl}
+        ogImage={seoMeta.ogImage}
         jsonLd={homeSchema}
       />
       <IndependenceDayTicker />

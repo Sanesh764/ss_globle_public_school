@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../../components/common/PageHeader';
 import SEO from '../../components/common/SEO';
+import { PUBLIC_ROUTE_SEO } from '../../utils/seoRoutesConfig';
 import { FiBookOpen, FiImage, FiClock, FiEye, FiDownload, FiX, FiCalendar } from 'react-icons/fi';
 import useFetch from '../../hooks/useFetch';
 import { getPublicAcademicResourcesApi } from '../../services/academicResourceService';
@@ -36,10 +37,9 @@ const Downloads = () => {
   return (
     <main className="bg-[#F4EFE3] text-[#252821]">
       <SEO
-        title="Academic Resources & Downloads | S.S. Global Public School Daudnagar"
-        description="Download official academic resources, CBSE syllabus guidelines, book lists & Academic Calendar for S.S. Global Public School, Daudnagar, Bihar."
-        keywords="S.S. Global Public School academic calendar, S.S. Global Public School Daudnagar, CBSE syllabus Daudnagar, school book list Aurangabad, academic resources Bihar"
-        canonicalUrl="https://www.ssglobalpublicschool.com/downloads"
+        title={PUBLIC_ROUTE_SEO['/downloads'].title}
+        description={PUBLIC_ROUTE_SEO['/downloads'].description}
+        canonicalUrl={PUBLIC_ROUTE_SEO['/downloads'].canonicalUrl}
         jsonLd={downloadsSchema}
       />
       <PageHeader

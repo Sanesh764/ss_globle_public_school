@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generateStaticRouteHtml.js",
     "lint": "oxlint",
     "test": "node --test tests/*.test.js",
     "preview": "vite preview"

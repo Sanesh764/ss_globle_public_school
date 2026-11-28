@@ -138,7 +138,7 @@ const HeroSlider = () => {
                   failedImages[slideId] && !isHero4
                     ? '/school.webp'
                     : isHero4
-                      ? '/hero-4.jpg'
+                      ? '/hero-4.webp'
                       : rawUrl;
 
                 const objectPosClass = isHero4
@@ -153,8 +153,10 @@ const HeroSlider = () => {
                   <React.Fragment key={slideId}>
                     {isHero4 ? (
                       <img
-                        src="/hero-4.jpg"
-                        alt="S.S. Global Public School Students & Faculty"
+                        src="/hero-4.webp"
+                        alt="S.S. Global Public School students and faculty at Daudnagar campus"
+                        width="1280"
+                        height="960"
                         fetchPriority="high"
                         loading="eager"
                         decoding="async"

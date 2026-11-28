@@ -36,7 +36,7 @@ export const getImageUrl = (imagePath) => {
 
   // Handle hero-4 image filename variations
   if (imagePath.includes('hero-4')) {
-    return '/hero-4.jpg';
+    return '/hero-4.webp';
   }
 
   const backendHost = getBackendBaseUrl();
